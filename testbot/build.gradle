@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+}
+
+group 'com.annimon'
+version '0.1-VERSION'
+
+sourceCompatibility = 10
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':module')
+    testImplementation 'junit:junit:4.12'
+}

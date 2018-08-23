@@ -1,0 +1,103 @@
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives jar
+    archives sourcesJar
+    archives javadocJar
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            customizePom(pom)
+            artifactId = 'tgbots-module'
+            groupId = group
+
+            from components.java
+
+            artifact sourcesJar
+            artifact javadocJar
+
+            // create the sign pom artifact
+            pom.withXml {
+                def pomFile = file("${project.buildDir}/generated.pom")
+                writeTo(pomFile)
+                def pomAscFile = signing.sign(pomFile).signatureFiles[0]
+                artifact pomAscFile
+            }
+        }
+    }
+    repositories {
+        maven {
+            url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            credentials {
+                username sonatypeUsername
+                password sonatypePassword
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.maven
+}
+
+def customizePom(pom) {
+    pom.withXml {
+        def root = asNode()
+
+        // eliminate test-scoped dependencies (no need in maven central POMs)
+        root.dependencies.removeAll { dep ->
+            dep.scope == "test"
+        }
+
+        // add all items necessary for maven central publication
+        root.children().last() + {
+            resolveStrategy = Closure.DELEGATE_FIRST
+
+            name 'tgbots-module'
+            description 'Simple Java telegram bots runner built on top of the Telegram Bots library'
+            url 'https://github.com/aNNiMON/tgbots-module'
+
+            developers {
+                developer {
+                    id 'annimon'
+                    name 'Victor Melnik'
+                }
+            }
+
+            licenses {
+                license {
+                    name 'MIT License'
+                    url 'http://www.opensource.org/licenses/mit-license.php'
+                    distribution 'repo'
+                }
+            }
+
+            scm {
+                url 'https://github.com/aNNiMON/tgbots-module'
+                connection 'scm:git:git://github.com/aNNiMON/tgbots-module.git'
+                developerConnection 'scm:git:ssh://git@github.com:aNNiMON/tgbots-module.git'
+            }
+
+            issueManagement {
+                system 'GitHub'
+                url 'https://github.com/aNNiMON/tgbots-module/issues'
+            }
+        }
+    }
+}
+
+model {
+    tasks.generatePomFileForMavenPublication {
+        destination = file("$buildDir/generated.pom")
+    }
+}

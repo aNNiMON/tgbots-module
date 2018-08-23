@@ -1,0 +1,4 @@
+rootProject.name = 'tgbots-module'
+include 'module'
+include 'testbot'
+
