@@ -6,6 +6,13 @@ import javax.validation.Valid;
 
 public class Config {
 
+    public static Config defaultConfig() {
+        final var config = new Config();
+        config.setLogLevel("INFO");
+        config.setModules(List.of());
+        return config;
+    }
+
     private String profile;
 
     @JsonProperty(value = "log-level", defaultValue = "INFO")

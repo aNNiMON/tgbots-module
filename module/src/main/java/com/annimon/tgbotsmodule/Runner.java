@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule;
 
 import com.annimon.tgbotsmodule.beans.Config;
+import com.annimon.tgbotsmodule.exceptions.ConfigLoaderException;
 import com.annimon.tgbotsmodule.services.YamlConfigLoaderService;
 import java.util.List;
 import java.util.Objects;
@@ -39,6 +40,7 @@ public class Runner {
 
     private static void run(Config config, List<BotModule> modules) {
         if (modules.isEmpty()) {
+            BotLogger.info(LOGTAG, "No modules found. Exiting…");
             return;
         }
         ApiContextInitializer.init();
@@ -90,8 +92,13 @@ public class Runner {
 
     private static Config loadConfig(String profile) {
         final var configLoader = new YamlConfigLoaderService<Config>();
-        final var configFile = configLoader.configFile("config", profile);
-        final var config = configLoader.load(configFile, Config.class);
+        var config = Config.defaultConfig();
+        try {
+            final var configFile = configLoader.configFile("config", profile);
+            config = configLoader.load(configFile, Config.class);
+        } catch (ConfigLoaderException cle) {
+            BotLogger.info(LOGTAG, "Unable to load config file. Switch to default configuration.");
+        }
         config.setProfile(profile);
         return config;
     }
