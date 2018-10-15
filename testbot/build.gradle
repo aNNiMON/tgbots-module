@@ -3,9 +3,9 @@ plugins {
 }
 
 group 'com.annimon'
-version '0.1-VERSION'
+version '0.2-SNAPSHOT'
 
-sourceCompatibility = 10
+sourceCompatibility = 11
 
 repositories {
     mavenCentral()

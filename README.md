@@ -15,7 +15,7 @@ Simple Java telegram bots runner built on top of the [Telegram Bots](https://git
  - Add gradle dependency:
  
     ```groovy
-    compile 'com.annimon:tgbots-module:0.1'
+    compile 'com.annimon:tgbots-module:0.2'
     ```
 
  - Implement `BotModule` interface:
@@ -86,12 +86,12 @@ Simple Java telegram bots runner built on top of the [Telegram Bots](https://git
     log-level: FINE
     webhook:
       enabled: false
-      port: 8443
+      port: env(PORT:8443)
       externalUrl: https://123.45.67.89:$port
       internalUrl: https://123.45.67.89:$port
       certificatePublicKeyPath: cert/public_cert.pem
       certificateStorePath: cert/keystore.jks
-      certificateStorePassword: secret
+      certificateStorePassword: env(STORE_PASSWORD)
     modules:
       - com.annimon.testbot.TestBot
     ```
@@ -125,7 +125,7 @@ Simple Java telegram bots runner built on top of the [Telegram Bots](https://git
     }
     ```
 
-Now you can easily switch between webhook and longpollibg methods by changing the `webhook:` `enabled` flag in `config,yaml`.
+Now you can easily switch between webhook and longpolling methods by changing the `webhook:` `enabled` flag in `config,yaml`.
 
 Or you can create `config-test.yaml` and run the `test` profile:
 

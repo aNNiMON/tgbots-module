@@ -1,11 +1,11 @@
 log-level: FINE
 webhook:
   enabled: false
-  port: 8443
+  port: env(PORT:8443)
   externalUrl: https://123.45.67.89:$port
   internalUrl: https://123.45.67.89:$port
   certificatePublicKeyPath: cert/public_cert.pem
   certificateStorePath: cert/keystore.jks
-  certificateStorePassword: secret
+  certificateStorePassword: env(STORE_PASSWORD)
 modules:
   - com.annimon.testbot.TestBot
