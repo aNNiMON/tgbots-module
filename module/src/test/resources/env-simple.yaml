@@ -1,0 +1,13 @@
+actual:
+  key1: 20
+  key2: test
+  key3:
+    a: aaa
+    b: bbb
+
+expected:
+  key1: 20
+  key2: test
+  key3:
+    a: aaa
+    b: bbb

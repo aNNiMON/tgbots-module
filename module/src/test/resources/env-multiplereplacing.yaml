@@ -1,0 +1,7 @@
+actual:
+  url1: https://env(IP):env(PORT)/
+  url2: https://env(NULL:127.0.0.1):env(NULL:7777)/
+
+expected:
+  url1: https://127.0.0.1:8888/
+  url2: https://127.0.0.1:7777/

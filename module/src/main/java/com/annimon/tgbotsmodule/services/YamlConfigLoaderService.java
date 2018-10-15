@@ -2,7 +2,6 @@ package com.annimon.tgbotsmodule.services;
 
 import com.annimon.tgbotsmodule.exceptions.ConfigLoaderException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.function.Predicate;
@@ -33,7 +32,7 @@ public class YamlConfigLoaderService<T> implements ConfigLoaderService<T> {
 
     @Override
     public T load(File file, Class<T> configType, boolean validate) {
-        final var mapper = new ObjectMapper(new YAMLFactory());
+        final var mapper = new ObjectMapper(new YamlConfigFactory());
         try {
             var config = mapper.readValue(file, configType);
             if (validate) {

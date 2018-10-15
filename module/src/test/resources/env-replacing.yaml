@@ -1,0 +1,17 @@
+actual:
+  key1: env(KEY1)
+  key2: env(NULL)
+  key3: env(NULL:unknown)
+  key4: env(NULL:)
+  key5:
+    key5_0: env(KEY1)
+    key5_1: env(NULL)
+
+expected:
+  key1: first
+  key2: null
+  key3: unknown
+  key4:
+  key5:
+    key5_0: first
+    key5_1: null
