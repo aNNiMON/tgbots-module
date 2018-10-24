@@ -9,6 +9,8 @@ import java.util.function.Predicate;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -33,12 +35,16 @@ public class Runner {
         run(config, modules);
     }
 
-    public static void run(String profile, List<BotModule> modules) {
+    public static void run(@NotNull String profile,
+                           @NotNull List<@Nullable BotModule> modules) {
         final var config = loadConfig(profile);
-        run(config, modules);
+        run(config, modules.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList()));
     }
 
-    private static void run(Config config, List<BotModule> modules) {
+    private static void run(@NotNull Config config,
+                            @NotNull List<@NotNull BotModule> modules) {
         if (modules.isEmpty()) {
             BotLogger.info(LOGTAG, "No modules found. Exiting…");
             return;
@@ -51,7 +57,8 @@ public class Runner {
         }
     }
 
-    private static void initWebHook(Config config, List<BotModule> botModules) {
+    private static void initWebHook(@NotNull Config config,
+                                    @NotNull List<@NotNull BotModule> botModules) {
         final Predicate<String> nullOrBlank = s -> (s == null) || (s.isEmpty());
         final TelegramBotsApi telegramBotsApi;
         try {
@@ -79,7 +86,8 @@ public class Runner {
         }
     }
 
-    private static void initLongPolling(Config config, List<BotModule> botModules) {
+    private static void initLongPolling(@NotNull Config config,
+                                        @NotNull List<@NotNull BotModule> botModules) {
         final var telegramBotsApi = new TelegramBotsApi();
         for (var module : botModules) {
             try {
@@ -90,7 +98,8 @@ public class Runner {
         }
     }
 
-    private static Config loadConfig(String profile) {
+    @NotNull
+    private static Config loadConfig(@NotNull String profile) {
         final var configLoader = new YamlConfigLoaderService<Config>();
         var config = Config.defaultConfig();
         try {
@@ -103,7 +112,8 @@ public class Runner {
         return config;
     }
 
-    private static BotModule moduleInstance(String className) {
+    @Nullable
+    private static BotModule moduleInstance(@NotNull String className) {
         try {
             return (BotModule) Class
                     .forName(className)

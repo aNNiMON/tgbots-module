@@ -1,8 +1,10 @@
 package com.annimon.tgbotsmodule;
 
 import com.annimon.tgbotsmodule.beans.Config;
+import org.jetbrains.annotations.NotNull;
 
 public interface BotModule {
 
-    BotHandler botHandler(Config config);
+    @NotNull
+    BotHandler botHandler(@NotNull Config config);
 }

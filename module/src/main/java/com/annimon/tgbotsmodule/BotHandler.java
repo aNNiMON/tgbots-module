@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramWebhookBot;
 import org.telegram.telegrambots.meta.ApiContext;
@@ -33,21 +35,23 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
         this(ApiContext.getInstance(DefaultBotOptions.class));
     }
 
-    public BotHandler(DefaultBotOptions options) {
+    public BotHandler(@NotNull DefaultBotOptions options) {
         super(options);
     }
 
     @Override
-    public void onUpdateReceived(Update update) {
+    public void onUpdateReceived(@NotNull Update update) {
         onUpdate(update);
     }
 
+    @Nullable
     @Override
-    public BotApiMethod onWebhookUpdateReceived(Update update) {
+    public BotApiMethod onWebhookUpdateReceived(@NotNull Update update) {
         return onUpdate(update);
     }
 
-    public abstract BotApiMethod onUpdate(Update update);
+    @Nullable
+    public abstract BotApiMethod onUpdate(@NotNull Update update);
 
     @Override
     public String getBotPath() {
@@ -65,7 +69,7 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
     }
 
 
-    public Boolean call(SetChatPhoto setChatPhoto) {
+    public Boolean call(@NotNull SetChatPhoto setChatPhoto) {
         try {
             return super.execute(setChatPhoto);
         } catch (TelegramApiException e) {
@@ -74,7 +78,7 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
         }
     }
 
-    public List<Message> call(SendMediaGroup sendMediaGroup) {
+    public List<Message> call(@NotNull SendMediaGroup sendMediaGroup) {
         try {
             return super.execute(sendMediaGroup);
         } catch (TelegramApiException e) {
@@ -83,7 +87,7 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
         }
     }
 
-    public Boolean call(AddStickerToSet addStickerToSet) {
+    public Boolean call(@NotNull AddStickerToSet addStickerToSet) {
         try {
             return super.execute(addStickerToSet);
         } catch (TelegramApiException e) {
@@ -92,7 +96,7 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
         }
     }
 
-    public Boolean call(CreateNewStickerSet createNewStickerSet) {
+    public Boolean call(@NotNull CreateNewStickerSet createNewStickerSet) {
         try {
             return super.execute(createNewStickerSet);
         } catch (TelegramApiException e) {
@@ -101,7 +105,8 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
         }
     }
 
-    public File call(UploadStickerFile uploadStickerFile) {
+    @Nullable
+    public File call(@NotNull UploadStickerFile uploadStickerFile) {
         try {
             return super.execute(uploadStickerFile);
         } catch (TelegramApiException e) {
@@ -110,7 +115,8 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
         }
     }
 
-    public Serializable call(EditMessageMedia editMessageMedia) {
+    @Nullable
+    public Serializable call(@NotNull EditMessageMedia editMessageMedia) {
         try {
             return super.execute(editMessageMedia);
         } catch (TelegramApiException e) {
@@ -119,7 +125,8 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
         }
     }
 
-    public Message call(SendAnimation sendAnimation) {
+    @Nullable
+    public Message call(@NotNull SendAnimation sendAnimation) {
         try {
             return super.execute(sendAnimation);
         } catch (TelegramApiException e) {
@@ -128,7 +135,9 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
         }
     }
 
-    public <T extends Serializable, M extends BotApiMethod<T>> T call(M method) {
+    @Nullable
+    public <T extends Serializable, M extends BotApiMethod<T>> T call(
+            @NotNull M method) {
         try {
             return super.execute(method);
         } catch (TelegramApiException e) {
@@ -138,7 +147,8 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
     }
 
     public <T extends Serializable, M extends BotApiMethod<T>,
-            C extends SentCallback<T>> void callAsyncWithCallback(M method, C callback) {
+            C extends SentCallback<T>> void callAsyncWithCallback(
+                    @NotNull M method, @NotNull C callback) {
         try {
             super.executeAsync(method, callback);
         } catch (TelegramApiException e) {
@@ -160,7 +170,7 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
      * @see #handleTelegramApiException(TelegramApiException)
      */
     public <T extends Serializable, M extends BotApiMethod<T>> void callAsync(
-            M method) {
+            @NotNull M method) {
         this.callAsync(method, null, null);
     }
 
@@ -179,7 +189,8 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
      * @see #handleTelegramApiException(TelegramApiException)
      */
     public <T extends Serializable, M extends BotApiMethod<T>> void callAsync(
-            M method, Consumer<T> responseConsumer) {
+            @NotNull M method,
+            @Nullable Consumer<T> responseConsumer) {
         this.callAsync(method, responseConsumer, null);
     }
 
@@ -198,8 +209,9 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
      * @see #handleTelegramApiException(TelegramApiException)
      */
     public <T extends Serializable, M extends BotApiMethod<T>> void callAsync(
-            M method, Consumer<T> responseConsumer,
-            Consumer<Exception> exceptionConsumer) {
+            @NotNull M method,
+            @Nullable Consumer<T> responseConsumer,
+            @Nullable Consumer<Exception> exceptionConsumer) {
         this.callAsync(method, responseConsumer,
                 this::handleTelegramApiException, exceptionConsumer);
     }
@@ -216,9 +228,10 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
      * @see #callAsyncWithCallback(BotApiMethod, SentCallback)
      */
     public <T extends Serializable, M extends BotApiMethod<T>> void callAsync(
-            M method, Consumer<T> responseConsumer,
-            Consumer<TelegramApiException> apiExceptionConsumer,
-            Consumer<Exception> exceptionConsumer) {
+            @NotNull M method,
+            @Nullable Consumer<T> responseConsumer,
+            @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
+            @Nullable Consumer<Exception> exceptionConsumer) {
         this.callAsyncWithCallback(method, new SentCallback<>() {
             @Override
             public void onResult(BotApiMethod<T> method, T response) {

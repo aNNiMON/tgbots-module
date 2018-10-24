@@ -3,9 +3,11 @@ package com.annimon.tgbotsmodule.beans;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import javax.validation.Valid;
+import org.jetbrains.annotations.NotNull;
 
 public class Config {
 
+    @NotNull
     public static Config defaultConfig() {
         final var config = new Config();
         config.setLogLevel("INFO");

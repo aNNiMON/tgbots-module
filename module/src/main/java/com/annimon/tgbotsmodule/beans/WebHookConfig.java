@@ -3,6 +3,7 @@ package com.annimon.tgbotsmodule.beans;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
+import org.jetbrains.annotations.NotNull;
 
 public class WebHookConfig {
 
@@ -48,6 +49,7 @@ public class WebHookConfig {
         this.port = port;
     }
 
+    @NotNull
     public String getExternalUrl() {
         return externalUrl.replace("$port", Integer.toString(port));
     }
@@ -56,6 +58,7 @@ public class WebHookConfig {
         this.externalUrl = externalUrl;
     }
 
+    @NotNull
     public String getInternalUrl() {
         return internalUrl.replace("$port", Integer.toString(port));
     }

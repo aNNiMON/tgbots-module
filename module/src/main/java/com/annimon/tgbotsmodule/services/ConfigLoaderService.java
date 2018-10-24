@@ -1,14 +1,18 @@
 package com.annimon.tgbotsmodule.services;
 
 import java.io.File;
+import org.jetbrains.annotations.NotNull;
 
 public interface ConfigLoaderService<T> {
 
-    default T load(File file, Class<T> configType) {
+    @NotNull
+    default T load(@NotNull File file, @NotNull Class<T> configType) {
         return load(file, configType, true);
     }
 
-    T load(File file, Class<T> configType, boolean validate);
+    @NotNull
+    T load(@NotNull File file, @NotNull Class<T> configType, boolean validate);
 
-    File configFile(String baseName, String profile);
+    @NotNull
+    File configFile(@NotNull String baseName, @NotNull String profile);
 }
