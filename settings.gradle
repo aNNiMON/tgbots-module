@@ -1,4 +1,5 @@
 rootProject.name = 'tgbots-module'
 include 'module'
 include 'testbot'
+include 'testbot-kotlin'
 
