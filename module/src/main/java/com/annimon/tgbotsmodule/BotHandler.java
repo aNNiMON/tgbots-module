@@ -12,7 +12,14 @@ import org.telegram.telegrambots.meta.ApiContext;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendAnimation;
+import org.telegram.telegrambots.meta.api.methods.send.SendAudio;
+import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMediaGroup;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
+import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
+import org.telegram.telegrambots.meta.api.methods.send.SendVideoNote;
+import org.telegram.telegrambots.meta.api.methods.send.SendVoice;
 import org.telegram.telegrambots.meta.api.methods.stickers.AddStickerToSet;
 import org.telegram.telegrambots.meta.api.methods.stickers.CreateNewStickerSet;
 import org.telegram.telegrambots.meta.api.methods.stickers.UploadStickerFile;
@@ -69,70 +76,404 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
     }
 
 
-    public Boolean call(@NotNull SetChatPhoto setChatPhoto) {
+    @Nullable
+    public Message call(@NotNull SendDocument action) {
         try {
-            return super.execute(setChatPhoto);
+            return super.execute(action);
+        } catch (TelegramApiException e) {
+            handleTelegramApiException(e);
+            return null;
+        }
+    }
+
+    public void callAsync(
+            @NotNull SendDocument method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull SendDocument method,
+            @Nullable Consumer<Message> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull SendDocument method,
+            @Nullable Consumer<Message> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+    }
+
+    @Nullable
+    public Message call(@NotNull SendPhoto action) {
+        try {
+            return super.execute(action);
+        } catch (TelegramApiException e) {
+            handleTelegramApiException(e);
+            return null;
+        }
+    }
+
+    public void callAsync(
+            @NotNull SendPhoto method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull SendPhoto method,
+            @Nullable Consumer<Message> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull SendPhoto method,
+            @Nullable Consumer<Message> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+    }
+
+    @Nullable
+    public Message call(@NotNull SendVideo action) {
+        try {
+            return super.execute(action);
+        } catch (TelegramApiException e) {
+            handleTelegramApiException(e);
+            return null;
+        }
+    }
+
+    public void callAsync(
+            @NotNull SendVideo method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull SendVideo method,
+            @Nullable Consumer<Message> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull SendVideo method,
+            @Nullable Consumer<Message> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+    }
+
+    @Nullable
+    public Message call(@NotNull SendVideoNote action) {
+        try {
+            return super.execute(action);
+        } catch (TelegramApiException e) {
+            handleTelegramApiException(e);
+            return null;
+        }
+    }
+
+    public void callAsync(
+            @NotNull SendVideoNote method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull SendVideoNote method,
+            @Nullable Consumer<Message> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull SendVideoNote method,
+            @Nullable Consumer<Message> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+    }
+
+    @Nullable
+    public Message call(@NotNull SendSticker action) {
+        try {
+            return super.execute(action);
+        } catch (TelegramApiException e) {
+            handleTelegramApiException(e);
+            return null;
+        }
+    }
+
+    public void callAsync(
+            @NotNull SendSticker method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull SendSticker method,
+            @Nullable Consumer<Message> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull SendSticker method,
+            @Nullable Consumer<Message> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+    }
+
+    @Nullable
+    public Message call(@NotNull SendAudio action) {
+        try {
+            return super.execute(action);
+        } catch (TelegramApiException e) {
+            handleTelegramApiException(e);
+            return null;
+        }
+    }
+
+    public void callAsync(
+            @NotNull SendAudio method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull SendAudio method,
+            @Nullable Consumer<Message> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull SendAudio method,
+            @Nullable Consumer<Message> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+    }
+
+    @Nullable
+    public Message call(@NotNull SendVoice action) {
+        try {
+            return super.execute(action);
+        } catch (TelegramApiException e) {
+            handleTelegramApiException(e);
+            return null;
+        }
+    }
+
+    public void callAsync(
+            @NotNull SendVoice method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull SendVoice method,
+            @Nullable Consumer<Message> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull SendVoice method,
+            @Nullable Consumer<Message> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+    }
+
+    public Boolean call(@NotNull SetChatPhoto action) {
+        try {
+            return super.execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return false;
         }
     }
 
-    public List<Message> call(@NotNull SendMediaGroup sendMediaGroup) {
+    public void callAsync(
+            @NotNull SetChatPhoto method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull SetChatPhoto method,
+            @Nullable Consumer<Boolean> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull SetChatPhoto method,
+            @Nullable Consumer<Boolean> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+    }
+
+    @Nullable
+    public List<Message> call(@NotNull SendMediaGroup action) {
         try {
-            return super.execute(sendMediaGroup);
+            return super.execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return Collections.emptyList();
         }
     }
 
-    public Boolean call(@NotNull AddStickerToSet addStickerToSet) {
+    public void callAsync(
+            @NotNull SendMediaGroup method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull SendMediaGroup method,
+            @Nullable Consumer<List<Message>> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull SendMediaGroup method,
+            @Nullable Consumer<List<Message>> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        exe.submit(() -> {
+            try {
+                final List<Message> result = execute(method);
+                if (responseConsumer != null) {
+                    responseConsumer.accept(result);
+                }
+            } catch (TelegramApiException e) {
+                if (exceptionConsumer != null) {
+                    exceptionConsumer.accept(e);
+                }
+            }
+        });
+    }
+
+    public Boolean call(@NotNull AddStickerToSet action) {
         try {
-            return super.execute(addStickerToSet);
+            return super.execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return false;
         }
     }
 
-    public Boolean call(@NotNull CreateNewStickerSet createNewStickerSet) {
+    public void callAsync(
+            @NotNull AddStickerToSet method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull AddStickerToSet method,
+            @Nullable Consumer<Boolean> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull AddStickerToSet method,
+            @Nullable Consumer<Boolean> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+    }
+
+    public Boolean call(@NotNull CreateNewStickerSet action) {
         try {
-            return super.execute(createNewStickerSet);
+            return super.execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return false;
         }
     }
 
+    public void callAsync(
+            @NotNull CreateNewStickerSet method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull CreateNewStickerSet method,
+            @Nullable Consumer<Boolean> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull CreateNewStickerSet method,
+            @Nullable Consumer<Boolean> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+    }
+
     @Nullable
-    public File call(@NotNull UploadStickerFile uploadStickerFile) {
+    public File call(@NotNull UploadStickerFile action) {
         try {
-            return super.execute(uploadStickerFile);
+            return super.execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
         }
     }
 
+    public void callAsync(
+            @NotNull UploadStickerFile method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull UploadStickerFile method,
+            @Nullable Consumer<File> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull UploadStickerFile method,
+            @Nullable Consumer<File> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+    }
+
     @Nullable
-    public Serializable call(@NotNull EditMessageMedia editMessageMedia) {
+    public Serializable call(@NotNull EditMessageMedia action) {
         try {
-            return super.execute(editMessageMedia);
+            return super.execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
         }
     }
 
+    public void callAsync(
+            @NotNull EditMessageMedia method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull EditMessageMedia method,
+            @Nullable Consumer<Serializable> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull EditMessageMedia method,
+            @Nullable Consumer<Serializable> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+    }
+
     @Nullable
-    public Message call(@NotNull SendAnimation sendAnimation) {
+    public Message call(@NotNull SendAnimation action) {
         try {
-            return super.execute(sendAnimation);
+            return super.execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
         }
+    }
+
+    public void callAsync(
+            @NotNull SendAnimation method) {
+        callAsync(method, null);
+    }
+
+    public void callAsync(
+            @NotNull SendAnimation method,
+            @Nullable Consumer<Message> responseConsumer) {
+        callAsync(method, responseConsumer, this::handleTelegramApiException);
+    }
+
+    public void callAsync(
+            @NotNull SendAnimation method,
+            @Nullable Consumer<Message> responseConsumer,
+            @Nullable Consumer<TelegramApiException> exceptionConsumer) {
+        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
     }
 
     @Nullable
@@ -171,7 +512,7 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
      */
     public <T extends Serializable, M extends BotApiMethod<T>> void callAsync(
             @NotNull M method) {
-        this.callAsync(method, null, null);
+        callAsync(method, null, null);
     }
 
     /**
@@ -191,7 +532,7 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
     public <T extends Serializable, M extends BotApiMethod<T>> void callAsync(
             @NotNull M method,
             @Nullable Consumer<T> responseConsumer) {
-        this.callAsync(method, responseConsumer, null);
+        callAsync(method, responseConsumer, null);
     }
 
     /**
@@ -212,7 +553,7 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
             @NotNull M method,
             @Nullable Consumer<T> responseConsumer,
             @Nullable Consumer<Exception> exceptionConsumer) {
-        this.callAsync(method, responseConsumer,
+        callAsync(method, responseConsumer,
                 this::handleTelegramApiException, exceptionConsumer);
     }
 
@@ -232,7 +573,7 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
             @Nullable Consumer<T> responseConsumer,
             @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
             @Nullable Consumer<Exception> exceptionConsumer) {
-        this.callAsyncWithCallback(method, new SentCallback<>() {
+        callAsyncWithCallback(method, new SentCallback<>() {
             @Override
             public void onResult(BotApiMethod<T> method, T response) {
                 if (responseConsumer != null) {
@@ -255,6 +596,28 @@ public abstract class BotHandler extends TelegramWebhookBot implements LongPolli
                 }
             }
         });
+    }
+
+    private <T extends Serializable> void callApiMethodAsync(
+            @NotNull ResultSupplier<T> resultSupplier,
+            @Nullable Consumer<T> responseConsumer,
+            @Nullable Consumer<TelegramApiException> apiExceptionConsumer) {
+        exe.submit(() -> {
+            try {
+                final T result = resultSupplier.get();
+                if (responseConsumer != null) {
+                    responseConsumer.accept(result);
+                }
+            } catch (TelegramApiException e) {
+                if (apiExceptionConsumer != null) {
+                    apiExceptionConsumer.accept(e);
+                }
+            }
+        });
+    }
+
+    private interface ResultSupplier<T> {
+        T get() throws TelegramApiException;
     }
 
     /**
