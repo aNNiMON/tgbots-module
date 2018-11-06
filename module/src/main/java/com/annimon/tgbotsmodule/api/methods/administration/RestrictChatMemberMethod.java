@@ -1,6 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.administration;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMemberMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.TimePeriodMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.RestrictChatMember;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class RestrictChatMemberMethod implements ChatMemberMethod<RestrictChatMemberMethod, Boolean> {
+public class RestrictChatMemberMethod implements TimePeriodMethod<RestrictChatMemberMethod, Boolean> {
 
     private final RestrictChatMember method;
 
@@ -42,11 +42,13 @@ public class RestrictChatMemberMethod implements ChatMemberMethod<RestrictChatMe
         return this;
     }
 
-    public Integer getUntilDate() {
+    @Override
+    public Integer getUntilDateInSeconds() {
         return method.getUntilDate();
     }
 
-    public RestrictChatMemberMethod setUntilDate(Integer untilDate) {
+    @Override
+    public RestrictChatMemberMethod setUntilDateInSeconds(Integer untilDate) {
         method.setUntilDate(untilDate);
         return this;
     }

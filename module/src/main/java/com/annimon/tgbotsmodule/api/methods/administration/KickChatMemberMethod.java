@@ -1,6 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.administration;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMemberMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.TimePeriodMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.KickChatMember;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class KickChatMemberMethod implements ChatMemberMethod<KickChatMemberMethod, Boolean> {
+public class KickChatMemberMethod implements TimePeriodMethod<KickChatMemberMethod, Boolean> {
 
     private final KickChatMember method;
 
@@ -42,11 +42,13 @@ public class KickChatMemberMethod implements ChatMemberMethod<KickChatMemberMeth
         return this;
     }
 
-    public Integer getUntilDate() {
+    @Override
+    public Integer getUntilDateInSeconds() {
         return method.getUntilDate();
     }
 
-    public KickChatMemberMethod setUntilDate(Integer untilDate) {
+    @Override
+    public KickChatMemberMethod setUntilDateInSeconds(Integer untilDate) {
         method.setUntilDate(untilDate);
         return this;
     }
