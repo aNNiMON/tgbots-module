@@ -6,7 +6,6 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.io.InputStream;
-import java.util.Objects;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -56,7 +55,7 @@ public class SendVoiceMethod implements
 
     @Override
     public boolean isNotificationDisabled() {
-        return !Objects.requireNonNullElse(method.getDisableNotification(), false);
+        return Boolean.TRUE.equals(method.getDisableNotification());
     }
 
     @Override

@@ -5,7 +5,6 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessa
 import com.annimon.tgbotsmodule.api.methods.interfaces.TextMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.WebPagePreviewMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.Objects;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,7 +54,7 @@ public class SendMessageMethod implements
 
     @Override
     public boolean isNotificationDisabled() {
-        return !Objects.requireNonNullElse(method.getDisableNotification(), false);
+        return Boolean.TRUE.equals(method.getDisableNotification());
     }
 
     @Override
@@ -107,7 +106,7 @@ public class SendMessageMethod implements
 
     @Override
     public boolean isWebPagePreviewDisabled() {
-        return Objects.requireNonNullElse(method.getDisableWebPagePreview(), true);
+        return Boolean.TRUE.equals(method.getDisableWebPagePreview());
     }
 
     public SendMessageMethod disableWebPagePreview() {

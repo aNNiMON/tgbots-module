@@ -41,7 +41,7 @@ public class GetUserProfilePhotosMethod implements
     }
 
     @Override
-    public GetUserProfilePhotosMethod setOffset(@NotNull Integer offset) {
+    public GetUserProfilePhotosMethod setOffset(Integer offset) {
         method.setOffset(offset);
         return this;
     }

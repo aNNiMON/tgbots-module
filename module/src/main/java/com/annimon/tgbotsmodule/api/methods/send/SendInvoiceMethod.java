@@ -4,7 +4,6 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMetho
 import com.annimon.tgbotsmodule.api.methods.interfaces.SendableMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +57,7 @@ public class SendInvoiceMethod implements
 
     @Override
     public boolean isNotificationDisabled() {
-        return !Objects.requireNonNullElse(method.getDisableNotification(), false);
+        return Boolean.TRUE.equals(method.getDisableNotification());
     }
 
     @Override

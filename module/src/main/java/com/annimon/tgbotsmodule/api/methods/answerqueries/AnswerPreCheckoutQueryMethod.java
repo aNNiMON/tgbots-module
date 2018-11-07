@@ -29,11 +29,11 @@ public class AnswerPreCheckoutQueryMethod implements Method<Boolean> {
         return this;
     }
 
-    public Boolean getOk() {
+    public boolean getOk() {
         return method.getOk();
     }
 
-    public AnswerPreCheckoutQueryMethod setOk(Boolean isPersonal) {
+    public AnswerPreCheckoutQueryMethod setOk(boolean isPersonal) {
         method.setOk(isPersonal);
         return this;
     }

@@ -3,7 +3,6 @@ package com.annimon.tgbotsmodule.api.methods.send;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.LocationMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.Objects;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,7 +49,7 @@ public class SendLocationMethod implements
 
     @Override
     public boolean isNotificationDisabled() {
-        return !Objects.requireNonNullElse(method.getDisableNotification(), false);
+        return Boolean.TRUE.equals(method.getDisableNotification());
     }
 
     @Override

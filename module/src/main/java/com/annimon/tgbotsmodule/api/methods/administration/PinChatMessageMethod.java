@@ -3,7 +3,6 @@ package com.annimon.tgbotsmodule.api.methods.administration;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.NotificationMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.Objects;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -48,7 +47,7 @@ public class PinChatMessageMethod implements
 
     @Override
     public boolean isNotificationDisabled() {
-        return !Objects.requireNonNullElse(method.getDisableNotification(), false);
+        return Boolean.TRUE.equals(method.getDisableNotification());
     }
 
     @Override

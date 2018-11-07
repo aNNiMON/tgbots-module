@@ -40,11 +40,11 @@ public class AnswerShippingQueryMethod implements Method<Boolean> {
         return this;
     }
 
-    public Boolean getOk() {
-        return method.getOk();
+    public boolean getOk() {
+        return Boolean.TRUE.equals(method.getOk());
     }
 
-    public AnswerShippingQueryMethod setOk(Boolean isPersonal) {
+    public AnswerShippingQueryMethod setOk(boolean isPersonal) {
         method.setOk(isPersonal);
         return this;
     }
