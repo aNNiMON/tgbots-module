@@ -77,15 +77,15 @@ public class StopMessageLiveLocationMethod implements
     }
 
     @Override
-    public Serializable execute(@NotNull CommonAbsSender sender) {
+    public Serializable call(@NotNull CommonAbsSender sender) {
         return sender.call(method);
     }
 
     @Override
-    public void executeAsync(@NotNull CommonAbsSender sender,
-                             @Nullable Consumer<? super Serializable> responseConsumer,
-                             @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                             @Nullable Consumer<Exception> exceptionConsumer) {
+    public void callAsync(@NotNull CommonAbsSender sender,
+                          @Nullable Consumer<? super Serializable> responseConsumer,
+                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
+                          @Nullable Consumer<Exception> exceptionConsumer) {
         sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
     }
 }

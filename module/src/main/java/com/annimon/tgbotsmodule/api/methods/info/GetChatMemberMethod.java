@@ -44,15 +44,15 @@ public class GetChatMemberMethod implements ChatMemberMethod<GetChatMemberMethod
     }
 
     @Override
-    public ChatMember execute(@NotNull CommonAbsSender sender) {
+    public ChatMember call(@NotNull CommonAbsSender sender) {
         return sender.call(method);
     }
 
     @Override
-    public void executeAsync(@NotNull CommonAbsSender sender,
-                             @Nullable Consumer<? super ChatMember> responseConsumer,
-                             @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                             @Nullable Consumer<Exception> exceptionConsumer) {
+    public void callAsync(@NotNull CommonAbsSender sender,
+                          @Nullable Consumer<? super ChatMember> responseConsumer,
+                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
+                          @Nullable Consumer<Exception> exceptionConsumer) {
         sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
     }
 }

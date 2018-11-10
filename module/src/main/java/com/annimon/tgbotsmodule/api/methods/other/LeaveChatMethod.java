@@ -32,15 +32,15 @@ public class LeaveChatMethod implements ChatMethod<LeaveChatMethod, Boolean> {
     }
 
     @Override
-    public Boolean execute(@NotNull CommonAbsSender sender) {
+    public Boolean call(@NotNull CommonAbsSender sender) {
         return sender.call(method);
     }
 
     @Override
-    public void executeAsync(@NotNull CommonAbsSender sender,
-                             @Nullable Consumer<? super Boolean> responseConsumer,
-                             @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                             @Nullable Consumer<Exception> exceptionConsumer) {
+    public void callAsync(@NotNull CommonAbsSender sender,
+                          @Nullable Consumer<? super Boolean> responseConsumer,
+                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
+                          @Nullable Consumer<Exception> exceptionConsumer) {
         sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
     }
 }

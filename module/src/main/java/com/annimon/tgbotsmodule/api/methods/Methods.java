@@ -547,6 +547,7 @@ public final class Methods {
     public static SendVenueMethod sendVenue() {
         return new SendVenueMethod();
     }
+
     public static SendVenueMethod sendVenue(@NotNull String chatId, float latitude, float longitude,
                                             @NotNull String title, @NotNull String address) {
         return new SendVenueMethod().setChatId(chatId)

@@ -131,15 +131,15 @@ public class SendPhotoMethod implements
     }
 
     @Override
-    public Message execute(@NotNull CommonAbsSender sender) {
+    public Message call(@NotNull CommonAbsSender sender) {
         return sender.call(method);
     }
 
     @Override
-    public void executeAsync(@NotNull CommonAbsSender sender,
-                             @Nullable Consumer<? super Message> responseConsumer,
-                             @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                             @Nullable Consumer<Exception> exceptionConsumer) {
+    public void callAsync(@NotNull CommonAbsSender sender,
+                          @Nullable Consumer<? super Message> responseConsumer,
+                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
+                          @Nullable Consumer<Exception> exceptionConsumer) {
         sender.callAsync(method, responseConsumer, apiExceptionConsumer);
     }
 }

@@ -1,8 +1,8 @@
 package com.annimon.testbot;
 
 import com.annimon.tgbotsmodule.BotHandler;
+import com.annimon.tgbotsmodule.api.methods.Methods;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class TestBotHandler extends BotHandler {
@@ -17,9 +17,10 @@ public class TestBotHandler extends BotHandler {
     public BotApiMethod onUpdate(Update update) {
         final var message = update.getMessage();
         if (update.hasMessage() && message.hasText()) {
-            call(new SendMessage()
+            Methods.sendMessage()
                     .setChatId(message.getChatId())
-                    .setText(new StringBuilder(message.getText()).reverse().toString()));
+                    .setText(new StringBuilder(message.getText()).reverse().toString())
+                    .call(this);
         }
         return null;
     }

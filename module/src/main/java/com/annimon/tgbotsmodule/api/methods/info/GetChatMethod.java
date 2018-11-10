@@ -33,15 +33,15 @@ public class GetChatMethod implements ChatMethod<GetChatMethod, Chat> {
     }
 
     @Override
-    public Chat execute(@NotNull CommonAbsSender sender) {
+    public Chat call(@NotNull CommonAbsSender sender) {
         return sender.call(method);
     }
 
     @Override
-    public void executeAsync(@NotNull CommonAbsSender sender,
-                             @Nullable Consumer<? super Chat> responseConsumer,
-                             @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                             @Nullable Consumer<Exception> exceptionConsumer) {
+    public void callAsync(@NotNull CommonAbsSender sender,
+                          @Nullable Consumer<? super Chat> responseConsumer,
+                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
+                          @Nullable Consumer<Exception> exceptionConsumer) {
         sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
     }
 }

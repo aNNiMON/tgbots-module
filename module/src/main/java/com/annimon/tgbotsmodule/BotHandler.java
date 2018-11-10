@@ -2,7 +2,6 @@ package com.annimon.tgbotsmodule;
 
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.meta.ApiContext;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -28,14 +27,12 @@ public abstract class BotHandler extends CommonAbsSender
         onUpdate(update);
     }
 
-    @Nullable
     @Override
     public BotApiMethod onWebhookUpdateReceived(@NotNull Update update) {
         return onUpdate(update);
     }
 
-    @Nullable
-    public abstract BotApiMethod onUpdate(@NotNull Update update);
+    protected abstract BotApiMethod onUpdate(@NotNull Update update);
 
     @Override
     public String getBotPath() {
