@@ -762,7 +762,7 @@ public final class Methods {
     }
 
     public static SendChatActionMethod sendChatAction(long chatId, @NotNull ActionType actionType) {
-        return new SendChatActionMethod().setChatId(chatId);
+        return new SendChatActionMethod().setChatId(chatId).setAction(actionType);
     }
 
 
@@ -781,11 +781,11 @@ public final class Methods {
 
     public static AnswerInlineQueryMethod answerInlineQuery(@NotNull String inlineQueryId,
                                                             @NotNull List<InlineQueryResult> results) {
-        return new AnswerInlineQueryMethod().setInlineQueryId(inlineQueryId).setResults();
+        return new AnswerInlineQueryMethod().setInlineQueryId(inlineQueryId).setResults(results);
     }
 
     public static AnswerInlineQueryMethod answerInlineQuery(@NotNull String inlineQueryId,
                                                             @NotNull InlineQueryResult... results) {
-        return new AnswerInlineQueryMethod().setInlineQueryId(inlineQueryId).setResults();
+        return new AnswerInlineQueryMethod().setInlineQueryId(inlineQueryId).setResults(results);
     }
 }
