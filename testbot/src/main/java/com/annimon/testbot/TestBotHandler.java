@@ -2,27 +2,100 @@ package com.annimon.testbot;
 
 import com.annimon.tgbotsmodule.BotHandler;
 import com.annimon.tgbotsmodule.api.methods.Methods;
+import com.annimon.tgbotsmodule.commands.CommandRegistry;
+import com.annimon.tgbotsmodule.commands.context.MessageContext;
+import com.annimon.tgbotsmodule.commands.SimpleCommand;
+import com.annimon.tgbotsmodule.commands.authority.For;
+import com.annimon.tgbotsmodule.commands.authority.SimpleAuthority;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class TestBotHandler extends BotHandler {
 
     private final BotConfig botConfig;
+    private final CommandRegistry commands;
 
     public TestBotHandler(BotConfig botConfig) {
         this.botConfig = botConfig;
+
+        final var authority = new SimpleAuthority(botConfig.getCreatorId());
+        commands = new CommandRegistry(this, authority);
+
+        commands.register(new SimpleCommand("/action", For.CREATOR, ctx -> {
+            if (ctx.argumentsLength() != 1) return;
+            Methods.sendChatAction(ctx.chatId(), ActionType.get(ctx.argument(0, "typing")))
+                    .callAsync(ctx.sender);
+        }));
+        commands.register(new SimpleCommand("/reverse", ctx -> {
+            ctx.reply(new StringBuilder(ctx.text()).reverse().toString())
+                    .callAsync(ctx.sender);
+        }));
+        commands.register(new SimpleCommand("/fillrect", For.ALL, this::fillRectInterpreter));
     }
 
     @Override
     public BotApiMethod onUpdate(Update update) {
-        final var message = update.getMessage();
-        if (update.hasMessage() && message.hasText()) {
-            Methods.sendMessage()
-                    .setChatId(message.getChatId())
-                    .setText(new StringBuilder(message.getText()).reverse().toString())
-                    .call(this);
+        if (commands.handleUpdate(update)) {
+            return null;
         }
+        // handle other updates
         return null;
+    }
+
+    private void fillRectInterpreter(MessageContext ctx) {
+        final int w = 200, h = 200;
+        var image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        var g = image.createGraphics();
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, w, h);
+        g.setColor(Color.BLACK);
+        final var statements = ctx.text().toLowerCase().split(";");
+        for (var statement : statements) {
+            final var p = statement.replaceAll("[(),]", " ").trim().replaceAll("\\s+", " ").split(" ");
+            switch (p[0].trim()) {
+                case "color":
+                case "setcolor":
+                    if (p.length >= 4) {
+                        g.setColor(new Color(intval(p[1]), intval(p[2]), intval(p[3])));
+                    } else if (p.length >= 2) {
+                        g.setColor(new Color(intval(p[1], 16)));
+                    }
+                    break;
+                case "rect":
+                case "fillrect":
+                    if (p.length >= 5) {
+                        g.fillRect(intval(p[1]), intval(p[2]), intval(p[3]), intval(p[4]));
+                    }
+                    break;
+            }
+        }
+        try {
+            final var file = File.createTempFile("_fillrect", ".png");
+            ImageIO.write(image, "png", file);
+            ctx.replyWithPhoto()
+                    .setFile(file)
+                    .callAsync(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int intval(String s) {
+        return intval(s, 10);
+    }
+
+    private int intval(String s, int radix) {
+        try {
+            return Integer.parseInt(s, radix);
+        } catch (NumberFormatException nfe) {
+            return 0;
+        }
     }
 
     @Override

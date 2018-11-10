@@ -13,6 +13,9 @@ public class BotConfig {
     @JsonProperty(required = true)
     private String username;
 
+    @JsonProperty(required = true)
+    private Integer creatorId;
+
     public String getToken() {
         return token;
     }
@@ -29,11 +32,20 @@ public class BotConfig {
         this.username = username;
     }
 
+    public Integer getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
+
     @Override
     public String toString() {
-        return "Config{" +
+        return "BotConfig{" +
                 "token='" + token + '\'' +
                 ", username='" + username + '\'' +
+                ", creatorId=" + creatorId +
                 '}';
     }
 }

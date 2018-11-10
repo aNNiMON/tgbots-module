@@ -33,5 +33,9 @@ data class BotConfig(
 
         @NotBlank
         @JsonProperty(required = true)
-        val username: String
+        val username: String,
+
+        @NotBlank
+        @JsonProperty(required = true)
+        val creatorId: Int
 )
