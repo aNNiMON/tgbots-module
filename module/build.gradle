@@ -28,7 +28,6 @@ dependencies {
     compile "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
     compile 'org.hibernate:hibernate-validator:6.0.12.Final'
     compile 'org.glassfish:javax.el:3.0.1-b10'
     compile 'javax.xml.bind:jaxb-api:2.3.0'

@@ -6,6 +6,7 @@ import com.annimon.tgbotsmodule.Runner
 import com.annimon.tgbotsmodule.beans.Config
 import com.annimon.tgbotsmodule.services.YamlConfigLoaderService
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import javax.validation.constraints.NotBlank
 
 class TestBot : BotModule {
@@ -21,7 +22,9 @@ class TestBot : BotModule {
     override fun botHandler(config: Config): BotHandler {
         val configLoader = YamlConfigLoaderService<BotConfig>()
         val configFile = configLoader.configFile("testbot", config.profile)
-        val botConfig = configLoader.load(configFile, BotConfig::class.java)
+        val botConfig = configLoader.load(configFile, BotConfig::class.java, true) {
+            it.registerModule(KotlinModule())
+        }
         return TestBotHandler(botConfig)
     }
 }
