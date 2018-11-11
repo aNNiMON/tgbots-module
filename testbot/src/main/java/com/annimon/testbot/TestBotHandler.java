@@ -3,14 +3,18 @@ package com.annimon.testbot;
 import com.annimon.tgbotsmodule.BotHandler;
 import com.annimon.tgbotsmodule.api.methods.Methods;
 import com.annimon.tgbotsmodule.commands.CommandRegistry;
+import com.annimon.tgbotsmodule.commands.SimpleRegexCommand;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.annimon.tgbotsmodule.commands.SimpleCommand;
 import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.authority.SimpleAuthority;
+import com.annimon.tgbotsmodule.commands.context.RegexMessageContext;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -37,6 +41,14 @@ public class TestBotHandler extends BotHandler {
                     .callAsync(ctx.sender);
         }));
         commands.register(new SimpleCommand("/fillrect", For.ALL, this::fillRectInterpreter));
+
+        commands.register(new SimpleRegexCommand(
+                "^/calc (-?\\d{1,20}) ?([+\\-*/]) ?(-?\\d{1,20})$", this::calcCommand));
+
+        commands.register(new SimpleRegexCommand(Pattern.compile("^/repeat (.*?) (\\d{1,2})$"), ctx -> {
+            ctx.reply(ctx.group(1).repeat(Integer.parseInt(ctx.group(2))))
+                    .callAsync(ctx.sender);
+        }));
     }
 
     @Override
@@ -46,6 +58,24 @@ public class TestBotHandler extends BotHandler {
         }
         // handle other updates
         return null;
+    }
+
+    private void calcCommand(RegexMessageContext ctx) {
+        var value1 = new BigInteger(ctx.group(1));
+        var value2 = new BigInteger(ctx.group(3));
+        String result = String.format("%s %s %s = ", value1, value2, ctx.group(3));
+        switch (ctx.group(2)) {
+            case "+": result += value1.add(value2); break;
+            case "-": result += value1.subtract(value2); break;
+            case "*": result += value1.multiply(value2); break;
+            case "/":
+                if (value2.compareTo(BigInteger.ZERO) == 0) result += "error";
+                else result += value1.divide(value2); break;
+            default: return;
+        }
+        ctx.reply(result)
+                .setReplyToMessageId(ctx.message().getMessageId())
+                .callAsync(ctx.sender);
     }
 
     private void fillRectInterpreter(MessageContext ctx) {

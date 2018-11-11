@@ -7,7 +7,9 @@ import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.annimon.tgbotsmodule.commands.context.MessageContextBuilder;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -21,6 +23,7 @@ public class CommandRegistry implements UpdateHandler {
     private final BotHandler handler;
     private final String botUsername;
     private final ListMultimap<String, TextCommand> textCommands;
+    private final List<RegexCommand> regexCommands;
     private final Authority authority;
 
     public CommandRegistry(@NotNull BotHandler handler, @NotNull Authority authority) {
@@ -28,11 +31,18 @@ public class CommandRegistry implements UpdateHandler {
         this.authority = authority;
         this.botUsername = "@" + handler.getBotUsername().toLowerCase(Locale.ENGLISH);
         textCommands = ArrayListMultimap.create();
+        regexCommands = new ArrayList<>();
     }
 
     public CommandRegistry register(@NotNull TextCommand command) {
         Objects.requireNonNull(command);
         textCommands.put(stringToCommand(command.command()), command);
+        return this;
+    }
+
+    public CommandRegistry register(@NotNull RegexCommand command) {
+        Objects.requireNonNull(command);
+        regexCommands.add(command);
         return this;
     }
 
@@ -44,12 +54,15 @@ public class CommandRegistry implements UpdateHandler {
                 if ((!textCommands.isEmpty()) && handleTextCommands(update)) {
                     return true;
                 }
+                if ((!regexCommands.isEmpty()) && handleRegexCommands(update)) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    private boolean handleTextCommands(@NotNull Update update) {
+    protected boolean handleTextCommands(@NotNull Update update) {
         final var message = update.getMessage();
         final var args = message.getText().split("\\s+", 2);
         final var command = stringToCommand(args[0]);
@@ -74,7 +87,26 @@ public class CommandRegistry implements UpdateHandler {
         return true;
     }
 
-    private String stringToCommand(String str) {
+    protected boolean handleRegexCommands(@NotNull Update update) {
+        final var message = update.getMessage();
+        final var text = message.getText();
+        final long count = regexCommands.stream()
+                .map(cmd -> Map.entry(cmd, cmd.pattern().matcher(text)))
+                .filter(e -> e.getValue().find())
+                .filter(e -> authority.hasRights(message.getFrom(), e.getKey().authority()))
+                .map(e -> Map.entry(e.getKey(), new MessageContextBuilder()
+                        .setSender(handler)
+                        .setUpdate(update)
+                        .setUser(message.getFrom())
+                        .setChatId(message.getChatId())
+                        .setText(text)
+                        .createRegexContext(e.getValue())))
+                .peek(e -> e.getKey().accept(e.getValue()))
+                .count();
+        return (count > 0);
+    }
+
+    protected String stringToCommand(String str) {
         return str.toLowerCase(Locale.ENGLISH).replace(botUsername, "");
     }
 }

@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule.commands.context;
 
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
+import java.util.regex.Matcher;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 
@@ -38,5 +39,9 @@ public class MessageContextBuilder {
 
     public MessageContext createMessageContext() {
         return new MessageContext(sender, update, user, chatId, text);
+    }
+
+    public RegexMessageContext createRegexContext(Matcher matcher) {
+        return new RegexMessageContext(createMessageContext(), matcher);
     }
 }
