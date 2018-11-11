@@ -11,7 +11,7 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod
 import org.telegram.telegrambots.meta.api.objects.Update
 
 class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
-    val authority = SimpleAuthority(botConfig.creatorId)
+    val authority = SimpleAuthority(this, botConfig.creatorId)
     val commands = CommandRegistry(this, authority)
 
     init {

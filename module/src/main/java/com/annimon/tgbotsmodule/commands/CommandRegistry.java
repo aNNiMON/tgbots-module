@@ -68,7 +68,7 @@ public class CommandRegistry implements UpdateHandler {
         final var command = stringToCommand(args[0]);
         final var commands = Stream.ofNullable(textCommands.get(command))
                 .flatMap(Collection::stream)
-                .filter(cmd -> authority.hasRights(message.getFrom(), cmd.authority()))
+                .filter(cmd -> authority.hasRights(update, message.getFrom(), cmd.authority()))
                 .collect(Collectors.toList());
         if (commands.isEmpty()) {
             return false;
@@ -93,7 +93,7 @@ public class CommandRegistry implements UpdateHandler {
         final long count = regexCommands.stream()
                 .map(cmd -> Map.entry(cmd, cmd.pattern().matcher(text)))
                 .filter(e -> e.getValue().find())
-                .filter(e -> authority.hasRights(message.getFrom(), e.getKey().authority()))
+                .filter(e -> authority.hasRights(update, message.getFrom(), e.getKey().authority()))
                 .map(e -> Map.entry(e.getKey(), new MessageContextBuilder()
                         .setSender(handler)
                         .setUpdate(update)

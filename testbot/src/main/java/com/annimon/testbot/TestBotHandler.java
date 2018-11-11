@@ -3,11 +3,11 @@ package com.annimon.testbot;
 import com.annimon.tgbotsmodule.BotHandler;
 import com.annimon.tgbotsmodule.api.methods.Methods;
 import com.annimon.tgbotsmodule.commands.CommandRegistry;
-import com.annimon.tgbotsmodule.commands.SimpleRegexCommand;
-import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.annimon.tgbotsmodule.commands.SimpleCommand;
+import com.annimon.tgbotsmodule.commands.SimpleRegexCommand;
 import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.authority.SimpleAuthority;
+import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.annimon.tgbotsmodule.commands.context.RegexMessageContext;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -24,11 +24,12 @@ public class TestBotHandler extends BotHandler {
 
     private final BotConfig botConfig;
     private final CommandRegistry commands;
+    private final SimpleAuthority authority;
 
     public TestBotHandler(BotConfig botConfig) {
         this.botConfig = botConfig;
 
-        final var authority = new SimpleAuthority(botConfig.getCreatorId());
+        authority = new SimpleAuthority(this, botConfig.getCreatorId());
         commands = new CommandRegistry(this, authority);
 
         commands.register(new SimpleCommand("/action", For.CREATOR, ctx -> {
