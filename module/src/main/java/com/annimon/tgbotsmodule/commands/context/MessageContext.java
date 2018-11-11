@@ -4,6 +4,7 @@ import com.annimon.tgbotsmodule.api.methods.Methods;
 import com.annimon.tgbotsmodule.api.methods.send.*;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import org.jetbrains.annotations.NotNull;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 
@@ -19,11 +20,15 @@ public class MessageContext extends Context {
         this.text = text;
     }
 
-    public Long chatId() {
+    public @NotNull Message message() {
+        return update.getMessage();
+    }
+
+    public @NotNull Long chatId() {
         return chatId;
     }
 
-    public String text() {
+    public @NotNull String text() {
         return text;
     }
 

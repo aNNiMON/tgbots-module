@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule.commands.context;
 
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
+import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 
@@ -16,11 +17,11 @@ public class Context {
         this.user = user;
     }
 
-    public Update update() {
+    public @NotNull Update update() {
         return update;
     }
 
-    public User user() {
+    public @NotNull User user() {
         return user;
     }
 }

@@ -36,7 +36,7 @@ public class MessageContextBuilder {
         return this;
     }
 
-    public MessageContext createContext() {
+    public MessageContext createMessageContext() {
         return new MessageContext(sender, update, user, chatId, text);
     }
 }

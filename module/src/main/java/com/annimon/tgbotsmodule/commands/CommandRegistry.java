@@ -9,6 +9,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,30 +38,40 @@ public class CommandRegistry implements UpdateHandler {
 
     @Override
     public boolean handleUpdate(@NotNull Update update) {
-        final var message = update.getMessage();
-        // Texr commands
-        if (update.hasMessage() && message.hasText()) {
-            final var args = message.getText().split("\\s+", 2);
-            final var command = stringToCommand(args[0]);
-            final var commands = Stream.ofNullable(textCommands.get(command))
-                    .flatMap(Collection::stream)
-                    .filter(cmd -> authority.hasRights(message.getFrom(), cmd.authority()))
-                    .collect(Collectors.toList());
-            if (!commands.isEmpty()) {
-                final MessageContext context = new MessageContextBuilder()
-                        .setSender(handler)
-                        .setUpdate(update)
-                        .setUser(message.getFrom())
-                        .setChatId(message.getChatId())
-                        .setText(args.length >= 2 ? args[1] : "")
-                        .createContext();
-                for (TextCommand cmd : commands) {
-                    cmd.accept(context);
+        if (update.hasMessage()) {
+            // Text commands
+            if (update.getMessage().hasText()) {
+                if ((!textCommands.isEmpty()) && handleTextCommands(update)) {
+                    return true;
                 }
-                return true;
             }
         }
         return false;
+    }
+
+    private boolean handleTextCommands(@NotNull Update update) {
+        final var message = update.getMessage();
+        final var args = message.getText().split("\\s+", 2);
+        final var command = stringToCommand(args[0]);
+        final var commands = Stream.ofNullable(textCommands.get(command))
+                .flatMap(Collection::stream)
+                .filter(cmd -> authority.hasRights(message.getFrom(), cmd.authority()))
+                .collect(Collectors.toList());
+        if (commands.isEmpty()) {
+            return false;
+        }
+
+        final MessageContext context = new MessageContextBuilder()
+                .setSender(handler)
+                .setUpdate(update)
+                .setUser(message.getFrom())
+                .setChatId(message.getChatId())
+                .setText(args.length >= 2 ? args[1] : "")
+                .createMessageContext();
+        for (TextCommand cmd : commands) {
+            cmd.accept(context);
+        }
+        return true;
     }
 
     private String stringToCommand(String str) {
