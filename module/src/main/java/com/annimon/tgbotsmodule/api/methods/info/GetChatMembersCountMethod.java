@@ -5,18 +5,18 @@ import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.api.methods.groupadministration.GetChatMemberCount;
+import org.telegram.telegrambots.meta.api.methods.groupadministration.GetChatMembersCount;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class GetChatMembersCountMethod implements ChatMethod<GetChatMembersCountMethod, Integer> {
 
-    private final GetChatMemberCount method;
+    private final GetChatMembersCount method;
 
     public GetChatMembersCountMethod() {
-        this(new GetChatMemberCount());
+        this(new GetChatMembersCount());
     }
 
-    public GetChatMembersCountMethod(@NotNull GetChatMemberCount method) {
+    public GetChatMembersCountMethod(@NotNull GetChatMembersCount method) {
         this.method = method;
     }
 

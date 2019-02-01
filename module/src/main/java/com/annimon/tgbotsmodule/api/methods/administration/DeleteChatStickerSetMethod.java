@@ -5,18 +5,18 @@ import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.api.methods.groupadministration.DeleteStickerSetName;
+import org.telegram.telegrambots.meta.api.methods.groupadministration.DeleteChatStickerSet;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class DeleteChatStickerSetMethod implements ChatMethod<DeleteChatStickerSetMethod, Boolean> {
 
-    private final DeleteStickerSetName method;
+    private final DeleteChatStickerSet method;
 
     public DeleteChatStickerSetMethod() {
-        this(new DeleteStickerSetName());
+        this(new DeleteChatStickerSet());
     }
 
-    public DeleteChatStickerSetMethod(@NotNull DeleteStickerSetName method) {
+    public DeleteChatStickerSetMethod(@NotNull DeleteChatStickerSet method) {
         this.method = method;
     }
 

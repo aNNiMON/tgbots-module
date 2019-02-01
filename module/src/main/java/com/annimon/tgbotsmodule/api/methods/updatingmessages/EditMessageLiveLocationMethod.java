@@ -91,12 +91,12 @@ public class EditMessageLiveLocationMethod implements
 
     @Override
     public Float getLongitude() {
-        return method.getLongitud();
+        return method.getLongitude();
     }
 
     @Override
     public EditMessageLiveLocationMethod setLongitude(@NotNull Float longitude) {
-        method.setLongitud(longitude);
+        method.setLongitude(longitude);
         return this;
     }
 
