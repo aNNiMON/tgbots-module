@@ -15,7 +15,7 @@ Simple Java telegram bots runner built on top of the [Telegram Bots](https://git
  - Add gradle dependency:
  
     ```groovy
-    compile 'com.annimon:tgbots-module:0.2'
+    compile 'com.annimon:tgbots-module:0.4'
     ```
 
  - Implement `BotModule` interface:
@@ -80,7 +80,7 @@ Simple Java telegram bots runner built on top of the [Telegram Bots](https://git
     }
     ```
 
- - Fill `config.yaml`:
+ - Fill in `config.yaml`:
  
     ```yaml
     log-level: FINE

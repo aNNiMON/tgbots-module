@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'com.annimon'
-version '0.3'
+version '0.4'
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 mainClassName = 'com.annimon.telegrambots.Runner'
@@ -20,7 +20,7 @@ repositories {
 ext.retrofitVersion = '2.5.0'
 ext.jacksonVersion = '2.9.7'
 ext.junit5Version = '5.3.2'
-ext.jaxbVersion = '2.3.2'
+ext.jaxbVersion = '2.3.1'
 
 dependencies {
     // runtimeOnly project(':testbot')
@@ -31,7 +31,7 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     compile 'org.hibernate:hibernate-validator:6.0.14.Final'
     compile 'org.glassfish:javax.el:3.0.1-b11'
-    compile "javax.xml.bind:jaxb-api:$jaxbVersion"
+    compile "javax.xml.bind:jaxb-api:2.3.1"
     compile "com.sun.xml.bind:jaxb-impl:$jaxbVersion"
     compile "org.glassfish.jaxb:jaxb-runtime:$jaxbVersion"
     compile 'javax.activation:activation:1.1.1'
