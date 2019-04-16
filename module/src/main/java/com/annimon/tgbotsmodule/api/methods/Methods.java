@@ -5,6 +5,8 @@ import com.annimon.tgbotsmodule.api.methods.answerqueries.*;
 import com.annimon.tgbotsmodule.api.methods.games.*;
 import com.annimon.tgbotsmodule.api.methods.info.*;
 import com.annimon.tgbotsmodule.api.methods.other.*;
+import com.annimon.tgbotsmodule.api.methods.polls.SendPollMethod;
+import com.annimon.tgbotsmodule.api.methods.polls.StopPollMethod;
 import com.annimon.tgbotsmodule.api.methods.send.*;
 import com.annimon.tgbotsmodule.api.methods.stickers.*;
 import com.annimon.tgbotsmodule.api.methods.updates.*;
@@ -12,6 +14,7 @@ import com.annimon.tgbotsmodule.api.methods.updatingmessages.*;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
+import org.telegram.telegrambots.meta.api.methods.polls.StopPoll;
 import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResult;
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.passport.dataerror.PassportElementError;
@@ -266,6 +269,35 @@ public final class Methods {
 
         public static AnswerPreCheckoutQueryMethod answerPreCheckoutQuery(@NotNull String preCheckoutQueryId, boolean ok) {
             return new AnswerPreCheckoutQueryMethod().setPreCheckoutQueryId(preCheckoutQueryId).setOk(ok);
+        }
+    }
+
+    public static class Polls {
+        private Polls() { }
+
+        public static SendPollMethod sendPoll() {
+            return new SendPollMethod();
+        }
+
+        public static SendPollMethod sendPoll(@NotNull String chatId) {
+            return sendPoll().setChatId(chatId);
+        }
+
+        public static SendPollMethod sendPoll(long chatId) {
+            return sendPoll().setChatId(chatId);
+        }
+
+
+        public static StopPollMethod stopPoll() {
+            return new StopPollMethod();
+        }
+
+        public static StopPollMethod stopPoll(@NotNull String chatId, int messageId) {
+            return new StopPollMethod(new StopPoll(chatId, messageId));
+        }
+
+        public static StopPollMethod stopPoll(long chatId, int messageId) {
+            return new StopPollMethod(new StopPoll(chatId, messageId));
         }
     }
 
@@ -610,7 +642,6 @@ public final class Methods {
     public static DeleteMessageMethod deleteMessage(@NotNull String chatId, int messageId) {
         return new DeleteMessageMethod().setChatId(chatId).setMessageId(messageId);
     }
-
     public static DeleteMessageMethod deleteMessage(long chatId, int messageId) {
         return new DeleteMessageMethod().setChatId(chatId).setMessageId(messageId);
     }
