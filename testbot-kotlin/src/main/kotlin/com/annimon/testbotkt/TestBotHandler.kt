@@ -24,6 +24,26 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
         commands.register(SimpleCommand("/reverse", For.ALL) { ctx ->
             ctx.reply(ctx.text().reversed()).callAsync(ctx.sender)
         })
+
+        commands.register(SimpleCommand("/poll", For.ALL) { ctx ->
+            val lines = ctx.text().lines().filterNot { it.isBlank() }
+            if (lines.size <= 3) {
+                ctx.reply("At least 3 lines expected").callAsync(ctx.sender)
+            } else {
+                Methods.Polls.sendPoll(ctx.chatId())
+                        .setQuestion(lines[0])
+                        .setOptions(lines.drop(1))
+                        .callAsync(ctx.sender)
+            }
+        })
+        commands.register(SimpleCommand("/stoppoll", For.ALL) { ctx ->
+            if (!ctx.message().isReply) {
+                ctx.reply("reply with this command to a poll message").callAsync(ctx.sender)
+            } else {
+                Methods.Polls.stopPoll(ctx.chatId(), ctx.message().replyToMessage.messageId)
+                        .callAsync(ctx.sender)
+            }
+        })
     }
 
     override fun onUpdate(update: Update): BotApiMethod<*>? {

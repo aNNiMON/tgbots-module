@@ -14,7 +14,7 @@ class TestBot : BotModule {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val profile = if (args.isNotEmpty() && !args[0].isEmpty()) args[0] else ""
+            val profile = args.firstOrNull() ?: ""
             Runner.run(profile, listOf(TestBot()))
         }
     }
