@@ -6,13 +6,19 @@ import com.annimon.tgbotsmodule.commands.CommandRegistry
 import com.annimon.tgbotsmodule.commands.SimpleCommand
 import com.annimon.tgbotsmodule.commands.authority.For
 import com.annimon.tgbotsmodule.commands.authority.SimpleAuthority
+import com.annimon.tgbotsmodule.services.ResourceBundleLocalizationService
 import org.telegram.telegrambots.meta.api.methods.ActionType
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod
 import org.telegram.telegrambots.meta.api.objects.Update
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton
 
 class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
     val authority = SimpleAuthority(this, botConfig.creatorId)
     val commands = CommandRegistry(this, authority)
+
+    var globalLocale = "en"
+    val localization = ResourceBundleLocalizationService("Language")
 
     init {
         commands.register(SimpleCommand("/action", For.CREATOR) { ctx ->
@@ -25,6 +31,7 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
             ctx.reply(ctx.text().reversed()).callAsync(ctx.sender)
         })
 
+        // Polls
         commands.register(SimpleCommand("/poll", For.ALL) { ctx ->
             val lines = ctx.text().lines().filterNot { it.isBlank() }
             if (lines.size <= 3) {
@@ -44,9 +51,45 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
                         .callAsync(ctx.sender)
             }
         })
+
+        // Locale
+        commands.register(SimpleCommand("/hello_global", For.ALL) { ctx ->
+            // Sends hello message according to global locale
+            ctx.reply(localization.getString("hello", globalLocale)).callAsync(ctx.sender)
+        })
+        commands.register(SimpleCommand("/hello_local", For.ALL) { ctx ->
+            // Sends hello message according to user language code
+            ctx.reply(localization.getString("hello", ctx.user().languageCode ?: globalLocale))
+                    .callAsync(ctx.sender)
+        })
+        commands.register(SimpleCommand("/switch_language", For.ALL) { ctx ->
+            // Setup inline keyboard
+            val keyboard = ArrayList<List<InlineKeyboardButton>>(2)
+            for (lang in listOf("en", "ru")) {
+                val languageName = localization.getString("lang_" + lang, globalLocale)
+                val btn = InlineKeyboardButton(languageName).setCallbackData(lang)
+                keyboard.add(listOf(btn))
+            }
+
+            ctx.reply(localization.getString("choose_language", globalLocale))
+                    .setReplyMarkup(InlineKeyboardMarkup().setKeyboard(keyboard))
+                    .callAsync(ctx.sender)
+        })
     }
 
     override fun onUpdate(update: Update): BotApiMethod<*>? {
+        if (update.hasCallbackQuery()) {
+            // Switch global language
+            update.callbackQuery.message?.let { message ->
+                globalLocale = update.callbackQuery.data ?: "en"
+                Methods.editMessageText()
+                        .setChatId(message.chatId)
+                        .setMessageId(message.messageId)
+                        .setText(localization.getString("language_set", globalLocale))
+                        .callAsync(this)
+            }
+            return null
+        }
         if (commands.handleUpdate(update)) {
             return null
         }
