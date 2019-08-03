@@ -8,12 +8,13 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.validation.Validation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.telegram.telegrambots.meta.logging.BotLogger;
 
 public class YamlConfigLoaderService<T> implements ConfigLoaderService<T> {
 
-    private static final String LOGTAG = YamlConfigLoaderService.class.getName();
+    private static final Logger log = LogManager.getLogger(YamlConfigLoaderService.class);
 
     @NotNull
     @Override
@@ -47,7 +48,7 @@ public class YamlConfigLoaderService<T> implements ConfigLoaderService<T> {
             }
             return config;
         } catch (IOException ex) {
-            BotLogger.error(LOGTAG, ex);
+            log.error(ex);
             throw new ConfigLoaderException(ex);
         }
     }

@@ -9,6 +9,8 @@ import java.util.function.Predicate;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.ApiContextInitializer;
@@ -17,17 +19,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 import org.telegram.telegrambots.meta.generics.LongPollingBot;
 import org.telegram.telegrambots.meta.generics.WebhookBot;
-import org.telegram.telegrambots.meta.logging.BotLogger;
 
 public class Runner {
 
-    private static final String LOGTAG = Runner.class.getName();
+    private static final Logger log = LogManager.getLogger(Runner.class);
 
     public static void main(String[] args) {
         final var profile = (args.length >= 1 && !args[0].isEmpty()) ? args[0] : "";
         final var config = loadConfig(profile);
-        BotLogger.setLevel(Level.parse(config.getLogLevel()));
-        BotLogger.registerLogger(new ConsoleHandler());
         final var modules = config.getModules().stream()
                 .map(Runner::moduleInstance)
                 .filter(Objects::nonNull)
@@ -46,7 +45,7 @@ public class Runner {
     private static void run(@NotNull Config config,
                             @NotNull List<@NotNull BotModule> modules) {
         if (modules.isEmpty()) {
-            BotLogger.info(LOGTAG, "No modules found. Exiting…");
+            log.info("No modules found. Exiting…");
             return;
         }
         ApiContextInitializer.init();
@@ -78,11 +77,11 @@ public class Runner {
                 try {
                     telegramBotsApi.registerBot((WebhookBot) module.botHandler(config));
                 } catch (TelegramApiException ex) {
-                    BotLogger.error(LOGTAG, ex);
+                    log.error(ex);
                 }
             }
         } catch (TelegramApiRequestException e) {
-            BotLogger.error(LOGTAG, e);
+            log.error(e);
         }
     }
 
@@ -93,7 +92,7 @@ public class Runner {
             try {
                 telegramBotsApi.registerBot((LongPollingBot) module.botHandler(config));
             } catch (TelegramApiException ex) {
-                BotLogger.error(LOGTAG, ex);
+                log.error(ex);
             }
         }
     }
@@ -106,7 +105,7 @@ public class Runner {
             final var configFile = configLoader.configFile("config", profile);
             config = configLoader.load(configFile, Config.class);
         } catch (ConfigLoaderException cle) {
-            BotLogger.info(LOGTAG, "Unable to load config file. Switch to default configuration.");
+            log.info("Unable to load config file. Switch to default configuration.");
         }
         config.setProfile(profile);
         return config;
@@ -120,7 +119,7 @@ public class Runner {
                     .getDeclaredConstructor()
                     .newInstance();
         } catch (Exception ex) {
-            BotLogger.warning(LOGTAG, "Unable to load module " + className);
+            log.warn("Unable to load module " + className);
             return null;
         }
     }

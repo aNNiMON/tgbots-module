@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.RestrictChatMember;
+import org.telegram.telegrambots.meta.api.objects.ChatPermissions;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class RestrictChatMemberMethod implements TimePeriodMethod<RestrictChatMemberMethod, Boolean> {
@@ -53,39 +54,12 @@ public class RestrictChatMemberMethod implements TimePeriodMethod<RestrictChatMe
         return this;
     }
 
-    public Boolean canSendMessages() {
-        return method.getCanSendMessages();
+    public ChatPermissions getPermissions() {
+        return method.getPermissions();
     }
 
-    public RestrictChatMemberMethod setCanSendMessages(Boolean canSendMessages) {
-        method.setCanSendMessages(canSendMessages);
-        return this;
-    }
-
-    public Boolean canSendMediaMessages() {
-        return method.getCanSendMediaMessages();
-    }
-
-    public RestrictChatMemberMethod setCanSendMediaMessages(Boolean canSendMediaMessages) {
-        method.setCanSendMediaMessages(canSendMediaMessages);
-        return this;
-    }
-
-    public Boolean canSendOtherMessages() {
-        return method.getCanSendOtherMessages();
-    }
-
-    public RestrictChatMemberMethod setCanSendOtherMessages(Boolean canSendOtherMessages) {
-        method.setCanSendOtherMessages(canSendOtherMessages);
-        return this;
-    }
-
-    public Boolean canAddWebPagePreviews() {
-        return method.getCanAddWebPagePreviews();
-    }
-
-    public RestrictChatMemberMethod setCanAddWebPagePreviews(Boolean canAddWebPagePreviews) {
-        method.setCanAddWebPagePreviews(canAddWebPagePreviews);
+    public RestrictChatMemberMethod setPermissions(ChatPermissions permissions) {
+        method.setPermissions(permissions);
         return this;
     }
 

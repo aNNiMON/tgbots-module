@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.bots.DefaultAbsSender;
@@ -28,13 +30,12 @@ import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
-import org.telegram.telegrambots.meta.logging.BotLogger;
 import org.telegram.telegrambots.meta.updateshandlers.SentCallback;
 
 @SuppressWarnings("WeakerAccess")
 public abstract class CommonAbsSender extends DefaultAbsSender {
 
-    private static final String LOGTAG = BotHandler.class.getName();
+    private static final Logger log = LogManager.getLogger(CommonAbsSender.class);
 
     public CommonAbsSender(DefaultBotOptions options) {
         super(options);
@@ -592,6 +593,6 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
      * @param ex  Exception
      */
     public void handleTelegramApiException(TelegramApiException ex) {
-        BotLogger.error(LOGTAG, ex);
+        log.error(ex);
     }
 }

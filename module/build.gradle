@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.annimon'
-version '0.5'
+version '0.6'
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 mainClassName = 'com.annimon.telegrambots.Runner'
@@ -16,19 +16,19 @@ repositories {
     mavenCentral()
 }
 
-ext.retrofitVersion = '2.5.0'
-ext.jacksonVersion = '2.9.8'
-ext.junit5Version = '5.4.2'
+ext.retrofitVersion = '2.6.1'
+ext.jacksonVersion = '2.9.9'
+ext.junit5Version = '5.5.1'
 ext.jaxbVersion = '2.3.1'
 
 dependencies {
     // runtimeOnly project(':testbot')
-    compile 'org.telegram:telegrambots:4.2'
+    compile 'org.telegram:telegrambots:4.4.0.1'
     compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
     compile "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    compile 'org.hibernate:hibernate-validator:6.0.16.Final'
+    compile 'org.hibernate:hibernate-validator:6.0.17.Final'
     compile 'org.glassfish:javax.el:3.0.1-b11'
     compile "javax.xml.bind:jaxb-api:$jaxbVersion"
     compile "com.sun.xml.bind:jaxb-impl:$jaxbVersion"
