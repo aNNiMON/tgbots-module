@@ -15,6 +15,7 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.polls.StopPoll;
+import org.telegram.telegrambots.meta.api.objects.ChatPermissions;
 import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResult;
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.passport.dataerror.PassportElementError;
@@ -128,6 +129,19 @@ public final class Methods {
 
         public static SetChatDescriptionMethod setChatDescription(long chatId, @NotNull String description) {
             return new SetChatDescriptionMethod().setChatId(chatId).setDescription(description);
+        }
+
+
+        public static SetChatPermissionsMethod setChatPermissions() {
+            return new SetChatPermissionsMethod();
+        }
+
+        public static SetChatPermissionsMethod setChatDescription(@NotNull String chatId, @NotNull ChatPermissions permissions) {
+            return new SetChatPermissionsMethod().setChatId(chatId).setPermissions(permissions);
+        }
+
+        public static SetChatPermissionsMethod setChatDescription(long chatId, @NotNull ChatPermissions permissions) {
+            return new SetChatPermissionsMethod().setChatId(chatId).setPermissions(permissions);
         }
 
 

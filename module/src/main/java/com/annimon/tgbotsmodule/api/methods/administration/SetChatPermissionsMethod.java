@@ -1,23 +1,23 @@
 package com.annimon.tgbotsmodule.api.methods.administration;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.TimePeriodMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.api.methods.groupadministration.RestrictChatMember;
+import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatPermissions;
 import org.telegram.telegrambots.meta.api.objects.ChatPermissions;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class RestrictChatMemberMethod implements TimePeriodMethod<RestrictChatMemberMethod, Boolean> {
+public class SetChatPermissionsMethod implements ChatMethod<SetChatPermissionsMethod, Boolean> {
 
-    private final RestrictChatMember method;
+    private final SetChatPermissions method;
 
-    public RestrictChatMemberMethod() {
-        this(new RestrictChatMember());
+    public SetChatPermissionsMethod() {
+        this(new SetChatPermissions());
     }
 
-    public RestrictChatMemberMethod(@NotNull RestrictChatMember method) {
+    public SetChatPermissionsMethod(@NotNull SetChatPermissions method) {
         this.method = method;
     }
 
@@ -27,30 +27,8 @@ public class RestrictChatMemberMethod implements TimePeriodMethod<RestrictChatMe
     }
 
     @Override
-    public RestrictChatMemberMethod setChatId(@NotNull String chatId) {
+    public SetChatPermissionsMethod setChatId(@NotNull String chatId) {
         method.setChatId(chatId);
-        return this;
-    }
-
-    @Override
-    public Integer getUserId() {
-        return method.getUserId();
-    }
-
-    @Override
-    public RestrictChatMemberMethod setUserId(@NotNull Integer userId) {
-        method.setUserId(userId);
-        return this;
-    }
-
-    @Override
-    public Integer getUntilDateInSeconds() {
-        return method.getUntilDate();
-    }
-
-    @Override
-    public RestrictChatMemberMethod setUntilDateInSeconds(Integer untilDate) {
-        method.setUntilDate(untilDate);
         return this;
     }
 
@@ -58,7 +36,7 @@ public class RestrictChatMemberMethod implements TimePeriodMethod<RestrictChatMe
         return method.getPermissions();
     }
 
-    public RestrictChatMemberMethod setPermissions(@NotNull ChatPermissions permissions) {
+    public SetChatPermissionsMethod setPermissions(@NotNull ChatPermissions permissions) {
         method.setPermissions(permissions);
         return this;
     }

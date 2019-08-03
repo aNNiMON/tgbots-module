@@ -40,16 +40,13 @@ public class StopPollMethod implements
 
     @Override
     public Integer getMessageId() {
-        // TODO replace with getter
-        final String in = method.toString();
-        final String key = "messageId=";
-        final String number = in.substring(in.indexOf(key) + key.length(), in.lastIndexOf("}"));
-        return Integer.parseInt(number);
+        return method.getMessageId();
     }
 
     @Override
     public StopPollMethod setMessageId(Integer messageId) {
-        return new StopPollMethod(new StopPoll(getChatId(), messageId));
+        method.setMessageId(messageId);
+        return this;
     }
 
     @Override
