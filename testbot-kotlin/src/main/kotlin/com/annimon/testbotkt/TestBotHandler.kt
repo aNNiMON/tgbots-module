@@ -53,28 +53,30 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
         })
 
         // Locale
-        commands.register(SimpleCommand("/hello_global", For.ALL) { ctx ->
-            // Sends hello message according to global locale
-            ctx.reply(localization.getString("hello", globalLocale)).callAsync(ctx.sender)
-        })
-        commands.register(SimpleCommand("/hello_local", For.ALL) { ctx ->
-            // Sends hello message according to user language code
-            ctx.reply(localization.getString("hello", ctx.user().languageCode ?: globalLocale))
-                    .callAsync(ctx.sender)
-        })
-        commands.register(SimpleCommand("/switch_language", For.ALL) { ctx ->
-            // Setup inline keyboard
-            val keyboard = ArrayList<List<InlineKeyboardButton>>(2)
-            for (lang in listOf("en", "ru")) {
-                val languageName = localization.getString("lang_" + lang, globalLocale)
-                val btn = InlineKeyboardButton(languageName).setCallbackData(lang)
-                keyboard.add(listOf(btn))
-            }
+        commands.registerBundle {registry ->
+            registry.register(SimpleCommand("/hello_global", For.ALL) { ctx ->
+                // Sends hello message according to global locale
+                ctx.reply(localization.getString("hello", globalLocale)).callAsync(ctx.sender)
+            })
+            registry.register(SimpleCommand("/hello_local", For.ALL) { ctx ->
+                // Sends hello message according to user language code
+                ctx.reply(localization.getString("hello", ctx.user().languageCode ?: globalLocale))
+                        .callAsync(ctx.sender)
+            })
+            registry.register(SimpleCommand("/switch_language", For.ALL) { ctx ->
+                // Setup inline keyboard
+                val keyboard = ArrayList<List<InlineKeyboardButton>>(2)
+                for (lang in listOf("en", "ru")) {
+                    val languageName = localization.getString("lang_" + lang, globalLocale)
+                    val btn = InlineKeyboardButton(languageName).setCallbackData(lang)
+                    keyboard.add(listOf(btn))
+                }
 
-            ctx.reply(localization.getString("choose_language", globalLocale))
-                    .setReplyMarkup(InlineKeyboardMarkup().setKeyboard(keyboard))
-                    .callAsync(ctx.sender)
-        })
+                ctx.reply(localization.getString("choose_language", globalLocale))
+                        .setReplyMarkup(InlineKeyboardMarkup().setKeyboard(keyboard))
+                        .callAsync(ctx.sender)
+            })
+        }
     }
 
     override fun onUpdate(update: Update): BotApiMethod<*>? {

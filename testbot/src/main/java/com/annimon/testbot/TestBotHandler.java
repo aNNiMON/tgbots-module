@@ -2,11 +2,13 @@ package com.annimon.testbot;
 
 import com.annimon.tgbotsmodule.BotHandler;
 import com.annimon.tgbotsmodule.api.methods.Methods;
+import com.annimon.tgbotsmodule.commands.CommandBundle;
 import com.annimon.tgbotsmodule.commands.CommandRegistry;
 import com.annimon.tgbotsmodule.commands.SimpleCommand;
 import com.annimon.tgbotsmodule.commands.SimpleRegexCommand;
 import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.authority.SimpleAuthority;
+import com.annimon.tgbotsmodule.commands.context.Context;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.annimon.tgbotsmodule.commands.context.RegexMessageContext;
 import com.annimon.tgbotsmodule.services.LocalizationService;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
+import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -65,28 +68,30 @@ public class TestBotHandler extends BotHandler {
         }));
 
         // Locale
-        commands.register(new SimpleCommand("/hello_global", ctx -> {
-            // Sends hello message according to global locale
-            ctx.reply(localization.getString("hello", globalLocale)).callAsync(ctx.sender);
-        }));
-        commands.register(new SimpleCommand("/hello_local", ctx -> {
-            // Sends hello message according to user language code
-            final var userLocale = Optional.ofNullable(ctx.user().getLanguageCode()).orElse(globalLocale);
-            ctx.reply(localization.getString("hello", userLocale)).callAsync(ctx.sender);
-        }));
-        commands.register(new SimpleCommand("/switch_language", ctx -> {
-            // Setup inline keyboard
-            final var keyboard = new ArrayList<List<InlineKeyboardButton>>(2);
-            for (var lang : List.of("en", "ru")) {
-                var languageName = localization.getString("lang_" + lang, globalLocale);
-                var btn = new InlineKeyboardButton(languageName).setCallbackData(lang);
-                keyboard.add(List.of(btn));
-            }
+        commands.registerBundle(registry -> {
+            registry.register(new SimpleCommand("/hello_global", ctx -> {
+                // Sends hello message according to global locale
+                ctx.reply(localization.getString("hello", globalLocale)).callAsync(ctx.sender);
+            }));
+            registry.register(new SimpleCommand("/hello_local", ctx -> {
+                // Sends hello message according to user language code
+                final var userLocale = Optional.ofNullable(ctx.user().getLanguageCode()).orElse(globalLocale);
+                ctx.reply(localization.getString("hello", userLocale)).callAsync(ctx.sender);
+            }));
+            registry.register(new SimpleCommand("/switch_language", ctx -> {
+                // Setup inline keyboard
+                final var keyboard = new ArrayList<List<InlineKeyboardButton>>(2);
+                for (var lang : List.of("en", "ru")) {
+                    var languageName = localization.getString("lang_" + lang, globalLocale);
+                    var btn = new InlineKeyboardButton(languageName).setCallbackData(lang);
+                    keyboard.add(List.of(btn));
+                }
 
-            ctx.reply(localization.getString("choose_language", globalLocale))
-                    .setReplyMarkup(new InlineKeyboardMarkup().setKeyboard(keyboard))
-                    .callAsync(ctx.sender);
-        }));
+                ctx.reply(localization.getString("choose_language", globalLocale))
+                        .setReplyMarkup(new InlineKeyboardMarkup().setKeyboard(keyboard))
+                        .callAsync(ctx.sender);
+            }));
+        });
     }
 
     @Override

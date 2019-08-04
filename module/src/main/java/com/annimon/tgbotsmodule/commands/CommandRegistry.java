@@ -8,6 +8,7 @@ import com.annimon.tgbotsmodule.commands.context.MessageContextBuilder;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -36,13 +37,21 @@ public class CommandRegistry implements UpdateHandler {
 
     public CommandRegistry register(@NotNull TextCommand command) {
         Objects.requireNonNull(command);
-        textCommands.put(stringToCommand(command.command()), command);
+        Stream.concat(Stream.of(command.command()), command.aliases().stream())
+                .map(this::stringToCommand)
+                .forEach(key -> textCommands.put(key, command));
         return this;
     }
 
     public CommandRegistry register(@NotNull RegexCommand command) {
         Objects.requireNonNull(command);
         regexCommands.add(command);
+        return this;
+    }
+
+    public CommandRegistry registerBundle(@NotNull CommandBundle bundle) {
+        Objects.requireNonNull(bundle);
+        bundle.register(this);
         return this;
     }
 
