@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.annimon'
-version '0.5'
+version '0.6'
 
 repositories {
     mavenCentral()
@@ -12,7 +12,7 @@ repositories {
 dependencies {
     implementation project(':module')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.9"
 }
 
 compileKotlin {
