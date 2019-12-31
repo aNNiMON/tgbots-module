@@ -8,13 +8,13 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.validation.Validation;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jetbrains.annotations.NotNull;
 
 public class YamlConfigLoaderService<T> implements ConfigLoaderService<T> {
 
-    private static final Logger log = LogManager.getLogger(YamlConfigLoaderService.class);
+    private static final Logger log = LoggerFactory.getLogger(YamlConfigLoaderService.class);
 
     @NotNull
     @Override
@@ -48,7 +48,7 @@ public class YamlConfigLoaderService<T> implements ConfigLoaderService<T> {
             }
             return config;
         } catch (IOException ex) {
-            log.error(ex);
+            log.error("yaml loader", ex);
             throw new ConfigLoaderException(ex);
         }
     }

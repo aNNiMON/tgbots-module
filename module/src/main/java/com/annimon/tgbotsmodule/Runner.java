@@ -9,8 +9,8 @@ import java.util.function.Predicate;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.ApiContextInitializer;
@@ -22,7 +22,7 @@ import org.telegram.telegrambots.meta.generics.WebhookBot;
 
 public class Runner {
 
-    private static final Logger log = LogManager.getLogger(Runner.class);
+    private static final Logger log = LoggerFactory.getLogger(Runner.class);
 
     public static void main(String[] args) {
         final var profile = (args.length >= 1 && !args[0].isEmpty()) ? args[0] : "";
@@ -35,7 +35,7 @@ public class Runner {
     }
 
     public static void run(@NotNull String profile,
-                           @NotNull List<@Nullable BotModule> modules) {
+                           @NotNull List<@Nullable ? extends BotModule> modules) {
         final var config = loadConfig(profile);
         run(config, modules.stream()
                 .filter(Objects::nonNull)
@@ -43,7 +43,7 @@ public class Runner {
     }
 
     private static void run(@NotNull Config config,
-                            @NotNull List<@NotNull BotModule> modules) {
+                            @NotNull List<@NotNull ? extends BotModule> modules) {
         if (modules.isEmpty()) {
             log.info("No modules found. Exiting…");
             return;
@@ -57,7 +57,7 @@ public class Runner {
     }
 
     private static void initWebHook(@NotNull Config config,
-                                    @NotNull List<@NotNull BotModule> botModules) {
+                                    @NotNull List<@NotNull ? extends BotModule> botModules) {
         final Predicate<String> nullOrBlank = s -> (s == null) || (s.isEmpty());
         final TelegramBotsApi telegramBotsApi;
         try {
@@ -77,22 +77,22 @@ public class Runner {
                 try {
                     telegramBotsApi.registerBot((WebhookBot) module.botHandler(config));
                 } catch (TelegramApiException ex) {
-                    log.error(ex);
+                    log.error("register webhook bot", ex);
                 }
             }
         } catch (TelegramApiRequestException e) {
-            log.error(e);
+            log.error("init webhook bot", e);
         }
     }
 
     private static void initLongPolling(@NotNull Config config,
-                                        @NotNull List<@NotNull BotModule> botModules) {
+                                        @NotNull List<@NotNull ? extends BotModule> botModules) {
         final var telegramBotsApi = new TelegramBotsApi();
         for (var module : botModules) {
             try {
                 telegramBotsApi.registerBot((LongPollingBot) module.botHandler(config));
             } catch (TelegramApiException ex) {
-                log.error(ex);
+                log.error("register longpolling bot", ex);
             }
         }
     }

@@ -3,8 +3,8 @@ package com.annimon.tgbotsmodule.analytics.chatbase;
 import com.annimon.tgbotsmodule.analytics.Event;
 import com.annimon.tgbotsmodule.analytics.EventRegister;
 import java.util.function.Predicate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import retrofit2.Call;
@@ -15,7 +15,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class ChatbaseEventRegister implements Callback<GenericResponse>, EventRegister {
 
-    private static final Logger log = LogManager.getLogger(ChatbaseEventRegister.class);
+    private static final Logger log = LoggerFactory.getLogger(ChatbaseEventRegister.class);
 
     private final String apiKey;
     private final String version;
@@ -66,6 +66,6 @@ public class ChatbaseEventRegister implements Callback<GenericResponse>, EventRe
 
     @Override
     public void onFailure(Call<GenericResponse> call, Throwable t) {
-        log.error(t);
+        log.error("chatbase event failure", t);
     }
 }
