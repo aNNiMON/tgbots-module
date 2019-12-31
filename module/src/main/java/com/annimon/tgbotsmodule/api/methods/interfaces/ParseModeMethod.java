@@ -17,6 +17,14 @@ public interface ParseModeMethod<M extends Method, T extends Serializable> exten
         return setParseMode(enable ? ParseMode.MARKDOWN : null);
     }
 
+    default M enableMarkdownV2() {
+        return enableMarkdownV2(true);
+    }
+
+    default M enableMarkdownV2(boolean enable) {
+        return setParseMode(enable ? ParseMode.MARKDOWNV2 : null);
+    }
+
     default M enableHtml() {
         return enableHtml(true);
     }

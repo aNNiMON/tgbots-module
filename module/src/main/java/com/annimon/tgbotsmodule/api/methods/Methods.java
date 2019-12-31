@@ -208,6 +208,19 @@ public final class Methods {
         public static UnpinChatMessageMethod unpinChatMessage(long chatId) {
             return new UnpinChatMessageMethod().setChatId(chatId);
         }
+
+
+        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle() {
+            return new SetChatAdministratorCustomTitleMethod();
+        }
+
+        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle(@NotNull String chatId, int userId) {
+            return new SetChatAdministratorCustomTitleMethod().setChatId(chatId).setUserId(userId);
+        }
+
+        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle(long chatId, int userId) {
+            return new SetChatAdministratorCustomTitleMethod().setChatId(chatId).setUserId(userId);
+        }
     }
     
     public static class Games {
