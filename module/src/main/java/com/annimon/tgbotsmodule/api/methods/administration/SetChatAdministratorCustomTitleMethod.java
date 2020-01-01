@@ -42,12 +42,13 @@ public class SetChatAdministratorCustomTitleMethod implements ChatMemberMethod<S
         return this;
     }
 
-    public SetChatAdministratorCustomTitle setCustomTitle(String customTitle) {
-        return method.setCustomTitle(customTitle);
-    }
-
     public String getCustomTitle() {
         return method.getCustomTitle();
+    }
+
+    public SetChatAdministratorCustomTitleMethod setCustomTitle(String customTitle) {
+        method.setCustomTitle(customTitle);
+        return this;
     }
 
     @Override
