@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.annimon'
-version '0.7'
+version '0.8'
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 mainClassName = 'com.annimon.telegrambots.Runner'
@@ -16,14 +16,14 @@ repositories {
     mavenCentral()
 }
 
-ext.retrofitVersion = '2.6.1'
+ext.retrofitVersion = '2.7.1'
 ext.jacksonVersion = '2.10.1'
 ext.junit5Version = '5.5.2'
 ext.jaxbVersion = '2.3.1'
 
 dependencies {
     // runtimeOnly project(':testbot')
-    compile 'org.telegram:telegrambots:4.5'
+    compile 'org.telegram:telegrambots:4.6'
     compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
     compile "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"

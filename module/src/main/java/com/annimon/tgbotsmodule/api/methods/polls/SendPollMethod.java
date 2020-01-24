@@ -113,6 +113,51 @@ public class SendPollMethod implements
         return setOptions(options);
     }
 
+    public Boolean getAnonymous() {
+        return method.getAnonymous();
+    }
+
+    public SendPollMethod setAnonymous(boolean anonymous) {
+        method.setAnonymous(anonymous);
+        return this;
+    }
+
+    public String getType() {
+        return method.getType();
+    }
+
+    public SendPollMethod setType(String type) {
+        method.setType(type);
+        return this;
+    }
+
+    public Boolean getAllowMultipleAnswers() {
+        return method.getAllowMultipleAnswers();
+    }
+
+    public SendPollMethod setAllowMultipleAnswers(boolean allowMultipleAnswers) {
+        method.setAllowMultipleAnswers(allowMultipleAnswers);
+        return this;
+    }
+
+    public Integer getCorrectOptionId() {
+        return method.getCorrectOptionId();
+    }
+
+    public SendPollMethod setCorrectOptionId(Integer correctOptionId) {
+        method.setCorrectOptionId(correctOptionId);
+        return this;
+    }
+
+    public Boolean getClosed() {
+        return method.getClosed();
+    }
+
+    public SendPollMethod setClosed(boolean closed) {
+        method.setClosed(closed);
+        return this;
+    }
+
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
         return sender.call(method);
