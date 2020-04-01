@@ -91,6 +91,10 @@ public class MessageContext extends Context {
         return Methods.sendMessage(chatId, text);
     }
 
+    public @NotNull SendDiceMethod replyWithDice() {
+        return Methods.sendDice(chatId);
+    }
+
     public @NotNull SendPhotoMethod replyWithPhoto() {
         return Methods.sendPhoto(chatId);
     }

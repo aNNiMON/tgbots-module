@@ -1,40 +1,34 @@
-package com.annimon.tgbotsmodule.api.methods.stickers;
+package com.annimon.tgbotsmodule.api.methods.info;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerPositionInSet;
+import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
+import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class SetStickerPositionInSetMethod implements Method<Boolean> {
+public class SetMyCommandsMethod implements Method<Boolean> {
 
-    private final SetStickerPositionInSet method;
+    private final SetMyCommands method;
 
-    public SetStickerPositionInSetMethod() {
-        this(new SetStickerPositionInSet());
+    public SetMyCommandsMethod() {
+        this(new SetMyCommands());
     }
 
-    public SetStickerPositionInSetMethod(@NotNull SetStickerPositionInSet method) {
+    public SetMyCommandsMethod(@NotNull SetMyCommands method) {
         this.method = method;
     }
 
-    public String getSticker() {
-        return method.getSticker();
+    public List<BotCommand> getCommands() {
+        return method.getCommands();
     }
 
-    public SetStickerPositionInSetMethod setSticker(@NotNull String sticker) {
-        method.setSticker(sticker);
-        return this;
-    }
-
-    public Integer getPosition() {
-        return method.getPosition();
-    }
-
-    public SetStickerPositionInSetMethod setPosition(@NotNull Integer position) {
-        method.setPosition(position);
+    public SetMyCommandsMethod setCommands(List<BotCommand> commands) {
+        method.setCommands(commands);
         return this;
     }
 

@@ -53,7 +53,7 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
         })
 
         // Locale
-        commands.registerBundle {registry ->
+        commands.registerBundle { registry ->
             registry.register(SimpleCommand("/hello_global", For.ALL) { ctx ->
                 // Sends hello message according to global locale
                 ctx.reply(localization.getString("hello", globalLocale)).callAsync(ctx.sender)

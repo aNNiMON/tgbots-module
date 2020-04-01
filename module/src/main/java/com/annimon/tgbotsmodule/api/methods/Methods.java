@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.polls.StopPoll;
 import org.telegram.telegrambots.meta.api.objects.ChatPermissions;
+import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResult;
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.passport.dataerror.PassportElementError;
@@ -339,14 +340,33 @@ public final class Methods {
             return new AddStickerToSetMethod().setUserId(userId).setName(name).setEmojis(emojis);
         }
 
+        public static AddAnimatedStickerToSetMethod addAnimatedStickerToSet() {
+            return new AddAnimatedStickerToSetMethod();
+        }
+
+        public static AddAnimatedStickerToSetMethod addAnimatedStickerToSet(int userId, @NotNull String name, @NotNull String emojis) {
+            return new AddAnimatedStickerToSetMethod().setUserId(userId).setName(name).setEmojis(emojis);
+        }
+
 
         public static CreateNewStickerSetMethod createNewStickerSet() {
             return new CreateNewStickerSetMethod();
         }
 
-        public static CreateNewStickerSetMethod createNewStickerSet(int userId, @NotNull String name,
-                                                                    @NotNull String title, @NotNull String emojis) {
+        public static CreateNewStickerSetMethod createNewStickerSet(
+                int userId, @NotNull String name,
+                @NotNull String title, @NotNull String emojis) {
             return new CreateNewStickerSetMethod().setUserId(userId).setName(name).setTitle(title).setEmojis(emojis);
+        }
+
+        public static CreateNewAnimatedStickerSetMethod createNewAnimatedStickerSet() {
+            return new CreateNewAnimatedStickerSetMethod();
+        }
+
+        public static CreateNewAnimatedStickerSetMethod createNewAnimatedStickerSet(
+                int userId, @NotNull String name,
+                @NotNull String title, @NotNull String emojis) {
+            return new CreateNewAnimatedStickerSetMethod().setUserId(userId).setName(name).setTitle(title).setEmojis(emojis);
         }
 
 
@@ -374,6 +394,15 @@ public final class Methods {
 
         public static SetStickerPositionInSetMethod setStickerPositionInSet(@NotNull String sticker, int position) {
             return new SetStickerPositionInSetMethod().setSticker(sticker).setPosition(position);
+        }
+
+
+        public static SetStickerSetThumbMethod setStickerSetThumb() {
+            return new SetStickerSetThumbMethod();
+        }
+
+        public static SetStickerSetThumbMethod setStickerSetThumb(int userId) {
+            return new SetStickerSetThumbMethod().setUserId(userId);
         }
 
 
@@ -495,6 +524,19 @@ public final class Methods {
     }
 
 
+    public static GetMyCommandsMethod getMyCommands() {
+        return new GetMyCommandsMethod();
+    }
+
+    public static SetMyCommandsMethod setMyCommands() {
+        return new SetMyCommandsMethod();
+    }
+
+    public static SetMyCommandsMethod setMyCommands(List<BotCommand> commands) {
+        return new SetMyCommandsMethod().setCommands(commands);
+    }
+
+
     // Send
 
     public static SendAnimationMethod sendAnimation() {
@@ -535,6 +577,19 @@ public final class Methods {
     public static SendContactMethod sendContact(long chatId,
                                                 @NotNull String phoneNumber, @NotNull String firstName) {
         return new SendContactMethod().setChatId(chatId).setPhoneNumber(phoneNumber).setFirstName(firstName);
+    }
+
+
+    public static SendDiceMethod sendDice() {
+        return new SendDiceMethod();
+    }
+
+    public static SendDiceMethod sendDice(@NotNull String chatId) {
+        return new SendDiceMethod().setChatId(chatId);
+    }
+
+    public static SendDiceMethod sendDice(long chatId) {
+        return new SendDiceMethod().setChatId(chatId);
     }
 
 
