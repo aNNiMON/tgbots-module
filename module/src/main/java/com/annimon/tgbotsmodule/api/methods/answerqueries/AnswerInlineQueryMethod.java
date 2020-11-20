@@ -50,11 +50,11 @@ public class AnswerInlineQueryMethod implements Method<Boolean> {
     }
 
     public Boolean isPersonal() {
-        return method.isPersonal();
+        return method.getIsPersonal();
     }
 
     public AnswerInlineQueryMethod setPersonal(Boolean isPersonal) {
-        method.setPersonal(isPersonal);
+        method.setIsPersonal(isPersonal);
         return this;
     }
 
@@ -86,7 +86,7 @@ public class AnswerInlineQueryMethod implements Method<Boolean> {
     }
 
     public AnswerInlineQueryMethod setResults(@NotNull InlineQueryResult... results) {
-        method.setResults(results);
+        method.setResults(List.of(results));
         return this;
     }
 

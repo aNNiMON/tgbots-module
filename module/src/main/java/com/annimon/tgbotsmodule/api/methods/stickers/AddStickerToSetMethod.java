@@ -43,32 +43,9 @@ public class AddStickerToSetMethod implements
     }
 
     @Override
-    public AddStickerToSetMethod setFile(@NotNull String fileId) {
-        method.setPngSticker(fileId);
-        return this;
-    }
-
-    @Override
-    public AddStickerToSetMethod setFile(@NotNull java.io.File file) {
+    public AddStickerToSetMethod setFile(@NotNull InputFile file) {
         method.setPngSticker(file);
         return this;
-    }
-
-    @Override
-    public AddStickerToSetMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setPngSticker(name, inputStream);
-        return this;
-    }
-
-    @Override
-    public AddStickerToSetMethod setFile(@NotNull InputFile file) {
-        if (file.getNewMediaFile() != null) {
-            return setFile(file.getNewMediaFile());
-        }
-        if (file.getNewMediaStream() != null) {
-            return setFile(file.getMediaName(), file.getNewMediaStream());
-        }
-        return setFile(file.getAttachName());
     }
 
     public String getName() {

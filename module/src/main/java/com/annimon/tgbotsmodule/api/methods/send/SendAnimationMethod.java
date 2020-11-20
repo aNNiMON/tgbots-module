@@ -89,24 +89,6 @@ public class SendAnimationMethod implements
     }
 
     @Override
-    public SendAnimationMethod setFile(@NotNull String fileId) {
-        method.setAnimation(fileId);
-        return this;
-    }
-
-    @Override
-    public SendAnimationMethod setFile(@NotNull java.io.File file) {
-        method.setAnimation(file);
-        return this;
-    }
-
-    @Override
-    public SendAnimationMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setAnimation(name, inputStream);
-        return this;
-    }
-
-    @Override
     public SendAnimationMethod setFile(@NotNull InputFile file) {
         method.setAnimation(file);
         return this;

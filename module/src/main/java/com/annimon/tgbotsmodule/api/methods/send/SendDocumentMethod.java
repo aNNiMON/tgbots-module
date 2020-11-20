@@ -87,24 +87,6 @@ public class SendDocumentMethod implements
     }
 
     @Override
-    public SendDocumentMethod setFile(@NotNull String fileId) {
-        method.setDocument(fileId);
-        return this;
-    }
-
-    @Override
-    public SendDocumentMethod setFile(@NotNull java.io.File file) {
-        method.setDocument(file);
-        return this;
-    }
-
-    @Override
-    public SendDocumentMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setDocument(name, inputStream);
-        return this;
-    }
-
-    @Override
     public SendDocumentMethod setFile(@NotNull InputFile file) {
         method.setDocument(file);
         return this;

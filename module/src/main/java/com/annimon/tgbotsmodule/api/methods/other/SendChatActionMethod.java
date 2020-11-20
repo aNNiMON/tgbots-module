@@ -33,7 +33,7 @@ public class SendChatActionMethod implements ChatMethod<SendChatActionMethod, Bo
     }
 
     public ActionType getAction() {
-        return method.getAction();
+        return method.getActionType();
     }
 
     public SendChatActionMethod setAction(@NotNull ActionType actionType) {

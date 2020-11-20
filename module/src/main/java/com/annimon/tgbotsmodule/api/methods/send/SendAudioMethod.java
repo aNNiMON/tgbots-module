@@ -89,24 +89,6 @@ public class SendAudioMethod implements
     }
 
     @Override
-    public SendAudioMethod setFile(@NotNull String fileId) {
-        method.setAudio(fileId);
-        return this;
-    }
-
-    @Override
-    public SendAudioMethod setFile(@NotNull java.io.File file) {
-        method.setAudio(file);
-        return this;
-    }
-
-    @Override
-    public SendAudioMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setAudio(name, inputStream);
-        return this;
-    }
-
-    @Override
     public SendAudioMethod setFile(@NotNull InputFile file) {
         method.setAudio(file);
         return this;

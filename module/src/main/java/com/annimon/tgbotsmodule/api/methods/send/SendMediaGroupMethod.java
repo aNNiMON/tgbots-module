@@ -63,12 +63,12 @@ public class SendMediaGroupMethod implements SendableMessageMethod<SendMediaGrou
         return this;
     }
 
-    public List<InputMedia> getMedia() {
-        return method.getMedia();
+    public List<InputMedia> getMedias() {
+        return method.getMedias();
     }
 
-    public SendMediaGroupMethod setMedia(@NotNull List<InputMedia> media) {
-        method.setMedia(media);
+    public SendMediaGroupMethod setMedias(@NotNull List<InputMedia> media) {
+        method.setMedias(media);
         return this;
     }
 

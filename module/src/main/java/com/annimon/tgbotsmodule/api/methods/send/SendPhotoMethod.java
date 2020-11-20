@@ -85,24 +85,6 @@ public class SendPhotoMethod implements
     }
 
     @Override
-    public SendPhotoMethod setFile(@NotNull String fileId) {
-        method.setPhoto(fileId);
-        return this;
-    }
-
-    @Override
-    public SendPhotoMethod setFile(@NotNull java.io.File file) {
-        method.setPhoto(file);
-        return this;
-    }
-
-    @Override
-    public SendPhotoMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setPhoto(name, inputStream);
-        return this;
-    }
-
-    @Override
     public SendPhotoMethod setFile(@NotNull InputFile file) {
         method.setPhoto(file);
         return this;

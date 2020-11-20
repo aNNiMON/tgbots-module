@@ -76,23 +76,23 @@ public class SendLocationMethod implements
     }
 
     @Override
-    public Float getLatitude() {
+    public Double getLatitude() {
         return method.getLatitude();
     }
 
     @Override
-    public SendLocationMethod setLatitude(@NotNull Float latitude) {
+    public SendLocationMethod setLatitude(@NotNull Double latitude) {
         method.setLatitude(latitude);
         return this;
     }
 
     @Override
-    public Float getLongitude() {
+    public Double getLongitude() {
         return method.getLongitude();
     }
 
     @Override
-    public SendLocationMethod setLongitude(@NotNull Float longitude) {
+    public SendLocationMethod setLongitude(@NotNull Double longitude) {
         method.setLongitude(longitude);
         return this;
     }

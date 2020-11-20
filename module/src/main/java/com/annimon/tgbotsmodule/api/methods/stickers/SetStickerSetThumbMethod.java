@@ -44,24 +44,6 @@ public class SetStickerSetThumbMethod implements
     }
 
     @Override
-    public SetStickerSetThumbMethod setFile(String fileId) {
-        method.setThumb(fileId);
-        return this;
-    }
-
-    @Override
-    public SetStickerSetThumbMethod setFile(@NotNull java.io.File file) {
-        method.setThumb(file);
-        return this;
-    }
-
-    @Override
-    public SetStickerSetThumbMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setThumb(name, inputStream);
-        return this;
-    }
-
-    @Override
     public SetStickerSetThumbMethod setFile(@NotNull InputFile file) {
         method.setThumb(file);
         return this;

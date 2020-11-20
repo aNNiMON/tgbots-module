@@ -83,12 +83,15 @@ public class TestBotHandler extends BotHandler {
                 final var keyboard = new ArrayList<List<InlineKeyboardButton>>(2);
                 for (var lang : List.of("en", "ru")) {
                     var languageName = localization.getString("lang_" + lang, globalLocale);
-                    var btn = new InlineKeyboardButton(languageName).setCallbackData(lang);
+                    var btn = InlineKeyboardButton.builder()
+                            .text(languageName)
+                            .callbackData(lang)
+                            .build();
                     keyboard.add(List.of(btn));
                 }
 
                 ctx.reply(localization.getString("choose_language", globalLocale))
-                        .setReplyMarkup(new InlineKeyboardMarkup().setKeyboard(keyboard))
+                        .setReplyMarkup(InlineKeyboardMarkup.builder().keyboard(keyboard).build())
                         .callAsync(ctx.sender);
             }));
         });

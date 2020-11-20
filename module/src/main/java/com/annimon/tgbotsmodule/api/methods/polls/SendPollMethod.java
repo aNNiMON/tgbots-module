@@ -113,12 +113,12 @@ public class SendPollMethod implements
         return setOptions(options);
     }
 
-    public Boolean getAnonymous() {
-        return method.getAnonymous();
+    public Boolean getIsAnonymous() {
+        return method.getIsAnonymous();
     }
 
-    public SendPollMethod setAnonymous(boolean anonymous) {
-        method.setAnonymous(anonymous);
+    public SendPollMethod setIsAnonymous(boolean anonymous) {
+        method.setIsAnonymous(anonymous);
         return this;
     }
 
@@ -149,12 +149,12 @@ public class SendPollMethod implements
         return this;
     }
 
-    public Boolean getClosed() {
-        return method.getClosed();
+    public Boolean getIsClosed() {
+        return method.getIsClosed();
     }
 
-    public SendPollMethod setClosed(boolean closed) {
-        method.setClosed(closed);
+    public SendPollMethod setIsClosed(boolean closed) {
+        method.setIsClosed(closed);
         return this;
     }
 

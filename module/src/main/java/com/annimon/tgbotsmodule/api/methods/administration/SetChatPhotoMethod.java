@@ -17,7 +17,6 @@ public class SetChatPhotoMethod implements
         InputFileMethod<SetChatPhotoMethod, Boolean> {
 
     private final SetChatPhoto method;
-    private InputFile inputFile;
 
     public SetChatPhotoMethod() {
         this(new SetChatPhoto());
@@ -40,34 +39,13 @@ public class SetChatPhotoMethod implements
 
     @Override
     public InputFile getFile() {
-        return inputFile;
-    }
-
-    @Override
-    public SetChatPhotoMethod setFile(String fileId) {
-        throw new UnsupportedOperationException("SetChatPhoto doesn't support setting files as fileId");
-    }
-
-    @Override
-    public SetChatPhotoMethod setFile(@NotNull File file) {
-        method.setPhoto(file);
-        inputFile = new InputFile(file, file.getName());
-        return this;
-    }
-
-    @Override
-    public SetChatPhotoMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setNewPhoto(name, inputStream);
-        inputFile = new InputFile(inputStream, name);
-        return this;
+        return method.getPhoto();
     }
 
     @Override
     public SetChatPhotoMethod setFile(@NotNull InputFile file) {
-        if (file.getNewMediaFile() != null) {
-            return setFile(file.getNewMediaFile());
-        }
-        return setFile(file.getMediaName(), file.getNewMediaStream());
+        method.setPhoto(file);
+        return this;
     }
 
     @Override

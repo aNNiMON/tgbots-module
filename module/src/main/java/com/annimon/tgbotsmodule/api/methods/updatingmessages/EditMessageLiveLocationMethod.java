@@ -79,23 +79,23 @@ public class EditMessageLiveLocationMethod implements
     }
 
     @Override
-    public Float getLatitude() {
+    public Double getLatitude() {
         return method.getLatitude();
     }
 
     @Override
-    public EditMessageLiveLocationMethod setLatitude(@NotNull Float latitude) {
+    public EditMessageLiveLocationMethod setLatitude(@NotNull Double latitude) {
         method.setLatitude(latitude);
         return this;
     }
 
     @Override
-    public Float getLongitude() {
+    public Double getLongitude() {
         return method.getLongitude();
     }
 
     @Override
-    public EditMessageLiveLocationMethod setLongitude(@NotNull Float longitude) {
+    public EditMessageLiveLocationMethod setLongitude(@NotNull Double longitude) {
         method.setLongitude(longitude);
         return this;
     }

@@ -85,24 +85,6 @@ public class SendVideoNoteMethod implements
     }
 
     @Override
-    public SendVideoNoteMethod setFile(@NotNull String fileId) {
-        method.setVideoNote(fileId);
-        return this;
-    }
-
-    @Override
-    public SendVideoNoteMethod setFile(@NotNull java.io.File file) {
-        method.setVideoNote(file);
-        return this;
-    }
-
-    @Override
-    public SendVideoNoteMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setVideoNote(name, inputStream);
-        return this;
-    }
-
-    @Override
     public SendVideoNoteMethod setFile(@NotNull InputFile file) {
         method.setVideoNote(file);
         return this;

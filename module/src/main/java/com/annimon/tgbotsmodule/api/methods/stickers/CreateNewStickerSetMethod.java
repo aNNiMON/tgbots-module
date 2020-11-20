@@ -43,26 +43,8 @@ public class CreateNewStickerSetMethod implements
     }
 
     @Override
-    public CreateNewStickerSetMethod setFile(@NotNull String fileId) {
-        method.setPngSticker(fileId);
-        return this;
-    }
-
-    @Override
-    public CreateNewStickerSetMethod setFile(@NotNull java.io.File file) {
-        method.setPngStickerFile(file);
-        return this;
-    }
-
-    @Override
-    public CreateNewStickerSetMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setPngStickerStream(name, inputStream);
-        return this;
-    }
-
-    @Override
     public CreateNewStickerSetMethod setFile(@NotNull InputFile file) {
-        method.setPngStickerFile(file);
+        method.setPngSticker(file);
         return this;
     }
 

@@ -81,24 +81,6 @@ public class SendStickerMethod implements
     }
 
     @Override
-    public SendStickerMethod setFile(@NotNull String fileId) {
-        method.setSticker(fileId);
-        return this;
-    }
-
-    @Override
-    public SendStickerMethod setFile(@NotNull java.io.File file) {
-        method.setSticker(file);
-        return this;
-    }
-
-    @Override
-    public SendStickerMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setSticker(name, inputStream);
-        return this;
-    }
-
-    @Override
     public SendStickerMethod setFile(@NotNull InputFile file) {
         method.setSticker(file);
         return this;

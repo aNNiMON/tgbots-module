@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public interface LocationMethod<M extends Method, T extends Serializable> extends Method<T> {
 
-    Float getLatitude();
+    Double getLatitude();
 
-    M setLatitude(Float latitude);
+    M setLatitude(Double latitude);
 
-    Float getLongitude();
+    Double getLongitude();
 
-    M setLongitude(Float longitude);
+    M setLongitude(Double longitude);
 }

@@ -224,12 +224,12 @@ public class SendInvoiceMethod implements
         return this;
     }
 
-    public Boolean getFlexible() {
-        return method.getFlexible();
+    public Boolean getIsFlexible() {
+        return method.getIsFlexible();
     }
 
-    public SendInvoiceMethod setFlexible(Boolean flexible) {
-        method.setFlexible(flexible);
+    public SendInvoiceMethod setIsFlexible(Boolean flexible) {
+        method.setIsFlexible(flexible);
         return this;
     }
 

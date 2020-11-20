@@ -13,12 +13,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 import org.telegram.telegrambots.meta.generics.LongPollingBot;
 import org.telegram.telegrambots.meta.generics.WebhookBot;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+import org.telegram.telegrambots.updatesreceivers.DefaultWebhook;
 
 public class Runner {
 
@@ -48,7 +50,6 @@ public class Runner {
             log.info("No modules found. Exiting…");
             return;
         }
-        ApiContextInitializer.init();
         if (config.isWebHookEnabled()) {
             initWebHook(config, modules);
         } else {
@@ -59,41 +60,38 @@ public class Runner {
     private static void initWebHook(@NotNull Config config,
                                     @NotNull List<@NotNull ? extends BotModule> botModules) {
         final Predicate<String> nullOrBlank = s -> (s == null) || (s.isEmpty());
-        final TelegramBotsApi telegramBotsApi;
         try {
             final var wh = config.getWebhook();
-            if (nullOrBlank.test(wh.getCertificatePublicKeyPath())) {
-                telegramBotsApi = new TelegramBotsApi(
-                        wh.getCertificateStorePath(), wh.getCertificateStorePassword(),
-                        wh.getExternalUrl(), wh.getInternalUrl());
-            } else {
-                // self-signed certificate
-                telegramBotsApi = new TelegramBotsApi(
-                        wh.getCertificateStorePath(), wh.getCertificateStorePassword(),
-                        wh.getExternalUrl(), wh.getInternalUrl(),
-                        wh.getCertificatePublicKeyPath());
-            }
+            final var webhook = new DefaultWebhook();
+            webhook.setInternalUrl(wh.getInternalUrl());
+            webhook.setKeyStore(wh.getKeystorePath(), wh.getKeystorePassword());
+            final var telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class, webhook);
             for (var module : botModules) {
                 try {
-                    telegramBotsApi.registerBot((WebhookBot) module.botHandler(config));
+                    telegramBotsApi.registerBot(module.botHandler(config), new SetWebhook());
                 } catch (TelegramApiException ex) {
                     log.error("register webhook bot", ex);
                 }
             }
-        } catch (TelegramApiRequestException e) {
+        } catch (TelegramApiException e) {
             log.error("init webhook bot", e);
         }
     }
 
-    private static void initLongPolling(@NotNull Config config,
-                                        @NotNull List<@NotNull ? extends BotModule> botModules) {
-        final var telegramBotsApi = new TelegramBotsApi();
-        for (var module : botModules) {
-            try {
-                telegramBotsApi.registerBot((LongPollingBot) module.botHandler(config));
-            } catch (TelegramApiException ex) {
-                log.error("register longpolling bot", ex);
+    private static void initLongPolling(
+            @NotNull Config config,
+            @NotNull List<@NotNull ? extends BotModule> botModules) {
+        try {
+            final var telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+            for (var module : botModules) {
+                try {
+                    telegramBotsApi.registerBot((LongPollingBot) module.botHandler(config));
+                } catch (TelegramApiException ex) {
+                    log.error("register longpolling bot", ex);
+                }
             }
+        } catch (TelegramApiException ex) {
+            log.error("init long polling bot", ex);
         }
     }
 

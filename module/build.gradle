@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.annimon'
-version '0.9'
+version '0.10'
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 mainClassName = 'com.annimon.telegrambots.Runner'
@@ -16,14 +16,14 @@ repositories {
     mavenCentral()
 }
 
-ext.retrofitVersion = '2.8.1'
-ext.jacksonVersion = '2.10.3'
-ext.junit5Version = '5.6.1'
+ext.retrofitVersion = '2.9.0'
+ext.jacksonVersion = '2.11.3'
+ext.junit5Version = '5.7.0'
 ext.jaxbVersion = '2.3.1'
 
 dependencies {
     // runtimeOnly project(':testbot')
-    compile 'org.telegram:telegrambots:4.7'
+    compile "org.telegram:telegrambots:5.0.1"
     compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
     compile "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
@@ -34,8 +34,8 @@ dependencies {
     compile "com.sun.xml.bind:jaxb-impl:$jaxbVersion"
     compile "org.glassfish.jaxb:jaxb-runtime:$jaxbVersion"
     compile 'javax.activation:activation:1.1.1'
-    compile 'org.jetbrains:annotations:17.0.0'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.4.2'
+    compile 'org.jetbrains:annotations:20.1.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.7.0'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junit5Version"
     testImplementation "org.junit.jupiter:junit-jupiter-params:$junit5Version"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$junit5Version"

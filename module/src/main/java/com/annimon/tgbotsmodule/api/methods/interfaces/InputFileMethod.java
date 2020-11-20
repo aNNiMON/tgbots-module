@@ -9,11 +9,17 @@ public interface InputFileMethod<M extends Method, T extends Serializable> exten
 
     InputFile getFile();
 
-    M setFile(String fileId);
+    default M setFile(String fileId) {
+        return setFile(new InputFile(fileId));
+    }
 
-    M setFile(File file);
+    default M setFile(File file) {
+        return setFile(new InputFile(file));
+    }
 
-    M setFile(String name, InputStream inputStream);
+    default M setFile(String name, InputStream inputStream) {
+        return setFile(new InputFile(inputStream, name));
+    }
 
     M setFile(InputFile file);
 }

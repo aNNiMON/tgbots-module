@@ -66,13 +66,13 @@ public class ForwardMessageMethod implements
 
     @Override
     public ForwardMessageMethod enableNotification() {
-        method.enableNotification();
+        method.setDisableNotification(false);
         return this;
     }
 
     @Override
     public ForwardMessageMethod disableNotification() {
-        method.disableNotification();
+        method.setDisableNotification(true);
         return this;
     }
 

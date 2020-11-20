@@ -18,7 +18,7 @@ public class Config {
     private String profile;
 
     @JsonProperty(value = "log-level", defaultValue = "INFO")
-    private String logLevel;
+    private String logLevel = "INFO";
 
     @Valid
     @JsonProperty

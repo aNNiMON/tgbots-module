@@ -100,11 +100,11 @@ public class SendContactMethod implements ReplyMarkupSupportedMessageMethod<Send
     }
 
     public String getVCard() {
-        return method.getvCard();
+        return method.getVCard();
     }
 
     public SendContactMethod setVCard(String vCard) {
-        method.setvCard(vCard);
+        method.setVCard(vCard);
         return this;
     }
 

@@ -8,30 +8,17 @@ import org.jetbrains.annotations.NotNull;
 public class WebHookConfig {
 
     @JsonProperty(defaultValue = "false")
-    private boolean enabled;
-
-    @Positive
-    @JsonProperty(defaultValue = "8443")
-    private int port;
-
-    @NotBlank
-    @JsonProperty(required = true)
-    private String externalUrl;
+    private boolean enabled = false;
 
     @NotBlank
     @JsonProperty(defaultValue = "https://127.0.0.1:$port")
     private String internalUrl;
 
     @JsonProperty
-    private String certificatePublicKeyPath;
+    private String keystorePath;
 
-    @NotBlank
-    @JsonProperty(required = true)
-    private String certificateStorePath;
-
-    @NotBlank
-    @JsonProperty(required = true)
-    private String certificateStorePassword;
+    @JsonProperty
+    private String keystorePassword;
 
     public boolean isEnabled() {
         return enabled;
@@ -41,66 +28,38 @@ public class WebHookConfig {
         this.enabled = enabled;
     }
 
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    @NotNull
-    public String getExternalUrl() {
-        return externalUrl.replace("$port", Integer.toString(port));
-    }
-
-    public void setExternalUrl(String externalUrl) {
-        this.externalUrl = externalUrl;
-    }
-
     @NotNull
     public String getInternalUrl() {
-        return internalUrl.replace("$port", Integer.toString(port));
+        return internalUrl;
     }
 
     public void setInternalUrl(String internalUrl) {
         this.internalUrl = internalUrl;
     }
 
-    public String getCertificatePublicKeyPath() {
-        return certificatePublicKeyPath;
+    public String getKeystorePath() {
+        return keystorePath;
     }
 
-    public void setCertificatePublicKeyPath(String certificatePublicKeyPath) {
-        this.certificatePublicKeyPath = certificatePublicKeyPath;
+    public void setKeystorePath(String path) {
+        this.keystorePath = path;
     }
 
-    public String getCertificateStorePath() {
-        return certificateStorePath;
+    public String getKeystorePassword() {
+        return keystorePassword;
     }
 
-    public void setCertificateStorePath(String certificateStorePath) {
-        this.certificateStorePath = certificateStorePath;
-    }
-
-    public String getCertificateStorePassword() {
-        return certificateStorePassword;
-    }
-
-    public void setCertificateStorePassword(String certificateStorePassword) {
-        this.certificateStorePassword = certificateStorePassword;
+    public void setKeystorePassword(String keystorePassword) {
+        this.keystorePassword = keystorePassword;
     }
 
     @Override
     public String toString() {
         return "WebHookConfig{" +
                 "enabled=" + enabled +
-                ", port=" + port +
-                ", externalUrl='" + externalUrl + '\'' +
                 ", internalUrl='" + internalUrl + '\'' +
-                ", certificatePublicKeyPath='" + certificatePublicKeyPath + '\'' +
-                ", certificateStorePath='" + certificateStorePath + '\'' +
-                ", certificateStorePassword='" + certificateStorePassword.replaceAll(".", "x") + '\'' +
+                ", keystorePath='" + keystorePath + '\'' +
+                ", keystorePassword='" + keystorePassword.replaceAll(".", "x") + '\'' +
                 '}';
     }
 }

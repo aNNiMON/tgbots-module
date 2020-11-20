@@ -325,7 +325,7 @@ public final class Methods {
         }
 
         public static StopPollMethod stopPoll(long chatId, int messageId) {
-            return new StopPollMethod(new StopPoll(chatId, messageId));
+            return stopPoll(Long.toString(chatId), messageId);
         }
     }
 
@@ -610,11 +610,11 @@ public final class Methods {
         return new SendLocationMethod();
     }
 
-    public static SendLocationMethod sendLocation(@NotNull String chatId, float latitude, float longitude) {
+    public static SendLocationMethod sendLocation(@NotNull String chatId, double latitude, double longitude) {
         return new SendLocationMethod().setChatId(chatId).setLatitude(latitude).setLongitude(longitude);
     }
 
-    public static SendLocationMethod sendLocation(long chatId, float latitude, float longitude) {
+    public static SendLocationMethod sendLocation(long chatId, double latitude, double longitude) {
         return new SendLocationMethod().setChatId(chatId).setLatitude(latitude).setLongitude(longitude);
     }
 
@@ -624,11 +624,11 @@ public final class Methods {
     }
 
     public static SendMediaGroupMethod sendMediaGroup(@NotNull String chatId, @NotNull List<InputMedia> media) {
-        return new SendMediaGroupMethod().setChatId(chatId).setMedia(media);
+        return new SendMediaGroupMethod().setChatId(chatId).setMedias(media);
     }
 
     public static SendMediaGroupMethod sendMediaGroup(long chatId, @NotNull List<InputMedia> media) {
-        return new SendMediaGroupMethod().setChatId(chatId).setMedia(media);
+        return new SendMediaGroupMethod().setChatId(chatId).setMedias(media);
     }
 
 
@@ -662,14 +662,14 @@ public final class Methods {
         return new SendVenueMethod();
     }
 
-    public static SendVenueMethod sendVenue(@NotNull String chatId, float latitude, float longitude,
+    public static SendVenueMethod sendVenue(@NotNull String chatId, double latitude, double longitude,
                                             @NotNull String title, @NotNull String address) {
         return new SendVenueMethod().setChatId(chatId)
                 .setLatitude(latitude).setLongitude(longitude)
                 .setTitle(title).setAddress(address);
     }
 
-    public static SendVenueMethod sendVenue(long chatId, float latitude, float longitude,
+    public static SendVenueMethod sendVenue(long chatId, double latitude, double longitude,
                                             @NotNull String title, @NotNull String address) {
         return new SendVenueMethod().setChatId(chatId)
                 .setLatitude(latitude).setLongitude(longitude)
@@ -751,19 +751,19 @@ public final class Methods {
     }
 
     public static EditMessageLiveLocationMethod editMessageLiveLocation(@NotNull String inlineMessageId,
-                                                                        float latitude, float longitude) {
+                                                                        double latitude, double longitude) {
         return new EditMessageLiveLocationMethod().setInlineMessageId(inlineMessageId)
                 .setLatitude(latitude).setLongitude(longitude);
     }
 
     public static EditMessageLiveLocationMethod editMessageLiveLocation(@NotNull String chatId, int messageId,
-                                                                        float latitude, float longitude) {
+                                                                        double latitude, double longitude) {
         return new EditMessageLiveLocationMethod().setChatId(chatId).setMessageId(messageId)
                 .setLatitude(latitude).setLongitude(longitude);
     }
 
     public static EditMessageLiveLocationMethod editMessageLiveLocation(long chatId, int messageId,
-                                                                        float latitude, float longitude) {
+                                                                        double latitude, double longitude) {
         return new EditMessageLiveLocationMethod().setChatId(chatId).setMessageId(messageId)
                 .setLatitude(latitude).setLongitude(longitude);
     }

@@ -89,24 +89,6 @@ public class SendVideoMethod implements
     }
 
     @Override
-    public SendVideoMethod setFile(@NotNull String fileId) {
-        method.setVideo(fileId);
-        return this;
-    }
-
-    @Override
-    public SendVideoMethod setFile(@NotNull java.io.File file) {
-        method.setVideo(file);
-        return this;
-    }
-
-    @Override
-    public SendVideoMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setVideo(name, inputStream);
-        return this;
-    }
-
-    @Override
     public SendVideoMethod setFile(@NotNull InputFile file) {
         method.setVideo(file);
         return this;

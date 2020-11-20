@@ -3,9 +3,10 @@ package com.annimon.tgbotsmodule;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
-import org.telegram.telegrambots.meta.ApiContext;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 import org.telegram.telegrambots.meta.generics.LongPollingBot;
 import org.telegram.telegrambots.meta.generics.WebhookBot;
@@ -15,7 +16,7 @@ public abstract class BotHandler extends CommonAbsSender
         implements LongPollingBot, WebhookBot {
 
     public BotHandler() {
-        this(ApiContext.getInstance(DefaultBotOptions.class));
+        this(new DefaultBotOptions());
     }
 
     public BotHandler(@NotNull DefaultBotOptions options) {
@@ -40,8 +41,8 @@ public abstract class BotHandler extends CommonAbsSender
     }
 
     @Override
-    public void setWebhook(String url, String publicCertificatePath) throws TelegramApiRequestException {
-        WebhookUtils.setWebhook(this, url, publicCertificatePath);
+    public void setWebhook(SetWebhook setWebhook) throws TelegramApiException {
+        WebhookUtils.setWebhook(this, setWebhook);
     }
 
     @Override

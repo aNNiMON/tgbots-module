@@ -2,6 +2,7 @@ package com.annimon.tgbotsmodule.api.methods.other;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +44,12 @@ public class SetPassportDataErrorsMethod implements UserMethod<SetPassportDataEr
     }
 
     public SetPassportDataErrorsMethod addError(@NotNull PassportElementError error) {
-        method.addError(error);
+        var errors = method.getErrors();
+        if (errors == null) {
+            errors = new ArrayList<>();
+        }
+        errors.add(error);
+        method.setErrors(errors);
         return this;
     }
 

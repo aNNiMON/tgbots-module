@@ -68,12 +68,15 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
                 val keyboard = ArrayList<List<InlineKeyboardButton>>(2)
                 for (lang in listOf("en", "ru")) {
                     val languageName = localization.getString("lang_" + lang, globalLocale)
-                    val btn = InlineKeyboardButton(languageName).setCallbackData(lang)
+                    val btn = InlineKeyboardButton.builder()
+                            .text(languageName)
+                            .callbackData(lang)
+                            .build()
                     keyboard.add(listOf(btn))
                 }
 
                 ctx.reply(localization.getString("choose_language", globalLocale))
-                        .setReplyMarkup(InlineKeyboardMarkup().setKeyboard(keyboard))
+                        .setReplyMarkup(InlineKeyboardMarkup.builder().keyboard(keyboard).build())
                         .callAsync(ctx.sender)
             })
         }

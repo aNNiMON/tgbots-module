@@ -44,31 +44,9 @@ public class AddAnimatedStickerToSetMethod implements
     }
 
     @Override
-    public AddAnimatedStickerToSetMethod setFile(@NotNull String fileId) {
-        throw new UnsupportedOperationException("Setting stickers as fileId not supported");
-    }
-
-    @Override
-    public AddAnimatedStickerToSetMethod setFile(@NotNull File file) {
+    public AddAnimatedStickerToSetMethod setFile(@NotNull InputFile file) {
         method.setTgsSticker(file);
         return this;
-    }
-
-    @Override
-    public AddAnimatedStickerToSetMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setTgsSticker(name, inputStream);
-        return this;
-    }
-
-    @Override
-    public AddAnimatedStickerToSetMethod setFile(@NotNull InputFile file) {
-        if (file.getNewMediaFile() != null) {
-            return setFile(file.getNewMediaFile());
-        }
-        if (file.getNewMediaStream() != null) {
-            return setFile(file.getMediaName(), file.getNewMediaStream());
-        }
-        return setFile(file.getAttachName());
     }
 
     public String getName() {

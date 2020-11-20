@@ -43,23 +43,6 @@ public class CreateNewAnimatedStickerSetMethod implements
     }
 
     @Override
-    public CreateNewAnimatedStickerSetMethod setFile(@NotNull String fileId) {
-        return setFile(new InputFile(fileId));
-    }
-
-    @Override
-    public CreateNewAnimatedStickerSetMethod setFile(@NotNull java.io.File file) {
-        method.setTgsSticker(file);
-        return this;
-    }
-
-    @Override
-    public CreateNewAnimatedStickerSetMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setTgsSticker(name, inputStream);
-        return this;
-    }
-
-    @Override
     public CreateNewAnimatedStickerSetMethod setFile(@NotNull InputFile file) {
         method.setTgsSticker(file);
         return this;

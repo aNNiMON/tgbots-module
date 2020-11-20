@@ -43,28 +43,9 @@ public class UploadStickerFileMethod implements
     }
 
     @Override
-    public UploadStickerFileMethod setFile(String fileId) {
-        throw new UnsupportedOperationException("Setting stickers as fileId not supported");
-    }
-
-    @Override
-    public UploadStickerFileMethod setFile(@NotNull java.io.File file) {
+    public UploadStickerFileMethod setFile(@NotNull InputFile file) {
         method.setPngSticker(file);
         return this;
-    }
-
-    @Override
-    public UploadStickerFileMethod setFile(@NotNull String name, @NotNull InputStream inputStream) {
-        method.setPngSticker(name, inputStream);
-        return this;
-    }
-
-    @Override
-    public UploadStickerFileMethod setFile(@NotNull InputFile file) {
-        if (file.getNewMediaFile() != null) {
-            return setFile(file.getNewMediaFile());
-        }
-        return setFile(file.getMediaName(), file.getNewMediaStream());
     }
 
     @Override
