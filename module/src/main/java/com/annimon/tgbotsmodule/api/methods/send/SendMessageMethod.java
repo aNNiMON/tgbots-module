@@ -5,11 +5,13 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessa
 import com.annimon.tgbotsmodule.api.methods.interfaces.TextMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.WebPagePreviewMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
+import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -20,7 +22,6 @@ public class SendMessageMethod implements
         TextMethod<SendMessageMethod, Message> {
 
     private final SendMessage method;
-    private String parseMode;
 
     public SendMessageMethod() {
         this(new SendMessage());
@@ -49,6 +50,17 @@ public class SendMessageMethod implements
     @Override
     public SendMessageMethod setReplyToMessageId(Integer messageId) {
         method.setReplyToMessageId(messageId);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return method.getAllowSendingWithoutReply();
+    }
+
+    @Override
+    public SendMessageMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 
@@ -82,14 +94,23 @@ public class SendMessageMethod implements
 
     @Override
     public String getParseMode() {
-        // Some library methods doesn't provide getParseMode()
-        return parseMode;
+        return method.getParseMode();
     }
 
     @Override
     public SendMessageMethod setParseMode(String parseMode) {
-        this.parseMode = parseMode;
         method.setParseMode(parseMode);
+        return this;
+    }
+
+    @Override
+    public List<MessageEntity> getEntities() {
+        return method.getEntities();
+    }
+
+    @Override
+    public SendMessageMethod setEntities(List<MessageEntity> entities) {
+        method.setEntities(entities);
         return this;
     }
 
@@ -113,7 +134,6 @@ public class SendMessageMethod implements
         method.disableWebPagePreview();
         return this;
     }
-
 
     public SendMessageMethod enableWebPagePreview() {
         method.enableWebPagePreview();

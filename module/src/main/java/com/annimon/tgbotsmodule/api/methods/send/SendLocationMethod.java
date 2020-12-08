@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendLocation;
+import org.telegram.telegrambots.meta.api.objects.Location;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -44,6 +45,17 @@ public class SendLocationMethod implements
     @Override
     public SendLocationMethod setReplyToMessageId(@NotNull Integer messageId) {
         method.setReplyToMessageId(messageId);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return method.getAllowSendingWithoutReply();
+    }
+
+    @Override
+    public SendLocationMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 
@@ -105,6 +117,26 @@ public class SendLocationMethod implements
         method.setLivePeriod(livePeriod);
         return this;
     }
+
+    public Integer getHeading() {
+        return method.getHeading();
+    }
+
+    public SendLocationMethod setHeading(Integer heading) {
+        method.setHeading(heading);
+        return this;
+    }
+
+    public Double getHorizontalAccuracy() {
+        return method.getHorizontalAccuracy();
+    }
+
+    public SendLocationMethod setHorizontalAccuracy(Double accuracy) {
+        method.setHorizontalAccuracy(accuracy);
+        return this;
+    }
+
+    // TODO proximity_alert_radius
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {

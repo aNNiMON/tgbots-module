@@ -45,6 +45,17 @@ public class SendGameMethod implements ReplyMarkupSupportedMessageMethod<SendGam
     }
 
     @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return method.getAllowSendingWithoutReply();
+    }
+
+    @Override
+    public SendGameMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        return this;
+    }
+
+    @Override
     public boolean isNotificationDisabled() {
         return Boolean.TRUE.equals(method.getDisableNotification());
     }

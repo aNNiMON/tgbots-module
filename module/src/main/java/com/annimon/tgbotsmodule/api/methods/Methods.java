@@ -211,6 +211,19 @@ public final class Methods {
         }
 
 
+        public static UnpinAllChatMessagesMethod unpinAllChatMessages() {
+            return new UnpinAllChatMessagesMethod();
+        }
+
+        public static UnpinAllChatMessagesMethod unpinAllChatMessages(@NotNull String chatId) {
+            return new UnpinAllChatMessagesMethod().setChatId(chatId);
+        }
+
+        public static UnpinAllChatMessagesMethod unpinAllChatMessages(long chatId) {
+            return new UnpinAllChatMessagesMethod().setChatId(chatId);
+        }
+
+
         public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle() {
             return new SetChatAdministratorCustomTitleMethod();
         }
@@ -850,6 +863,20 @@ public final class Methods {
 
     public static ForwardMessageMethod forwardMessage(long toChatId, long fromChatId, int messageId) {
         return new ForwardMessageMethod().setChatId(toChatId).setFromChatId(fromChatId).setMessageId(messageId);
+    }
+
+
+    public static CopyMessageMethod copyMessage() {
+        return new CopyMessageMethod();
+    }
+
+    public static CopyMessageMethod copyMessage(@NotNull String toChatId,
+                                                @NotNull String fromChatId, int messageId) {
+        return new CopyMessageMethod().setChatId(toChatId).setFromChatId(fromChatId).setMessageId(messageId);
+    }
+
+    public static CopyMessageMethod copyMessage(long toChatId, long fromChatId, int messageId) {
+        return new CopyMessageMethod().setChatId(toChatId).setFromChatId(fromChatId).setMessageId(messageId);
     }
 
 

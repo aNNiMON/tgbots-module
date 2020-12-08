@@ -5,12 +5,15 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMetho
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.TextMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.WebPagePreviewMethod;
+import com.annimon.tgbotsmodule.api.methods.send.SendMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.io.Serializable;
+import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -22,8 +25,6 @@ public class EditMessageTextMethod implements
         TextMethod<EditMessageTextMethod, Serializable> {
 
     private final EditMessageText method;
-    private String parseMode;
-    private boolean isWebPagePreviewEnabled;
 
     public EditMessageTextMethod() {
         this(new EditMessageText());
@@ -31,7 +32,6 @@ public class EditMessageTextMethod implements
 
     public EditMessageTextMethod(@NotNull EditMessageText method) {
         this.method = method;
-        isWebPagePreviewEnabled = true;
     }
 
     @Override
@@ -87,14 +87,23 @@ public class EditMessageTextMethod implements
 
     @Override
     public String getParseMode() {
-        // Some library methods doesn't provide getParseMode()
-        return parseMode;
+        return method.getParseMode();
     }
 
     @Override
     public EditMessageTextMethod setParseMode(String parseMode) {
-        this.parseMode = parseMode;
         method.setParseMode(parseMode);
+        return this;
+    }
+
+    @Override
+    public List<MessageEntity> getEntities() {
+        return method.getEntities();
+    }
+
+    @Override
+    public EditMessageTextMethod setEntities(List<MessageEntity> entities) {
+        method.setEntities(entities);
         return this;
     }
 
@@ -111,18 +120,16 @@ public class EditMessageTextMethod implements
 
     @Override
     public boolean isWebPagePreviewDisabled() {
-        return !isWebPagePreviewEnabled;
+        return Boolean.TRUE.equals(method.getDisableWebPagePreview());
     }
 
     public EditMessageTextMethod disableWebPagePreview() {
-        isWebPagePreviewEnabled = false;
         method.disableWebPagePreview();
         return this;
     }
 
 
     public EditMessageTextMethod enableWebPagePreview() {
-        isWebPagePreviewEnabled = true;
         method.enableWebPagePreview();
         return this;
     }

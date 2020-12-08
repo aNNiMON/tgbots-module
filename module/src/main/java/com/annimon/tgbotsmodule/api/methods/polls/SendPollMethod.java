@@ -1,7 +1,10 @@
 package com.annimon.tgbotsmodule.api.methods.polls;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.send.SendMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -9,11 +12,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.polls.SendPoll;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendPollMethod implements
-        ReplyMarkupSupportedMessageMethod<SendPollMethod, Message> {
+        ReplyMarkupSupportedMessageMethod<SendPollMethod, Message>,
+        ParseModeMethod<SendPollMethod, Message> {
 
     private final SendPoll method;
 
@@ -48,6 +53,17 @@ public class SendPollMethod implements
     }
 
     @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return method.getAllowSendingWithoutReply();
+    }
+
+    @Override
+    public SendPollMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        return this;
+    }
+
+    @Override
     public ReplyKeyboard getReplyMarkup() {
         return method.getReplyMarkup();
     }
@@ -72,6 +88,28 @@ public class SendPollMethod implements
     @Override
     public SendPollMethod disableNotification() {
         method.disableNotification();
+        return this;
+    }
+
+    @Override
+    public String getParseMode() {
+        return method.getExplanationParseMode();
+    }
+
+    @Override
+    public SendPollMethod setParseMode(String parseMode) {
+        method.setExplanationParseMode(parseMode);
+        return this;
+    }
+
+    @Override
+    public List<MessageEntity> getEntities() {
+        return method.getCaptionEntities();
+    }
+
+    @Override
+    public SendPollMethod setEntities(List<MessageEntity> entities) {
+        method.setCaptionEntities(entities);
         return this;
     }
 
@@ -155,6 +193,33 @@ public class SendPollMethod implements
 
     public SendPollMethod setIsClosed(boolean closed) {
         method.setIsClosed(closed);
+        return this;
+    }
+
+    public Integer getOpenPeriod() {
+        return method.getOpenPeriod();
+    }
+
+    public SendPollMethod setOpenPeriod(Integer openPeriod) {
+        method.setOpenPeriod(openPeriod);
+        return this;
+    }
+
+    public Integer getCloseDate() {
+        return method.getCloseDate();
+    }
+
+    public SendPollMethod setCloseDate(Integer closeDate) {
+        method.setCloseDate(closeDate);
+        return this;
+    }
+
+    public String getExplanation() {
+        return method.getExplanation();
+    }
+
+    public SendPollMethod setExplanation(String explanation) {
+        method.setExplanation(explanation);
         return this;
     }
 

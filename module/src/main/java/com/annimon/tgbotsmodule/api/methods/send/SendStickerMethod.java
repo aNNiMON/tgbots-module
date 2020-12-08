@@ -48,6 +48,17 @@ public class SendStickerMethod implements
     }
 
     @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return method.getAllowSendingWithoutReply();
+    }
+
+    @Override
+    public SendStickerMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        return this;
+    }
+
+    @Override
     public boolean isNotificationDisabled() {
         return Boolean.TRUE.equals(method.getDisableNotification());
     }

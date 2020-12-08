@@ -1,23 +1,22 @@
 package com.annimon.tgbotsmodule.api.methods.administration;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMemberMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.api.methods.groupadministration.UnbanChatMember;
+import org.telegram.telegrambots.meta.api.methods.pinnedmessages.UnpinAllChatMessages;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class UnbanChatMemberMethod implements ChatMemberMethod<UnbanChatMemberMethod, Boolean> {
+public class UnpinAllChatMessagesMethod implements ChatMethod<UnpinAllChatMessagesMethod, Boolean> {
 
-    private final UnbanChatMember method;
+    private final UnpinAllChatMessages method;
 
-    public UnbanChatMemberMethod() {
-        this(new UnbanChatMember());
+    public UnpinAllChatMessagesMethod() {
+        this(new UnpinAllChatMessages());
     }
 
-    public UnbanChatMemberMethod(@NotNull UnbanChatMember method) {
+    public UnpinAllChatMessagesMethod(@NotNull UnpinAllChatMessages method) {
         this.method = method;
     }
 
@@ -27,28 +26,8 @@ public class UnbanChatMemberMethod implements ChatMemberMethod<UnbanChatMemberMe
     }
 
     @Override
-    public UnbanChatMemberMethod setChatId(@NotNull String chatId) {
+    public UnpinAllChatMessagesMethod setChatId(@NotNull String chatId) {
         method.setChatId(chatId);
-        return this;
-    }
-
-    @Override
-    public Integer getUserId() {
-        return method.getUserId();
-    }
-
-    @Override
-    public UnbanChatMemberMethod setUserId(@NotNull Integer userId) {
-        method.setUserId(userId);
-        return this;
-    }
-
-    public Boolean getOnlyIfBanned() {
-        return method.getOnlyIfBanned();
-    }
-
-    public UnbanChatMemberMethod setOnlyIfBanned(Boolean onlyIfBanned) {
-        method.setOnlyIfBanned(onlyIfBanned);
         return this;
     }
 

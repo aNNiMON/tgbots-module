@@ -52,6 +52,17 @@ public class SendVideoNoteMethod implements
     }
 
     @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return method.getAllowSendingWithoutReply();
+    }
+
+    @Override
+    public SendVideoNoteMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        return this;
+    }
+
+    @Override
     public boolean isNotificationDisabled() {
         return Boolean.TRUE.equals(method.getDisableNotification());
     }

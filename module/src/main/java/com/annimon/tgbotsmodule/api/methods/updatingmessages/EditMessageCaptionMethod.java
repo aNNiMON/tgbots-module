@@ -6,10 +6,13 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageCaption;
+import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -20,7 +23,6 @@ public class EditMessageCaptionMethod implements
         CaptionMethod<EditMessageCaptionMethod, Serializable> {
 
     private final EditMessageCaption method;
-    private String parseMode;
 
     public EditMessageCaptionMethod() {
         this(new EditMessageCaption());
@@ -83,14 +85,23 @@ public class EditMessageCaptionMethod implements
 
     @Override
     public String getParseMode() {
-        // Some library methods doesn't provide getParseMode()
-        return parseMode;
+        return method.getParseMode();
     }
 
     @Override
     public EditMessageCaptionMethod setParseMode(String parseMode) {
-        this.parseMode = parseMode;
         method.setParseMode(parseMode);
+        return this;
+    }
+
+    @Override
+    public List<MessageEntity> getEntities() {
+        return method.getCaptionEntities();
+    }
+
+    @Override
+    public EditMessageCaptionMethod setEntities(List<MessageEntity> entities) {
+        method.setCaptionEntities(entities);
         return this;
     }
 

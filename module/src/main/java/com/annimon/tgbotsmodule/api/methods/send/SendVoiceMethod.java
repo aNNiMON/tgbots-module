@@ -6,12 +6,14 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.io.InputStream;
+import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendVoice;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -50,6 +52,17 @@ public class SendVoiceMethod implements
     @Override
     public SendVoiceMethod setReplyToMessageId(@NotNull Integer messageId) {
         method.setReplyToMessageId(messageId);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return method.getAllowSendingWithoutReply();
+    }
+
+    @Override
+    public SendVoiceMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 
@@ -102,7 +115,18 @@ public class SendVoiceMethod implements
         method.setParseMode(parseMode);
         return this;
     }
-    
+
+    @Override
+    public List<MessageEntity> getEntities() {
+        return method.getCaptionEntities();
+    }
+
+    @Override
+    public SendVoiceMethod setEntities(List<MessageEntity> entities) {
+        method.setCaptionEntities(entities);
+        return this;
+    }
+
     @Override
     public String getCaption() {
         return method.getCaption();

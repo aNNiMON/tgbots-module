@@ -3,6 +3,7 @@ package com.annimon.tgbotsmodule.api.methods.send;
 import com.annimon.tgbotsmodule.api.methods.interfaces.LocationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -47,6 +48,17 @@ public class SendDiceMethod implements
     }
 
     @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return method.getAllowSendingWithoutReply();
+    }
+
+    @Override
+    public SendDiceMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        return this;
+    }
+
+    @Override
     public boolean isNotificationDisabled() {
         return Boolean.TRUE.equals(method.getDisableNotification());
     }
@@ -71,6 +83,15 @@ public class SendDiceMethod implements
     @Override
     public SendDiceMethod setReplyMarkup(ReplyKeyboard replyMarkup) {
         method.setReplyMarkup(replyMarkup);
+        return this;
+    }
+
+    public String getEmoji() {
+        return method.getEmoji();
+    }
+
+    public SendDiceMethod setEmoji(String emoji) {
+        method.setEmoji(emoji);
         return this;
     }
 

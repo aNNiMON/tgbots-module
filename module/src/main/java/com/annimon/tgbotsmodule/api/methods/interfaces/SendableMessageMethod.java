@@ -8,4 +8,8 @@ public interface SendableMessageMethod<M extends Method, T extends Serializable>
     Integer getReplyToMessageId();
 
     M setReplyToMessageId(Integer replyToMessageId);
+
+    Boolean getAllowSendingWithoutReply();
+
+    M setAllowSendingWithoutReply(Boolean allowSendingWithoutReply);
 }

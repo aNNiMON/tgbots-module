@@ -47,6 +47,17 @@ public class SendMediaGroupMethod implements SendableMessageMethod<SendMediaGrou
     }
 
     @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return method.getAllowSendingWithoutReply();
+    }
+
+    @Override
+    public SendMediaGroupMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        return this;
+    }
+
+    @Override
     public boolean isNotificationDisabled() {
         return Boolean.TRUE.equals(method.getDisableNotification());
     }

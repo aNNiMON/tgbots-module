@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.administration;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
@@ -8,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.pinnedmessages.UnpinChatMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class UnpinChatMessageMethod implements ChatMethod<UnpinChatMessageMethod, Boolean> {
+public class UnpinChatMessageMethod implements ChatMessageMethod<UnpinChatMessageMethod, Boolean> {
 
     private final UnpinChatMessage method;
 
@@ -28,6 +29,17 @@ public class UnpinChatMessageMethod implements ChatMethod<UnpinChatMessageMethod
     @Override
     public UnpinChatMessageMethod setChatId(@NotNull String chatId) {
         method.setChatId(chatId);
+        return this;
+    }
+
+    @Override
+    public Integer getMessageId() {
+        return method.getMessageId();
+    }
+
+    @Override
+    public UnpinChatMessageMethod setMessageId(Integer messageId) {
+        method.setMessageId(messageId);
         return this;
     }
 

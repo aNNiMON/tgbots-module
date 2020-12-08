@@ -5,12 +5,14 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.io.InputStream;
+import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -48,6 +50,17 @@ public class SendPhotoMethod implements
     @Override
     public SendPhotoMethod setReplyToMessageId(Integer messageId) {
         method.setReplyToMessageId(messageId);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return method.getAllowSendingWithoutReply();
+    }
+
+    @Override
+    public SendPhotoMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 
@@ -98,6 +111,17 @@ public class SendPhotoMethod implements
     @Override
     public SendPhotoMethod setParseMode(String parseMode) {
         method.setParseMode(parseMode);
+        return this;
+    }
+
+    @Override
+    public List<MessageEntity> getEntities() {
+        return method.getCaptionEntities();
+    }
+
+    @Override
+    public SendPhotoMethod setEntities(List<MessageEntity> entities) {
+        method.setCaptionEntities(entities);
         return this;
     }
     

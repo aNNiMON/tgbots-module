@@ -2,6 +2,7 @@ package com.annimon.tgbotsmodule.api.methods.send;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SendableMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.polls.SendPollMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
 import java.util.function.Consumer;
@@ -52,6 +53,17 @@ public class SendInvoiceMethod implements
     @Override
     public SendInvoiceMethod setReplyToMessageId(@NotNull Integer messageId) {
         method.setReplyToMessageId(messageId);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return method.getAllowSendingWithoutReply();
+    }
+
+    @Override
+    public SendInvoiceMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 

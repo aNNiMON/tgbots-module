@@ -48,6 +48,17 @@ public class SendVenueMethod implements
     }
 
     @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return method.getAllowSendingWithoutReply();
+    }
+
+    @Override
+    public SendVenueMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        return this;
+    }
+
+    @Override
     public boolean isNotificationDisabled() {
         return Boolean.TRUE.equals(method.getDisableNotification());
     }
@@ -130,6 +141,24 @@ public class SendVenueMethod implements
 
     public SendVenueMethod setFoursquareType(String foursquareType) {
         method.setFoursquareType(foursquareType);
+        return this;
+    }
+
+    public String getGooglePlaceId() {
+        return method.getGooglePlaceId();
+    }
+
+    public SendVenueMethod setGooglePlaceId(String googlePlaceId) {
+        method.setGooglePlaceId(googlePlaceId);
+        return this;
+    }
+
+    public String getGooglePlaceType() {
+        return method.getGooglePlaceType();
+    }
+
+    public SendVenueMethod setGooglePlaceType(String googlePlaceType) {
+        method.setGooglePlaceType(googlePlaceType);
         return this;
     }
 
