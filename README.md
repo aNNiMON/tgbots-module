@@ -17,7 +17,7 @@ Simple Java telegram bots runner built on top of the [Telegram Bots](https://git
  - Add gradle dependency:
  
     ```groovy
-    compile 'com.annimon:tgbots-module:0.9'
+    compile 'com.annimon:tgbots-module:0.10'
     ```
 
  - Implement `BotModule` interface:
@@ -88,12 +88,9 @@ Simple Java telegram bots runner built on top of the [Telegram Bots](https://git
     log-level: FINE
     webhook:
       enabled: false
-      port: env(PORT:8443)
-      externalUrl: https://123.45.67.89:$port
-      internalUrl: https://123.45.67.89:$port
-      certificatePublicKeyPath: cert/public_cert.pem
-      certificateStorePath: cert/keystore.jks
-      certificateStorePassword: env(STORE_PASSWORD)
+      internalUrl: https://123.45.67.89:8443
+      keystorePath: cert/keystore.jks
+      keystorePassword: env(STORE_PASSWORD)
     modules:
       - com.annimon.testbot.TestBot
     ```
