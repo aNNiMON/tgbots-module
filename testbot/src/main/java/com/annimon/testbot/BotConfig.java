@@ -1,15 +1,12 @@
 package com.annimon.testbot;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.validation.constraints.NotBlank;
 
 public class BotConfig {
 
-    @NotBlank
     @JsonProperty(required = true)
     private String token;
 
-    @NotBlank
     @JsonProperty(required = true)
     private String username;
 
