@@ -3,7 +3,6 @@ package com.annimon.tgbotsmodule.api.methods.updatingmessages;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.LocationMethod;
-import com.annimon.tgbotsmodule.api.methods.send.SendLocationMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.io.Serializable;
 import java.util.function.Consumer;
@@ -119,7 +118,14 @@ public class EditMessageLiveLocationMethod implements
         return this;
     }
 
-    // TODO proximity_alert_radius
+    public Integer getProximityAlertRadius() {
+        return method.getProximityAlertRadius();
+    }
+
+    public EditMessageLiveLocationMethod setProximityAlertRadius(Integer proximityAlertRadius) {
+        method.setProximityAlertRadius(proximityAlertRadius);
+        return this;
+    }
 
     @Override
     public Serializable call(@NotNull CommonAbsSender sender) {

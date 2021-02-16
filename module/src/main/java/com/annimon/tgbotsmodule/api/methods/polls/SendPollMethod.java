@@ -104,12 +104,12 @@ public class SendPollMethod implements
 
     @Override
     public List<MessageEntity> getEntities() {
-        return method.getCaptionEntities();
+        return method.getExplanationEntities();
     }
 
     @Override
     public SendPollMethod setEntities(List<MessageEntity> entities) {
-        method.setCaptionEntities(entities);
+        method.setExplanationEntities(entities);
         return this;
     }
 

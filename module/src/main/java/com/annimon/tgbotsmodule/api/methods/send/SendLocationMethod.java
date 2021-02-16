@@ -136,7 +136,14 @@ public class SendLocationMethod implements
         return this;
     }
 
-    // TODO proximity_alert_radius
+    public Integer getProximityAlertRadius() {
+        return method.getProximityAlertRadius();
+    }
+
+    public SendLocationMethod setProximityAlertRadius(Integer proximityAlertRadius) {
+        method.setProximityAlertRadius(proximityAlertRadius);
+        return this;
+    }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {

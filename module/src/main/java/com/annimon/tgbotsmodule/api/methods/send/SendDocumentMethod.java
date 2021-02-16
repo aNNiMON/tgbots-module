@@ -150,7 +150,14 @@ public class SendDocumentMethod implements
         return this;
     }
 
-    // TODO disable_content_type_detection
+    public Boolean getDisableContentTypeDetection() {
+        return method.getDisableContentTypeDetection();
+    }
+
+    public SendDocumentMethod setDisableNotification(Boolean disableNotification) {
+        method.setDisableNotification(disableNotification);
+        return this;
+    }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
