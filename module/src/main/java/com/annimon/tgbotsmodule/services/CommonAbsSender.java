@@ -4,6 +4,7 @@ import com.annimon.tgbotsmodule.BotHandler;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +45,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     @Nullable
     public Message call(@NotNull SendDocument action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -72,7 +73,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     @Nullable
     public Message call(@NotNull SendPhoto action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -100,7 +101,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     @Nullable
     public Message call(@NotNull SendVideo action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -128,7 +129,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     @Nullable
     public Message call(@NotNull SendVideoNote action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -156,7 +157,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     @Nullable
     public Message call(@NotNull SendSticker action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -184,7 +185,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     @Nullable
     public Message call(@NotNull SendAudio action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -212,7 +213,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     @Nullable
     public Message call(@NotNull SendVoice action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -239,7 +240,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
 
     public Boolean call(@NotNull SetChatPhoto action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return false;
@@ -267,7 +268,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     @Nullable
     public List<Message> call(@NotNull SendMediaGroup action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return Collections.emptyList();
@@ -305,7 +306,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
 
     public Boolean call(@NotNull AddStickerToSet action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return false;
@@ -332,7 +333,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
 
     public Boolean call(@NotNull CreateNewStickerSet action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return false;
@@ -360,7 +361,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     @Nullable
     public File call(@NotNull UploadStickerFile action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -388,7 +389,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     @Nullable
     public Serializable call(@NotNull EditMessageMedia action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -416,7 +417,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     @Nullable
     public Message call(@NotNull SendAnimation action) {
         try {
-            return super.execute(action);
+            return execute(action);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -445,7 +446,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     public <T extends Serializable, M extends BotApiMethod<T>> T call(
             @NotNull M method) {
         try {
-            return super.execute(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -456,7 +457,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             C extends SentCallback<T>> void callAsyncWithCallback(
             @NotNull M method, @NotNull C callback) {
         try {
-            super.executeAsync(method, callback);
+            executeAsync(method, callback);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
         }
