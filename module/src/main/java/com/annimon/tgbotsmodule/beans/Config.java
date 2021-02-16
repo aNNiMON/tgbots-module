@@ -2,7 +2,6 @@ package com.annimon.tgbotsmodule.beans;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
-import javax.validation.Valid;
 import org.jetbrains.annotations.NotNull;
 
 public class Config {
@@ -20,7 +19,6 @@ public class Config {
     @JsonProperty(value = "log-level", defaultValue = "INFO")
     private String logLevel = "INFO";
 
-    @Valid
     @JsonProperty
     private WebHookConfig webhook;
 

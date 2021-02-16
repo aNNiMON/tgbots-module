@@ -1,8 +1,6 @@
 package com.annimon.tgbotsmodule.beans;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 import org.jetbrains.annotations.NotNull;
 
 public class WebHookConfig {
@@ -10,7 +8,6 @@ public class WebHookConfig {
     @JsonProperty(defaultValue = "false")
     private boolean enabled = false;
 
-    @NotBlank
     @JsonProperty(defaultValue = "https://127.0.0.1:$port")
     private String internalUrl;
 
