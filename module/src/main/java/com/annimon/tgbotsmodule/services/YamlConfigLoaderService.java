@@ -4,10 +4,10 @@ import com.annimon.tgbotsmodule.exceptions.ConfigLoaderException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import javax.validation.Validation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.jetbrains.annotations.NotNull;
@@ -36,31 +36,31 @@ public class YamlConfigLoaderService<T> implements ConfigLoaderService<T> {
 
     @Override
     public @NotNull T load(@NotNull File file, @NotNull Class<T> configType,
-                           boolean validate, Consumer<ObjectMapper> mapperConsumer) {
+                           Consumer<ObjectMapper> mapperConsumer) {
         final var mapper = new ObjectMapper(new YamlConfigFactory());
         if (mapperConsumer != null) {
             mapperConsumer.accept(mapper);
         }
         try {
-            var config = mapper.readValue(file, configType);
-            if (validate) {
-                validate(config);
-            }
-            return config;
+            return mapper.readValue(file, configType);
         } catch (IOException ex) {
             log.error("yaml loader", ex);
             throw new ConfigLoaderException(ex);
         }
     }
 
-    private void validate(T config) {
-        final var factory = Validation.buildDefaultValidatorFactory();
-        final var violations = factory.getValidator().validate(config);
-        if (!violations.isEmpty()) {
-            String description = violations.stream()
-                    .map(cv -> String.format("Config property %s %s", cv.getPropertyPath(), cv.getMessage()))
-                    .collect(Collectors.joining("\n"));
-            throw new ConfigLoaderException(description);
+    @Override
+    public @NotNull T load(@NotNull InputStream is, @NotNull Class<T> configType,
+                           Consumer<ObjectMapper> mapperConsumer) {
+        final var mapper = new ObjectMapper(new YamlConfigFactory());
+        if (mapperConsumer != null) {
+            mapperConsumer.accept(mapper);
+        }
+        try {
+            return mapper.readValue(is, configType);
+        } catch (IOException ex) {
+            log.error("yaml loader", ex);
+            throw new ConfigLoaderException(ex);
         }
     }
 }
