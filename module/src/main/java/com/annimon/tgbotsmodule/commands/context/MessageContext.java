@@ -2,6 +2,7 @@ package com.annimon.tgbotsmodule.commands.context;
 
 import com.annimon.tgbotsmodule.api.methods.Methods;
 import com.annimon.tgbotsmodule.api.methods.send.*;
+import com.annimon.tgbotsmodule.api.methods.updatingmessages.DeleteMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -13,11 +14,13 @@ public class MessageContext extends Context {
     private final Long chatId;
     private final String text;
     private String[] arguments;
+    private int argumentsLimit;
 
     MessageContext(CommonAbsSender sender, Update update, User user, Long chatId, String text) {
         super(sender, update, user);
         this.chatId = chatId;
         this.text = text;
+        this.argumentsLimit = 0;
     }
 
     public @NotNull Message message() {
@@ -53,10 +56,26 @@ public class MessageContext extends Context {
         return arguments().length;
     }
 
+    public int argumentsLimit() {
+        return argumentsLimit;
+    }
+
+    private void createArguments() {
+        arguments = text.split("\\s+", argumentsLimit);
+    }
+
     private void lazyCreateArguments() {
         if (arguments == null) {
-            arguments = text.split("\\s+");
+            createArguments();
         }
+    }
+
+    public void setArgumentsLimit(int argumentsLimit) {
+        if (argumentsLimit == this.argumentsLimit)
+            return;
+
+        this.argumentsLimit = argumentsLimit;
+        createArguments();
     }
 
     public @NotNull SendAnimationMethod replyWithAnimation() {
@@ -113,5 +132,9 @@ public class MessageContext extends Context {
 
     public @NotNull SendVoiceMethod replyWithVoice() {
         return Methods.sendVoice(chatId);
+    }
+
+    public @NotNull DeleteMessageMethod deleteMessage() {
+        return Methods.deleteMessage(chatId, message().getMessageId());
     }
 }
