@@ -9,7 +9,7 @@ Simple Java telegram bots runner built on top of the [Telegram Bots](https://git
  - I want to easily disable bots without recompiling the application.
  - I want yaml configs to store bot tokens and other data.
  - I want different profiles for configs.
- - I want command support with roles support.
+ - I want command system with roles support.
  - I want localization support.
  
 ## Usage
@@ -17,7 +17,7 @@ Simple Java telegram bots runner built on top of the [Telegram Bots](https://git
  - Add gradle dependency:
  
     ```groovy
-    compile 'com.annimon:tgbots-module:0.11'
+    implementation 'com.annimon:tgbots-module:0.12'
     ```
 
  - Implement `BotModule` interface:
