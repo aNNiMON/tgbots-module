@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule;
 
+import com.annimon.tgbotsmodule.beans.FixedDefaultBotOptions;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
@@ -16,7 +17,7 @@ public abstract class BotHandler extends CommonAbsSender
         implements LongPollingBot, WebhookBot {
 
     public BotHandler() {
-        this(new DefaultBotOptions());
+        this(new FixedDefaultBotOptions());
     }
 
     public BotHandler(@NotNull DefaultBotOptions options) {
