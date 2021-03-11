@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.administration;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMemberMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.TimePeriodMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
@@ -9,7 +10,9 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.RestrictCh
 import org.telegram.telegrambots.meta.api.objects.ChatPermissions;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class RestrictChatMemberMethod implements TimePeriodMethod<RestrictChatMemberMethod, Boolean> {
+public class RestrictChatMemberMethod implements
+        TimePeriodMethod<RestrictChatMemberMethod, Boolean>,
+        ChatMemberMethod<RestrictChatMemberMethod, Boolean> {
 
     private final RestrictChatMember method;
 

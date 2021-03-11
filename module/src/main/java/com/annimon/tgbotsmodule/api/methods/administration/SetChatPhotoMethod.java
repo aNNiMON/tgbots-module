@@ -3,8 +3,6 @@ package com.annimon.tgbotsmodule.api.methods.administration;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InputFileMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.io.File;
-import java.io.InputStream;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -29,6 +29,19 @@ public final class Methods {
     public static final class Administration {
         private Administration() { }
 
+        public static CreateChatInviteLinkMethod createChatInviteLink() {
+            return new CreateChatInviteLinkMethod();
+        }
+
+        public static CreateChatInviteLinkMethod createChatInviteLink(@NotNull String chatId) {
+            return new CreateChatInviteLinkMethod().setChatId(chatId);
+        }
+
+        public static CreateChatInviteLinkMethod createChatInviteLink(long chatId) {
+            return new CreateChatInviteLinkMethod().setChatId(chatId);
+        }
+
+
         public static DeleteChatPhotoMethod deleteChatPhoto() {
             return new DeleteChatPhotoMethod();
         }
@@ -52,6 +65,19 @@ public final class Methods {
 
         public static DeleteChatStickerSetMethod deleteChatStickerSet(long chatId) {
             return new DeleteChatStickerSetMethod().setChatId(chatId);
+        }
+
+
+        public static EditChatInviteLinkMethod editChatInviteLink() {
+            return new EditChatInviteLinkMethod();
+        }
+
+        public static EditChatInviteLinkMethod editChatInviteLink(@NotNull String chatId, String inviteLink) {
+            return new EditChatInviteLinkMethod().setChatId(chatId).setInviteLink(inviteLink);
+        }
+
+        public static EditChatInviteLinkMethod editChatInviteLink(long chatId, String inviteLink) {
+            return new EditChatInviteLinkMethod().setChatId(chatId).setInviteLink(inviteLink);
         }
 
 
@@ -117,6 +143,32 @@ public final class Methods {
 
         public static RestrictChatMemberMethod restrictChatMember(long chatId, long userId) {
             return new RestrictChatMemberMethod().setChatId(chatId).setUserId(userId);
+        }
+
+
+        public static RevokeChatInviteLinkMethod revokeChatInviteLink() {
+            return new RevokeChatInviteLinkMethod();
+        }
+
+        public static RevokeChatInviteLinkMethod revokeChatInviteLink(@NotNull String chatId, String inviteLink) {
+            return new RevokeChatInviteLinkMethod().setChatId(chatId).setInviteLink(inviteLink);
+        }
+
+        public static RevokeChatInviteLinkMethod revokeChatInviteLink(long chatId, String inviteLink) {
+            return new RevokeChatInviteLinkMethod().setChatId(chatId).setInviteLink(inviteLink);
+        }
+
+
+        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle() {
+            return new SetChatAdministratorCustomTitleMethod();
+        }
+
+        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle(@NotNull String chatId, long userId) {
+            return new SetChatAdministratorCustomTitleMethod().setChatId(chatId).setUserId(userId);
+        }
+
+        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle(long chatId, long userId) {
+            return new SetChatAdministratorCustomTitleMethod().setChatId(chatId).setUserId(userId);
         }
 
 
@@ -221,19 +273,6 @@ public final class Methods {
 
         public static UnpinAllChatMessagesMethod unpinAllChatMessages(long chatId) {
             return new UnpinAllChatMessagesMethod().setChatId(chatId);
-        }
-
-
-        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle() {
-            return new SetChatAdministratorCustomTitleMethod();
-        }
-
-        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle(@NotNull String chatId, long userId) {
-            return new SetChatAdministratorCustomTitleMethod().setChatId(chatId).setUserId(userId);
-        }
-
-        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle(long chatId, long userId) {
-            return new SetChatAdministratorCustomTitleMethod().setChatId(chatId).setUserId(userId);
         }
     }
     

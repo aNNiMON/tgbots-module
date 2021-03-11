@@ -114,6 +114,33 @@ public class PromoteChatMemberMethod implements ChatMemberMethod<PromoteChatMemb
         return this;
     }
 
+    public Boolean сanManageChat() {
+        return method.getCanManageChat();
+    }
+
+    public PromoteChatMemberMethod setCanManageChat(Boolean canManageChat) {
+        method.setCanManageChat(canManageChat);
+        return this;
+    }
+
+    public Boolean сanManageVoiceChats() {
+        return method.getCanManageVoiceChats();
+    }
+
+    public PromoteChatMemberMethod setCanManageVoiceChats(Boolean canManageVoiceChats) {
+        method.setCanManageVoiceChats(canManageVoiceChats);
+        return this;
+    }
+
+    public Boolean isAnonymous() {
+        return method.getIsAnonymous();
+    }
+
+    public PromoteChatMemberMethod setIsAnonymous(Boolean isAnonymous) {
+        method.setIsAnonymous(isAnonymous);
+        return this;
+    }
+
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
         return sender.call(method);

@@ -2,7 +2,6 @@ package com.annimon.tgbotsmodule.api.methods.administration;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMemberMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

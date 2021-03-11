@@ -1,7 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.administration;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
