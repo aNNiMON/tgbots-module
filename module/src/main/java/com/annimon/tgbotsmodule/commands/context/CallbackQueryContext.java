@@ -83,14 +83,13 @@ public class CallbackQueryContext extends Context {
         createArguments();
     }
 
-    public @NotNull AnswerCallbackQueryMethod answer(String text, boolean showAsAlert) {
+    public @NotNull AnswerCallbackQueryMethod answer(String text) {
         return Methods.answerCallbackQuery(queryId())
-                .setText(text)
-                .setShowAlert(showAsAlert);
+                .setText(text);
     }
 
-    public @NotNull AnswerCallbackQueryMethod answer(String text) {
-        return answer(text, false);
+    public @NotNull AnswerCallbackQueryMethod answer(String text, boolean showAsAlert) {
+        return answer(text).setShowAlert(showAsAlert);
     }
 
     public @NotNull AnswerCallbackQueryMethod answerAsAlert(String text) {
@@ -102,25 +101,20 @@ public class CallbackQueryContext extends Context {
                 .setUrl(url);
     }
 
-    public @NotNull EditMessageTextMethod editMessage(String text, InlineKeyboardMarkup markup) {
+    public @NotNull EditMessageTextMethod editMessage(String text) {
         return Methods.editMessageText()
                 .setChatId(message().getChatId())
                 .setMessageId(message().getMessageId())
-                .setText(text)
-                .setReplyMarkup(markup);
+                .setText(text);
     }
 
-    public @NotNull EditMessageTextMethod editMessage(String text) {
-        return editMessage(text, null);
+    public @NotNull EditMessageTextMethod editMessage(String text, InlineKeyboardMarkup markup) {
+        return editMessage(text).setReplyMarkup(markup);
     }
 
     public @NotNull EditMessageTextMethod removeMarkup() {
-        return Methods.editMessageText()
-                .setChatId(message().getChatId())
-                .setMessageId(message().getMessageId())
-                .setText(message().getText())
+        return editMessage(message().getText())
                 .setEntities(message().getEntities())
                 .setReplyMarkup(null);
     }
-
 }
