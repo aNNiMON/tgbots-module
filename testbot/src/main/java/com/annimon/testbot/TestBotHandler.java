@@ -2,13 +2,11 @@ package com.annimon.testbot;
 
 import com.annimon.tgbotsmodule.BotHandler;
 import com.annimon.tgbotsmodule.api.methods.Methods;
-import com.annimon.tgbotsmodule.commands.CommandBundle;
 import com.annimon.tgbotsmodule.commands.CommandRegistry;
 import com.annimon.tgbotsmodule.commands.SimpleCommand;
 import com.annimon.tgbotsmodule.commands.SimpleRegexCommand;
 import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.authority.SimpleAuthority;
-import com.annimon.tgbotsmodule.commands.context.Context;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.annimon.tgbotsmodule.commands.context.RegexMessageContext;
 import com.annimon.tgbotsmodule.services.LocalizationService;
@@ -23,7 +21,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
-import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -123,7 +120,7 @@ public class TestBotHandler extends BotHandler {
     private void calcCommand(RegexMessageContext ctx) {
         var value1 = new BigInteger(ctx.group(1));
         var value2 = new BigInteger(ctx.group(3));
-        String result = String.format("%s %s %s = ", value1, value2, ctx.group(3));
+        String result = String.format("%s %s %s = ", value1, ctx.group(2), value2);
         switch (ctx.group(2)) {
             case "+": result += value1.add(value2); break;
             case "-": result += value1.subtract(value2); break;
@@ -133,9 +130,7 @@ public class TestBotHandler extends BotHandler {
                 else result += value1.divide(value2); break;
             default: return;
         }
-        ctx.reply(result)
-                .setReplyToMessageId(ctx.message().getMessageId())
-                .callAsync(ctx.sender);
+        ctx.replyToMessage(result).callAsync(ctx.sender);
     }
 
     private void fillRectInterpreter(MessageContext ctx) {
