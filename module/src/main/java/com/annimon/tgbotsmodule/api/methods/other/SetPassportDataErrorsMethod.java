@@ -24,12 +24,12 @@ public class SetPassportDataErrorsMethod implements UserMethod<SetPassportDataEr
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return method.getUserId();
     }
 
     @Override
-    public SetPassportDataErrorsMethod setUserId(@NotNull Integer userId) {
+    public SetPassportDataErrorsMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }

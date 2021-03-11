@@ -66,12 +66,12 @@ public class GetGameHighScoresMethod implements
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return method.getUserId();
     }
 
     @Override
-    public GetGameHighScoresMethod setUserId(@NotNull Integer userId) {
+    public GetGameHighScoresMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }

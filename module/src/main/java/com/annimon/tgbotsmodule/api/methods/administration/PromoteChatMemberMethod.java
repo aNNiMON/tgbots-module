@@ -32,12 +32,12 @@ public class PromoteChatMemberMethod implements ChatMemberMethod<PromoteChatMemb
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return method.getUserId();
     }
 
     @Override
-    public PromoteChatMemberMethod setUserId(@NotNull Integer userId) {
+    public PromoteChatMemberMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }

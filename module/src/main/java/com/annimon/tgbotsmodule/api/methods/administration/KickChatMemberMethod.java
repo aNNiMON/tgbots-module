@@ -32,12 +32,12 @@ public class KickChatMemberMethod implements TimePeriodMethod<KickChatMemberMeth
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return method.getUserId();
     }
 
     @Override
-    public KickChatMemberMethod setUserId(@NotNull Integer userId) {
+    public KickChatMemberMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }

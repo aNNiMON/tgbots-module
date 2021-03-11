@@ -28,12 +28,12 @@ public class SetStickerSetThumbMethod implements
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return method.getUserId();
     }
 
     @Override
-    public SetStickerSetThumbMethod setUserId(@NotNull Integer userId) {
+    public SetStickerSetThumbMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }

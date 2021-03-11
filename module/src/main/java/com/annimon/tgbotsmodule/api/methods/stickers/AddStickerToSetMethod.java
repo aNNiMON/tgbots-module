@@ -27,12 +27,12 @@ public class AddStickerToSetMethod implements
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return method.getUserId();
     }
 
     @Override
-    public AddStickerToSetMethod setUserId(@NotNull Integer userId) {
+    public AddStickerToSetMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }

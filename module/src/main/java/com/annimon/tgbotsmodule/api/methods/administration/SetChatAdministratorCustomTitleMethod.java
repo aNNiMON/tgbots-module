@@ -32,12 +32,12 @@ public class SetChatAdministratorCustomTitleMethod implements ChatMemberMethod<S
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return method.getUserId();
     }
 
     @Override
-    public SetChatAdministratorCustomTitleMethod setUserId(@NotNull Integer userId) {
+    public SetChatAdministratorCustomTitleMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }

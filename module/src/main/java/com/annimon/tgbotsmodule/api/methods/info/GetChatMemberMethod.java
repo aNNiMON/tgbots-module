@@ -33,12 +33,12 @@ public class GetChatMemberMethod implements ChatMemberMethod<GetChatMemberMethod
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return method.getUserId();
     }
 
     @Override
-    public GetChatMemberMethod setUserId(@NotNull Integer userId) {
+    public GetChatMemberMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }

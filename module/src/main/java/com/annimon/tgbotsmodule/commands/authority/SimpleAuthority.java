@@ -18,7 +18,7 @@ public class SimpleAuthority implements Authority {
     private final CommonAbsSender sender;
     private final int creatorId;
     private final Set<Integer> botAdmins;
-    private final Map<String, Map.Entry<Long, Set<Integer>>> chatAdmins;
+    private final Map<String, Map.Entry<Long, Set<Long>>> chatAdmins;
     private long adminUpdatesTimeInSec;
 
     public SimpleAuthority(CommonAbsSender sender, int creatorId) {
@@ -58,13 +58,13 @@ public class SimpleAuthority implements Authority {
         return !chat.isUserChat();
     }
 
-    public boolean isGroupAdmin(@NotNull Integer userId, @NotNull Long chatId) {
+    public boolean isGroupAdmin(@NotNull Long userId, @NotNull Long chatId) {
         return isGroupAdmin(userId, Long.toString(chatId));
     }
 
-    public boolean isGroupAdmin(@NotNull Integer userId, @NotNull String chatId) {
+    public boolean isGroupAdmin(@NotNull Long userId, @NotNull String chatId) {
         final var entry = chatAdmins.get(chatId);
-        final Set<Integer> admins;
+        final Set<Long> admins;
         if (needUpdateChatAdmins(entry)) {
             admins = Methods.getChatAdministrators(chatId)
                     .call(sender).stream()
@@ -79,7 +79,7 @@ public class SimpleAuthority implements Authority {
 
     @Override
     public boolean hasRights(Update update, @NotNull User user, @NotNull For role) {
-        final int userId = user.getId();
+        final long userId = user.getId();
         final boolean isCreator = (userId == creatorId);
         if (isCreator) {
             return true;
@@ -99,7 +99,7 @@ public class SimpleAuthority implements Authority {
         }
     }
 
-    private boolean needUpdateChatAdmins(Map.Entry<Long, Set<Integer>> entry) {
+    private boolean needUpdateChatAdmins(Map.Entry<Long, Set<Long>> entry) {
         if (entry == null) return true;
         if (entry.getValue().isEmpty()) return true;
         if (entry.getKey() + adminUpdatesTimeInSec < time()) {

@@ -10,7 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.User;
 public class Event {
 
     public static Event withUser(@NotNull User user) {
-        return withUser(Integer.toString(user.getId(), 10));
+        return withUser(Long.toString(user.getId(), 10));
     }
 
     public static Event withUser(@NotNull String userId) {

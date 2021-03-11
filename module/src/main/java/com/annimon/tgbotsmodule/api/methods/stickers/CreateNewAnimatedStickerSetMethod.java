@@ -27,12 +27,12 @@ public class CreateNewAnimatedStickerSetMethod implements
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return method.getUserId();
     }
 
     @Override
-    public CreateNewAnimatedStickerSetMethod setUserId(@NotNull Integer userId) {
+    public CreateNewAnimatedStickerSetMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }

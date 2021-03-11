@@ -72,11 +72,11 @@ public final class Methods {
             return new KickChatMemberMethod();
         }
 
-        public static KickChatMemberMethod kickChatMember(@NotNull String chatId, int userId) {
+        public static KickChatMemberMethod kickChatMember(@NotNull String chatId, long userId) {
             return new KickChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
-        public static KickChatMemberMethod kickChatMember(long chatId, int userId) {
+        public static KickChatMemberMethod kickChatMember(long chatId, long userId) {
             return new KickChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
@@ -98,11 +98,11 @@ public final class Methods {
             return new PromoteChatMemberMethod();
         }
 
-        public static PromoteChatMemberMethod promoteChatMember(@NotNull String chatId, int userId) {
+        public static PromoteChatMemberMethod promoteChatMember(@NotNull String chatId, long userId) {
             return new PromoteChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
-        public static PromoteChatMemberMethod promoteChatMember(long chatId, int userId) {
+        public static PromoteChatMemberMethod promoteChatMember(long chatId, long userId) {
             return new PromoteChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
@@ -111,11 +111,11 @@ public final class Methods {
             return new RestrictChatMemberMethod();
         }
 
-        public static RestrictChatMemberMethod restrictChatMember(@NotNull String chatId, int userId) {
+        public static RestrictChatMemberMethod restrictChatMember(@NotNull String chatId, long userId) {
             return new RestrictChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
-        public static RestrictChatMemberMethod restrictChatMember(long chatId, int userId) {
+        public static RestrictChatMemberMethod restrictChatMember(long chatId, long userId) {
             return new RestrictChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
@@ -189,11 +189,11 @@ public final class Methods {
             return new UnbanChatMemberMethod();
         }
 
-        public static UnbanChatMemberMethod unbanChatMember(@NotNull String chatId, int userId) {
+        public static UnbanChatMemberMethod unbanChatMember(@NotNull String chatId, long userId) {
             return new UnbanChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
-        public static UnbanChatMemberMethod unbanChatMember(long chatId, int userId) {
+        public static UnbanChatMemberMethod unbanChatMember(long chatId, long userId) {
             return new UnbanChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
@@ -228,11 +228,11 @@ public final class Methods {
             return new SetChatAdministratorCustomTitleMethod();
         }
 
-        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle(@NotNull String chatId, int userId) {
+        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle(@NotNull String chatId, long userId) {
             return new SetChatAdministratorCustomTitleMethod().setChatId(chatId).setUserId(userId);
         }
 
-        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle(long chatId, int userId) {
+        public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle(long chatId, long userId) {
             return new SetChatAdministratorCustomTitleMethod().setChatId(chatId).setUserId(userId);
         }
     }
@@ -270,11 +270,11 @@ public final class Methods {
             return new SetPassportDataErrorsMethod();
         }
 
-        public static SetPassportDataErrorsMethod setPassportDataErrors(int userId) {
+        public static SetPassportDataErrorsMethod setPassportDataErrors(long userId) {
             return new SetPassportDataErrorsMethod().setUserId(userId);
         }
 
-        public static SetPassportDataErrorsMethod setPassportDataErrors(int userId, @NotNull List<PassportElementError> errors) {
+        public static SetPassportDataErrorsMethod setPassportDataErrors(long userId, @NotNull List<PassportElementError> errors) {
             return new SetPassportDataErrorsMethod().setUserId(userId).setErrors(errors);
         }
     }
@@ -349,7 +349,7 @@ public final class Methods {
             return new AddStickerToSetMethod();
         }
 
-        public static AddStickerToSetMethod addStickerToSet(int userId, @NotNull String name, @NotNull String emojis) {
+        public static AddStickerToSetMethod addStickerToSet(long userId, @NotNull String name, @NotNull String emojis) {
             return new AddStickerToSetMethod().setUserId(userId).setName(name).setEmojis(emojis);
         }
 
@@ -357,7 +357,7 @@ public final class Methods {
             return new AddAnimatedStickerToSetMethod();
         }
 
-        public static AddAnimatedStickerToSetMethod addAnimatedStickerToSet(int userId, @NotNull String name, @NotNull String emojis) {
+        public static AddAnimatedStickerToSetMethod addAnimatedStickerToSet(long userId, @NotNull String name, @NotNull String emojis) {
             return new AddAnimatedStickerToSetMethod().setUserId(userId).setName(name).setEmojis(emojis);
         }
 
@@ -367,7 +367,7 @@ public final class Methods {
         }
 
         public static CreateNewStickerSetMethod createNewStickerSet(
-                int userId, @NotNull String name,
+                long userId, @NotNull String name,
                 @NotNull String title, @NotNull String emojis) {
             return new CreateNewStickerSetMethod().setUserId(userId).setName(name).setTitle(title).setEmojis(emojis);
         }
@@ -377,7 +377,7 @@ public final class Methods {
         }
 
         public static CreateNewAnimatedStickerSetMethod createNewAnimatedStickerSet(
-                int userId, @NotNull String name,
+                long userId, @NotNull String name,
                 @NotNull String title, @NotNull String emojis) {
             return new CreateNewAnimatedStickerSetMethod().setUserId(userId).setName(name).setTitle(title).setEmojis(emojis);
         }
@@ -414,7 +414,7 @@ public final class Methods {
             return new SetStickerSetThumbMethod();
         }
 
-        public static SetStickerSetThumbMethod setStickerSetThumb(int userId) {
+        public static SetStickerSetThumbMethod setStickerSetThumb(long userId) {
             return new SetStickerSetThumbMethod().setUserId(userId);
         }
 
@@ -436,7 +436,7 @@ public final class Methods {
             return new UploadStickerFileMethod();
         }
 
-        public static UploadStickerFileMethod uploadStickerFile(int userId) {
+        public static UploadStickerFileMethod uploadStickerFile(long userId) {
             return new UploadStickerFileMethod().setUserId(userId);
         }
     }
@@ -479,11 +479,11 @@ public final class Methods {
         return new GetChatMemberMethod();
     }
 
-    public static GetChatMemberMethod getChatMember(@NotNull String chatId, int userId) {
+    public static GetChatMemberMethod getChatMember(@NotNull String chatId, long userId) {
         return new GetChatMemberMethod().setChatId(chatId).setUserId(userId);
     }
 
-    public static GetChatMemberMethod getChatMember(long chatId, int userId) {
+    public static GetChatMemberMethod getChatMember(long chatId, long userId) {
         return new GetChatMemberMethod().setChatId(chatId).setUserId(userId);
     }
 
@@ -532,7 +532,7 @@ public final class Methods {
         return new GetUserProfilePhotosMethod();
     }
 
-    public static GetUserProfilePhotosMethod getUserProfilePhotos(int userId) {
+    public static GetUserProfilePhotosMethod getUserProfilePhotos(long userId) {
         return new GetUserProfilePhotosMethod().setUserId(userId);
     }
 

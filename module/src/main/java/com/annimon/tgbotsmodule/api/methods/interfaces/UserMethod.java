@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public interface UserMethod<M extends Method, T extends Serializable> extends Method<T> {
 
-    Integer getUserId();
+    Long getUserId();
 
-    M setUserId(Integer userId);
+    M setUserId(Long userId);
 }

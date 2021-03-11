@@ -33,12 +33,12 @@ public class UnbanChatMemberMethod implements ChatMemberMethod<UnbanChatMemberMe
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return method.getUserId();
     }
 
     @Override
-    public UnbanChatMemberMethod setUserId(@NotNull Integer userId) {
+    public UnbanChatMemberMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }

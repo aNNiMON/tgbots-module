@@ -42,7 +42,7 @@ public abstract class BotHandler extends CommonAbsSender
 
     @Override
     public void setWebhook(SetWebhook setWebhook) throws TelegramApiException {
-        WebhookUtils.setWebhook(this, setWebhook);
+        WebhookUtils.setWebhook(this, this, setWebhook);
     }
 
     @Override

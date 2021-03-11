@@ -33,12 +33,12 @@ public class RestrictChatMemberMethod implements TimePeriodMethod<RestrictChatMe
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return method.getUserId();
     }
 
     @Override
-    public RestrictChatMemberMethod setUserId(@NotNull Integer userId) {
+    public RestrictChatMemberMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }

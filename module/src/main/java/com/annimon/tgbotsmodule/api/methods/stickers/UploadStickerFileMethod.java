@@ -27,12 +27,12 @@ public class UploadStickerFileMethod implements
     }
 
     @Override
-    public Integer getUserId() {
+    public Long getUserId() {
         return method.getUserId();
     }
 
     @Override
-    public UploadStickerFileMethod setUserId(@NotNull Integer userId) {
+    public UploadStickerFileMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }
