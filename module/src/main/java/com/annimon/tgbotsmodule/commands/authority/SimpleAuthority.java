@@ -16,12 +16,12 @@ import org.telegram.telegrambots.meta.api.objects.User;
 public class SimpleAuthority implements Authority {
 
     private final CommonAbsSender sender;
-    private final int creatorId;
-    private final Set<Integer> botAdmins;
+    private final long creatorId;
+    private final Set<Long> botAdmins;
     private final Map<String, Map.Entry<Long, Set<Long>>> chatAdmins;
     private long adminUpdatesTimeInSec;
 
-    public SimpleAuthority(CommonAbsSender sender, int creatorId) {
+    public SimpleAuthority(CommonAbsSender sender, long creatorId) {
         this.sender = sender;
         this.creatorId = creatorId;
         botAdmins = ConcurrentHashMap.newKeySet();
@@ -37,15 +37,15 @@ public class SimpleAuthority implements Authority {
         adminUpdatesTimeInSec = Objects.requireNonNull(duration).toSeconds();
     }
 
-    public int getCreatorId() {
+    public long getCreatorId() {
         return creatorId;
     }
 
-    public @NotNull Set<Integer> getBotAdmins() {
+    public @NotNull Set<Long> getBotAdmins() {
         return botAdmins;
     }
 
-    public SimpleAuthority addBotAdmin(Integer id) {
+    public SimpleAuthority addBotAdmin(Long id) {
         botAdmins.add(id);
         return this;
     }

@@ -47,10 +47,14 @@ public class MessageContext extends Context {
 
     public @NotNull String argument(int index, @NotNull String defaultValue) {
         lazyCreateArguments();
-        if (index >= 0 && index < arguments.length) {
-            return arguments[index];
+        if (index < 0 || index >= argumentsLength()) {
+            return defaultValue;
         }
-        return defaultValue;
+        final var result = arguments[index];
+        if (result.isEmpty()) {
+            return defaultValue;
+        }
+        return result;
     }
 
     public @NotNull String[] arguments() {

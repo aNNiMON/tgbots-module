@@ -1,9 +1,11 @@
 package com.annimon.tgbotsmodule.beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Config {
 
     @NotNull
