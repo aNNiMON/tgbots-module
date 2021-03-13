@@ -9,5 +9,5 @@ public interface TextCommand extends Command<MessageContext> {
 
     default Set<String> aliases() {
         return Set.of();
-    };
+    }
 }

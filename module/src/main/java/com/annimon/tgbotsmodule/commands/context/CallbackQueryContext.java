@@ -20,24 +20,24 @@ public class CallbackQueryContext extends Context {
         super(sender, update, user);
     }
 
-    public @NotNull String queryId() {
-        return update.getCallbackQuery().getId();
-    }
-
     public @NotNull CallbackQuery callbackQuery() {
         return update.getCallbackQuery();
     }
 
-    public @NotNull Message message() {
-        return update.getCallbackQuery().getMessage();
+    public @NotNull String queryId() {
+        return callbackQuery().getId();
+    }
+
+    public Message message() {
+        return callbackQuery().getMessage();
     }
 
     public String data() {
-        return update.getCallbackQuery().getData();
+        return callbackQuery().getData();
     }
 
     public String gameShortName() {
-        return update.getCallbackQuery().getGameShortName();
+        return callbackQuery().getGameShortName();
     }
 
     public @NotNull String argument(int index) {
@@ -46,10 +46,14 @@ public class CallbackQueryContext extends Context {
 
     public @NotNull String argument(int index, @NotNull String defaultValue) {
         lazyCreateArguments();
-        if (index >= 0 && index < arguments.length) {
-            return arguments[index];
+        if (index < 0 || index >= argumentsLength()) {
+            return defaultValue;
         }
-        return defaultValue;
+        final var result = arguments[index];
+        if (result.isEmpty()) {
+            return defaultValue;
+        }
+        return result;
     }
 
     public @NotNull String[] arguments() {
@@ -66,7 +70,7 @@ public class CallbackQueryContext extends Context {
     }
 
     private void createArguments() {
-        arguments = update.getCallbackQuery().getData().split("\\s+", argumentsLimit);
+        arguments = data().split("\\s+", argumentsLimit);
     }
 
     private void lazyCreateArguments() {
@@ -102,10 +106,16 @@ public class CallbackQueryContext extends Context {
     }
 
     public @NotNull EditMessageTextMethod editMessage(String text) {
-        return Methods.editMessageText()
-                .setChatId(message().getChatId())
-                .setMessageId(message().getMessageId())
-                .setText(text);
+        if (message() != null) {
+            return Methods.editMessageText()
+                    .setChatId(message().getChatId())
+                    .setMessageId(message().getMessageId())
+                    .setText(text);
+        } else {
+            return Methods.editMessageText()
+                    .setInlineMessageId(callbackQuery().getInlineMessageId())
+                    .setText(text);
+        }
     }
 
     public @NotNull EditMessageTextMethod editMessage(String text, InlineKeyboardMarkup markup) {
