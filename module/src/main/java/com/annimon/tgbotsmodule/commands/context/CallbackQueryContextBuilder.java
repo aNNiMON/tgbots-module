@@ -9,6 +9,7 @@ public class CallbackQueryContextBuilder {
     private CommonAbsSender sender;
     private Update update;
     private User user;
+    private String argumentsAsString;
 
     public CallbackQueryContextBuilder setSender(CommonAbsSender sender) {
         this.sender = sender;
@@ -25,8 +26,12 @@ public class CallbackQueryContextBuilder {
         return this;
     }
 
-    public CallbackQueryContext createContext() {
-        return new CallbackQueryContext(sender, update, user);
+    public CallbackQueryContextBuilder setArgumentsAsString(String text) {
+        this.argumentsAsString = text;
+        return this;
     }
 
+    public CallbackQueryContext createContext() {
+        return new CallbackQueryContext(sender, update, user, argumentsAsString);
+    }
 }

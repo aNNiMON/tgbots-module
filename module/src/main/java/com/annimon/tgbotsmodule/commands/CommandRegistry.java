@@ -3,12 +3,13 @@ package com.annimon.tgbotsmodule.commands;
 import com.annimon.tgbotsmodule.BotHandler;
 import com.annimon.tgbotsmodule.analytics.UpdateHandler;
 import com.annimon.tgbotsmodule.commands.authority.Authority;
+import com.annimon.tgbotsmodule.commands.context.CallbackQueryContext;
+import com.annimon.tgbotsmodule.commands.context.CallbackQueryContextBuilder;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.annimon.tgbotsmodule.commands.context.MessageContextBuilder;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -25,7 +26,10 @@ public class CommandRegistry implements UpdateHandler {
     private final String botUsername;
     private final ListMultimap<String, TextCommand> textCommands;
     private final List<RegexCommand> regexCommands;
+    private final ListMultimap<String, CallbackQueryCommand> callbackCommands;
     private final Authority authority;
+
+    private String callbackCommandSplitPattern;
 
     public CommandRegistry(@NotNull BotHandler handler, @NotNull Authority authority) {
         this.handler = handler;
@@ -33,6 +37,9 @@ public class CommandRegistry implements UpdateHandler {
         this.botUsername = "@" + handler.getBotUsername().toLowerCase(Locale.ENGLISH);
         textCommands = ArrayListMultimap.create();
         regexCommands = new ArrayList<>();
+        callbackCommands = ArrayListMultimap.create();
+
+        callbackCommandSplitPattern = ":";
     }
 
     public CommandRegistry register(@NotNull TextCommand command) {
@@ -49,9 +56,44 @@ public class CommandRegistry implements UpdateHandler {
         return this;
     }
 
+    public CommandRegistry register(@NotNull CallbackQueryCommand command) {
+        Objects.requireNonNull(command);
+        callbackCommands.put(command.command(), command);
+        return this;
+    }
+
     public CommandRegistry registerBundle(@NotNull CommandBundle bundle) {
         Objects.requireNonNull(bundle);
         bundle.register(this);
+        return this;
+    }
+
+    /**
+     * Splits {@code callback.data} by whitespace ({@code "cmd:args"})
+     * @return this
+     */
+    public CommandRegistry splitCallbackCommandByColon() {
+        return splitCallbackCommandByPattern(":");
+    }
+
+    /**
+     * Splits {@code callback.data} by whitespace ({@code "cmd args"})
+     * @return this
+     */
+    public CommandRegistry splitCallbackCommandByWhitespace() {
+        return splitCallbackCommandByPattern("\\s+");
+    }
+
+    /**
+     * Treats whole {@code callback.data} as command ({@code "cmd"})
+     * @return this
+     */
+    public CommandRegistry doNotSplitCallbackCommands() {
+        return splitCallbackCommandByPattern("$");
+    }
+
+    public CommandRegistry splitCallbackCommandByPattern(@NotNull String pattern) {
+        this.callbackCommandSplitPattern = Objects.requireNonNull(pattern);;
         return this;
     }
 
@@ -64,6 +106,14 @@ public class CommandRegistry implements UpdateHandler {
                     return true;
                 }
                 if ((!regexCommands.isEmpty()) && handleRegexCommands(update)) {
+                    return true;
+                }
+            }
+        } else if (update.hasCallbackQuery()) {
+            // Callback commands
+            final var data = update.getCallbackQuery().getData();
+            if (data != null && !data.isEmpty()) {
+                if ((!callbackCommands.isEmpty()) && handleCallbackQueryCommands(update)) {
                     return true;
                 }
             }
@@ -113,6 +163,30 @@ public class CommandRegistry implements UpdateHandler {
                 .peek(e -> e.getKey().accept(e.getValue()))
                 .count();
         return (count > 0);
+    }
+
+    protected boolean handleCallbackQueryCommands(@NotNull Update update) {
+        final var query = update.getCallbackQuery();
+        final var args = query.getData().split(callbackCommandSplitPattern, 2);
+        final var command = args[0];
+        final var commands = Stream.ofNullable(callbackCommands.get(command))
+                .flatMap(Collection::stream)
+                .filter(cmd -> authority.hasRights(update, query.getFrom(), cmd.authority()))
+                .collect(Collectors.toList());
+        if (commands.isEmpty()) {
+            return false;
+        }
+
+        final CallbackQueryContext context = new CallbackQueryContextBuilder()
+                .setSender(handler)
+                .setUpdate(update)
+                .setUser(query.getFrom())
+                .setArgumentsAsString(args.length >= 2 ? args[1] : "")
+                .createContext();
+        for (CallbackQueryCommand cmd : commands) {
+            cmd.accept(context);
+        }
+        return true;
     }
 
     protected String stringToCommand(String str) {

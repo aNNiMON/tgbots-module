@@ -13,11 +13,13 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 
 public class CallbackQueryContext extends Context {
 
+    private String argumentsAsString;
     private String[] arguments;
     private int argumentsLimit;
 
-    CallbackQueryContext(CommonAbsSender sender, Update update, User user) {
+    CallbackQueryContext(CommonAbsSender sender, Update update, User user, String text) {
         super(sender, update, user);
+        this.argumentsAsString = text;
     }
 
     public @NotNull CallbackQuery callbackQuery() {
@@ -34,6 +36,10 @@ public class CallbackQueryContext extends Context {
 
     public String data() {
         return callbackQuery().getData();
+    }
+
+    public String argumentsAsString() {
+        return argumentsAsString;
     }
 
     public String gameShortName() {
@@ -70,7 +76,7 @@ public class CallbackQueryContext extends Context {
     }
 
     private void createArguments() {
-        arguments = data().split("\\s+", argumentsLimit);
+        arguments = argumentsAsString.split("\\s+", argumentsLimit);
     }
 
     private void lazyCreateArguments() {
