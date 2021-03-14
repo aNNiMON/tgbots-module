@@ -1,28 +1,14 @@
 package com.annimon.tgbotsmodule.services;
 
-import com.annimon.tgbotsmodule.BotHandler;
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.function.Consumer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.bots.DefaultAbsSender;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatPhoto;
-import org.telegram.telegrambots.meta.api.methods.send.SendAnimation;
-import org.telegram.telegrambots.meta.api.methods.send.SendAudio;
-import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
-import org.telegram.telegrambots.meta.api.methods.send.SendMediaGroup;
-import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
-import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
-import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
-import org.telegram.telegrambots.meta.api.methods.send.SendVideoNote;
-import org.telegram.telegrambots.meta.api.methods.send.SendVoice;
+import org.telegram.telegrambots.meta.api.methods.send.*;
 import org.telegram.telegrambots.meta.api.methods.stickers.AddStickerToSet;
 import org.telegram.telegrambots.meta.api.methods.stickers.CreateNewStickerSet;
 import org.telegram.telegrambots.meta.api.methods.stickers.UploadStickerFile;
@@ -33,13 +19,42 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 import org.telegram.telegrambots.meta.updateshandlers.SentCallback;
 
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+
 @SuppressWarnings("WeakerAccess")
 public abstract class CommonAbsSender extends DefaultAbsSender {
 
     private static final Logger log = LoggerFactory.getLogger(CommonAbsSender.class);
+    private final Map<String, Consumer<BotApiMethod<?>>> preprocessors = new HashMap<>();
 
     public CommonAbsSender(DefaultBotOptions options) {
         super(options);
+    }
+
+    @Override
+    public <T extends Serializable, Method extends BotApiMethod<T>> T execute(Method method) throws TelegramApiException {
+        preprocessMethod(method);
+        return super.execute(method);
+    }
+
+    @Override
+    public <T extends Serializable, Method extends BotApiMethod<T>, Callback extends SentCallback<T>> void executeAsync(Method method, Callback callback) throws TelegramApiException {
+        preprocessMethod(method);
+        super.executeAsync(method, callback);
+    }
+
+    /**
+     * Add function which will preprocess the method before sending it to telegram server
+     * @param methodPath path of the method, like sendMessage, editMessageText, getMe
+     * @param preprocessor preprocessor to execute. Cast BotApiMethod to
+     */
+    protected void addMethodPreprocessor(String methodPath, Consumer<BotApiMethod<?>> preprocessor) {
+        preprocessors.put(methodPath, preprocessor);
     }
 
     @Nullable
@@ -465,14 +480,14 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
 
     /**
      * Simple {@code callAsyncWithCallback} implementation on lambda Consumers.
-     *
+     * <p>
      * Uses {@code handleTelegramApiException} method
      * as {@code TelegramApiException} error callback and
      * suppresses all other callbacks
      *
-     * @param method  api method
-     * @param <T> the type of the result
-     * @param <M> the type of the api method
+     * @param method api method
+     * @param <T>    the type of the result
+     * @param <M>    the type of the api method
      * @see #callAsync(BotApiMethod, Consumer, Consumer, Consumer)
      * @see #handleTelegramApiException(TelegramApiException)
      */
@@ -483,15 +498,15 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
 
     /**
      * {@code callAsyncWithCallback} implementation on lambda Consumers.
-     *
+     * <p>
      * Uses {@code handleTelegramApiException} method
      * as {@code TelegramApiException} error callback and
      * suppresses exception callback
      *
-     * @param method  api method
-     * @param responseConsumer  response callback
-     * @param <T> the type of the result
-     * @param <M> the type of the api method
+     * @param method           api method
+     * @param responseConsumer response callback
+     * @param <T>              the type of the result
+     * @param <M>              the type of the api method
      * @see #callAsync(BotApiMethod, Consumer, Consumer, Consumer)
      * @see #handleTelegramApiException(TelegramApiException)
      */
@@ -503,15 +518,15 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
 
     /**
      * {@code callAsyncWithCallback} implementation on lambda Consumers.
-     *
+     * <p>
      * Uses {@code handleTelegramApiException} method
      * as {@code TelegramApiException} error callback
      *
-     * @param method  api method
+     * @param method            api method
      * @param responseConsumer  response callback
-     * @param exceptionConsumer  exception callback
-     * @param <T> the type of the result
-     * @param <M> the type of the api method
+     * @param exceptionConsumer exception callback
+     * @param <T>               the type of the result
+     * @param <M>               the type of the api method
      * @see #callAsync(BotApiMethod, Consumer, Consumer, Consumer)
      * @see #handleTelegramApiException(TelegramApiException)
      */
@@ -526,12 +541,12 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     /**
      * {@code callAsyncWithCallback} implementation on lambda Consumers.
      *
-     * @param method  api method
-     * @param responseConsumer  response callback
-     * @param apiExceptionConsumer  {@code TelegramApiException} error callback
-     * @param exceptionConsumer  exception callback
-     * @param <T> the type of the result
-     * @param <M> the type of the api method
+     * @param method               api method
+     * @param responseConsumer     response callback
+     * @param apiExceptionConsumer {@code TelegramApiException} error callback
+     * @param exceptionConsumer    exception callback
+     * @param <T>                  the type of the result
+     * @param <M>                  the type of the api method
      * @see #callAsyncWithCallback(BotApiMethod, SentCallback)
      */
     public <T extends Serializable, M extends BotApiMethod<T>> void callAsync(
@@ -582,16 +597,22 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
         });
     }
 
+    private <T extends Serializable, Method extends BotApiMethod<T>> void preprocessMethod(@NotNull Method method) {
+        var preprocessor = preprocessors.get(method.getMethod());
+        if (preprocessor != null)
+            preprocessor.accept(method);
+    }
+
     private interface ResultSupplier<T> {
         T get() throws TelegramApiException;
     }
 
     /**
      * Handles exceptions for {@code call} methods.
-     *
+     * <p>
      * By default logs exception as an error.
      *
-     * @param ex  Exception
+     * @param ex Exception
      */
     public void handleTelegramApiException(TelegramApiException ex) {
         log.error("telegram api exception ", ex);

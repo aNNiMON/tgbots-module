@@ -3,6 +3,7 @@ package com.annimon.testbot;
 import com.annimon.testbot.commands.LocalizationBundle;
 import com.annimon.tgbotsmodule.BotHandler;
 import com.annimon.tgbotsmodule.api.methods.Methods;
+import com.annimon.tgbotsmodule.api.methods.send.SendMessageMethod;
 import com.annimon.tgbotsmodule.commands.CommandRegistry;
 import com.annimon.tgbotsmodule.commands.SimpleCommand;
 import com.annimon.tgbotsmodule.commands.SimpleRegexCommand;
@@ -17,8 +18,13 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class TestBotHandler extends BotHandler {
@@ -54,10 +60,20 @@ public class TestBotHandler extends BotHandler {
 
         // Locale
         commands.registerBundle(new LocalizationBundle());
+
+        addMethodPreprocessor(SendMessage.PATH, m -> {
+            var sm = (SendMessage) m;
+            sm.disableWebPagePreview();
+        });
+
+        addMethodPreprocessor(EditMessageText.PATH, m -> {
+            var emt = (EditMessageText) m;
+            emt.disableWebPagePreview();
+        });
     }
 
     @Override
-    public BotApiMethod onUpdate(Update update) {
+    public BotApiMethod<?> onUpdate(@NotNull Update update) {
         if (commands.handleUpdate(update)) {
             return null;
         }
