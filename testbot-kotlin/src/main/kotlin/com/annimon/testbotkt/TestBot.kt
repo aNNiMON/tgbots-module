@@ -36,5 +36,5 @@ data class BotConfig(
         val username: String,
 
         @JsonProperty(required = true)
-        val creatorId: Int
+        val creatorId: Long
 )

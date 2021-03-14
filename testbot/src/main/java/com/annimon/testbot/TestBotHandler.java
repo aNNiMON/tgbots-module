@@ -1,5 +1,6 @@
 package com.annimon.testbot;
 
+import com.annimon.testbot.commands.LocalizationBundle;
 import com.annimon.tgbotsmodule.BotHandler;
 import com.annimon.tgbotsmodule.api.methods.Methods;
 import com.annimon.tgbotsmodule.commands.CommandRegistry;
@@ -9,23 +10,16 @@ import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.authority.SimpleAuthority;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.annimon.tgbotsmodule.commands.context.RegexMessageContext;
-import com.annimon.tgbotsmodule.services.LocalizationService;
-import com.annimon.tgbotsmodule.services.ResourceBundleLocalizationService;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 public class TestBotHandler extends BotHandler {
 
@@ -33,17 +27,11 @@ public class TestBotHandler extends BotHandler {
     private final CommandRegistry commands;
     private final SimpleAuthority authority;
 
-    private String globalLocale;
-    private final LocalizationService localization;
-
     public TestBotHandler(BotConfig botConfig) {
         this.botConfig = botConfig;
 
         authority = new SimpleAuthority(this, botConfig.getCreatorId());
         commands = new CommandRegistry(this, authority);
-
-        globalLocale = "en";
-        localization = new ResourceBundleLocalizationService("Language");
 
         commands.register(new SimpleCommand("/action", For.CREATOR, ctx -> {
             if (ctx.argumentsLength() != 1) return;
@@ -65,51 +53,11 @@ public class TestBotHandler extends BotHandler {
         }));
 
         // Locale
-        commands.registerBundle(registry -> {
-            registry.register(new SimpleCommand("/hello_global", ctx -> {
-                // Sends hello message according to global locale
-                ctx.reply(localization.getString("hello", globalLocale)).callAsync(ctx.sender);
-            }));
-            registry.register(new SimpleCommand("/hello_local", ctx -> {
-                // Sends hello message according to user language code
-                final var userLocale = Optional.ofNullable(ctx.user().getLanguageCode()).orElse(globalLocale);
-                ctx.reply(localization.getString("hello", userLocale)).callAsync(ctx.sender);
-            }));
-            registry.register(new SimpleCommand("/switch_language", ctx -> {
-                // Setup inline keyboard
-                final var keyboard = new ArrayList<List<InlineKeyboardButton>>(2);
-                for (var lang : List.of("en", "ru")) {
-                    var languageName = localization.getString("lang_" + lang, globalLocale);
-                    var btn = InlineKeyboardButton.builder()
-                            .text(languageName)
-                            .callbackData(lang)
-                            .build();
-                    keyboard.add(List.of(btn));
-                }
-
-                ctx.reply(localization.getString("choose_language", globalLocale))
-                        .setReplyMarkup(InlineKeyboardMarkup.builder().keyboard(keyboard).build())
-                        .callAsync(ctx.sender);
-            }));
-        });
+        commands.registerBundle(new LocalizationBundle());
     }
 
     @Override
     public BotApiMethod onUpdate(Update update) {
-        if (update.hasCallbackQuery()) {
-            // Switch global language
-            final var message = update.getCallbackQuery().getMessage();
-            if (message != null) {
-                final String callbackData = update.getCallbackQuery().getData();
-                globalLocale = Optional.ofNullable(callbackData).orElse("en");
-                Methods.editMessageText()
-                        .setChatId(message.getChatId())
-                        .setMessageId(message.getMessageId())
-                        .setText(localization.getString("language_set", globalLocale))
-                        .callAsync(this);
-            }
-            return null;
-        }
         if (commands.handleUpdate(update)) {
             return null;
         }
