@@ -1,6 +1,6 @@
 # tgbots-module
 
-Simple Java telegram bots runner built on top of the [Telegram Bots](https://github.com/rubenlagus/TelegramBots) library.
+Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://github.com/rubenlagus/TelegramBots) library.
 
 ## Why?
 
@@ -17,7 +17,7 @@ Simple Java telegram bots runner built on top of the [Telegram Bots](https://git
  - Add gradle dependency:
  
     ```groovy
-    implementation 'com.annimon:tgbots-module:0.12'
+    implementation 'com.annimon:tgbots-module:0.13'
     ```
 
  - Implement `BotModule` interface:
@@ -124,7 +124,7 @@ Simple Java telegram bots runner built on top of the [Telegram Bots](https://git
     }
     ```
 
-Now you can easily switch between webhook and longpolling methods by changing the `webhook:` `enabled` flag in `config,yaml`.
+Now you can easily switch between webhook and long polling methods by changing the `webhook:` `enabled` flag in `config,yaml`.
 
 Or you can create `config-test.yaml` and run the `test` profile:
 
