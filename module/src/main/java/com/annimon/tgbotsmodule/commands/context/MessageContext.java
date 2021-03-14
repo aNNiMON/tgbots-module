@@ -14,14 +14,10 @@ import org.telegram.telegrambots.meta.api.objects.User;
 public class MessageContext extends Context {
 
     private final Long chatId;
-    private final String text;
-    private String[] arguments;
-    private int argumentsLimit;
 
     MessageContext(CommonAbsSender sender, Update update, User user, Long chatId, String text) {
-        super(sender, update, user);
+        super(sender, update, user, text);
         this.chatId = chatId;
-        this.text = text;
         this.argumentsLimit = 0;
     }
 
@@ -30,7 +26,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull Integer messageId() {
-        return update.getMessage().getMessageId();
+        return message().getMessageId();
     }
 
     public @NotNull Long chatId() {
@@ -39,53 +35,6 @@ public class MessageContext extends Context {
 
     public @NotNull String text() {
         return text;
-    }
-
-    public @NotNull String argument(int index) {
-        return argument(index, "");
-    }
-
-    public @NotNull String argument(int index, @NotNull String defaultValue) {
-        lazyCreateArguments();
-        if (index < 0 || index >= argumentsLength()) {
-            return defaultValue;
-        }
-        final var result = arguments[index];
-        if (result.isEmpty()) {
-            return defaultValue;
-        }
-        return result;
-    }
-
-    public @NotNull String[] arguments() {
-        lazyCreateArguments();
-        return arguments;
-    }
-
-    public int argumentsLength() {
-        return arguments().length;
-    }
-
-    public int argumentsLimit() {
-        return argumentsLimit;
-    }
-
-    private void createArguments() {
-        arguments = text.split("\\s+", argumentsLimit);
-    }
-
-    private void lazyCreateArguments() {
-        if (arguments == null) {
-            createArguments();
-        }
-    }
-
-    public void setArgumentsLimit(int argumentsLimit) {
-        if (argumentsLimit == this.argumentsLimit)
-            return;
-
-        this.argumentsLimit = argumentsLimit;
-        createArguments();
     }
 
     public @NotNull SendAnimationMethod replyWithAnimation() {
