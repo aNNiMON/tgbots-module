@@ -20,6 +20,12 @@ public class SimpleCommand implements TextCommand {
     }
 
     public SimpleCommand(@NotNull String command,
+                         @NotNull For role,
+                         @NotNull Consumer<MessageContext> contextConsumer) {
+        this(command, Set.of(), EnumSet.of(role), contextConsumer);
+    }
+
+    public SimpleCommand(@NotNull String command,
                          @NotNull EnumSet<For> authority,
                          @NotNull Consumer<MessageContext> contextConsumer) {
         this(command, Set.of(), authority, contextConsumer);

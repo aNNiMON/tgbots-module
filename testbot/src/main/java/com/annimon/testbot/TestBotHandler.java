@@ -15,10 +15,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.EnumSet;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
-
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -36,7 +34,7 @@ public class TestBotHandler extends BotHandler {
         authority = new SimpleAuthority(this, botConfig.getCreatorId());
         commands = new CommandRegistry<>(this, authority);
 
-        commands.register(new SimpleCommand("/action", EnumSet.of(For.CREATOR), ctx -> {
+        commands.register(new SimpleCommand("/action", For.CREATOR, ctx -> {
             if (ctx.argumentsLength() != 1) return;
             Methods.sendChatAction(ctx.chatId(), ActionType.get(ctx.argument(0, "typing")))
                     .callAsync(ctx.sender);

@@ -10,14 +10,13 @@ import com.annimon.tgbotsmodule.commands.authority.SimpleAuthority
 import org.telegram.telegrambots.meta.api.methods.ActionType
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod
 import org.telegram.telegrambots.meta.api.objects.Update
-import java.util.*
 
 class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
     private val authority = SimpleAuthority(this, botConfig.creatorId)
     private val commands = CommandRegistry(this, authority)
 
     init {
-        commands.register(SimpleCommand("/action", EnumSet.of(For.CREATOR)) { ctx ->
+        commands.register(SimpleCommand("/action", For.CREATOR) { ctx ->
             if (ctx.argumentsLength() == 1) {
                 Methods.sendChatAction(ctx.chatId(), ActionType.get(ctx.argument(0, "typing")))
                         .callAsync(ctx.sender)

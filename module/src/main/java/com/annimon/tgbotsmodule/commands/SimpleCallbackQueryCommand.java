@@ -18,6 +18,12 @@ public class SimpleCallbackQueryCommand implements CallbackQueryCommand {
     }
 
     public SimpleCallbackQueryCommand(@NotNull String command,
+                                      @NotNull For role,
+                                      @NotNull Consumer<CallbackQueryContext> contextConsumer) {
+        this(command, EnumSet.of(role), contextConsumer);
+    }
+
+    public SimpleCallbackQueryCommand(@NotNull String command,
                                       @NotNull EnumSet<For> authority,
                                       @NotNull Consumer<CallbackQueryContext> contextConsumer) {
         this.command = command;
