@@ -4,17 +4,18 @@ import com.annimon.tgbotsmodule.commands.CommandBundle
 import com.annimon.tgbotsmodule.commands.CommandRegistry
 import com.annimon.tgbotsmodule.commands.SimpleCallbackQueryCommand
 import com.annimon.tgbotsmodule.commands.SimpleCommand
+import com.annimon.tgbotsmodule.commands.authority.For
 import com.annimon.tgbotsmodule.commands.context.MessageContext
 import com.annimon.tgbotsmodule.services.ResourceBundleLocalizationService
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton
 
-class LocalizationBundle : CommandBundle {
+class LocalizationBundle : CommandBundle<For> {
 
     private var globalLocale = "en"
     private val localization = ResourceBundleLocalizationService("Language")
 
-    override fun register(registry: CommandRegistry) {
+    override fun register(registry: CommandRegistry<For>) {
         registry.splitCallbackCommandByColon()
         registry.register(SimpleCallbackQueryCommand("lang") { ctx ->
             // Switch global language

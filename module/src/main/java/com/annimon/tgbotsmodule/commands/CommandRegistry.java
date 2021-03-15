@@ -20,18 +20,19 @@ import java.util.stream.Stream;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-public class CommandRegistry implements UpdateHandler {
+@SuppressWarnings({"UnusedReturnValue", "unused"})
+public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler {
 
     private final BotHandler handler;
     private final String botUsername;
     private final ListMultimap<String, TextCommand> textCommands;
     private final List<RegexCommand> regexCommands;
     private final ListMultimap<String, CallbackQueryCommand> callbackCommands;
-    private final Authority authority;
+    private final Authority<TRole> authority;
 
     private String callbackCommandSplitPattern;
 
-    public CommandRegistry(@NotNull BotHandler handler, @NotNull Authority authority) {
+    public CommandRegistry(@NotNull BotHandler handler, @NotNull Authority<TRole> authority) {
         this.handler = handler;
         this.authority = authority;
         this.botUsername = "@" + handler.getBotUsername().toLowerCase(Locale.ENGLISH);
@@ -42,7 +43,7 @@ public class CommandRegistry implements UpdateHandler {
         callbackCommandSplitPattern = ":";
     }
 
-    public CommandRegistry register(@NotNull TextCommand command) {
+    public CommandRegistry<TRole> register(@NotNull TextCommand command) {
         Objects.requireNonNull(command);
         Stream.concat(Stream.of(command.command()), command.aliases().stream())
                 .map(this::stringToCommand)
@@ -50,19 +51,19 @@ public class CommandRegistry implements UpdateHandler {
         return this;
     }
 
-    public CommandRegistry register(@NotNull RegexCommand command) {
+    public CommandRegistry<TRole> register(@NotNull RegexCommand command) {
         Objects.requireNonNull(command);
         regexCommands.add(command);
         return this;
     }
 
-    public CommandRegistry register(@NotNull CallbackQueryCommand command) {
+    public CommandRegistry<TRole> register(@NotNull CallbackQueryCommand command) {
         Objects.requireNonNull(command);
         callbackCommands.put(command.command(), command);
         return this;
     }
 
-    public CommandRegistry registerBundle(@NotNull CommandBundle bundle) {
+    public CommandRegistry<TRole> registerBundle(@NotNull CommandBundle<TRole> bundle) {
         Objects.requireNonNull(bundle);
         bundle.register(this);
         return this;
@@ -72,7 +73,7 @@ public class CommandRegistry implements UpdateHandler {
      * Splits {@code callback.data} by whitespace ({@code "cmd:args"})
      * @return this
      */
-    public CommandRegistry splitCallbackCommandByColon() {
+    public CommandRegistry<TRole> splitCallbackCommandByColon() {
         return splitCallbackCommandByPattern(":");
     }
 
@@ -80,7 +81,7 @@ public class CommandRegistry implements UpdateHandler {
      * Splits {@code callback.data} by whitespace ({@code "cmd args"})
      * @return this
      */
-    public CommandRegistry splitCallbackCommandByWhitespace() {
+    public CommandRegistry<TRole> splitCallbackCommandByWhitespace() {
         return splitCallbackCommandByPattern("\\s+");
     }
 
@@ -88,11 +89,11 @@ public class CommandRegistry implements UpdateHandler {
      * Treats whole {@code callback.data} as command ({@code "cmd"})
      * @return this
      */
-    public CommandRegistry doNotSplitCallbackCommands() {
+    public CommandRegistry<TRole> doNotSplitCallbackCommands() {
         return splitCallbackCommandByPattern("$");
     }
 
-    public CommandRegistry splitCallbackCommandByPattern(@NotNull String pattern) {
+    public CommandRegistry<TRole> splitCallbackCommandByPattern(@NotNull String pattern) {
         this.callbackCommandSplitPattern = Objects.requireNonNull(pattern);
         return this;
     }

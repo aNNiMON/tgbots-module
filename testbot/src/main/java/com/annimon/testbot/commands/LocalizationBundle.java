@@ -4,6 +4,7 @@ import com.annimon.tgbotsmodule.commands.CommandBundle;
 import com.annimon.tgbotsmodule.commands.CommandRegistry;
 import com.annimon.tgbotsmodule.commands.SimpleCallbackQueryCommand;
 import com.annimon.tgbotsmodule.commands.SimpleCommand;
+import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.annimon.tgbotsmodule.services.LocalizationService;
 import com.annimon.tgbotsmodule.services.ResourceBundleLocalizationService;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-public class LocalizationBundle implements CommandBundle {
+public class LocalizationBundle implements CommandBundle<For> {
 
     private String globalLocale;
     private final LocalizationService localization;
@@ -25,7 +26,7 @@ public class LocalizationBundle implements CommandBundle {
     }
 
     @Override
-    public void register(@NotNull CommandRegistry registry) {
+    public void register(@NotNull CommandRegistry<For> registry) {
         registry.splitCallbackCommandByColon();
         registry.register(new SimpleCallbackQueryCommand("lang", ctx -> {
             // Switch global language
