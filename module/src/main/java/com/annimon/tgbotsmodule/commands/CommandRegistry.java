@@ -20,13 +20,14 @@ import java.util.stream.Stream;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+@SuppressWarnings({"UnusedReturnValue", "unused"})
 public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler {
 
     private final BotHandler handler;
     private final String botUsername;
-    private final ListMultimap<String, TextCommand<TRole>> textCommands;
-    private final List<RegexCommand<TRole>> regexCommands;
-    private final ListMultimap<String, CallbackQueryCommand<TRole>> callbackCommands;
+    private final ListMultimap<String, TextCommand> textCommands;
+    private final List<RegexCommand> regexCommands;
+    private final ListMultimap<String, CallbackQueryCommand> callbackCommands;
     private final Authority<TRole> authority;
 
     private String callbackCommandSplitPattern;
@@ -42,7 +43,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         callbackCommandSplitPattern = ":";
     }
 
-    public CommandRegistry<TRole> register(@NotNull TextCommand<TRole> command) {
+    public CommandRegistry<TRole> register(@NotNull TextCommand command) {
         Objects.requireNonNull(command);
         Stream.concat(Stream.of(command.command()), command.aliases().stream())
                 .map(this::stringToCommand)
@@ -50,13 +51,13 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         return this;
     }
 
-    public CommandRegistry<TRole> register(@NotNull RegexCommand<TRole> command) {
+    public CommandRegistry<TRole> register(@NotNull RegexCommand command) {
         Objects.requireNonNull(command);
         regexCommands.add(command);
         return this;
     }
 
-    public CommandRegistry<TRole> register(@NotNull CallbackQueryCommand<TRole> command) {
+    public CommandRegistry<TRole> register(@NotNull CallbackQueryCommand command) {
         Objects.requireNonNull(command);
         callbackCommands.put(command.command(), command);
         return this;
@@ -140,7 +141,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
                 .setChatId(message.getChatId())
                 .setText(args.length >= 2 ? args[1] : "")
                 .createMessageContext();
-        for (TextCommand<TRole> cmd : commands) {
+        for (TextCommand cmd : commands) {
             cmd.accept(context);
         }
         return true;
@@ -183,7 +184,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
                 .setUser(query.getFrom())
                 .setArgumentsAsString(args.length >= 2 ? args[1] : "")
                 .createContext();
-        for (CallbackQueryCommand<TRole> cmd : commands) {
+        for (CallbackQueryCommand cmd : commands) {
             cmd.accept(context);
         }
         return true;

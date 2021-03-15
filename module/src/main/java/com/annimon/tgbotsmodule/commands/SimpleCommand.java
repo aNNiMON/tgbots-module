@@ -3,12 +3,11 @@ package com.annimon.tgbotsmodule.commands;
 import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class SimpleCommand implements TextCommand<For> {
+public class SimpleCommand implements TextCommand {
 
     private final String command;
     private final Set<String> aliases;
@@ -46,6 +45,7 @@ public class SimpleCommand implements TextCommand<For> {
         return aliases;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public EnumSet<For> authority() {
         return authority;

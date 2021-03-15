@@ -2,13 +2,12 @@ package com.annimon.tgbotsmodule.commands;
 
 import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.context.RegexMessageContext;
-
 import java.util.EnumSet;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import org.jetbrains.annotations.NotNull;
 
-public class SimpleRegexCommand implements RegexCommand<For> {
+public class SimpleRegexCommand implements RegexCommand {
 
     private final Pattern pattern;
     private final Consumer<RegexMessageContext> contextConsumer;
@@ -37,6 +36,7 @@ public class SimpleRegexCommand implements RegexCommand<For> {
         return pattern;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public EnumSet<For> authority() {
         return authority;

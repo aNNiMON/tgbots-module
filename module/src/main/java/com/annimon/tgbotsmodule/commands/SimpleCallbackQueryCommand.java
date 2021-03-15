@@ -2,12 +2,11 @@ package com.annimon.tgbotsmodule.commands;
 
 import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.context.CallbackQueryContext;
-
 import java.util.EnumSet;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 
-public class SimpleCallbackQueryCommand implements CallbackQueryCommand<For> {
+public class SimpleCallbackQueryCommand implements CallbackQueryCommand {
 
     private final String command;
     private final Consumer<CallbackQueryContext> contextConsumer;
@@ -31,6 +30,7 @@ public class SimpleCallbackQueryCommand implements CallbackQueryCommand<For> {
         return command;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public EnumSet<For> authority() {
         return authority;

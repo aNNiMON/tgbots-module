@@ -1,9 +1,8 @@
 package com.annimon.tgbotsmodule.commands.authority;
 
+import java.util.EnumSet;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
-
-import java.util.EnumSet;
 
 public interface Authority<TRole extends Enum<TRole>> {
 
