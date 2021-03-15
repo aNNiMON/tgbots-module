@@ -23,12 +23,12 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
                         .callAsync(ctx.sender)
             }
         })
-        commands.register(SimpleCommand("/reverse", EnumSet.of(For.ALL)) { ctx ->
+        commands.register(SimpleCommand("/reverse", For.all()) { ctx ->
             ctx.reply(ctx.text().reversed()).callAsync(ctx.sender)
         })
 
         // Polls
-        commands.register(SimpleCommand("/poll", EnumSet.of(For.ALL)) { ctx ->
+        commands.register(SimpleCommand("/poll", For.all()) { ctx ->
             val lines = ctx.text().lines().filterNot { it.isBlank() }
             if (lines.size <= 3) {
                 ctx.reply("At least 3 lines expected").callAsync(ctx.sender)
@@ -39,7 +39,7 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
                         .callAsync(ctx.sender)
             }
         })
-        commands.register(SimpleCommand("/stoppoll", EnumSet.of(For.ALL)) { ctx ->
+        commands.register(SimpleCommand("/stoppoll", For.all()) { ctx ->
             if (!ctx.message().isReply) {
                 ctx.reply("reply with this command to a poll message").callAsync(ctx.sender)
             } else {

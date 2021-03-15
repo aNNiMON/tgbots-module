@@ -15,7 +15,7 @@ public class SimpleRegexCommand implements RegexCommand<For> {
     private final EnumSet<For> authority;
 
     public SimpleRegexCommand(@NotNull String regex, @NotNull Consumer<RegexMessageContext> contextConsumer) {
-        this(regex, EnumSet.of(For.ALL), contextConsumer);
+        this(regex, For.all(), contextConsumer);
     }
 
     public SimpleRegexCommand(@NotNull String regex, @NotNull EnumSet<For> authority, @NotNull Consumer<RegexMessageContext> contextConsumer) {
@@ -23,7 +23,7 @@ public class SimpleRegexCommand implements RegexCommand<For> {
     }
 
     public SimpleRegexCommand(@NotNull Pattern pattern, @NotNull Consumer<RegexMessageContext> contextConsumer) {
-        this(pattern, EnumSet.of(For.ALL), contextConsumer);
+        this(pattern, For.all(), contextConsumer);
     }
 
     public SimpleRegexCommand(@NotNull Pattern pattern, @NotNull EnumSet<For> authority, @NotNull Consumer<RegexMessageContext> contextConsumer) {

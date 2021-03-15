@@ -17,7 +17,7 @@ public class SimpleCommand implements TextCommand<For> {
 
     public SimpleCommand(@NotNull String command,
                          @NotNull Consumer<MessageContext> contextConsumer) {
-        this(command, EnumSet.of(For.ALL), contextConsumer);
+        this(command, For.all(), contextConsumer);
     }
 
     public SimpleCommand(@NotNull String command,

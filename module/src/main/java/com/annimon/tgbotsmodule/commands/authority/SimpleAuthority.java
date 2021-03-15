@@ -86,7 +86,7 @@ public class SimpleAuthority implements Authority<For> {
             return true;
         }
 
-        if (roles.contains(For.ALL))
+        if (roles.contains(For.USER))
             return true;
 
         if (roles.contains(For.GROUP_ADMIN)){

@@ -45,7 +45,7 @@ public class TestBotHandler extends BotHandler {
             ctx.reply(new StringBuilder(ctx.text()).reverse().toString())
                     .callAsync(ctx.sender);
         }));
-        commands.register(new SimpleCommand("/fillrect", EnumSet.of(For.ALL), this::fillRectInterpreter));
+        commands.register(new SimpleCommand("/fillrect", For.all(), this::fillRectInterpreter));
 
         commands.register(new SimpleRegexCommand(
                 "^/calc (-?\\d{1,20}) ?([+\\-*/]) ?(-?\\d{1,20})$", this::calcCommand));

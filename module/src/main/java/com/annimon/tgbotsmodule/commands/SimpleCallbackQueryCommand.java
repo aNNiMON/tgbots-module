@@ -15,7 +15,7 @@ public class SimpleCallbackQueryCommand implements CallbackQueryCommand<For> {
 
     public SimpleCallbackQueryCommand(@NotNull String command,
                                       @NotNull Consumer<CallbackQueryContext> contextConsumer) {
-        this(command, EnumSet.of(For.ALL), contextConsumer);
+        this(command, For.all(), contextConsumer);
     }
 
     public SimpleCallbackQueryCommand(@NotNull String command,
