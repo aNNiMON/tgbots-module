@@ -59,7 +59,7 @@ public class Context {
     }
 
     protected void createArguments() {
-        arguments = text.isBlank() ? new String[]{} : text.split("\\s+", argumentsLimit);
+        arguments = text.isBlank() ? new String[0] : text.split("\\s+", argumentsLimit);
     }
 
     private void lazyCreateArguments() {
