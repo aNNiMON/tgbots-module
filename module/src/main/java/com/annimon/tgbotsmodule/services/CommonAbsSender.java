@@ -1,5 +1,11 @@
 package com.annimon.tgbotsmodule.services;
 
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -19,21 +25,16 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 import org.telegram.telegrambots.meta.updateshandlers.SentCallback;
 
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
-
 @SuppressWarnings("WeakerAccess")
 public abstract class CommonAbsSender extends DefaultAbsSender {
 
     private static final Logger log = LoggerFactory.getLogger(CommonAbsSender.class);
-    private final Map<String, Consumer<BotApiMethod<?>>> preprocessors = new HashMap<>();
+    private final Map<Class<? extends BotApiMethod<?>>,
+                      Consumer<? extends BotApiMethod<?>>> preprocessors;
 
     public CommonAbsSender(DefaultBotOptions options) {
         super(options);
+        preprocessors = new HashMap<>();
     }
 
     @Override
@@ -50,11 +51,12 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
 
     /**
      * Add function which will preprocess the method before sending it to telegram server
-     * @param methodPath path of the method, like sendMessage, editMessageText, getMe
-     * @param preprocessor preprocessor to execute. Cast BotApiMethod to
+     * @param method  the class of the bot method
+     * @param preprocessor  preprocessor to execute
      */
-    protected void addMethodPreprocessor(String methodPath, Consumer<BotApiMethod<?>> preprocessor) {
-        preprocessors.put(methodPath, preprocessor);
+    protected <M extends BotApiMethod<?>> void addMethodPreprocessor(
+            @NotNull Class<M> method, @NotNull Consumer<M> preprocessor) {
+        preprocessors.put(method, preprocessor);
     }
 
     @Nullable
@@ -597,10 +599,15 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
         });
     }
 
-    private <T extends Serializable, Method extends BotApiMethod<T>> void preprocessMethod(@NotNull Method method) {
-        var preprocessor = preprocessors.get(method.getMethod());
-        if (preprocessor != null)
-            preprocessor.accept(method);
+    @SuppressWarnings("unchecked")
+    private <M extends BotApiMethod<?>> void preprocessMethod(@NotNull M method) {
+        if (preprocessors.isEmpty()) return;
+        var preprocessor = preprocessors.get(method.getClass());
+        if (preprocessor != null) {
+            // We can safely cast here, because early we
+            // added Class<M> and its corresponding Consumer<M>
+            ((Consumer<M>) preprocessor).accept(method);
+        }
     }
 
     private interface ResultSupplier<T> {

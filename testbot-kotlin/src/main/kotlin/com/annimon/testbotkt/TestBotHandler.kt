@@ -52,13 +52,11 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
         // Locale
         commands.registerBundle(LocalizationBundle())
 
-        addMethodPreprocessor(SendMessage.PATH){
-            it as SendMessage
+        addMethodPreprocessor(SendMessage::class.java) {
+            it.allowSendingWithoutReply = true
             it.disableWebPagePreview()
         }
-
-        addMethodPreprocessor(EditMessageText.PATH){
-            it as EditMessageText
+        addMethodPreprocessor(EditMessageText::class.java) {
             it.disableWebPagePreview()
         }
     }

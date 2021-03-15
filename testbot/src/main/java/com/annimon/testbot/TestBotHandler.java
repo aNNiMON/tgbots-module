@@ -3,7 +3,6 @@ package com.annimon.testbot;
 import com.annimon.testbot.commands.LocalizationBundle;
 import com.annimon.tgbotsmodule.BotHandler;
 import com.annimon.tgbotsmodule.api.methods.Methods;
-import com.annimon.tgbotsmodule.api.methods.send.SendMessageMethod;
 import com.annimon.tgbotsmodule.commands.CommandRegistry;
 import com.annimon.tgbotsmodule.commands.SimpleCommand;
 import com.annimon.tgbotsmodule.commands.SimpleRegexCommand;
@@ -18,7 +17,6 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -60,15 +58,11 @@ public class TestBotHandler extends BotHandler {
         // Locale
         commands.registerBundle(new LocalizationBundle());
 
-        addMethodPreprocessor(SendMessage.PATH, m -> {
-            var sm = (SendMessage) m;
-            sm.disableWebPagePreview();
+        addMethodPreprocessor(SendMessage.class, m -> {
+            m.setAllowSendingWithoutReply(true);
+            m.disableWebPagePreview();
         });
-
-        addMethodPreprocessor(EditMessageText.PATH, m -> {
-            var emt = (EditMessageText) m;
-            emt.disableWebPagePreview();
-        });
+        addMethodPreprocessor(EditMessageText.class, EditMessageText::disableWebPagePreview);
     }
 
     @Override
