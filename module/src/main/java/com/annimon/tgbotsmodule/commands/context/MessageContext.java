@@ -9,15 +9,11 @@ import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.User;
 
 public class MessageContext extends Context {
 
-    private final Long chatId;
-
-    MessageContext(CommonAbsSender sender, Update update, User user, Long chatId, String text) {
-        super(sender, update, user, text);
-        this.chatId = chatId;
+    public MessageContext(CommonAbsSender sender, Update update, String text) {
+        super(sender, update, update.getMessage().getFrom(), text);
         this.argumentsLimit = 0;
     }
 
@@ -30,7 +26,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull Long chatId() {
-        return chatId;
+        return message().getChatId();
     }
 
     public @NotNull String text() {
@@ -38,7 +34,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendAnimationMethod replyWithAnimation() {
-        return Methods.sendAnimation(chatId);
+        return Methods.sendAnimation(chatId());
     }
 
     public @NotNull SendAnimationMethod replyToMessageWithAnimation() {
@@ -48,7 +44,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendAudioMethod replyWithAudio() {
-        return Methods.sendAudio(chatId);
+        return Methods.sendAudio(chatId());
     }
 
     public @NotNull SendAudioMethod replyToMessageWithAudio() {
@@ -58,7 +54,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendContactMethod replyWithContact() {
-        return Methods.sendContact().setChatId(chatId);
+        return Methods.sendContact().setChatId(chatId());
     }
 
     public @NotNull SendContactMethod replyToMessageWithContact() {
@@ -68,7 +64,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendDiceMethod replyWithDice() {
-        return Methods.sendDice(chatId);
+        return Methods.sendDice(chatId());
     }
 
     public @NotNull SendDiceMethod replyToMessageWithDice() {
@@ -78,7 +74,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendDocumentMethod replyWithDocument() {
-        return Methods.sendDocument(chatId);
+        return Methods.sendDocument(chatId());
     }
 
     public @NotNull SendDocumentMethod replyToMessageWithDocument() {
@@ -88,7 +84,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendGameMethod replyWithGame() {
-        return Methods.Games.sendGame().setChatId(chatId);
+        return Methods.Games.sendGame().setChatId(chatId());
     }
 
     public @NotNull SendGameMethod replyToMessageWithGame() {
@@ -98,7 +94,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendInvoiceMethod replyWithInvoice() {
-        return Methods.Payments.sendInvoice(chatId);
+        return Methods.Payments.sendInvoice(chatId());
     }
 
     public @NotNull SendInvoiceMethod replyToMessageWithInvoice() {
@@ -108,7 +104,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendLocationMethod replyWithLocation() {
-        return Methods.sendLocation().setChatId(chatId);
+        return Methods.sendLocation().setChatId(chatId());
     }
 
     public @NotNull SendLocationMethod replyToMessageWithLocation() {
@@ -118,7 +114,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendMediaGroupMethod replyWithMediaGroup() {
-        return Methods.sendMediaGroup().setChatId(chatId);
+        return Methods.sendMediaGroup().setChatId(chatId());
     }
 
     public @NotNull SendMediaGroupMethod replyToMessageWithMediaGroup() {
@@ -128,11 +124,11 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendMessageMethod reply() {
-        return Methods.sendMessage().setChatId(chatId);
+        return Methods.sendMessage().setChatId(chatId());
     }
 
     public @NotNull SendMessageMethod reply(@NotNull String text) {
-        return Methods.sendMessage(chatId, text);
+        return Methods.sendMessage(chatId(), text);
     }
 
     public @NotNull SendMessageMethod replyToMessage() {
@@ -148,7 +144,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendPhotoMethod replyWithPhoto() {
-        return Methods.sendPhoto(chatId);
+        return Methods.sendPhoto(chatId());
     }
 
     public @NotNull SendPhotoMethod replyToMessageWithPhoto() {
@@ -158,7 +154,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendStickerMethod replyWithSticker() {
-        return Methods.Stickers.sendSticker(chatId);
+        return Methods.Stickers.sendSticker(chatId());
     }
 
     public @NotNull SendStickerMethod replyToMessageWithSticker() {
@@ -168,7 +164,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendVenueMethod replyWithVenue() {
-        return Methods.sendVenue().setChatId(chatId);
+        return Methods.sendVenue().setChatId(chatId());
     }
 
     public @NotNull SendVenueMethod replyToMessageWithVenue() {
@@ -178,7 +174,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendVideoMethod replyWithVideo() {
-        return Methods.sendVideo(chatId);
+        return Methods.sendVideo(chatId());
     }
 
     public @NotNull SendVideoMethod replyToMessageWithVideo() {
@@ -188,7 +184,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendVideoNoteMethod replyWithVideoNote() {
-        return Methods.sendVideoNote(chatId);
+        return Methods.sendVideoNote(chatId());
     }
 
     public @NotNull SendVideoNoteMethod replyToMessageWithVideoNote() {
@@ -198,7 +194,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendVoiceMethod replyWithVoice() {
-        return Methods.sendVoice(chatId);
+        return Methods.sendVoice(chatId());
     }
 
     public @NotNull SendVoiceMethod replyToMessageWithVoice() {
@@ -209,14 +205,14 @@ public class MessageContext extends Context {
 
 
     public @NotNull DeleteMessageMethod deleteMessage() {
-        return Methods.deleteMessage(chatId, messageId());
+        return Methods.deleteMessage(chatId(), messageId());
     }
 
     public @NotNull ForwardMessageMethod forwardMessageTo(long toChatId) {
-        return Methods.forwardMessage(toChatId, chatId, messageId());
+        return Methods.forwardMessage(toChatId, chatId(), messageId());
     }
 
     public @NotNull CopyMessageMethod copyMessageTo(long toChatId) {
-        return Methods.copyMessage(toChatId, chatId, messageId());
+        return Methods.copyMessage(toChatId, chatId(), messageId());
     }
 }

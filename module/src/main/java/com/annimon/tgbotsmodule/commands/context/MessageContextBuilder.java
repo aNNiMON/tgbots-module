@@ -8,8 +8,6 @@ import org.telegram.telegrambots.meta.api.objects.User;
 public class MessageContextBuilder {
     private CommonAbsSender sender;
     private Update update;
-    private User user;
-    private Long chatId;
     private String text;
 
     public MessageContextBuilder setSender(CommonAbsSender sender) {
@@ -22,23 +20,13 @@ public class MessageContextBuilder {
         return this;
     }
 
-    public MessageContextBuilder setUser(User user) {
-        this.user = user;
-        return this;
-    }
-
-    public MessageContextBuilder setChatId(Long chatId) {
-        this.chatId = chatId;
-        return this;
-    }
-
     public MessageContextBuilder setText(String text) {
         this.text = text;
         return this;
     }
 
     public MessageContext createMessageContext() {
-        return new MessageContext(sender, update, user, chatId, text);
+        return new MessageContext(sender, update, text);
     }
 
     public RegexMessageContext createRegexContext(Matcher matcher) {

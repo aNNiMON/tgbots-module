@@ -93,7 +93,7 @@ public class CommandRegistry implements UpdateHandler {
     }
 
     public CommandRegistry splitCallbackCommandByPattern(@NotNull String pattern) {
-        this.callbackCommandSplitPattern = Objects.requireNonNull(pattern);;
+        this.callbackCommandSplitPattern = Objects.requireNonNull(pattern);
         return this;
     }
 
@@ -136,8 +136,6 @@ public class CommandRegistry implements UpdateHandler {
         final MessageContext context = new MessageContextBuilder()
                 .setSender(handler)
                 .setUpdate(update)
-                .setUser(message.getFrom())
-                .setChatId(message.getChatId())
                 .setText(args.length >= 2 ? args[1] : "")
                 .createMessageContext();
         for (TextCommand cmd : commands) {
@@ -156,8 +154,6 @@ public class CommandRegistry implements UpdateHandler {
                 .map(e -> Map.entry(e.getKey(), new MessageContextBuilder()
                         .setSender(handler)
                         .setUpdate(update)
-                        .setUser(message.getFrom())
-                        .setChatId(message.getChatId())
                         .setText(text)
                         .createRegexContext(e.getValue())))
                 .peek(e -> e.getKey().accept(e.getValue()))
@@ -180,7 +176,6 @@ public class CommandRegistry implements UpdateHandler {
         final CallbackQueryContext context = new CallbackQueryContextBuilder()
                 .setSender(handler)
                 .setUpdate(update)
-                .setUser(query.getFrom())
                 .setArgumentsAsString(args.length >= 2 ? args[1] : "")
                 .createContext();
         for (CallbackQueryCommand cmd : commands) {

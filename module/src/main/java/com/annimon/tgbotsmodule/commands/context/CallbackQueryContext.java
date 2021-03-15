@@ -8,13 +8,12 @@ import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 public class CallbackQueryContext extends Context {
 
-    CallbackQueryContext(CommonAbsSender sender, Update update, User user, String text) {
-        super(sender, update, user, text);
+    public CallbackQueryContext(CommonAbsSender sender, Update update, String text) {
+        super(sender, update, update.getCallbackQuery().getFrom(), text);
     }
 
     public @NotNull CallbackQuery callbackQuery() {
