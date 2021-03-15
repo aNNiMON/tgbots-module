@@ -9,6 +9,8 @@ import com.annimon.tgbotsmodule.commands.authority.For
 import com.annimon.tgbotsmodule.commands.authority.SimpleAuthority
 import org.telegram.telegrambots.meta.api.methods.ActionType
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText
 import org.telegram.telegrambots.meta.api.objects.Update
 
 class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
@@ -49,6 +51,14 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
 
         // Locale
         commands.registerBundle(LocalizationBundle())
+
+        addMethodPreprocessor(SendMessage::class.java) {
+            it.allowSendingWithoutReply = true
+            it.disableWebPagePreview()
+        }
+        addMethodPreprocessor(EditMessageText::class.java) {
+            it.disableWebPagePreview()
+        }
     }
 
     override fun onUpdate(update: Update): BotApiMethod<*>? {

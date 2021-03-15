@@ -1,28 +1,20 @@
 package com.annimon.tgbotsmodule.services;
 
-import com.annimon.tgbotsmodule.BotHandler;
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.Executors;
+import java.util.Map;
 import java.util.function.Consumer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.bots.DefaultAbsSender;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatPhoto;
-import org.telegram.telegrambots.meta.api.methods.send.SendAnimation;
-import org.telegram.telegrambots.meta.api.methods.send.SendAudio;
-import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
-import org.telegram.telegrambots.meta.api.methods.send.SendMediaGroup;
-import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
-import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
-import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
-import org.telegram.telegrambots.meta.api.methods.send.SendVideoNote;
-import org.telegram.telegrambots.meta.api.methods.send.SendVoice;
+import org.telegram.telegrambots.meta.api.methods.send.*;
 import org.telegram.telegrambots.meta.api.methods.stickers.AddStickerToSet;
 import org.telegram.telegrambots.meta.api.methods.stickers.CreateNewStickerSet;
 import org.telegram.telegrambots.meta.api.methods.stickers.UploadStickerFile;
@@ -37,9 +29,34 @@ import org.telegram.telegrambots.meta.updateshandlers.SentCallback;
 public abstract class CommonAbsSender extends DefaultAbsSender {
 
     private static final Logger log = LoggerFactory.getLogger(CommonAbsSender.class);
+    private final Map<Class<? extends BotApiMethod<?>>,
+                      Consumer<? extends BotApiMethod<?>>> preprocessors;
 
     public CommonAbsSender(DefaultBotOptions options) {
         super(options);
+        preprocessors = new HashMap<>();
+    }
+
+    @Override
+    public <T extends Serializable, Method extends BotApiMethod<T>> T execute(Method method) throws TelegramApiException {
+        preprocessMethod(method);
+        return super.execute(method);
+    }
+
+    @Override
+    public <T extends Serializable, Method extends BotApiMethod<T>, Callback extends SentCallback<T>> void executeAsync(Method method, Callback callback) throws TelegramApiException {
+        preprocessMethod(method);
+        super.executeAsync(method, callback);
+    }
+
+    /**
+     * Add function which will preprocess the method before sending it to telegram server
+     * @param method  the class of the bot method
+     * @param preprocessor  preprocessor to execute
+     */
+    protected <M extends BotApiMethod<?>> void addMethodPreprocessor(
+            @NotNull Class<M> method, @NotNull Consumer<M> preprocessor) {
+        preprocessors.put(method, preprocessor);
     }
 
     @Nullable
@@ -465,7 +482,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
 
     /**
      * Simple {@code callAsyncWithCallback} implementation on lambda Consumers.
-     *
+     * <p>
      * Uses {@code handleTelegramApiException} method
      * as {@code TelegramApiException} error callback and
      * suppresses all other callbacks
@@ -580,6 +597,17 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
                 }
             }
         });
+    }
+
+    @SuppressWarnings("unchecked")
+    private <M extends BotApiMethod<?>> void preprocessMethod(@NotNull M method) {
+        if (preprocessors.isEmpty()) return;
+        var preprocessor = preprocessors.get(method.getClass());
+        if (preprocessor != null) {
+            // We can safely cast here, because early we
+            // added Class<M> and its corresponding Consumer<M>
+            ((Consumer<M>) preprocessor).accept(method);
+        }
     }
 
     private interface ResultSupplier<T> {

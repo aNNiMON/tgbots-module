@@ -6,8 +6,8 @@ public class RegexMessageContext extends MessageContext {
 
     protected final Matcher matcher;
 
-    RegexMessageContext(MessageContext m, Matcher matcher) {
-        super(m.sender, m.update, m.user, m.chatId(), m.text());
+    public RegexMessageContext(MessageContext m, Matcher matcher) {
+        super(m.sender, m.update, m.text());
         this.matcher = matcher;
     }
 
