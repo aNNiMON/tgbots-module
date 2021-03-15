@@ -12,8 +12,11 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class MessageContext extends Context {
 
+    private final Long chatId;
+
     public MessageContext(CommonAbsSender sender, Update update, String text) {
         super(sender, update, update.getMessage().getFrom(), text);
+        this.chatId = update.getMessage().getChatId();
         this.argumentsLimit = 0;
     }
 
@@ -26,7 +29,7 @@ public class MessageContext extends Context {
     }
 
     public @NotNull Long chatId() {
-        return message().getChatId();
+        return chatId;
     }
 
     public @NotNull String text() {

@@ -485,9 +485,9 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
      * as {@code TelegramApiException} error callback and
      * suppresses all other callbacks
      *
-     * @param method api method
-     * @param <T>    the type of the result
-     * @param <M>    the type of the api method
+     * @param method  api method
+     * @param <T> the type of the result
+     * @param <M> the type of the api method
      * @see #callAsync(BotApiMethod, Consumer, Consumer, Consumer)
      * @see #handleTelegramApiException(TelegramApiException)
      */
@@ -498,15 +498,15 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
 
     /**
      * {@code callAsyncWithCallback} implementation on lambda Consumers.
-     * <p>
+     *
      * Uses {@code handleTelegramApiException} method
      * as {@code TelegramApiException} error callback and
      * suppresses exception callback
      *
-     * @param method           api method
-     * @param responseConsumer response callback
-     * @param <T>              the type of the result
-     * @param <M>              the type of the api method
+     * @param method  api method
+     * @param responseConsumer  response callback
+     * @param <T> the type of the result
+     * @param <M> the type of the api method
      * @see #callAsync(BotApiMethod, Consumer, Consumer, Consumer)
      * @see #handleTelegramApiException(TelegramApiException)
      */
@@ -518,15 +518,15 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
 
     /**
      * {@code callAsyncWithCallback} implementation on lambda Consumers.
-     * <p>
+     *
      * Uses {@code handleTelegramApiException} method
      * as {@code TelegramApiException} error callback
      *
-     * @param method            api method
+     * @param method  api method
      * @param responseConsumer  response callback
-     * @param exceptionConsumer exception callback
-     * @param <T>               the type of the result
-     * @param <M>               the type of the api method
+     * @param exceptionConsumer  exception callback
+     * @param <T> the type of the result
+     * @param <M> the type of the api method
      * @see #callAsync(BotApiMethod, Consumer, Consumer, Consumer)
      * @see #handleTelegramApiException(TelegramApiException)
      */
@@ -541,12 +541,12 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     /**
      * {@code callAsyncWithCallback} implementation on lambda Consumers.
      *
-     * @param method               api method
-     * @param responseConsumer     response callback
-     * @param apiExceptionConsumer {@code TelegramApiException} error callback
-     * @param exceptionConsumer    exception callback
-     * @param <T>                  the type of the result
-     * @param <M>                  the type of the api method
+     * @param method  api method
+     * @param responseConsumer  response callback
+     * @param apiExceptionConsumer  {@code TelegramApiException} error callback
+     * @param exceptionConsumer  exception callback
+     * @param <T> the type of the result
+     * @param <M> the type of the api method
      * @see #callAsyncWithCallback(BotApiMethod, SentCallback)
      */
     public <T extends Serializable, M extends BotApiMethod<T>> void callAsync(
@@ -609,10 +609,10 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
 
     /**
      * Handles exceptions for {@code call} methods.
-     * <p>
+     *
      * By default logs exception as an error.
      *
-     * @param ex Exception
+     * @param ex  Exception
      */
     public void handleTelegramApiException(TelegramApiException ex) {
         log.error("telegram api exception ", ex);
