@@ -15,8 +15,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.EnumSet;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
+
+import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -24,16 +27,16 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class TestBotHandler extends BotHandler {
 
     private final BotConfig botConfig;
-    private final CommandRegistry commands;
+    private final CommandRegistry<For> commands;
     private final SimpleAuthority authority;
 
     public TestBotHandler(BotConfig botConfig) {
         this.botConfig = botConfig;
 
         authority = new SimpleAuthority(this, botConfig.getCreatorId());
-        commands = new CommandRegistry(this, authority);
+        commands = new CommandRegistry<>(this, authority);
 
-        commands.register(new SimpleCommand("/action", For.CREATOR, ctx -> {
+        commands.register(new SimpleCommand("/action", EnumSet.of(For.CREATOR), ctx -> {
             if (ctx.argumentsLength() != 1) return;
             Methods.sendChatAction(ctx.chatId(), ActionType.get(ctx.argument(0, "typing")))
                     .callAsync(ctx.sender);
@@ -42,7 +45,7 @@ public class TestBotHandler extends BotHandler {
             ctx.reply(new StringBuilder(ctx.text()).reverse().toString())
                     .callAsync(ctx.sender);
         }));
-        commands.register(new SimpleCommand("/fillrect", For.ALL, this::fillRectInterpreter));
+        commands.register(new SimpleCommand("/fillrect", EnumSet.of(For.ALL), this::fillRectInterpreter));
 
         commands.register(new SimpleRegexCommand(
                 "^/calc (-?\\d{1,20}) ?([+\\-*/]) ?(-?\\d{1,20})$", this::calcCommand));
@@ -57,7 +60,7 @@ public class TestBotHandler extends BotHandler {
     }
 
     @Override
-    public BotApiMethod onUpdate(Update update) {
+    public BotApiMethod<?> onUpdate(@NotNull Update update) {
         if (commands.handleUpdate(update)) {
             return null;
         }

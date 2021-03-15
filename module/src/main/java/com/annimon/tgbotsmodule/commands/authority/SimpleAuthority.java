@@ -3,6 +3,7 @@ package com.annimon.tgbotsmodule.commands.authority;
 import com.annimon.tgbotsmodule.api.methods.Methods;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.time.Duration;
+import java.util.EnumSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -13,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 
-public class SimpleAuthority implements Authority {
+public class SimpleAuthority implements Authority<For> {
 
     private final CommonAbsSender sender;
     private final long creatorId;
@@ -78,25 +79,26 @@ public class SimpleAuthority implements Authority {
     }
 
     @Override
-    public boolean hasRights(Update update, @NotNull User user, @NotNull For role) {
+    public boolean hasRights(Update update, @NotNull User user, @NotNull EnumSet<For> roles) {
         final long userId = user.getId();
         final boolean isCreator = (userId == creatorId);
         if (isCreator) {
             return true;
         }
 
-        switch (role) {
-            case ALL:
+        if (roles.contains(For.ALL))
+            return true;
+
+        if (roles.contains(For.GROUP_ADMIN)){
+            if (botAdmins.contains(userId)
+                || (isGroupChat(update) && isGroupAdmin(userId, update.getMessage().getChatId())))
                 return true;
-            case GROUP_ADMIN:
-                return botAdmins.contains(userId)
-                        || (isGroupChat(update) && isGroupAdmin(userId, update.getMessage().getChatId()));
-            case ADMIN:
-                return botAdmins.contains(userId);
-            case CREATOR:
-            default:
-                return false;
         }
+
+        if (roles.contains(For.ADMIN) && botAdmins.contains(userId))
+            return true;
+
+        return false;
     }
 
     private boolean needUpdateChatAdmins(Map.Entry<Long, Set<Long>> entry) {

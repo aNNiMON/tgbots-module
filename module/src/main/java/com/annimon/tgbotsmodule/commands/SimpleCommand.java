@@ -2,32 +2,33 @@ package com.annimon.tgbotsmodule.commands;
 
 import com.annimon.tgbotsmodule.commands.authority.For;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
-import java.util.Locale;
-import java.util.Set;
-import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 
-public class SimpleCommand implements TextCommand {
+import java.util.EnumSet;
+import java.util.Set;
+import java.util.function.Consumer;
+
+public class SimpleCommand implements TextCommand<For> {
 
     private final String command;
     private final Set<String> aliases;
     private final Consumer<MessageContext> contextConsumer;
-    private final For authority;
+    private final EnumSet<For> authority;
 
     public SimpleCommand(@NotNull String command,
                          @NotNull Consumer<MessageContext> contextConsumer) {
-        this(command, For.ALL, contextConsumer);
+        this(command, EnumSet.of(For.ALL), contextConsumer);
     }
 
     public SimpleCommand(@NotNull String command,
-                         @NotNull For authority,
+                         @NotNull EnumSet<For> authority,
                          @NotNull Consumer<MessageContext> contextConsumer) {
         this(command, Set.of(), authority, contextConsumer);
     }
 
     public SimpleCommand(@NotNull String command,
                          @NotNull Set<String> aliases,
-                         @NotNull For authority,
+                         @NotNull EnumSet<For> authority,
                          @NotNull Consumer<MessageContext> contextConsumer) {
         this.command = command;
         this.aliases = aliases;
@@ -46,7 +47,7 @@ public class SimpleCommand implements TextCommand {
     }
 
     @Override
-    public For authority() {
+    public EnumSet<For> authority() {
         return authority;
     }
 

@@ -10,24 +10,25 @@ import com.annimon.tgbotsmodule.commands.authority.SimpleAuthority
 import org.telegram.telegrambots.meta.api.methods.ActionType
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod
 import org.telegram.telegrambots.meta.api.objects.Update
+import java.util.*
 
 class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
     private val authority = SimpleAuthority(this, botConfig.creatorId)
     private val commands = CommandRegistry(this, authority)
 
     init {
-        commands.register(SimpleCommand("/action", For.CREATOR) { ctx ->
+        commands.register(SimpleCommand("/action", EnumSet.of(For.CREATOR)) { ctx ->
             if (ctx.argumentsLength() == 1) {
                 Methods.sendChatAction(ctx.chatId(), ActionType.get(ctx.argument(0, "typing")))
                         .callAsync(ctx.sender)
             }
         })
-        commands.register(SimpleCommand("/reverse", For.ALL) { ctx ->
+        commands.register(SimpleCommand("/reverse", EnumSet.of(For.ALL)) { ctx ->
             ctx.reply(ctx.text().reversed()).callAsync(ctx.sender)
         })
 
         // Polls
-        commands.register(SimpleCommand("/poll", For.ALL) { ctx ->
+        commands.register(SimpleCommand("/poll", EnumSet.of(For.ALL)) { ctx ->
             val lines = ctx.text().lines().filterNot { it.isBlank() }
             if (lines.size <= 3) {
                 ctx.reply("At least 3 lines expected").callAsync(ctx.sender)
@@ -38,7 +39,7 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
                         .callAsync(ctx.sender)
             }
         })
-        commands.register(SimpleCommand("/stoppoll", For.ALL) { ctx ->
+        commands.register(SimpleCommand("/stoppoll", EnumSet.of(For.ALL)) { ctx ->
             if (!ctx.message().isReply) {
                 ctx.reply("reply with this command to a poll message").callAsync(ctx.sender)
             } else {
