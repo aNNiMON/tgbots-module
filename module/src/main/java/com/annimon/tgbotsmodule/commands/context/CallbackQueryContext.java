@@ -12,8 +12,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 
 public class CallbackQueryContext extends Context {
 
-    public CallbackQueryContext(CommonAbsSender sender, Update update, String text) {
-        super(sender, update, update.getCallbackQuery().getFrom(), text);
+    public CallbackQueryContext(CommonAbsSender sender, Update update, String arguments) {
+        super(sender, update, update.getCallbackQuery().getFrom(), arguments);
     }
 
     public @NotNull CallbackQuery callbackQuery() {

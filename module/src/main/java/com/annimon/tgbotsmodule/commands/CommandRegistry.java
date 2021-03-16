@@ -137,7 +137,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         final MessageContext context = new MessageContextBuilder()
                 .setSender(handler)
                 .setUpdate(update)
-                .setText(args.length >= 2 ? args[1] : "")
+                .setArguments(args.length >= 2 ? args[1] : "")
                 .createMessageContext();
         for (TextCommand cmd : commands) {
             cmd.accept(context);
@@ -155,7 +155,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
                 .map(e -> Map.entry(e.getKey(), new MessageContextBuilder()
                         .setSender(handler)
                         .setUpdate(update)
-                        .setText(text)
+                        .setArguments(text)
                         .createRegexContext(e.getValue())))
                 .peek(e -> e.getKey().accept(e.getValue()))
                 .count();
@@ -177,7 +177,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         final CallbackQueryContext context = new CallbackQueryContextBuilder()
                 .setSender(handler)
                 .setUpdate(update)
-                .setArgumentsAsString(args.length >= 2 ? args[1] : "")
+                .setArguments(args.length >= 2 ? args[1] : "")
                 .createContext();
         for (CallbackQueryCommand cmd : commands) {
             cmd.accept(context);

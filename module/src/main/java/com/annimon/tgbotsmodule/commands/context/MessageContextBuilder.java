@@ -3,12 +3,11 @@ package com.annimon.tgbotsmodule.commands.context;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.regex.Matcher;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.User;
 
 public class MessageContextBuilder {
     private CommonAbsSender sender;
     private Update update;
-    private String text;
+    private String arguments;
 
     public MessageContextBuilder setSender(CommonAbsSender sender) {
         this.sender = sender;
@@ -20,13 +19,13 @@ public class MessageContextBuilder {
         return this;
     }
 
-    public MessageContextBuilder setText(String text) {
-        this.text = text;
+    public MessageContextBuilder setArguments(String arguments) {
+        this.arguments = arguments;
         return this;
     }
 
     public MessageContext createMessageContext() {
-        return new MessageContext(sender, update, text);
+        return new MessageContext(sender, update, arguments);
     }
 
     public RegexMessageContext createRegexContext(Matcher matcher) {

@@ -10,15 +10,15 @@ public class Context {
     public final CommonAbsSender sender;
     protected final Update update;
     protected final User user;
-    protected final String text;
+    protected final String argumentsAsString;
     protected String[] arguments;
     protected int argumentsLimit;
 
-    Context(CommonAbsSender sender, Update update, User user, String text) {
+    public Context(CommonAbsSender sender, Update update, User user, String arguments) {
         this.sender = sender;
         this.update = update;
         this.user = user;
-        this.text = text;
+        this.argumentsAsString = arguments;
         this.argumentsLimit = 0;
     }
 
@@ -30,8 +30,20 @@ public class Context {
         return user;
     }
 
-    public String getText() {
-        return text;
+    /**
+     * Full arguments without the command.
+     * If command has no arguments returns empty string.
+     *
+     * Examples:
+     *  text: "/cmd arg1 arg2"
+     *  args: "arg1 arg2"
+     *  text: "/cmd"
+     *  args: ""
+     *
+     * @return arguments string
+     */
+    public String argumentsAsString() {
+        return argumentsAsString;
     }
 
     public @NotNull String argument(int index) {
@@ -58,21 +70,25 @@ public class Context {
         return argumentsLimit;
     }
 
-    protected void createArguments() {
-        arguments = text.isBlank() ? new String[0] : text.split("\\s+", argumentsLimit);
-    }
-
-    private void lazyCreateArguments() {
-        if (arguments == null) {
-            createArguments();
-        }
-    }
-
     public void setArgumentsLimit(int argumentsLimit) {
         if (argumentsLimit == this.argumentsLimit)
             return;
 
         this.argumentsLimit = argumentsLimit;
         createArguments();
+    }
+
+    protected void createArguments() {
+        if (argumentsAsString.isBlank()) {
+            arguments = new String[0];
+        } else {
+            arguments = argumentsAsString.split("\\s+", argumentsLimit);
+        }
+    }
+
+    private void lazyCreateArguments() {
+        if (arguments == null) {
+            createArguments();
+        }
     }
 }
