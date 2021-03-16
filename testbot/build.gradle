@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.annimon'
-version '0.14-SNAPSHOT'
+version '0.15-SNAPSHOT'
 
 sourceCompatibility = 11
 
