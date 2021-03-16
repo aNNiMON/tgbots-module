@@ -5,6 +5,7 @@ import com.annimon.tgbotsmodule.analytics.UpdateHandler;
 import com.annimon.tgbotsmodule.commands.authority.Authority;
 import com.annimon.tgbotsmodule.commands.context.CallbackQueryContext;
 import com.annimon.tgbotsmodule.commands.context.CallbackQueryContextBuilder;
+import com.annimon.tgbotsmodule.commands.context.InlineQueryContext;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.annimon.tgbotsmodule.commands.context.MessageContextBuilder;
 import com.google.common.collect.ArrayListMultimap;
@@ -28,6 +29,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
     private final ListMultimap<String, TextCommand> textCommands;
     private final List<RegexCommand> regexCommands;
     private final ListMultimap<String, CallbackQueryCommand> callbackCommands;
+    private final ListMultimap<String, InlineQueryCommand> inlineCommands;
     private final Authority<TRole> authority;
 
     private String callbackCommandSplitPattern;
@@ -39,6 +41,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         textCommands = ArrayListMultimap.create();
         regexCommands = new ArrayList<>();
         callbackCommands = ArrayListMultimap.create();
+        inlineCommands = ArrayListMultimap.create();
 
         callbackCommandSplitPattern = ":";
     }
@@ -60,6 +63,12 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
     public CommandRegistry<TRole> register(@NotNull CallbackQueryCommand command) {
         Objects.requireNonNull(command);
         callbackCommands.put(command.command(), command);
+        return this;
+    }
+
+    public CommandRegistry<TRole> register(@NotNull InlineQueryCommand command) {
+        Objects.requireNonNull(command);
+        inlineCommands.put(command.command(), command);
         return this;
     }
 
@@ -111,12 +120,18 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
                 }
             }
         } else if (update.hasCallbackQuery()) {
-            // Callback commands
+            // Callback query commands
             final var data = update.getCallbackQuery().getData();
             if (data != null && !data.isEmpty()) {
                 if ((!callbackCommands.isEmpty()) && handleCallbackQueryCommands(update)) {
                     return true;
                 }
+            }
+        } else if (update.hasInlineQuery()) {
+            // Inline query commands
+            final var query = update.getInlineQuery().getQuery();
+            if ((!inlineCommands.isEmpty()) && handleInlineQueryCommands(update)) {
+                return true;
             }
         }
         return false;
@@ -180,6 +195,27 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
                 .setArguments(args.length >= 2 ? args[1] : "")
                 .createContext();
         for (CallbackQueryCommand cmd : commands) {
+            cmd.accept(context);
+        }
+        return true;
+    }
+
+    private boolean handleInlineQueryCommands(Update update) {
+        final var inlineQuery = update.getInlineQuery();
+        final var query = inlineQuery.getQuery();
+        final var args = query.split("\\s+", 2);
+        final var command = args[0];
+        final var commands = Stream.ofNullable(inlineCommands.get(command))
+                .flatMap(Collection::stream)
+                .filter(cmd -> authority.hasRights(update, inlineQuery.getFrom(), cmd.authority()))
+                .collect(Collectors.toList());
+        if (commands.isEmpty()) {
+            return false;
+        }
+
+        final var commandArguments = args.length >= 2 ? args[1] : "";
+        final var context = new InlineQueryContext(handler, update, commandArguments);
+        for (InlineQueryCommand cmd : commands) {
             cmd.accept(context);
         }
         return true;

@@ -1,6 +1,7 @@
 package com.annimon.testbotkt
 
 import com.annimon.testbotkt.commands.LocalizationBundle
+import com.annimon.testbotkt.commands.ReverseBundle
 import com.annimon.tgbotsmodule.BotHandler
 import com.annimon.tgbotsmodule.api.methods.Methods
 import com.annimon.tgbotsmodule.commands.CommandRegistry
@@ -24,9 +25,6 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
                         .callAsync(ctx.sender)
             }
         })
-        commands.register(SimpleCommand("/reverse", For.all()) { ctx ->
-            ctx.reply(ctx.argumentsAsString().reversed()).callAsync(ctx.sender)
-        })
 
         // Polls
         commands.register(SimpleCommand("/poll", For.all()) { ctx ->
@@ -49,8 +47,8 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
             }
         })
 
-        // Locale
         commands.registerBundle(LocalizationBundle())
+        commands.registerBundle(ReverseBundle())
 
         addMethodPreprocessor(SendMessage::class.java) {
             it.allowSendingWithoutReply = true
