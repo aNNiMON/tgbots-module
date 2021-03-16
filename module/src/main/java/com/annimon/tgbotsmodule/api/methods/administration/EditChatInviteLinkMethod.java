@@ -14,12 +14,7 @@ public class EditChatInviteLinkMethod implements ChatMethod<EditChatInviteLinkMe
     private final EditChatInviteLink method;
 
     public EditChatInviteLinkMethod() {
-        this(new EditChatInviteLink() {
-            @Override
-            public String getMethod() { // TODO: remove after fix in parent lib
-                return "editChatInviteLink";
-            }
-        });
+        this(new EditChatInviteLink());
     }
 
     public EditChatInviteLinkMethod(@NotNull EditChatInviteLink method) {

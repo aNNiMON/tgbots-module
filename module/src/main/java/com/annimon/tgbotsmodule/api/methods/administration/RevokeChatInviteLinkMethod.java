@@ -14,12 +14,7 @@ public class RevokeChatInviteLinkMethod implements ChatMethod<RevokeChatInviteLi
     private final RevokeChatInviteLink method;
 
     public RevokeChatInviteLinkMethod() {
-        this(new RevokeChatInviteLink() {
-            @Override
-            public String getMethod() { // TODO: remove after fix in parent lib
-                return "revokeChatInviteLink";
-            }
-        });
+        this(new RevokeChatInviteLink());
     }
 
     public RevokeChatInviteLinkMethod(@NotNull RevokeChatInviteLink method) {
