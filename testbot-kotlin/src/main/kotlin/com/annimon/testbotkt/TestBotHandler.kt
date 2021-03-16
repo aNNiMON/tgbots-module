@@ -25,12 +25,12 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
             }
         })
         commands.register(SimpleCommand("/reverse", For.all()) { ctx ->
-            ctx.reply(ctx.text().reversed()).callAsync(ctx.sender)
+            ctx.reply(ctx.argumentsAsString().reversed()).callAsync(ctx.sender)
         })
 
         // Polls
         commands.register(SimpleCommand("/poll", For.all()) { ctx ->
-            val lines = ctx.text().lines().filterNot { it.isBlank() }
+            val lines = ctx.argumentsAsString().lines().filterNot { it.isBlank() }
             if (lines.size <= 3) {
                 ctx.reply("At least 3 lines expected").callAsync(ctx.sender)
             } else {

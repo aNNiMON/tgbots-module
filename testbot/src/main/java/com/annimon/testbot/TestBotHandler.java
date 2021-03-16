@@ -42,7 +42,7 @@ public class TestBotHandler extends BotHandler {
                     .callAsync(ctx.sender);
         }));
         commands.register(new SimpleCommand("/reverse", ctx -> {
-            ctx.reply(new StringBuilder(ctx.text()).reverse().toString())
+            ctx.reply(new StringBuilder(ctx.argumentsAsString()).reverse().toString())
                     .callAsync(ctx.sender);
         }));
         commands.register(new SimpleCommand("/fillrect", For.all(), this::fillRectInterpreter));
@@ -97,7 +97,7 @@ public class TestBotHandler extends BotHandler {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, w, h);
         g.setColor(Color.BLACK);
-        final var statements = ctx.text().toLowerCase().split(";");
+        final var statements = ctx.argumentsAsString().toLowerCase().split(";");
         for (var statement : statements) {
             final var p = statement.replaceAll("[(),]", " ").trim().replaceAll("\\s+", " ").split(" ");
             switch (p[0].trim()) {
