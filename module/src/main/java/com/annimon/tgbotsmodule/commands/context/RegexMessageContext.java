@@ -1,13 +1,16 @@
 package com.annimon.tgbotsmodule.commands.context;
 
+import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.regex.Matcher;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class RegexMessageContext extends MessageContext {
 
     protected final Matcher matcher;
 
-    public RegexMessageContext(MessageContext m, Matcher matcher) {
-        super(m.sender, m.update, m.argumentsAsString);
+    public RegexMessageContext(CommonAbsSender sender, Update update, String arguments,
+                               Matcher matcher) {
+        super(sender, update, arguments);
         this.matcher = matcher;
     }
 

@@ -4,10 +4,9 @@ import com.annimon.tgbotsmodule.BotHandler;
 import com.annimon.tgbotsmodule.analytics.UpdateHandler;
 import com.annimon.tgbotsmodule.commands.authority.Authority;
 import com.annimon.tgbotsmodule.commands.context.CallbackQueryContext;
-import com.annimon.tgbotsmodule.commands.context.CallbackQueryContextBuilder;
 import com.annimon.tgbotsmodule.commands.context.InlineQueryContext;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
-import com.annimon.tgbotsmodule.commands.context.MessageContextBuilder;
+import com.annimon.tgbotsmodule.commands.context.RegexMessageContext;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import java.util.ArrayList;
@@ -149,11 +148,8 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
             return false;
         }
 
-        final MessageContext context = new MessageContextBuilder()
-                .setSender(handler)
-                .setUpdate(update)
-                .setArguments(args.length >= 2 ? args[1] : "")
-                .createMessageContext();
+        final var commandArguments = args.length >= 2 ? args[1] : "";
+        final var context = new MessageContext(handler, update, commandArguments);
         for (TextCommand cmd : commands) {
             cmd.accept(context);
         }
@@ -167,12 +163,11 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
                 .map(cmd -> Map.entry(cmd, cmd.pattern().matcher(text)))
                 .filter(e -> e.getValue().find())
                 .filter(e -> authority.hasRights(update, message.getFrom(), e.getKey().authority()))
-                .map(e -> Map.entry(e.getKey(), new MessageContextBuilder()
-                        .setSender(handler)
-                        .setUpdate(update)
-                        .setArguments(text)
-                        .createRegexContext(e.getValue())))
-                .peek(e -> e.getKey().accept(e.getValue()))
+                .peek(e -> {
+                    final RegexCommand command = e.getKey();
+                    final var matcher = e.getValue();
+                    command.accept(new RegexMessageContext(handler, update, text, matcher));
+                })
                 .count();
         return (count > 0);
     }
@@ -189,11 +184,8 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
             return false;
         }
 
-        final CallbackQueryContext context = new CallbackQueryContextBuilder()
-                .setSender(handler)
-                .setUpdate(update)
-                .setArguments(args.length >= 2 ? args[1] : "")
-                .createContext();
+        final var commandArguments = args.length >= 2 ? args[1] : "";
+        final var context = new CallbackQueryContext(handler, update, commandArguments);
         for (CallbackQueryCommand cmd : commands) {
             cmd.accept(context);
         }
