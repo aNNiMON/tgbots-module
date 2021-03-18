@@ -74,23 +74,25 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
        // ...
        @Override
        public BotHandler botHandler(Config config) {
-           final var configLoader = new YamlConfigLoaderService<BotConfig>();
+           final var configLoader = new YamlConfigLoaderService();
            final var configFile = configLoader.configFile("testbot", config.getProfile());
-           final var botConfig = configLoader.load(configFile, BotConfig.class);
+           final var botConfig = configLoader.loadFile(configFile, BotConfig.class);
            return new TestBotHandler(botConfig);
        }
     }
     ```
 
- - Fill in `config.yaml`:
+ - Fill in `config.yaml` (See [Webhooks](#webhooks) examples):
  
     ```yaml
     log-level: FINE
     webhook:
       enabled: false
-      internalUrl: https://123.45.67.89:8443
+      port: env(PORT:8443)
+      externalUrl: https://123.45.67.890:$port
+      internalUrl: http://0.0.0.0:$port
       keystorePath: cert/keystore.jks
-      keystorePassword: env(STORE_PASSWORD)
+      keystorePassword: env(KEYSTORE_PASSWORD)
     modules:
       - com.annimon.testbot.TestBot
     ```
@@ -132,3 +134,66 @@ Or you can create `config-test.yaml` and run the `test` profile:
 java -cp tgbots-module.jar:testbot.jar:yourfavoritebot.jar com.annimon.telegrambots.Runner test
 ```
 
+
+## Webhooks
+
+### Heroku
+
+Heroku starts on a random port, you can get a value from the environment property `PORT`:
+
+ ```yaml
+ webhook:
+   enabled: true
+   port: env(PORT)
+   externalUrl: https://yourappname.herokuapp.com
+   internalUrl: http://0.0.0.0:$port
+ ```
+
+### Self-hosted
+
+Use `certgen.sh` to generate a certificate (replace `SERVERIPADDRESS` with the server's IP address):
+
+```bash
+JKS=keystore.jks
+CERT=public_cert.pem
+
+openssl req -newkey rsa:2048 -sha256 -nodes \
+    -keyout private.key -x509 \
+    -days 365 \
+    -out $CERT \
+    -subj "/C=US/ST=Utah/L=Location/O=Organization/CN=SERVERIPADDRESS"
+
+openssl pkcs12 -export \
+    -in $CERT \
+    -inkey private.key \
+    -certfile $CERT \
+    -out keystore.p12
+
+keytool -importkeystore \
+    -srckeystore keystore.p12 \
+    -srcstoretype pkcs12 \
+    -sigalg SHA1withRSA \
+    -destkeystore $JKS \
+    -deststoretype pkcs12
+
+rm keystore.p12 private.key
+```
+
+The keystore password will be asked several times during the generation of the certificate. Don't forget to `export` it:
+
+```bash
+export KEYSTORE_PASSWORD=mysupersecretpasswordis123456
+```
+
+Specify generated `keystore.jks` and `public_cert.pem` paths and your `SERVERIPADDRESS` in `config.yaml`: 
+
+ ```yaml
+ webhook:
+   enabled: true
+   port: 8443
+   externalUrl: https://SERVERIPADDRESS:$port
+   internalUrl: http://0.0.0.0:$port
+   keystorePath: cert/keystore.jks
+   keystorePassword: env(KEYSTORE_PASSWORD)
+   certificatePublicKeyPath: cert/public_cert.pem
+ ```
