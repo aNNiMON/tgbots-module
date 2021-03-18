@@ -97,11 +97,11 @@ public class Runner {
 
     @NotNull
     private static Config loadConfig(@NotNull String profile) {
-        final var configLoader = new YamlConfigLoaderService<Config>();
+        final var configLoader = new YamlConfigLoaderService();
         var config = Config.defaultConfig();
         try {
             final var configFile = configLoader.configFile("config", profile);
-            config = configLoader.load(configFile, Config.class);
+            config = configLoader.loadFile(configFile, Config.class);
         } catch (ConfigLoaderException cle) {
             log.info("Unable to load config file. Switch to default configuration.");
         }

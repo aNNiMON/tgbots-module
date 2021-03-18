@@ -3,7 +3,6 @@ package com.annimon.tgbotsmodule.services;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 import java.util.stream.Stream;
-import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -29,8 +28,8 @@ class YamlConfigLoaderServiceTest {
     void testConverter(String name, Map<String, String> props) {
         props.forEach(System::setProperty);
 
-        final var converter = new YamlConfigLoaderService<EnvConfig>();
-        final var config = converter.load(converter.configFile("src/test/resources/env", name), EnvConfig.class);
+        final var converter = new YamlConfigLoaderService();
+        final var config = converter.loadFile(converter.configFile("src/test/resources/env", name), EnvConfig.class);
 
         assertThat(config.actual, is(not(nullValue())));
         assertThat(config.expected, is(not(nullValue())));

@@ -8,21 +8,29 @@ import java.io.InputStream;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 
-public interface ConfigLoaderService<T> {
+public interface ConfigLoaderService {
 
-    default @NotNull T load(@NotNull File file, @NotNull Class<T> configType) {
-        return load(file, configType, null);
+    default <T> @NotNull T loadFile(
+            @NotNull File file,
+            @NotNull Class<T> configType) {
+        return loadFile(file, configType, null);
     }
 
-    @NotNull T load(@NotNull File file, @NotNull Class<T> configType,
-                    Consumer<ObjectMapper> mapperConsumer);
+    <T> @NotNull T loadFile(
+            @NotNull File file,
+            @NotNull Class<T> configType,
+            Consumer<ObjectMapper> mapperConsumer);
 
-    default @NotNull T load(@NotNull String resourcePath, @NotNull Class<T> configType) {
-        return load(resourcePath, configType, null);
+    default <T> @NotNull T loadResource(
+            @NotNull String resourcePath,
+            @NotNull Class<T> configType) {
+        return loadResource(resourcePath, configType, null);
     }
 
-    default @NotNull T load(@NotNull String resourcePath, @NotNull Class<T> configType,
-                            Consumer<ObjectMapper> mapperConsumer) {
+    default <T> @NotNull T loadResource(
+            @NotNull String resourcePath,
+            @NotNull Class<T> configType,
+            Consumer<ObjectMapper> mapperConsumer) {
         try (var is = getClass().getResourceAsStream(resourcePath)) {
             return load(is, configType, mapperConsumer);
         } catch (IOException ex) {
@@ -30,12 +38,16 @@ public interface ConfigLoaderService<T> {
         }
     }
 
-    default @NotNull T load(@NotNull InputStream is, @NotNull Class<T> configType) {
+    default <T> @NotNull T load(
+            @NotNull InputStream is,
+            @NotNull Class<T> configType) {
         return load(is, configType, null);
     }
 
-    @NotNull T load(@NotNull InputStream is, @NotNull Class<T> configType,
-                    Consumer<ObjectMapper> mapperConsumer);
+    <T> @NotNull T load(
+            @NotNull InputStream is,
+            @NotNull Class<T> configType,
+            Consumer<ObjectMapper> mapperConsumer);
 
     @NotNull
     File configFile(@NotNull String baseName, @NotNull String profile);

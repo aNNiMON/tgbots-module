@@ -19,9 +19,9 @@ class TestBot : BotModule {
     }
 
     override fun botHandler(config: Config): BotHandler {
-        val configLoader = YamlConfigLoaderService<BotConfig>()
+        val configLoader = YamlConfigLoaderService()
         val configFile = configLoader.configFile("testbot", config.profile)
-        val botConfig = configLoader.load(configFile, BotConfig::class.java) {
+        val botConfig = configLoader.loadFile(configFile, BotConfig::class.java) {
             it.registerModule(KotlinModule())
         }
         return TestBotHandler(botConfig)

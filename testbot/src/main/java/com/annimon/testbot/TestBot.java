@@ -16,9 +16,9 @@ public class TestBot implements BotModule {
 
     @Override
     public BotHandler botHandler(Config config) {
-        final var configLoader = new YamlConfigLoaderService<BotConfig>();
+        final var configLoader = new YamlConfigLoaderService();
         final var configFile = configLoader.configFile("testbot", config.getProfile());
-        final var botConfig = configLoader.load(configFile, BotConfig.class);
+        final var botConfig = configLoader.loadFile(configFile, BotConfig.class);
         return new TestBotHandler(botConfig);
     }
 }
