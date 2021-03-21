@@ -27,12 +27,11 @@ public class TestBotHandler extends BotHandler {
 
     private final BotConfig botConfig;
     private final CommandRegistry<For> commands;
-    private final SimpleAuthority authority;
 
     public TestBotHandler(BotConfig botConfig) {
         this.botConfig = botConfig;
 
-        authority = new SimpleAuthority(this, botConfig.getCreatorId());
+        final var authority = new SimpleAuthority(this, botConfig.getCreatorId());
         commands = new CommandRegistry<>(this, authority);
 
         commands.register(new SimpleCommand("/action", For.CREATOR, ctx -> {

@@ -98,7 +98,7 @@ public class Runner {
 
             // Configure bot modules
             final var telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class, webhook);
-            for (BotModule module : botModules) {
+            for (var module : botModules) {
                 try {
                     // Make sure to call botHandler first to init bots
                     final var bot = module.botHandler(config);

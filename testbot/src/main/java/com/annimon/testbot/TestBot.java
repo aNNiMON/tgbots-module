@@ -6,6 +6,7 @@ import com.annimon.tgbotsmodule.Runner;
 import com.annimon.tgbotsmodule.beans.Config;
 import com.annimon.tgbotsmodule.services.YamlConfigLoaderService;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public class TestBot implements BotModule {
 
@@ -15,7 +16,7 @@ public class TestBot implements BotModule {
     }
 
     @Override
-    public BotHandler botHandler(Config config) {
+    public @NotNull BotHandler botHandler(Config config) {
         final var configLoader = new YamlConfigLoaderService();
         final var configFile = configLoader.configFile("testbot", config.getProfile());
         final var botConfig = configLoader.loadFile(configFile, BotConfig.class);

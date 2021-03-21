@@ -29,11 +29,11 @@ public abstract class BotHandler extends CommonAbsSender
     }
 
     @Override
-    public BotApiMethod onWebhookUpdateReceived(@NotNull Update update) {
+    public BotApiMethod<?> onWebhookUpdateReceived(@NotNull Update update) {
         return onUpdate(update);
     }
 
-    protected abstract BotApiMethod onUpdate(@NotNull Update update);
+    protected abstract BotApiMethod<?> onUpdate(@NotNull Update update);
 
     @Override
     public String getBotPath() {

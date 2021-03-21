@@ -5,7 +5,6 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMetho
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.TextMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.WebPagePreviewMethod;
-import com.annimon.tgbotsmodule.api.methods.send.SendMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.io.Serializable;
 import java.util.List;
