@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,10 +14,12 @@ import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.bots.DefaultAbsSender;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.*;
 import org.telegram.telegrambots.meta.api.methods.stickers.AddStickerToSet;
 import org.telegram.telegrambots.meta.api.methods.stickers.CreateNewStickerSet;
+import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerSetThumb;
 import org.telegram.telegrambots.meta.api.methods.stickers.UploadStickerFile;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageMedia;
 import org.telegram.telegrambots.meta.api.objects.File;
@@ -35,28 +38,6 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     public CommonAbsSender(DefaultBotOptions options) {
         super(options);
         preprocessors = new HashMap<>();
-    }
-
-    @Override
-    public <T extends Serializable, Method extends BotApiMethod<T>> T execute(Method method) throws TelegramApiException {
-        preprocessMethod(method);
-        return super.execute(method);
-    }
-
-    @Override
-    public <T extends Serializable, Method extends BotApiMethod<T>, Callback extends SentCallback<T>> void executeAsync(Method method, Callback callback) throws TelegramApiException {
-        preprocessMethod(method);
-        super.executeAsync(method, callback);
-    }
-
-    /**
-     * Add function which will preprocess the method before sending it to telegram server
-     * @param method  the class of the bot method
-     * @param preprocessor  preprocessor to execute
-     */
-    protected <M extends BotApiMethod<?>> void addMethodPreprocessor(
-            @NotNull Class<M> method, @NotNull Consumer<M> preprocessor) {
-        preprocessors.put(method, preprocessor);
     }
 
     @Nullable
@@ -599,8 +580,90 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
         });
     }
 
+
+    @Override
+    public <T extends Serializable, Method extends BotApiMethod<T>> T execute(Method method) throws TelegramApiException {
+        preprocessMethod(method);
+        return super.execute(method);
+    }
+
+    @Override
+    public Boolean execute(SetChatPhoto method) throws TelegramApiException {
+        preprocessMethod(method);
+        return super.execute(method);
+    }
+
+    @Override
+    public List<Message> execute(SendMediaGroup method) throws TelegramApiException {
+        preprocessMethod(method);
+        return super.execute(method);
+    }
+
+    @Override
+    public Boolean execute(AddStickerToSet method) throws TelegramApiException {
+        preprocessMethod(method);
+        return super.execute(method);
+    }
+
+    @Override
+    public Boolean execute(SetStickerSetThumb method) throws TelegramApiException {
+        preprocessMethod(method);
+        return super.execute(method);
+    }
+
+    @Override
+    public Boolean execute(CreateNewStickerSet method) throws TelegramApiException {
+        preprocessMethod(method);
+        return super.execute(method);
+    }
+
+    @Override
+    public File execute(UploadStickerFile method) throws TelegramApiException {
+        preprocessMethod(method);
+        return super.execute(method);
+    }
+
+    @Override
+    public Serializable execute(EditMessageMedia method) throws TelegramApiException {
+        preprocessMethod(method);
+        return super.execute(method);
+    }
+
+    @Override
+    public Message execute(SendAnimation method) throws TelegramApiException {
+        preprocessMethod(method);
+        return super.execute(method);
+    }
+
+    @Override
+    protected <T extends Serializable, Method extends BotApiMethod<T>> CompletableFuture<T> sendApiMethodAsync(Method method) {
+        preprocessMethod(method);
+        return super.sendApiMethodAsync(method);
+    }
+
+    @Override
+    public CompletableFuture<Message> executeAsync(SendDocument sendDocument) {
+        return super.executeAsync(sendDocument);
+    }
+
+    @Override
+    public <T extends Serializable, Method extends BotApiMethod<T>, Callback extends SentCallback<T>> void executeAsync(Method method, Callback callback) throws TelegramApiException {
+        preprocessMethod(method);
+        super.executeAsync(method, callback);
+    }
+
+    /**
+     * Add function which will preprocess the method before sending it to telegram server
+     * @param method  the class of the bot method
+     * @param preprocessor  preprocessor to execute
+     */
+    protected <M extends BotApiMethod<?>> void addMethodPreprocessor(
+            @NotNull Class<M> method, @NotNull Consumer<M> preprocessor) {
+        preprocessors.put(method, preprocessor);
+    }
+
     @SuppressWarnings("unchecked")
-    private <M extends BotApiMethod<?>> void preprocessMethod(@NotNull M method) {
+    private <M extends PartialBotApiMethod<?>> void preprocessMethod(@NotNull M method) {
         if (preprocessors.isEmpty()) return;
         var preprocessor = preprocessors.get(method.getClass());
         if (preprocessor != null) {
