@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.annimon'
-version '0.15-SNAPSHOT'
+version '0.16-SNAPSHOT'
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 mainClassName = 'com.annimon.telegrambots.Runner'
