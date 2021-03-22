@@ -11,6 +11,11 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
  - I want different profiles for configs.
  - I want command system with roles support.
  - I want localization support.
+
+## Example
+
+ [@tgbotsmodulebot](https://t.me/tgbotsmodulebot) ([source code](https://github.com/annimon-tutorials/tgbotsmodule-webhook-bot))
+
  
 ## Usage
  
@@ -36,7 +41,7 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
     ```java
     public class TestBot implements BotModule {   
        public static void main(String[] args) {
-           final var profile = (args.length >= 1 && !args[0].isEmpty()) ? args[0] : "";
+           final var profile = (args.length >= 1) ? args[0] : "";
            Runner.run(profile, List.of(new TestBot()));
        }
        // ...
