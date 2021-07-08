@@ -17,13 +17,13 @@ repositories {
 }
 
 ext.retrofitVersion = '2.9.0'
-ext.jacksonVersion = '2.12.2'
+ext.jacksonVersion = '2.12.4'
 ext.junit5Version = '5.7.0'
 ext.jaxbVersion = '2.3.1'
 
 dependencies {
     // runtimeOnly project(':testbot')
-    compile "org.telegram:telegrambots:5.1.1"
+    compile "org.telegram:telegrambots:5.4.0.1"
     compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
     compile "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"

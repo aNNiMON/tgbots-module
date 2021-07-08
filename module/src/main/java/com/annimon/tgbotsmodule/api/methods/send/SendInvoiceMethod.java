@@ -2,7 +2,6 @@ package com.annimon.tgbotsmodule.api.methods.send;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SendableMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.polls.SendPollMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
 import java.util.function.Consumer;
@@ -30,18 +29,18 @@ public class SendInvoiceMethod implements
 
     @Override
     public String getChatId() {
-        return Integer.toString(method.getChatId());
+        return method.getChatId();
     }
 
     @Override
     public SendInvoiceMethod setChatId(long chatId) {
-        method.setChatId((int) chatId);
+        method.setChatId(Long.toString(chatId));
         return this;
     }
 
     @Override
     public SendInvoiceMethod setChatId(@NotNull String chatId) {
-        method.setChatId(Integer.parseInt(chatId, 10));
+        method.setChatId(chatId);
         return this;
     }
 
