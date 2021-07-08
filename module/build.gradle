@@ -23,17 +23,17 @@ ext.jaxbVersion = '2.3.1'
 
 dependencies {
     // runtimeOnly project(':testbot')
-    compile "org.telegram:telegrambots:5.3.0"
-    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    compile "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
-    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
-    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    compile 'org.glassfish:javax.el:3.0.1-b11'
-    compile "javax.xml.bind:jaxb-api:$jaxbVersion"
-    compile "com.sun.xml.bind:jaxb-impl:$jaxbVersion"
-    compile "org.glassfish.jaxb:jaxb-runtime:$jaxbVersion"
-    compile 'javax.activation:activation:1.1.1'
-    compile 'org.jetbrains:annotations:20.1.0'
+    implementation "org.telegram:telegrambots:5.3.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    implementation 'org.glassfish:javax.el:3.0.1-b11'
+    implementation "javax.xml.bind:jaxb-api:$jaxbVersion"
+    implementation "com.sun.xml.bind:jaxb-impl:$jaxbVersion"
+    implementation "org.glassfish.jaxb:jaxb-runtime:$jaxbVersion"
+    implementation 'javax.activation:activation:1.1.1'
+    implementation 'org.jetbrains:annotations:20.1.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.7.0'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junit5Version"
     testImplementation "org.junit.jupiter:junit-jupiter-params:$junit5Version"
