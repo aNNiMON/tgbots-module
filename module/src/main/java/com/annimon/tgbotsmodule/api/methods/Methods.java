@@ -581,6 +581,10 @@ public final class Methods {
         return new GetMyCommandsMethod();
     }
 
+    public static GetMyCommandsMethod getMyCommands(BotCommandScope scope){
+        return new GetMyCommandsMethod().setScope(scope);
+    }
+
     public static SetMyCommandsMethod setMyCommands() {
         return new SetMyCommandsMethod();
     }
