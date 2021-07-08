@@ -94,16 +94,16 @@ public final class Methods {
         }
 
 
-        public static KickChatMemberMethod kickChatMember() {
-            return new KickChatMemberMethod();
+        public static BanChatMemberMethod kickChatMember() {
+            return new BanChatMemberMethod();
         }
 
-        public static KickChatMemberMethod kickChatMember(@NotNull String chatId, long userId) {
-            return new KickChatMemberMethod().setChatId(chatId).setUserId(userId);
+        public static BanChatMemberMethod kickChatMember(@NotNull String chatId, long userId) {
+            return new BanChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
-        public static KickChatMemberMethod kickChatMember(long chatId, long userId) {
-            return new KickChatMemberMethod().setChatId(chatId).setUserId(userId);
+        public static BanChatMemberMethod kickChatMember(long chatId, long userId) {
+            return new BanChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
 
@@ -527,16 +527,16 @@ public final class Methods {
     }
 
 
-    public static GetChatMembersCountMethod getChatMembersCount() {
-        return new GetChatMembersCountMethod();
+    public static GetChatMemberCountMethod getChatMembersCount() {
+        return new GetChatMemberCountMethod();
     }
 
-    public static GetChatMembersCountMethod getChatMembersCount(@NotNull String chatId) {
-        return new GetChatMembersCountMethod().setChatId(chatId);
+    public static GetChatMemberCountMethod getChatMembersCount(@NotNull String chatId) {
+        return new GetChatMemberCountMethod().setChatId(chatId);
     }
 
-    public static GetChatMembersCountMethod getChatMembersCount(long chatId) {
-        return new GetChatMembersCountMethod().setChatId(chatId);
+    public static GetChatMemberCountMethod getChatMembersCount(long chatId) {
+        return new GetChatMemberCountMethod().setChatId(chatId);
     }
 
 
