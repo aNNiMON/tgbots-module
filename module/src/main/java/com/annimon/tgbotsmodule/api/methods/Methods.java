@@ -95,15 +95,15 @@ public final class Methods {
         }
 
 
-        public static BanChatMemberMethod kickChatMember() {
+        public static BanChatMemberMethod banChatMember() {
             return new BanChatMemberMethod();
         }
 
-        public static BanChatMemberMethod kickChatMember(@NotNull String chatId, long userId) {
+        public static BanChatMemberMethod banChatMember(@NotNull String chatId, long userId) {
             return new BanChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
-        public static BanChatMemberMethod kickChatMember(long chatId, long userId) {
+        public static BanChatMemberMethod banChatMember(long chatId, long userId) {
             return new BanChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
@@ -528,15 +528,15 @@ public final class Methods {
     }
 
 
-    public static GetChatMemberCountMethod getChatMembersCount() {
+    public static GetChatMemberCountMethod getChatMemberCount() {
         return new GetChatMemberCountMethod();
     }
 
-    public static GetChatMemberCountMethod getChatMembersCount(@NotNull String chatId) {
+    public static GetChatMemberCountMethod getChatMemberCount(@NotNull String chatId) {
         return new GetChatMemberCountMethod().setChatId(chatId);
     }
 
-    public static GetChatMemberCountMethod getChatMembersCount(long chatId) {
+    public static GetChatMemberCountMethod getChatMemberCount(long chatId) {
         return new GetChatMemberCountMethod().setChatId(chatId);
     }
 
