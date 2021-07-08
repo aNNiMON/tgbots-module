@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
+import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetMyCommandsMethod implements Method<Boolean> {
@@ -29,6 +30,16 @@ public class SetMyCommandsMethod implements Method<Boolean> {
 
     public SetMyCommandsMethod setCommands(List<BotCommand> commands) {
         method.setCommands(commands);
+        return this;
+    }
+
+    public SetMyCommandsMethod setScope(BotCommandScope scope){
+        method.setScope(scope);
+        return this;
+    }
+
+    public SetMyCommandsMethod setLanguageCode(String languageCode){
+        method.setLanguageCode(languageCode);
         return this;
     }
 
