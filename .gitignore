@@ -2,7 +2,7 @@
 !/.idea/codeStyles
 /.idea/*
 .gradle
-/build/
+build/
 out
 gen
 *.iml

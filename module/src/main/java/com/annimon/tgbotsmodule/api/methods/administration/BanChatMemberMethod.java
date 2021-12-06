@@ -6,20 +6,20 @@ import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.api.methods.groupadministration.KickChatMember;
+import org.telegram.telegrambots.meta.api.methods.groupadministration.BanChatMember;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class KickChatMemberMethod implements
-        TimePeriodMethod<KickChatMemberMethod, Boolean>,
-        ChatMemberMethod<KickChatMemberMethod, Boolean> {
+public class BanChatMemberMethod implements
+        TimePeriodMethod<BanChatMemberMethod, Boolean>,
+        ChatMemberMethod<BanChatMemberMethod, Boolean> {
 
-    private final KickChatMember method;
+    private final BanChatMember method;
 
-    public KickChatMemberMethod() {
-        this(new KickChatMember());
+    public BanChatMemberMethod() {
+        this(new BanChatMember());
     }
 
-    public KickChatMemberMethod(@NotNull KickChatMember method) {
+    public BanChatMemberMethod(@NotNull BanChatMember method) {
         this.method = method;
     }
 
@@ -29,7 +29,7 @@ public class KickChatMemberMethod implements
     }
 
     @Override
-    public KickChatMemberMethod setChatId(@NotNull String chatId) {
+    public BanChatMemberMethod setChatId(@NotNull String chatId) {
         method.setChatId(chatId);
         return this;
     }
@@ -40,7 +40,7 @@ public class KickChatMemberMethod implements
     }
 
     @Override
-    public KickChatMemberMethod setUserId(@NotNull Long userId) {
+    public BanChatMemberMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }
@@ -51,7 +51,7 @@ public class KickChatMemberMethod implements
     }
 
     @Override
-    public KickChatMemberMethod setUntilDateInSeconds(Integer untilDate) {
+    public BanChatMemberMethod setUntilDateInSeconds(Integer untilDate) {
         method.setUntilDate(untilDate);
         return this;
     }
@@ -60,7 +60,7 @@ public class KickChatMemberMethod implements
         return method.getRevokeMessages();
     }
 
-    public KickChatMemberMethod setRevokeMessages(Boolean revokeMessages) {
+    public BanChatMemberMethod setRevokeMessages(Boolean revokeMessages) {
         method.setRevokeMessages(revokeMessages);
         return this;
     }
