@@ -17,6 +17,7 @@ import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.polls.StopPoll;
 import org.telegram.telegrambots.meta.api.objects.ChatPermissions;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
+import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope;
 import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResult;
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.passport.dataerror.PassportElementError;
@@ -94,16 +95,16 @@ public final class Methods {
         }
 
 
-        public static KickChatMemberMethod kickChatMember() {
-            return new KickChatMemberMethod();
+        public static BanChatMemberMethod banChatMember() {
+            return new BanChatMemberMethod();
         }
 
-        public static KickChatMemberMethod kickChatMember(@NotNull String chatId, long userId) {
-            return new KickChatMemberMethod().setChatId(chatId).setUserId(userId);
+        public static BanChatMemberMethod banChatMember(@NotNull String chatId, long userId) {
+            return new BanChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
-        public static KickChatMemberMethod kickChatMember(long chatId, long userId) {
-            return new KickChatMemberMethod().setChatId(chatId).setUserId(userId);
+        public static BanChatMemberMethod banChatMember(long chatId, long userId) {
+            return new BanChatMemberMethod().setChatId(chatId).setUserId(userId);
         }
 
 
@@ -527,16 +528,16 @@ public final class Methods {
     }
 
 
-    public static GetChatMembersCountMethod getChatMembersCount() {
-        return new GetChatMembersCountMethod();
+    public static GetChatMemberCountMethod getChatMemberCount() {
+        return new GetChatMemberCountMethod();
     }
 
-    public static GetChatMembersCountMethod getChatMembersCount(@NotNull String chatId) {
-        return new GetChatMembersCountMethod().setChatId(chatId);
+    public static GetChatMemberCountMethod getChatMemberCount(@NotNull String chatId) {
+        return new GetChatMemberCountMethod().setChatId(chatId);
     }
 
-    public static GetChatMembersCountMethod getChatMembersCount(long chatId) {
-        return new GetChatMembersCountMethod().setChatId(chatId);
+    public static GetChatMemberCountMethod getChatMemberCount(long chatId) {
+        return new GetChatMemberCountMethod().setChatId(chatId);
     }
 
 
@@ -580,12 +581,24 @@ public final class Methods {
         return new GetMyCommandsMethod();
     }
 
+    public static GetMyCommandsMethod getMyCommands(BotCommandScope scope){
+        return new GetMyCommandsMethod().setScope(scope);
+    }
+
     public static SetMyCommandsMethod setMyCommands() {
         return new SetMyCommandsMethod();
     }
 
     public static SetMyCommandsMethod setMyCommands(List<BotCommand> commands) {
         return new SetMyCommandsMethod().setCommands(commands);
+    }
+
+    public static DeleteMyCommandsMethod deleteMyCommands(){
+        return new DeleteMyCommandsMethod();
+    }
+
+    public static DeleteMyCommandsMethod deleteMyCommands(BotCommandScope scope){
+        return new DeleteMyCommandsMethod().setScope(scope);
     }
 
 
