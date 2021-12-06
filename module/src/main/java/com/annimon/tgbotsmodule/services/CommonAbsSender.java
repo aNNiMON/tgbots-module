@@ -656,6 +656,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
      * Add function which will preprocess the method before sending it to telegram server
      * @param method  the class of the bot method
      * @param preprocessor  preprocessor to execute
+     * @param <M>  the type of the api method
      */
     protected <M extends BotApiMethod<?>> void addMethodPreprocessor(
             @NotNull Class<M> method, @NotNull Consumer<M> preprocessor) {
