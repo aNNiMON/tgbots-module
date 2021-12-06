@@ -50,6 +50,24 @@ public class CreateChatInviteLinkMethod implements ChatMethod<CreateChatInviteLi
         return this;
     }
 
+    public String getName() {
+        return method.getName();
+    }
+
+    public CreateChatInviteLinkMethod setName(String name) {
+        method.setName(name);
+        return this;
+    }
+
+    public Boolean getCreatesJoinRequest() {
+        return method.getCreatesJoinRequest();
+    }
+
+    public CreateChatInviteLinkMethod setCreatesJoinRequest(Boolean createsJoinRequest) {
+        method.setCreatesJoinRequest(createsJoinRequest);
+        return this;
+    }
+
     @Override
     public ChatInviteLink call(@NotNull CommonAbsSender sender) {
         return sender.call(method);

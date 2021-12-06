@@ -20,9 +20,17 @@ public class DeleteMyCommandsMethod implements Method<Boolean> {
         this.method = method;
     }
 
+    public BotCommandScope getScope() {
+        return method.getScope();
+    }
+
     public DeleteMyCommandsMethod setScope(BotCommandScope scope) {
         method.setScope(scope);
         return this;
+    }
+
+    public String getLanguageCode() {
+        return method.getLanguageCode();
     }
 
     public DeleteMyCommandsMethod setLanguageCode(String languageCode) {

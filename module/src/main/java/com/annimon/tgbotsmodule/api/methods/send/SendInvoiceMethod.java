@@ -253,6 +253,24 @@ public class SendInvoiceMethod implements
         return this;
     }
 
+    public Integer getMaxTipAmount() {
+        return method.getMaxTipAmount();
+    }
+
+    public SendInvoiceMethod setMaxTipAmount(Integer maxTipAmount) {
+        method.setMaxTipAmount(maxTipAmount);
+        return this;
+    }
+
+    public List<Integer> getSuggestedTipAmounts() {
+        return method.getSuggestedTipAmounts();
+    }
+
+    public SendInvoiceMethod setSuggestedTipAmounts(List<Integer> suggestedTipAmounts) {
+        method.setSuggestedTipAmounts(suggestedTipAmounts);
+        return this;
+    }
+
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
         return sender.call(method);

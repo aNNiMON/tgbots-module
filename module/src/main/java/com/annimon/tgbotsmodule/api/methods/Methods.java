@@ -30,6 +30,19 @@ public final class Methods {
     public static final class Administration {
         private Administration() { }
 
+        public static ApproveChatJoinRequestMethod approveChatJoinRequest() {
+            return new ApproveChatJoinRequestMethod();
+        }
+
+        public static ApproveChatJoinRequestMethod approveChatJoinRequest(@NotNull String chatId, long userId) {
+            return new ApproveChatJoinRequestMethod().setChatId(chatId).setUserId(userId);
+        }
+
+        public static ApproveChatJoinRequestMethod approveChatJoinRequest(long chatId, long userId) {
+            return new ApproveChatJoinRequestMethod().setChatId(chatId).setUserId(userId);
+        }
+
+
         public static CreateChatInviteLinkMethod createChatInviteLink() {
             return new CreateChatInviteLinkMethod();
         }
@@ -40,6 +53,19 @@ public final class Methods {
 
         public static CreateChatInviteLinkMethod createChatInviteLink(long chatId) {
             return new CreateChatInviteLinkMethod().setChatId(chatId);
+        }
+
+
+        public static DeclineChatJoinRequestMethod declineChatJoinRequest() {
+            return new DeclineChatJoinRequestMethod();
+        }
+
+        public static DeclineChatJoinRequestMethod declineChatJoinRequest(@NotNull String chatId, long userId) {
+            return new DeclineChatJoinRequestMethod().setChatId(chatId).setUserId(userId);
+        }
+
+        public static DeclineChatJoinRequestMethod declineChatJoinRequest(long chatId, long userId) {
+            return new DeclineChatJoinRequestMethod().setChatId(chatId).setUserId(userId);
         }
 
 

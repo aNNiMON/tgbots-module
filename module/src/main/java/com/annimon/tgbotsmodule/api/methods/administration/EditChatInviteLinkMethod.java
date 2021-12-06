@@ -59,6 +59,24 @@ public class EditChatInviteLinkMethod implements ChatMethod<EditChatInviteLinkMe
         return this;
     }
 
+    public String getName() {
+        return method.getName();
+    }
+
+    public EditChatInviteLinkMethod setName(String name) {
+        method.setName(name);
+        return this;
+    }
+
+    public Boolean getCreatesJoinRequest() {
+        return method.getCreatesJoinRequest();
+    }
+
+    public EditChatInviteLinkMethod setCreatesJoinRequest(Boolean createsJoinRequest) {
+        method.setCreatesJoinRequest(createsJoinRequest);
+        return this;
+    }
+
     @Override
     public ChatInviteLink call(@NotNull CommonAbsSender sender) {
         return sender.call(method);

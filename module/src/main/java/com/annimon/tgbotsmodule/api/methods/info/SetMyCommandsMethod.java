@@ -2,7 +2,6 @@ package com.annimon.tgbotsmodule.api.methods.info;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -33,9 +32,17 @@ public class SetMyCommandsMethod implements Method<Boolean> {
         return this;
     }
 
+    public BotCommandScope getScope() {
+        return method.getScope();
+    }
+
     public SetMyCommandsMethod setScope(BotCommandScope scope){
         method.setScope(scope);
         return this;
+    }
+
+    public String getLanguageCode() {
+        return method.getLanguageCode();
     }
 
     public SetMyCommandsMethod setLanguageCode(String languageCode){
