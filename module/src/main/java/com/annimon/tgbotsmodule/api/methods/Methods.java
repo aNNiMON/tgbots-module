@@ -134,6 +134,19 @@ public final class Methods {
         }
 
 
+        public static BanChatSenderChatMethod banChatSenderChat() {
+            return new BanChatSenderChatMethod();
+        }
+
+        public static BanChatSenderChatMethod banChatSenderChat(@NotNull String chatId, long senderChatId) {
+            return new BanChatSenderChatMethod().setChatId(chatId).setSenderChatId(senderChatId);
+        }
+
+        public static BanChatSenderChatMethod banChatSenderChat(long chatId, long senderChatId) {
+            return new BanChatSenderChatMethod().setChatId(chatId).setSenderChatId(senderChatId);
+        }
+
+
         public static PinChatMessageMethod pinChatMessage() {
             return new PinChatMessageMethod();
         }
@@ -274,6 +287,19 @@ public final class Methods {
 
         public static UnbanChatMemberMethod unbanChatMember(long chatId, long userId) {
             return new UnbanChatMemberMethod().setChatId(chatId).setUserId(userId);
+        }
+
+
+        public static UnbanChatSenderChatMethod unbanChatSenderChat() {
+            return new UnbanChatSenderChatMethod();
+        }
+
+        public static UnbanChatSenderChatMethod unbanChatSenderChat(@NotNull String chatId, long senderChatId) {
+            return new UnbanChatSenderChatMethod().setChatId(chatId).setSenderChatId(senderChatId);
+        }
+
+        public static UnbanChatSenderChatMethod unbanChatSenderChat(long chatId, long senderChatId) {
+            return new UnbanChatSenderChatMethod().setChatId(chatId).setSenderChatId(senderChatId);
         }
 
 

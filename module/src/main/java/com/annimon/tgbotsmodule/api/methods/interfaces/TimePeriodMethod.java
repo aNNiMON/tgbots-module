@@ -6,7 +6,7 @@ import java.time.Instant;
 import java.time.ZonedDateTime;
 import org.jetbrains.annotations.NotNull;
 
-public interface TimePeriodMethod<M extends Method, T extends Serializable> extends ChatMemberMethod<M, T> {
+public interface TimePeriodMethod<M extends Method, T extends Serializable> extends ChatMethod<M, T> {
 
     Integer getUntilDateInSeconds();
 
