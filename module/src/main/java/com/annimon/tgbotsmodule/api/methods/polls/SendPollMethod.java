@@ -1,10 +1,9 @@
 package com.annimon.tgbotsmodule.api.methods.polls;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.send.SendMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -18,7 +17,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendPollMethod implements
         ReplyMarkupSupportedMessageMethod<SendPollMethod, Message>,
-        ParseModeMethod<SendPollMethod, Message> {
+        ParseModeMethod<SendPollMethod, Message>,
+        ProtectedContentMethod<SendPollMethod, Message> {
 
     private final SendPoll method;
 
@@ -220,6 +220,17 @@ public class SendPollMethod implements
 
     public SendPollMethod setExplanation(String explanation) {
         method.setExplanation(explanation);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendPollMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

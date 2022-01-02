@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.LocationMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
@@ -13,7 +14,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendVenueMethod implements
         ReplyMarkupSupportedMessageMethod<SendVenueMethod, Message>,
-        LocationMethod<SendVenueMethod, Message> {
+        LocationMethod<SendVenueMethod, Message>,
+        ProtectedContentMethod<SendVenueMethod, Message> {
 
     private final SendVenue method;
 
@@ -161,6 +163,18 @@ public class SendVenueMethod implements
         method.setGooglePlaceType(googlePlaceType);
         return this;
     }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendVenueMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
+        return this;
+    }
+
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {

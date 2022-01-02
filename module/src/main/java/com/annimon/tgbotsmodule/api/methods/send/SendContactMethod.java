@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
@@ -10,7 +11,9 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class SendContactMethod implements ReplyMarkupSupportedMessageMethod<SendContactMethod, Message> {
+public class SendContactMethod implements
+        ReplyMarkupSupportedMessageMethod<SendContactMethod, Message>,
+        ProtectedContentMethod<SendContactMethod, Message> {
 
     private final SendContact method;
 
@@ -116,6 +119,17 @@ public class SendContactMethod implements ReplyMarkupSupportedMessageMethod<Send
 
     public SendContactMethod setVCard(String vCard) {
         method.setVCard(vCard);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendContactMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

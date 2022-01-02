@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SendableMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
@@ -15,7 +16,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendInvoiceMethod implements
         SendableMessageMethod<SendInvoiceMethod, Message>,
-        InlineKeyboardMarkupMethod<SendInvoiceMethod, Message> {
+        InlineKeyboardMarkupMethod<SendInvoiceMethod, Message>,
+        ProtectedContentMethod<SendInvoiceMethod, Message> {
 
     private final SendInvoice method;
 
@@ -268,6 +270,17 @@ public class SendInvoiceMethod implements
 
     public SendInvoiceMethod setSuggestedTipAmounts(List<Integer> suggestedTipAmounts) {
         method.setSuggestedTipAmounts(suggestedTipAmounts);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendInvoiceMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

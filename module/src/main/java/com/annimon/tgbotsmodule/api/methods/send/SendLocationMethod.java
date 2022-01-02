@@ -1,20 +1,21 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.LocationMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendLocation;
-import org.telegram.telegrambots.meta.api.objects.Location;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendLocationMethod implements
         ReplyMarkupSupportedMessageMethod<SendLocationMethod, Message>,
-        LocationMethod<SendLocationMethod, Message> {
+        LocationMethod<SendLocationMethod, Message>,
+        ProtectedContentMethod<SendLocationMethod, Message> {
 
     private final SendLocation method;
 
@@ -142,6 +143,17 @@ public class SendLocationMethod implements
 
     public SendLocationMethod setProximityAlertRadius(Integer proximityAlertRadius) {
         method.setProximityAlertRadius(proximityAlertRadius);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendLocationMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

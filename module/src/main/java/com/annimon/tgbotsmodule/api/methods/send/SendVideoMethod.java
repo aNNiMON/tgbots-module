@@ -6,7 +6,6 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ThumbMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.io.InputStream;
 import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -186,6 +185,17 @@ public class SendVideoMethod implements
 
     public SendVideoMethod setSupportsStreaming(Boolean supportsStreaming) {
         method.setSupportsStreaming(supportsStreaming);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendVideoMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

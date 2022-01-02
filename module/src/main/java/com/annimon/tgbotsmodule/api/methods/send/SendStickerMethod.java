@@ -2,7 +2,6 @@ package com.annimon.tgbotsmodule.api.methods.send;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.io.InputStream;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -94,6 +93,17 @@ public class SendStickerMethod implements
     @Override
     public SendStickerMethod setFile(@NotNull InputFile file) {
         method.setSticker(file);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendStickerMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

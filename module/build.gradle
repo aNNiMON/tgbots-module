@@ -23,7 +23,7 @@ ext.jaxbVersion = '2.3.1'
 
 dependencies {
     // runtimeOnly project(':testbot')
-    compile "org.telegram:telegrambots:5.5.0"
+    compile "org.telegram:telegrambots:5.6.0"
     compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
     compile "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"

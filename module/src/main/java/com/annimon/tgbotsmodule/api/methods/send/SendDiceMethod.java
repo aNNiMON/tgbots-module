@@ -1,9 +1,8 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.LocationMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,7 +12,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendDiceMethod implements
-        ReplyMarkupSupportedMessageMethod<SendDiceMethod, Message> {
+        ReplyMarkupSupportedMessageMethod<SendDiceMethod, Message>,
+        ProtectedContentMethod<SendDiceMethod, Message> {
 
     private final SendDice method;
 
@@ -92,6 +92,17 @@ public class SendDiceMethod implements
 
     public SendDiceMethod setEmoji(String emoji) {
         method.setEmoji(emoji);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendDiceMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

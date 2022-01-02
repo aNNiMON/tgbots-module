@@ -2,6 +2,7 @@ package com.annimon.tgbotsmodule.api.methods.other;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.NotificationMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +13,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class ForwardMessageMethod implements
         ChatMessageMethod<ForwardMessageMethod, Message>,
-        NotificationMethod<ForwardMessageMethod, Message> {
+        NotificationMethod<ForwardMessageMethod, Message>,
+        ProtectedContentMethod<ForwardMessageMethod, Message> {
 
     private final ForwardMessage method;
 
@@ -73,6 +75,17 @@ public class ForwardMessageMethod implements
     @Override
     public ForwardMessageMethod disableNotification() {
         method.setDisableNotification(true);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public ForwardMessageMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

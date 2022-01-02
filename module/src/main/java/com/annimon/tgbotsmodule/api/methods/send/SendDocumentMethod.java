@@ -160,6 +160,17 @@ public class SendDocumentMethod implements
     }
 
     @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendDocumentMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
+        return this;
+    }
+
+    @Override
     public Message call(@NotNull CommonAbsSender sender) {
         return sender.call(method);
     }

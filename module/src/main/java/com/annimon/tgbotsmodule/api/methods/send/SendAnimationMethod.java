@@ -182,6 +182,17 @@ public class SendAnimationMethod implements
     }
 
     @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendAnimationMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
+        return this;
+    }
+
+    @Override
     public Message call(@NotNull CommonAbsSender sender) {
         return sender.call(method);
     }

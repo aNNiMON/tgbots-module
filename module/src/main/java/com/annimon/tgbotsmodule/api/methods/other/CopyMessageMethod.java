@@ -2,18 +2,19 @@ package com.annimon.tgbotsmodule.api.methods.other;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.NotificationMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.CopyMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageId;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class CopyMessageMethod implements
         ChatMessageMethod<CopyMessageMethod, MessageId>,
-        NotificationMethod<CopyMessageMethod, MessageId> {
+        NotificationMethod<CopyMessageMethod, MessageId>,
+        ProtectedContentMethod<CopyMessageMethod, MessageId> {
 
     private final CopyMessage method;
 
@@ -74,6 +75,17 @@ public class CopyMessageMethod implements
     @Override
     public CopyMessageMethod disableNotification() {
         method.setDisableNotification(true);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public CopyMessageMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

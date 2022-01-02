@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
@@ -10,7 +11,9 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class SendGameMethod implements ReplyMarkupSupportedMessageMethod<SendGameMethod, Message> {
+public class SendGameMethod implements
+        ReplyMarkupSupportedMessageMethod<SendGameMethod, Message>,
+        ProtectedContentMethod<SendGameMethod, Message> {
 
     private final SendGame method;
 
@@ -89,6 +92,17 @@ public class SendGameMethod implements ReplyMarkupSupportedMessageMethod<SendGam
 
     public SendGameMethod setGameShortName(@NotNull String gameShortName) {
         method.setGameShortName(gameShortName);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendGameMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

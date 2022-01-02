@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.TextMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.WebPagePreviewMethod;
@@ -19,6 +20,7 @@ public class SendMessageMethod implements
         ReplyMarkupSupportedMessageMethod<SendMessageMethod, Message>,
         ParseModeMethod<SendMessageMethod, Message>,
         WebPagePreviewMethod<SendMessageMethod, Message>,
+        ProtectedContentMethod<SendMessageMethod, Message>,
         TextMethod<SendMessageMethod, Message> {
 
     private final SendMessage method;
@@ -61,6 +63,17 @@ public class SendMessageMethod implements
     @Override
     public SendMessageMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
         method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendMessageMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

@@ -4,7 +4,6 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ThumbMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.io.InputStream;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -129,6 +128,17 @@ public class SendVideoNoteMethod implements
 
     public SendVideoNoteMethod setLength(Integer length) {
         method.setLength(length);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendVideoNoteMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

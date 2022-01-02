@@ -4,7 +4,6 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.io.InputStream;
 import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -133,6 +132,17 @@ public class SendPhotoMethod implements
     @Override
     public SendPhotoMethod setCaption(String caption) {
         method.setCaption(caption);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendPhotoMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

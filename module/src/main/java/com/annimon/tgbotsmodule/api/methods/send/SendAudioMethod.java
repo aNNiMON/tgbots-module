@@ -6,7 +6,6 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ThumbMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.io.InputStream;
 import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -177,6 +176,17 @@ public class SendAudioMethod implements
 
     public SendAudioMethod setTitle(String title) {
         method.setTitle(title);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendAudioMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 

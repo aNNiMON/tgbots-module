@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SendableMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.ArrayList;
@@ -12,7 +13,9 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class SendMediaGroupMethod implements SendableMessageMethod<SendMediaGroupMethod, ArrayList<Message>> {
+public class SendMediaGroupMethod implements
+        SendableMessageMethod<SendMediaGroupMethod, ArrayList<Message>>,
+        ProtectedContentMethod<SendMediaGroupMethod, ArrayList<Message>> {
 
     private final SendMediaGroup method;
 
@@ -80,6 +83,17 @@ public class SendMediaGroupMethod implements SendableMessageMethod<SendMediaGrou
 
     public SendMediaGroupMethod setMedias(@NotNull List<InputMedia> media) {
         method.setMedias(media);
+        return this;
+    }
+
+    @Override
+    public Boolean getProtectContent() {
+        return method.getProtectContent();
+    }
+
+    @Override
+    public SendMediaGroupMethod setProtectContent(Boolean protectContent) {
+        method.setProtectContent(protectContent);
         return this;
     }
 
