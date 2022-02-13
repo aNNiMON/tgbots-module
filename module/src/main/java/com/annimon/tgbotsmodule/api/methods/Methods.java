@@ -453,6 +453,14 @@ public final class Methods {
             return new AddAnimatedStickerToSetMethod().setUserId(userId).setName(name).setEmojis(emojis);
         }
 
+        public static AddWebmStickerToSetMethod addWebmStickerToSet() {
+            return new AddWebmStickerToSetMethod();
+        }
+
+        public static AddWebmStickerToSetMethod addWebmStickerToSet(long userId, @NotNull String name, @NotNull String emojis) {
+            return new AddWebmStickerToSetMethod().setUserId(userId).setName(name).setEmojis(emojis);
+        }
+
 
         public static CreateNewStickerSetMethod createNewStickerSet() {
             return new CreateNewStickerSetMethod();
@@ -472,6 +480,16 @@ public final class Methods {
                 long userId, @NotNull String name,
                 @NotNull String title, @NotNull String emojis) {
             return new CreateNewAnimatedStickerSetMethod().setUserId(userId).setName(name).setTitle(title).setEmojis(emojis);
+        }
+
+        public static CreateNewWebmStickerSetMethod createNewWebmStickerSet() {
+            return new CreateNewWebmStickerSetMethod();
+        }
+
+        public static CreateNewWebmStickerSetMethod createNewWebmStickerSet(
+                long userId, @NotNull String name,
+                @NotNull String title, @NotNull String emojis) {
+            return new CreateNewWebmStickerSetMethod().setUserId(userId).setName(name).setTitle(title).setEmojis(emojis);
         }
 
 

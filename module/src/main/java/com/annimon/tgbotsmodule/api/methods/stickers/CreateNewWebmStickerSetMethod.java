@@ -11,17 +11,17 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.stickers.MaskPosition;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class CreateNewAnimatedStickerSetMethod implements
-        UserMethod<CreateNewAnimatedStickerSetMethod, Boolean>,
-        InputFileMethod<CreateNewAnimatedStickerSetMethod, Boolean> {
+public class CreateNewWebmStickerSetMethod implements
+        UserMethod<CreateNewWebmStickerSetMethod, Boolean>,
+        InputFileMethod<CreateNewWebmStickerSetMethod, Boolean> {
 
     private final CreateNewStickerSet method;
 
-    public CreateNewAnimatedStickerSetMethod() {
+    public CreateNewWebmStickerSetMethod() {
         this(new CreateNewStickerSet());
     }
 
-    public CreateNewAnimatedStickerSetMethod(@NotNull CreateNewStickerSet method) {
+    public CreateNewWebmStickerSetMethod(@NotNull CreateNewStickerSet method) {
         this.method = method;
     }
 
@@ -31,19 +31,19 @@ public class CreateNewAnimatedStickerSetMethod implements
     }
 
     @Override
-    public CreateNewAnimatedStickerSetMethod setUserId(@NotNull Long userId) {
+    public CreateNewWebmStickerSetMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }
 
     @Override
     public InputFile getFile() {
-        return method.getTgsSticker();
+        return method.getWebmSticker();
     }
 
     @Override
-    public CreateNewAnimatedStickerSetMethod setFile(@NotNull InputFile file) {
-        method.setTgsSticker(file);
+    public CreateNewWebmStickerSetMethod setFile(@NotNull InputFile file) {
+        method.setWebmSticker(file);
         return this;
     }
 
@@ -51,7 +51,7 @@ public class CreateNewAnimatedStickerSetMethod implements
         return method.getName();
     }
 
-    public CreateNewAnimatedStickerSetMethod setName(@NotNull String name) {
+    public CreateNewWebmStickerSetMethod setName(@NotNull String name) {
         method.setName(name);
         return this;
     }
@@ -60,7 +60,7 @@ public class CreateNewAnimatedStickerSetMethod implements
         return method.getTitle();
     }
 
-    public CreateNewAnimatedStickerSetMethod setTitle(@NotNull String title) {
+    public CreateNewWebmStickerSetMethod setTitle(@NotNull String title) {
         method.setTitle(title);
         return this;
     }
@@ -69,7 +69,7 @@ public class CreateNewAnimatedStickerSetMethod implements
         return method.getEmojis();
     }
 
-    public CreateNewAnimatedStickerSetMethod setEmojis(@NotNull String emojis) {
+    public CreateNewWebmStickerSetMethod setEmojis(@NotNull String emojis) {
         method.setEmojis(emojis);
         return this;
     }
@@ -78,7 +78,7 @@ public class CreateNewAnimatedStickerSetMethod implements
         return method.getContainsMasks();
     }
 
-    public CreateNewAnimatedStickerSetMethod setContainsMasks(Boolean containsMasks) {
+    public CreateNewWebmStickerSetMethod setContainsMasks(Boolean containsMasks) {
         method.setContainsMasks(containsMasks);
         return this;
     }
@@ -87,7 +87,7 @@ public class CreateNewAnimatedStickerSetMethod implements
         return method.getMaskPosition();
     }
 
-    public CreateNewAnimatedStickerSetMethod setMaskPosition(MaskPosition maskPosition) {
+    public CreateNewWebmStickerSetMethod setMaskPosition(MaskPosition maskPosition) {
         method.setMaskPosition(maskPosition);
         return this;
     }

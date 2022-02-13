@@ -3,7 +3,6 @@ package com.annimon.tgbotsmodule.api.methods.stickers;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InputFileMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.io.InputStream;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
