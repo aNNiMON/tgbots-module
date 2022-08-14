@@ -6,8 +6,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class YamlConfigLoaderServiceTest {
@@ -31,10 +30,10 @@ class YamlConfigLoaderServiceTest {
         final var converter = new YamlConfigLoaderService();
         final var config = converter.loadFile(converter.configFile("src/test/resources/env", name), EnvConfig.class);
 
-        assertThat(config.actual, is(not(nullValue())));
-        assertThat(config.expected, is(not(nullValue())));
-        assertThat(config.actual.entrySet(), everyItem(isIn(config.expected.entrySet())));
-        assertThat(config.expected.entrySet(), everyItem(isIn(config.actual.entrySet())));
+        assertThat(config.actual).isNotNull();
+        assertThat(config.expected).isNotNull();
+        assertThat(config.actual).containsAllEntriesOf(config.expected);
+        assertThat(config.expected).containsAllEntriesOf(config.actual);
     }
 
     static class EnvConfig {
