@@ -58,7 +58,8 @@ public class CopyMessageMethod implements
     }
 
     public CopyMessageMethod setFromChatId(long chatId) {
-        return setFromChatId(Long.toString(chatId, 10));
+        method.setFromChatId(chatId);
+        return this;
     }
 
     @Override

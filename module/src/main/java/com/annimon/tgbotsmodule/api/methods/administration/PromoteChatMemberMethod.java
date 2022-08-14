@@ -114,7 +114,7 @@ public class PromoteChatMemberMethod implements ChatMemberMethod<PromoteChatMemb
         return this;
     }
 
-    public Boolean сanManageChat() {
+    public Boolean canManageChat() {
         return method.getCanManageChat();
     }
 
@@ -123,12 +123,12 @@ public class PromoteChatMemberMethod implements ChatMemberMethod<PromoteChatMemb
         return this;
     }
 
-    public Boolean сanManageVoiceChats() {
-        return method.getCanManageVoiceChats();
+    public Boolean canManageVideoChats() {
+        return method.getCanManageVideoChats();
     }
 
-    public PromoteChatMemberMethod setCanManageVoiceChats(Boolean canManageVoiceChats) {
-        method.setCanManageVoiceChats(canManageVoiceChats);
+    public PromoteChatMemberMethod setCanManageVideoChats(Boolean canManageVideoChats) {
+        method.setCanManageVideoChats(canManageVideoChats);
         return this;
     }
 
