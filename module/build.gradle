@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'application'
+    id 'java-library'
     id 'maven-publish'
     id 'signing'
 }
@@ -9,7 +9,6 @@ group 'com.annimon'
 version '5.7.0-SNAPSHOT'
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
-mainClassName = 'com.annimon.telegrambots.Runner'
 sourceCompatibility = 11
 
 repositories {
@@ -22,18 +21,17 @@ ext.junit5Version = '5.7.0'
 ext.jaxbVersion = '2.3.1'
 
 dependencies {
-    // runtimeOnly project(':testbot')
-    compile "org.telegram:telegrambots:5.7.1"
-    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    compile "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
-    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
-    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    compile 'org.glassfish:javax.el:3.0.1-b11'
-    compile "javax.xml.bind:jaxb-api:$jaxbVersion"
-    compile "com.sun.xml.bind:jaxb-impl:$jaxbVersion"
-    compile "org.glassfish.jaxb:jaxb-runtime:$jaxbVersion"
-    compile 'javax.activation:activation:1.1.1'
-    compile 'org.jetbrains:annotations:20.1.0'
+    api "org.telegram:telegrambots:5.7.1"
+    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    api "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
+    api "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
+    api "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    api 'org.glassfish:javax.el:3.0.1-b11'
+    api "javax.xml.bind:jaxb-api:$jaxbVersion"
+    api "com.sun.xml.bind:jaxb-impl:$jaxbVersion"
+    api "org.glassfish.jaxb:jaxb-runtime:$jaxbVersion"
+    api 'javax.activation:activation:1.1.1'
+    api 'org.jetbrains:annotations:20.1.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.7.0'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junit5Version"
     testImplementation "org.junit.jupiter:junit-jupiter-params:$junit5Version"
