@@ -4,6 +4,8 @@ import com.annimon.tgbotsmodule.api.methods.administration.*;
 import com.annimon.tgbotsmodule.api.methods.answerqueries.*;
 import com.annimon.tgbotsmodule.api.methods.games.*;
 import com.annimon.tgbotsmodule.api.methods.info.*;
+import com.annimon.tgbotsmodule.api.methods.invoices.CreateInvoiceLinkMethod;
+import com.annimon.tgbotsmodule.api.methods.invoices.SendInvoiceMethod;
 import com.annimon.tgbotsmodule.api.methods.other.*;
 import com.annimon.tgbotsmodule.api.methods.polls.SendPollMethod;
 import com.annimon.tgbotsmodule.api.methods.polls.StopPollMethod;
@@ -16,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.polls.StopPoll;
 import org.telegram.telegrambots.meta.api.objects.ChatPermissions;
+import org.telegram.telegrambots.meta.api.objects.adminrights.ChatAdministratorRights;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope;
 import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResult;
@@ -387,6 +390,11 @@ public final class Methods {
         }
 
 
+        public static CreateInvoiceLinkMethod createInvoiceLink() {
+            return new CreateInvoiceLinkMethod();
+        }
+
+
         public static AnswerShippingQueryMethod answerShippingQuery() {
             return new AnswerShippingQueryMethod();
         }
@@ -644,6 +652,51 @@ public final class Methods {
 
     public static GetUserProfilePhotosMethod getUserProfilePhotos(long userId) {
         return new GetUserProfilePhotosMethod().setUserId(userId);
+    }
+
+
+    public static GetMyDefaultAdministratorRightsMethod getMyDefaultAdministratorRightsMethod() {
+        return new GetMyDefaultAdministratorRightsMethod();
+    }
+
+    public static GetMyDefaultAdministratorRightsMethod getMyDefaultAdministratorRightsMethod(boolean forChannels) {
+        return new GetMyDefaultAdministratorRightsMethod().setForChannels(forChannels);
+    }
+
+    public static SetMyDefaultAdministratorRightsMethod setMyDefaultAdministratorRightsMethod() {
+        return new SetMyDefaultAdministratorRightsMethod();
+    }
+
+    public static SetMyDefaultAdministratorRightsMethod setMyDefaultAdministratorRightsMethod(boolean forChannels) {
+        return new SetMyDefaultAdministratorRightsMethod().setForChannels(forChannels);
+    }
+
+    public static SetMyDefaultAdministratorRightsMethod setMyDefaultAdministratorRightsMethod(ChatAdministratorRights rights) {
+        return new SetMyDefaultAdministratorRightsMethod().setRights(rights);
+    }
+
+    public static GetChatMenuButtonMethod getChatMenuButton() {
+        return new GetChatMenuButtonMethod();
+    }
+
+    public static GetChatMenuButtonMethod getChatMenuButton(@NotNull String chatId) {
+        return new GetChatMenuButtonMethod().setChatId(chatId);
+    }
+
+    public static GetChatMenuButtonMethod getChatMenuButton(long chatId) {
+        return new GetChatMenuButtonMethod().setChatId(chatId);
+    }
+
+    public static SetChatMenuButtonMethod setChatMenuButton() {
+        return new SetChatMenuButtonMethod();
+    }
+
+    public static SetChatMenuButtonMethod setChatMenuButton(@NotNull String chatId) {
+        return new SetChatMenuButtonMethod().setChatId(chatId);
+    }
+
+    public static SetChatMenuButtonMethod setChatMenuButton(long chatId) {
+        return new SetChatMenuButtonMethod().setChatId(chatId);
     }
 
 
@@ -1049,5 +1102,14 @@ public final class Methods {
     public static AnswerInlineQueryMethod answerInlineQuery(@NotNull String inlineQueryId,
                                                             @NotNull InlineQueryResult... results) {
         return new AnswerInlineQueryMethod().setInlineQueryId(inlineQueryId).setResults(results);
+    }
+
+    public static AnswerWebAppQueryMethod answerWebAppQuery() {
+        return new AnswerWebAppQueryMethod();
+    }
+
+    public static AnswerWebAppQueryMethod answerWebAppQuery(@NotNull String webAppQueryId,
+                                                            @NotNull InlineQueryResult queryResult) {
+        return new AnswerWebAppQueryMethod().setWebAppQueryId(webAppQueryId).setQueryResult(queryResult);
     }
 }
