@@ -67,7 +67,7 @@ public class EditMessageCaptionMethod implements
     public EditMessageCaptionMethod setInlineMessageId(@NotNull String inlineMessageId) {
         method.setInlineMessageId(inlineMessageId);
         // Clear chat id and message id
-        method.setChatId(null);
+        method.setChatId((String) null);
         method.setMessageId(null);
         return this;
     }

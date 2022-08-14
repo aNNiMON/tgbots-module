@@ -58,7 +58,8 @@ public class ForwardMessageMethod implements
     }
 
     public ForwardMessageMethod setFromChatId(long chatId) {
-        return setFromChatId(Long.toString(chatId, 10));
+        method.setFromChatId(chatId);
+        return this;
     }
 
     @Override

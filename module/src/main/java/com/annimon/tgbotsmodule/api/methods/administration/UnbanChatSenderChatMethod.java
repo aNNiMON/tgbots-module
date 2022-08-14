@@ -5,18 +5,18 @@ import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.api.methods.groupadministration.unbanChatSenderChat;
+import org.telegram.telegrambots.meta.api.methods.groupadministration.UnbanChatSenderChat;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class UnbanChatSenderChatMethod implements ChatMethod<UnbanChatSenderChatMethod, Boolean> {
 
-    private final unbanChatSenderChat method;
+    private final UnbanChatSenderChat method;
 
     public UnbanChatSenderChatMethod() {
-        this(new unbanChatSenderChat());
+        this(new UnbanChatSenderChat());
     }
 
-    public UnbanChatSenderChatMethod(@NotNull unbanChatSenderChat method) {
+    public UnbanChatSenderChatMethod(@NotNull UnbanChatSenderChat method) {
         this.method = method;
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.api.methods.send.SendInvoice;
+import org.telegram.telegrambots.meta.api.methods.invoices.SendInvoice;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -281,6 +281,24 @@ public class SendInvoiceMethod implements
     @Override
     public SendInvoiceMethod setProtectContent(Boolean protectContent) {
         method.setProtectContent(protectContent);
+        return this;
+    }
+
+    public Boolean getSendEmailToProvider() {
+        return method.getSendEmailToProvider();
+    }
+
+    public SendInvoiceMethod setSendEmailToProvider(Boolean sendEmailToProvider) {
+        method.setSendEmailToProvider(sendEmailToProvider);
+        return this;
+    }
+
+    public Boolean getSendPhoneNumberToProvider() {
+        return method.getSendPhoneNumberToProvider();
+    }
+
+    public SendInvoiceMethod setSendPhoneNumberToProvider(Boolean sendPhoneNumberToProvider) {
+        method.setSendPhoneNumberToProvider(sendPhoneNumberToProvider);
         return this;
     }
 

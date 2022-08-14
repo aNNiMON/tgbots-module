@@ -22,7 +22,7 @@ class TestBot : BotModule {
         val configLoader = YamlConfigLoaderService()
         val configFile = configLoader.configFile("testbot", config.profile)
         val botConfig = configLoader.loadFile(configFile, BotConfig::class.java) {
-            it.registerModule(KotlinModule())
+            it.registerModule(KotlinModule.Builder().build())
         }
         return TestBotHandler(botConfig)
     }
