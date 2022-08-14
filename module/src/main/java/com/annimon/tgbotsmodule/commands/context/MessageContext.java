@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule.commands.context;
 
 import com.annimon.tgbotsmodule.api.methods.Methods;
+import com.annimon.tgbotsmodule.api.methods.invoices.SendInvoiceMethod;
 import com.annimon.tgbotsmodule.api.methods.other.CopyMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.other.ForwardMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.send.*;

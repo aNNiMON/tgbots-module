@@ -1,4 +1,4 @@
-package com.annimon.tgbotsmodule.api.methods.send;
+package com.annimon.tgbotsmodule.api.methods.invoices;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
