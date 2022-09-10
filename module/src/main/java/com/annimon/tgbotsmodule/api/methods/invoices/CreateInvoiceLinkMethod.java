@@ -7,11 +7,10 @@ import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.invoices.CreateInvoiceLink;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class CreateInvoiceLinkMethod implements Method<Message> {
+public class CreateInvoiceLinkMethod implements Method<String> {
 
     private final CreateInvoiceLink method;
 
@@ -204,13 +203,13 @@ public class CreateInvoiceLinkMethod implements Method<Message> {
     }
 
     @Override
-    public Message call(@NotNull CommonAbsSender sender) {
+    public String call(@NotNull CommonAbsSender sender) {
         return sender.call(method);
     }
 
     @Override
     public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Message> responseConsumer,
+                          @Nullable Consumer<? super String> responseConsumer,
                           @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
                           @Nullable Consumer<Exception> exceptionConsumer) {
         sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);

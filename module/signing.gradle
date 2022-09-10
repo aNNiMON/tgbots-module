@@ -61,7 +61,7 @@ def customizePom(pom) {
 
         // add all items necessary for maven central publication
         root.children().last() + {
-            resolveStrategy = DELEGATE_FIRST
+            resolveStrategy = Closure.DELEGATE_FIRST
 
             name 'tgbots-module'
             description 'Simple Java telegram bots runner built on top of the Telegram Bots library'

@@ -3,7 +3,6 @@ package com.annimon.tgbotsmodule.api.methods.stickers;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InputFileMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.io.InputStream;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,6 +15,8 @@ public class CreateNewStickerSetMethod implements
         UserMethod<CreateNewStickerSetMethod, Boolean>,
         InputFileMethod<CreateNewStickerSetMethod, Boolean> {
 
+    private static final String REGULAR_TYPE = "regular";
+    private static final String MASK_TYPE = "mask";
     private final CreateNewStickerSet method;
 
     public CreateNewStickerSetMethod() {
@@ -75,13 +76,29 @@ public class CreateNewStickerSetMethod implements
         return this;
     }
 
-    public Boolean getContainsMasks() {
-        return method.getContainsMasks();
+    public String getStickerType() {
+        return method.getStickerType();
     }
 
-    public CreateNewStickerSetMethod setContainsMasks(Boolean containsMasks) {
-        method.setContainsMasks(containsMasks);
+    public CreateNewStickerSetMethod setStickerType(String stickerType) {
+        method.setStickerType(stickerType);
         return this;
+    }
+
+    public boolean isRegularSticker() {
+        return REGULAR_TYPE.equals(getStickerType());
+    }
+
+    public CreateNewStickerSetMethod setRegularType() {
+        return setStickerType(REGULAR_TYPE);
+    }
+
+    public boolean isMask() {
+        return MASK_TYPE.equals(getStickerType());
+    }
+
+    public CreateNewStickerSetMethod setMaskType() {
+        return setStickerType(MASK_TYPE);
     }
 
     public MaskPosition getMaskPosition() {
