@@ -1,9 +1,9 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
 import java.util.function.Consumer;
@@ -51,6 +51,17 @@ public class SendVoiceMethod implements
     @Override
     public SendVoiceMethod setReplyToMessageId(@NotNull Integer messageId) {
         method.setReplyToMessageId(messageId);
+        return this;
+    }
+
+    @Override
+    public Integer getMessageThreadId() {
+        return method.getMessageThreadId();
+    }
+
+    @Override
+    public SendVoiceMethod setMessageThreadId(Integer messageThreadId) {
+        method.setMessageThreadId(messageThreadId);
         return this;
     }
 

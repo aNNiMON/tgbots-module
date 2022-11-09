@@ -48,6 +48,17 @@ public class SendDiceMethod implements
     }
 
     @Override
+    public Integer getMessageThreadId() {
+        return method.getMessageThreadId();
+    }
+
+    @Override
+    public SendDiceMethod setMessageThreadId(Integer messageThreadId) {
+        method.setMessageThreadId(messageThreadId);
+        return this;
+    }
+
+    @Override
     public Boolean getAllowSendingWithoutReply() {
         return method.getAllowSendingWithoutReply();
     }

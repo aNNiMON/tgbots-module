@@ -1,13 +1,11 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ThumbMethod;
-import com.annimon.tgbotsmodule.api.methods.updatingmessages.EditMessageTextMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.io.InputStream;
 import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -55,6 +53,17 @@ public class SendAnimationMethod implements
     @Override
     public SendAnimationMethod setReplyToMessageId(Integer messageId) {
         method.setReplyToMessageId(messageId);
+        return this;
+    }
+
+    @Override
+    public Integer getMessageThreadId() {
+        return method.getMessageThreadId();
+    }
+
+    @Override
+    public SendAnimationMethod setMessageThreadId(Integer messageThreadId) {
+        method.setMessageThreadId(messageThreadId);
         return this;
     }
 

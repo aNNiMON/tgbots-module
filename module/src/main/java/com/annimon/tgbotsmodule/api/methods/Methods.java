@@ -2,6 +2,7 @@ package com.annimon.tgbotsmodule.api.methods;
 
 import com.annimon.tgbotsmodule.api.methods.administration.*;
 import com.annimon.tgbotsmodule.api.methods.answerqueries.*;
+import com.annimon.tgbotsmodule.api.methods.forum.*;
 import com.annimon.tgbotsmodule.api.methods.games.*;
 import com.annimon.tgbotsmodule.api.methods.info.*;
 import com.annimon.tgbotsmodule.api.methods.invoices.CreateInvoiceLinkMethod;
@@ -331,7 +332,93 @@ public final class Methods {
             return new UnpinAllChatMessagesMethod().setChatId(chatId);
         }
     }
-    
+
+    public static class Forum {
+        private Forum() { }
+
+        public static CreateForumTopicMethod createForumTopic() {
+            return new CreateForumTopicMethod();
+        }
+
+        public static CreateForumTopicMethod createForumTopic(@NotNull String chatId) {
+            return new CreateForumTopicMethod().setChatId(chatId);
+        }
+
+        public static CreateForumTopicMethod createForumTopic(long chatId) {
+            return new CreateForumTopicMethod().setChatId(chatId);
+        }
+
+
+        public static EditForumTopicMethod editForumTopic() {
+            return new EditForumTopicMethod();
+        }
+
+        public static EditForumTopicMethod editForumTopic(@NotNull String chatId, int messageThreadId) {
+            return new EditForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+        }
+
+        public static EditForumTopicMethod editForumTopic(long chatId, int messageThreadId) {
+            return new EditForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+        }
+
+
+        public static CloseForumTopicMethod closeForumTopic() {
+            return new CloseForumTopicMethod();
+        }
+
+        public static CloseForumTopicMethod closeForumTopic(@NotNull String chatId, int messageThreadId) {
+            return new CloseForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+        }
+
+        public static CloseForumTopicMethod closeForumTopic(long chatId, int messageThreadId) {
+            return new CloseForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+        }
+
+
+        public static ReopenForumTopicMethod reopenForumTopic() {
+            return new ReopenForumTopicMethod();
+        }
+
+        public static ReopenForumTopicMethod reopenForumTopic(@NotNull String chatId, int messageThreadId) {
+            return new ReopenForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+        }
+
+        public static ReopenForumTopicMethod reopenForumTopic(long chatId, int messageThreadId) {
+            return new ReopenForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+        }
+
+
+        public static DeleteForumTopicMethod deleteForumTopic() {
+            return new DeleteForumTopicMethod();
+        }
+
+        public static DeleteForumTopicMethod deleteForumTopic(@NotNull String chatId, int messageThreadId) {
+            return new DeleteForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+        }
+
+        public static DeleteForumTopicMethod deleteForumTopic(long chatId, int messageThreadId) {
+            return new DeleteForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+        }
+
+
+        public static GetForumTopicIconStickersMethod getForumTopicIconStickers() {
+            return new GetForumTopicIconStickersMethod();
+        }
+
+
+        public static UnpinAllForumTopicMessagesMethod unpinAllForumTopicMessages() {
+            return new UnpinAllForumTopicMessagesMethod();
+        }
+
+        public static UnpinAllForumTopicMessagesMethod unpinAllForumTopicMessages(@NotNull String chatId) {
+            return new UnpinAllForumTopicMessagesMethod().setChatId(chatId);
+        }
+
+        public static UnpinAllForumTopicMessagesMethod unpinAllForumTopicMessages(long chatId) {
+            return new UnpinAllForumTopicMessagesMethod().setChatId(chatId);
+        }
+    }
+
     public static class Games {
         private Games() { }
 

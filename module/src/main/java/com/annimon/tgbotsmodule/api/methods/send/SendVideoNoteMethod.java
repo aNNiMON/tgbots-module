@@ -1,7 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ThumbMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
@@ -47,6 +47,17 @@ public class SendVideoNoteMethod implements
     @Override
     public SendVideoNoteMethod setReplyToMessageId(Integer messageId) {
         method.setReplyToMessageId(messageId);
+        return this;
+    }
+
+    @Override
+    public Integer getMessageThreadId() {
+        return method.getMessageThreadId();
+    }
+
+    @Override
+    public SendVideoNoteMethod setMessageThreadId(Integer messageThreadId) {
+        method.setMessageThreadId(messageThreadId);
         return this;
     }
 

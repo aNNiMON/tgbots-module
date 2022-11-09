@@ -50,6 +50,17 @@ public class SendMediaGroupMethod implements
     }
 
     @Override
+    public Integer getMessageThreadId() {
+        return method.getMessageThreadId();
+    }
+
+    @Override
+    public SendMediaGroupMethod setMessageThreadId(Integer messageThreadId) {
+        method.setMessageThreadId(messageThreadId);
+        return this;
+    }
+
+    @Override
     public Boolean getAllowSendingWithoutReply() {
         return method.getAllowSendingWithoutReply();
     }

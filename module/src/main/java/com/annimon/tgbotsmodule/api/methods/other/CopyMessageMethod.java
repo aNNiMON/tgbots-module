@@ -48,6 +48,15 @@ public class CopyMessageMethod implements
         return this;
     }
 
+    public Integer getMessageThreadId() {
+        return method.getMessageThreadId();
+    }
+
+    public CopyMessageMethod setMessageThreadId(@NotNull Integer messageThreadId) {
+        method.setMessageThreadId(messageThreadId);
+        return this;
+    }
+
     public String getFromChatId() {
         return method.getFromChatId();
     }

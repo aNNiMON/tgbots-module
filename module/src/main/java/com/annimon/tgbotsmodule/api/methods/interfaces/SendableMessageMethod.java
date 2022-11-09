@@ -14,6 +14,14 @@ public interface SendableMessageMethod<M extends Method, T extends Serializable>
         return setReplyToMessageId(message.getMessageId());
     }
 
+    Integer getMessageThreadId();
+
+    M setMessageThreadId(Integer messageThreadId);
+
+    default M inThread(Message message) {
+        return setMessageThreadId(message.getMessageThreadId());
+    }
+
     Boolean getAllowSendingWithoutReply();
 
     M setAllowSendingWithoutReply(Boolean allowSendingWithoutReply);

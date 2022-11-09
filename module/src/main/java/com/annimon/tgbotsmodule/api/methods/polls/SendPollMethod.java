@@ -53,6 +53,17 @@ public class SendPollMethod implements
     }
 
     @Override
+    public Integer getMessageThreadId() {
+        return method.getMessageThreadId();
+    }
+
+    @Override
+    public SendPollMethod setMessageThreadId(Integer messageThreadId) {
+        method.setMessageThreadId(messageThreadId);
+        return this;
+    }
+
+    @Override
     public Boolean getAllowSendingWithoutReply() {
         return method.getAllowSendingWithoutReply();
     }

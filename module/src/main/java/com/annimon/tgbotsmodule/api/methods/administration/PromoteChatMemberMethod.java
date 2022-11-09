@@ -132,6 +132,15 @@ public class PromoteChatMemberMethod implements ChatMemberMethod<PromoteChatMemb
         return this;
     }
 
+    public Boolean canManageTopics() {
+        return method.getCanManageTopics();
+    }
+
+    public PromoteChatMemberMethod setCanManageTopics(Boolean canManageTopics) {
+        method.setCanManageTopics(canManageTopics);
+        return this;
+    }
+
     public Boolean isAnonymous() {
         return method.getIsAnonymous();
     }

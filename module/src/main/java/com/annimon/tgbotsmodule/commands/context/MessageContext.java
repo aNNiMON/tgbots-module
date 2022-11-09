@@ -8,6 +8,7 @@ import com.annimon.tgbotsmodule.api.methods.send.*;
 import com.annimon.tgbotsmodule.api.methods.updatingmessages.DeleteMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -33,12 +34,17 @@ public class MessageContext extends Context {
         return chatId;
     }
 
+    public @Nullable Integer messageThreadId() {
+        return message().getMessageThreadId();
+    }
+
     public @NotNull SendAnimationMethod replyWithAnimation() {
         return Methods.sendAnimation(chatId);
     }
 
     public @NotNull SendAnimationMethod replyToMessageWithAnimation() {
         return replyWithAnimation()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -49,6 +55,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendAudioMethod replyToMessageWithAudio() {
         return replyWithAudio()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -59,6 +66,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendContactMethod replyToMessageWithContact() {
         return replyWithContact()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -69,6 +77,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendDiceMethod replyToMessageWithDice() {
         return replyWithDice()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -79,6 +88,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendDocumentMethod replyToMessageWithDocument() {
         return replyWithDocument()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -89,6 +99,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendGameMethod replyToMessageWithGame() {
         return replyWithGame()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -99,6 +110,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendInvoiceMethod replyToMessageWithInvoice() {
         return replyWithInvoice()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -109,6 +121,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendLocationMethod replyToMessageWithLocation() {
         return replyWithLocation()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -119,6 +132,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendMediaGroupMethod replyToMessageWithMediaGroup() {
         return replyWithMediaGroup()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -133,12 +147,14 @@ public class MessageContext extends Context {
 
     public @NotNull SendMessageMethod replyToMessage() {
         return reply()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
 
     public @NotNull SendMessageMethod replyToMessage(@NotNull String text) {
         return reply(text)
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -149,6 +165,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendPhotoMethod replyToMessageWithPhoto() {
         return replyWithPhoto()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -159,6 +176,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendStickerMethod replyToMessageWithSticker() {
         return replyWithSticker()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -169,6 +187,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendVenueMethod replyToMessageWithVenue() {
         return replyWithVenue()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -179,6 +198,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendVideoMethod replyToMessageWithVideo() {
         return replyWithVideo()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -189,6 +209,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendVideoNoteMethod replyToMessageWithVideoNote() {
         return replyWithVideoNote()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
@@ -199,6 +220,7 @@ public class MessageContext extends Context {
 
     public @NotNull SendVoiceMethod replyToMessageWithVoice() {
         return replyWithVoice()
+                .setMessageThreadId(messageThreadId())
                 .setReplyToMessageId(messageId())
                 .setAllowSendingWithoutReply(true);
     }
