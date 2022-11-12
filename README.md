@@ -22,7 +22,7 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
  - Add gradle dependency:
  
     ```groovy
-    implementation 'com.annimon:tgbots-module:6.3.0'
+    implementation 'com.annimon:tgbots-module:6.3.1'
     ```
 
  - Implement `BotModule` interface:
