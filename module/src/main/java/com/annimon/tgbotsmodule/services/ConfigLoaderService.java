@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule.services;
 
 import com.annimon.tgbotsmodule.exceptions.ConfigLoaderException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +22,11 @@ public interface ConfigLoaderService {
             @NotNull Class<T> configType,
             Consumer<ObjectMapper> mapperConsumer);
 
+    <T> @NotNull T loadFile(
+            @NotNull File file,
+            @NotNull TypeReference<T> configType,
+            Consumer<ObjectMapper> mapperConsumer);
+
     default <T> @NotNull T loadResource(
             @NotNull String resourcePath,
             @NotNull Class<T> configType) {
@@ -38,15 +44,38 @@ public interface ConfigLoaderService {
         }
     }
 
+    default <T> @NotNull T loadResource(
+            @NotNull String resourcePath,
+            @NotNull TypeReference<T> configType,
+            Consumer<ObjectMapper> mapperConsumer) {
+        try (var is = getClass().getResourceAsStream(resourcePath)) {
+            return load(is, configType, mapperConsumer);
+        } catch (IOException ex) {
+            throw new ConfigLoaderException(ex);
+        }
+    }
+
     default <T> @NotNull T load(
             @NotNull InputStream is,
             @NotNull Class<T> configType) {
         return load(is, configType, null);
     }
 
+    default <T> @NotNull T load(
+            @NotNull InputStream is,
+            @NotNull TypeReference<T> configType) {
+        return load(is, configType, null);
+    }
+
     <T> @NotNull T load(
             @NotNull InputStream is,
             @NotNull Class<T> configType,
+            Consumer<ObjectMapper> mapperConsumer);
+
+
+    <T> @NotNull T load(
+            @NotNull InputStream is,
+            @NotNull TypeReference<T> configType,
             Consumer<ObjectMapper> mapperConsumer);
 
     @NotNull
