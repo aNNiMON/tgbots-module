@@ -1,10 +1,12 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'com.annimon'
 version '6.3.1-SNAPSHOT'
 
+mainClassName = 'com.annimon.testbot.TestBot'
 sourceCompatibility = 11
 
 repositories {
@@ -13,4 +15,6 @@ repositories {
 
 dependencies {
     implementation project(':module')
+    implementation 'org.slf4j:slf4j-simple:2.0.6'
+    testImplementation 'junit:junit:4.13.1'
 }
