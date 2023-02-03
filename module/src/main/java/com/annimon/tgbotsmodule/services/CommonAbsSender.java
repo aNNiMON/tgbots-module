@@ -32,8 +32,8 @@ import org.telegram.telegrambots.meta.updateshandlers.SentCallback;
 public abstract class CommonAbsSender extends DefaultAbsSender {
 
     private static final Logger log = LoggerFactory.getLogger(CommonAbsSender.class);
-    private final Map<Class<? extends BotApiMethod<?>>,
-                      Consumer<? extends BotApiMethod<?>>> preprocessors;
+    private final Map<Class<? extends PartialBotApiMethod<?>>,
+                      Consumer<? extends PartialBotApiMethod<?>>> preprocessors;
 
     public CommonAbsSender(DefaultBotOptions options) {
         super(options);
@@ -41,9 +41,10 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     }
 
     @Nullable
-    public Message call(@NotNull SendDocument action) {
+    public Message call(@NotNull SendDocument method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -69,9 +70,10 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     }
 
     @Nullable
-    public Message call(@NotNull SendPhoto action) {
+    public Message call(@NotNull SendPhoto method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -93,13 +95,17 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @NotNull SendPhoto method,
             @Nullable Consumer<? super Message> responseConsumer,
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
-        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+        callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return execute(method);
+        }, responseConsumer, exceptionConsumer);
     }
 
     @Nullable
-    public Message call(@NotNull SendVideo action) {
+    public Message call(@NotNull SendVideo method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -121,13 +127,17 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @NotNull SendVideo method,
             @Nullable Consumer<? super Message> responseConsumer,
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
-        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+        callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return execute(method);
+        }, responseConsumer, exceptionConsumer);
     }
 
     @Nullable
-    public Message call(@NotNull SendVideoNote action) {
+    public Message call(@NotNull SendVideoNote method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -149,13 +159,17 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @NotNull SendVideoNote method,
             @Nullable Consumer<? super Message> responseConsumer,
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
-        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+        callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return execute(method);
+        }, responseConsumer, exceptionConsumer);
     }
 
     @Nullable
-    public Message call(@NotNull SendSticker action) {
+    public Message call(@NotNull SendSticker method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -177,13 +191,17 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @NotNull SendSticker method,
             @Nullable Consumer<? super Message> responseConsumer,
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
-        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+        callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return execute(method);
+        }, responseConsumer, exceptionConsumer);
     }
 
     @Nullable
-    public Message call(@NotNull SendAudio action) {
+    public Message call(@NotNull SendAudio method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -205,13 +223,17 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @NotNull SendAudio method,
             @Nullable Consumer<? super Message> responseConsumer,
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
-        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+        callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return execute(method);
+        }, responseConsumer, exceptionConsumer);
     }
 
     @Nullable
-    public Message call(@NotNull SendVoice action) {
+    public Message call(@NotNull SendVoice method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -233,12 +255,16 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @NotNull SendVoice method,
             @Nullable Consumer<? super Message> responseConsumer,
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
-        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+        callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return execute(method);
+        }, responseConsumer, exceptionConsumer);
     }
 
-    public Boolean call(@NotNull SetChatPhoto action) {
+    public Boolean call(@NotNull SetChatPhoto method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return false;
@@ -260,13 +286,17 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @NotNull SetChatPhoto method,
             @Nullable Consumer<? super Boolean> responseConsumer,
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
-        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+        callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return execute(method);
+        }, responseConsumer, exceptionConsumer);
     }
 
     @Nullable
-    public List<Message> call(@NotNull SendMediaGroup action) {
+    public List<Message> call(@NotNull SendMediaGroup method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return Collections.emptyList();
@@ -290,6 +320,7 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
         exe.submit(() -> {
             try {
+                preprocessMethod(method);
                 final List<Message> result = execute(method);
                 if (responseConsumer != null) {
                     responseConsumer.accept(result);
@@ -302,9 +333,10 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
         });
     }
 
-    public Boolean call(@NotNull AddStickerToSet action) {
+    public Boolean call(@NotNull AddStickerToSet method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return false;
@@ -326,12 +358,16 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @NotNull AddStickerToSet method,
             @Nullable Consumer<? super Boolean> responseConsumer,
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
-        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+        callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return execute(method);
+        }, responseConsumer, exceptionConsumer);
     }
 
-    public Boolean call(@NotNull CreateNewStickerSet action) {
+    public Boolean call(@NotNull CreateNewStickerSet method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return false;
@@ -353,13 +389,17 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @NotNull CreateNewStickerSet method,
             @Nullable Consumer<? super Boolean> responseConsumer,
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
-        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+        callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return execute(method);
+        }, responseConsumer, exceptionConsumer);
     }
 
     @Nullable
-    public File call(@NotNull UploadStickerFile action) {
+    public File call(@NotNull UploadStickerFile method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -381,13 +421,17 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @NotNull UploadStickerFile method,
             @Nullable Consumer<? super File> responseConsumer,
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
-        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+        callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return execute(method);
+        }, responseConsumer, exceptionConsumer);
     }
 
     @Nullable
-    public Serializable call(@NotNull EditMessageMedia action) {
+    public Serializable call(@NotNull EditMessageMedia method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -409,13 +453,17 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @NotNull EditMessageMedia method,
             @Nullable Consumer<? super Serializable> responseConsumer,
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
-        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+        callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return execute(method);
+        }, responseConsumer, exceptionConsumer);
     }
 
     @Nullable
-    public Message call(@NotNull SendAnimation action) {
+    public Message call(@NotNull SendAnimation method) {
         try {
-            return execute(action);
+            preprocessMethod(method);
+            return execute(method);
         } catch (TelegramApiException e) {
             handleTelegramApiException(e);
             return null;
@@ -437,7 +485,10 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
             @NotNull SendAnimation method,
             @Nullable Consumer<? super Message> responseConsumer,
             @Nullable Consumer<TelegramApiException> exceptionConsumer) {
-        callApiMethodAsync(() -> execute(method), responseConsumer, exceptionConsumer);
+        callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return execute(method);
+        }, responseConsumer, exceptionConsumer);
     }
 
     @Nullable
@@ -658,19 +709,20 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
      * @param preprocessor  preprocessor to execute
      * @param <M>  the type of the api method
      */
-    protected <M extends BotApiMethod<?>> void addMethodPreprocessor(
+    protected <M extends PartialBotApiMethod<?>> void addMethodPreprocessor(
             @NotNull Class<M> method, @NotNull Consumer<M> preprocessor) {
         preprocessors.put(method, preprocessor);
     }
 
     @SuppressWarnings("unchecked")
     private <M extends PartialBotApiMethod<?>> void preprocessMethod(@NotNull M method) {
-        if (preprocessors.isEmpty()) return;
-        var preprocessor = preprocessors.get(method.getClass());
-        if (preprocessor != null) {
-            // We can safely cast here, because early we
-            // added Class<M> and its corresponding Consumer<M>
-            ((Consumer<M>) preprocessor).accept(method);
+        if (!preprocessors.isEmpty()) {
+            var preprocessor = preprocessors.get(method.getClass());
+            if (preprocessor != null) {
+                // We can safely cast here, because early we
+                // added Class<M> and its corresponding Consumer<M>
+                ((Consumer<M>) preprocessor).accept(method);
+            }
         }
     }
 

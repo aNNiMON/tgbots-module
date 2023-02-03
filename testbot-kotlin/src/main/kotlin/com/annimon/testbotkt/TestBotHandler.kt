@@ -11,6 +11,7 @@ import com.annimon.tgbotsmodule.commands.authority.SimpleAuthority
 import org.telegram.telegrambots.meta.api.methods.ActionType
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText
 import org.telegram.telegrambots.meta.api.objects.Update
 
@@ -56,6 +57,9 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
         }
         addMethodPreprocessor(EditMessageText::class.java) {
             it.disableWebPagePreview()
+        }
+        addMethodPreprocessor(SendPhoto::class.java) {
+            it.protectContent = true
         }
     }
 

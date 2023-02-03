@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -56,6 +57,9 @@ public class TestBotHandler extends BotHandler {
         addMethodPreprocessor(SendMessage.class, m -> {
             m.setAllowSendingWithoutReply(true);
             m.disableWebPagePreview();
+        });
+        addMethodPreprocessor(SendPhoto.class, m -> {
+            m.setProtectContent(true);
         });
         addMethodPreprocessor(EditMessageText.class, EditMessageText::disableWebPagePreview);
     }
