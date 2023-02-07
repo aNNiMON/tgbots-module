@@ -1,6 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.other;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageThreadMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.send.SendChatAction;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class SendChatActionMethod implements ChatMethod<SendChatActionMethod, Boolean> {
+public class SendChatActionMethod implements ChatMessageThreadMethod<SendChatActionMethod, Boolean> {
 
     private final SendChatAction method;
 
@@ -29,6 +29,17 @@ public class SendChatActionMethod implements ChatMethod<SendChatActionMethod, Bo
     @Override
     public SendChatActionMethod setChatId(@NotNull String chatId) {
         method.setChatId(chatId);
+        return this;
+    }
+
+    @Override
+    public Integer getMessageThreadId() {
+        return method.getMessageThreadId();
+    }
+
+    @Override
+    public SendChatActionMethod setMessageThreadId(Integer messageThreadId) {
+        method.setMessageThreadId(messageThreadId);
         return this;
     }
 

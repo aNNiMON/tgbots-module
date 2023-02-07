@@ -3,6 +3,7 @@ package com.annimon.tgbotsmodule.api.methods.send;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.SpoilerMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
 import java.util.function.Consumer;
@@ -18,7 +19,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class SendPhotoMethod implements
         MediaMessageMethod<SendPhotoMethod, Message>,
         ParseModeMethod<SendPhotoMethod, Message>,
-        CaptionMethod<SendPhotoMethod, Message> {
+        CaptionMethod<SendPhotoMethod, Message>,
+        SpoilerMethod<SendPhotoMethod, Message> {
 
     private final SendPhoto method;
 
@@ -154,6 +156,17 @@ public class SendPhotoMethod implements
     @Override
     public SendPhotoMethod setProtectContent(Boolean protectContent) {
         method.setProtectContent(protectContent);
+        return this;
+    }
+
+    @Override
+    public Boolean getHasSpoiler() {
+        return method.getHasSpoiler();
+    }
+
+    @Override
+    public SendPhotoMethod setHasSpoiler(Boolean spoiler) {
+        method.setHasSpoiler(spoiler);
         return this;
     }
 

@@ -4,6 +4,7 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.SpoilerMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ThumbMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
@@ -22,7 +23,8 @@ public class SendVideoMethod implements
         ParseModeMethod<SendVideoMethod, Message>,
         CaptionMethod<SendVideoMethod, Message>,
         DurationMethod<SendVideoMethod, Message>,
-        ThumbMethod<SendVideoMethod, Message> {
+        ThumbMethod<SendVideoMethod, Message>,
+        SpoilerMethod<SendVideoMethod, Message> {
 
     private final SendVideo method;
 
@@ -207,6 +209,17 @@ public class SendVideoMethod implements
     @Override
     public SendVideoMethod setProtectContent(Boolean protectContent) {
         method.setProtectContent(protectContent);
+        return this;
+    }
+
+    @Override
+    public Boolean getHasSpoiler() {
+        return method.getHasSpoiler();
+    }
+
+    @Override
+    public SendVideoMethod setHasSpoiler(Boolean spoiler) {
+        method.setHasSpoiler(spoiler);
         return this;
     }
 

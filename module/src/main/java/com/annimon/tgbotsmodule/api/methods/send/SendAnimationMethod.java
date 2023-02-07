@@ -4,6 +4,7 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.SpoilerMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ThumbMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
@@ -22,7 +23,8 @@ public class SendAnimationMethod implements
         ParseModeMethod<SendAnimationMethod, Message>,
         CaptionMethod<SendAnimationMethod, Message>,
         DurationMethod<SendAnimationMethod, Message>,
-        ThumbMethod<SendAnimationMethod, Message> {
+        ThumbMethod<SendAnimationMethod, Message>,
+        SpoilerMethod<SendAnimationMethod, Message> {
 
     private final SendAnimation method;
 
@@ -198,6 +200,17 @@ public class SendAnimationMethod implements
     @Override
     public SendAnimationMethod setProtectContent(Boolean protectContent) {
         method.setProtectContent(protectContent);
+        return this;
+    }
+
+    @Override
+    public Boolean getHasSpoiler() {
+        return method.getHasSpoiler();
+    }
+
+    @Override
+    public SendAnimationMethod setHasSpoiler(Boolean spoiler) {
+        method.setHasSpoiler(spoiler);
         return this;
     }
 

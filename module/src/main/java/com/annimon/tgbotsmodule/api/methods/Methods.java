@@ -401,6 +401,71 @@ public final class Methods {
         }
 
 
+        public static EditGeneralForumTopicMethod editGeneralForumTopic() {
+            return new EditGeneralForumTopicMethod();
+        }
+
+        public static EditGeneralForumTopicMethod editGeneralForumTopic(@NotNull String chatId) {
+            return new EditGeneralForumTopicMethod().setChatId(chatId);
+        }
+
+        public static EditGeneralForumTopicMethod editGeneralForumTopic(long chatId) {
+            return new EditGeneralForumTopicMethod().setChatId(chatId);
+        }
+
+
+        public static CloseGeneralForumTopicMethod closeGeneralForumTopic() {
+            return new CloseGeneralForumTopicMethod();
+        }
+
+        public static CloseGeneralForumTopicMethod closeGeneralForumTopic(@NotNull String chatId) {
+            return new CloseGeneralForumTopicMethod().setChatId(chatId);
+        }
+
+        public static CloseGeneralForumTopicMethod closeGeneralForumTopic(long chatId) {
+            return new CloseGeneralForumTopicMethod().setChatId(chatId);
+        }
+
+
+        public static ReopenGeneralForumTopicMethod reopenGeneralForumTopic() {
+            return new ReopenGeneralForumTopicMethod();
+        }
+
+        public static ReopenGeneralForumTopicMethod reopenGeneralForumTopic(@NotNull String chatId) {
+            return new ReopenGeneralForumTopicMethod().setChatId(chatId);
+        }
+
+        public static ReopenGeneralForumTopicMethod reopenGeneralForumTopic(long chatId) {
+            return new ReopenGeneralForumTopicMethod().setChatId(chatId);
+        }
+
+
+        public static HideGeneralForumTopicMethod hideGeneralForumTopic() {
+            return new HideGeneralForumTopicMethod();
+        }
+
+        public static HideGeneralForumTopicMethod hideGeneralForumTopic(@NotNull String chatId) {
+            return new HideGeneralForumTopicMethod().setChatId(chatId);
+        }
+
+        public static HideGeneralForumTopicMethod hideGeneralForumTopic(long chatId) {
+            return new HideGeneralForumTopicMethod().setChatId(chatId);
+        }
+
+
+        public static UnhideGeneralForumTopicMethod unhideGeneralForumTopic() {
+            return new UnhideGeneralForumTopicMethod();
+        }
+
+        public static UnhideGeneralForumTopicMethod unhideGeneralForumTopic(@NotNull String chatId) {
+            return new UnhideGeneralForumTopicMethod().setChatId(chatId);
+        }
+
+        public static UnhideGeneralForumTopicMethod unhideGeneralForumTopic(long chatId) {
+            return new UnhideGeneralForumTopicMethod().setChatId(chatId);
+        }
+
+
         public static GetForumTopicIconStickersMethod getForumTopicIconStickers() {
             return new GetForumTopicIconStickersMethod();
         }

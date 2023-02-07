@@ -4,7 +4,7 @@ import java.io.Serializable;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public interface SendableMessageMethod<M extends Method, T extends Serializable>
-        extends ChatMethod<M, T>, NotificationMethod<M, T> {
+        extends ChatMessageThreadMethod<M, T>, NotificationMethod<M, T> {
 
     Integer getReplyToMessageId();
 
@@ -12,14 +12,6 @@ public interface SendableMessageMethod<M extends Method, T extends Serializable>
 
     default M inReplyTo(Message message) {
         return setReplyToMessageId(message.getMessageId());
-    }
-
-    Integer getMessageThreadId();
-
-    M setMessageThreadId(Integer messageThreadId);
-
-    default M inThread(Message message) {
-        return setMessageThreadId(message.getMessageThreadId());
     }
 
     Boolean getAllowSendingWithoutReply();
