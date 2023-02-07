@@ -22,7 +22,7 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
  - Add gradle dependency:
  
     ```groovy
-    implementation 'com.annimon:tgbots-module:6.3.1'
+    implementation 'com.annimon:tgbots-module:6.5.0'
     ```
 
  - Implement `BotModule` interface:
@@ -31,6 +31,7 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
     public class TestBot implements BotModule {   
        @Override
        public BotHandler botHandler(Config config) {
+           super(config.getToken());
            return new TestBotHandler();
        }
     }
@@ -110,6 +111,7 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
         private final BotConfig botConfig;
     
         public TestBotHandler(BotConfig botConfig) {
+            super(botConfig.getToken());
             this.botConfig = botConfig;
         }
     
@@ -122,11 +124,6 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
         @Override
         public String getBotUsername() {
             return botConfig.getUsername();
-        }
-    
-        @Override
-        public String getBotToken() {
-            return botConfig.getToken();
         }
     }
     ```
