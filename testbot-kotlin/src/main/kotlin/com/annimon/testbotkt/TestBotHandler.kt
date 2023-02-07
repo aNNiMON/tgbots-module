@@ -15,7 +15,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendPhoto
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText
 import org.telegram.telegrambots.meta.api.objects.Update
 
-class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
+class TestBotHandler(private val botConfig: BotConfig) : BotHandler(botConfig.token) {
     private val authority = SimpleAuthority(this, botConfig.creatorId)
     private val commands = CommandRegistry(this, authority)
 
@@ -72,6 +72,4 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler() {
     }
 
     override fun getBotUsername() = botConfig.username
-
-    override fun getBotToken() = botConfig.token
 }

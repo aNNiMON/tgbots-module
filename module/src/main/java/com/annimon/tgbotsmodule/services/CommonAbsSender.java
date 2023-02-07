@@ -35,8 +35,8 @@ public abstract class CommonAbsSender extends DefaultAbsSender {
     private final Map<Class<? extends PartialBotApiMethod<?>>,
                       Consumer<? extends PartialBotApiMethod<?>>> preprocessors;
 
-    public CommonAbsSender(DefaultBotOptions options) {
-        super(options);
+    public CommonAbsSender(@NotNull DefaultBotOptions options, @NotNull String botToken) {
+        super(options, botToken);
         preprocessors = new HashMap<>();
     }
 

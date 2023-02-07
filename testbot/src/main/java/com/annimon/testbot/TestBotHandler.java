@@ -30,6 +30,7 @@ public class TestBotHandler extends BotHandler {
     private final CommandRegistry<For> commands;
 
     public TestBotHandler(BotConfig botConfig) {
+        super(botConfig.getToken());
         this.botConfig = botConfig;
 
         final var authority = new SimpleAuthority(this, botConfig.getCreatorId());
@@ -126,10 +127,5 @@ public class TestBotHandler extends BotHandler {
     @Override
     public String getBotUsername() {
         return botConfig.getUsername();
-    }
-
-    @Override
-    public String getBotToken() {
-        return botConfig.getToken();
     }
 }

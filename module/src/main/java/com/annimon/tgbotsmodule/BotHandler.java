@@ -15,12 +15,12 @@ import org.telegram.telegrambots.util.WebhookUtils;
 public abstract class BotHandler extends CommonAbsSender
         implements LongPollingBot, WebhookBot {
 
-    public BotHandler() {
-        this(new DefaultBotOptions());
+    public BotHandler(@NotNull String botToken) {
+        this(new DefaultBotOptions(), botToken);
     }
 
-    public BotHandler(@NotNull DefaultBotOptions options) {
-        super(options);
+    public BotHandler(@NotNull DefaultBotOptions options, @NotNull String botToken) {
+        super(options, botToken);
     }
 
     @Override
