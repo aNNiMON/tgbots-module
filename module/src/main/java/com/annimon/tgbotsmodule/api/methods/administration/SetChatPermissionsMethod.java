@@ -41,6 +41,15 @@ public class SetChatPermissionsMethod implements ChatMethod<SetChatPermissionsMe
         return this;
     }
 
+    public Boolean getUseIndependentChatPermissions() {
+        return method.getUseIndependentChatPermissions();
+    }
+
+    public SetChatPermissionsMethod setUseIndependentChatPermissions(Boolean flag) {
+        method.setUseIndependentChatPermissions(flag);
+        return this;
+    }
+
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
         return sender.call(method);

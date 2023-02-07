@@ -57,6 +57,15 @@ public class RestrictChatMemberMethod implements
         return this;
     }
 
+    public Boolean getUseIndependentChatPermissions() {
+        return method.getUseIndependentChatPermissions();
+    }
+
+    public RestrictChatMemberMethod setUseIndependentChatPermissions(Boolean flag) {
+        method.setUseIndependentChatPermissions(flag);
+        return this;
+    }
+
     public ChatPermissions getPermissions() {
         return method.getPermissions();
     }
