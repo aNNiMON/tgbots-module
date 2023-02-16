@@ -16,13 +16,13 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.Update
 
 class TestBotHandler(private val botConfig: BotConfig) : BotHandler(botConfig.token) {
-    private val authority = SimpleAuthority(this, botConfig.creatorId)
-    private val commands = CommandRegistry(botUsername, authority)
+    private val authority = SimpleAuthority(botConfig.creatorId)
+    private val commands = CommandRegistry(botConfig.username, authority)
 
     init {
         commands.register(SimpleCommand("/action", For.CREATOR) { ctx ->
             if (ctx.argumentsLength() == 1) {
-                Methods.sendChatAction(ctx.chatId(), ActionType.get(ctx.argument(0, "typing")))
+                Methods.sendChatAction(ctx.chatId(), ActionType.get(ctx.argument(0, ActionType.TYPING.toString())))
                         .callAsync(ctx.sender)
             }
         })
@@ -64,7 +64,7 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler(botConfig.to
     }
 
     override fun onUpdate(update: Update): BotApiMethod<*>? {
-        if (commands.handleUpdate(update, this)) {
+        if (commands.handleUpdate(this, update)) {
             return null
         }
         // handle other updates

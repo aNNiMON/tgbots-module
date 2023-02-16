@@ -16,14 +16,12 @@ import org.telegram.telegrambots.meta.api.objects.User;
 
 public class SimpleAuthority implements Authority<For> {
 
-    private final CommonAbsSender sender;
     private final long creatorId;
     private final Set<Long> botAdmins;
     private final Map<String, Map.Entry<Long, Set<Long>>> chatAdmins;
     private long adminUpdatesTimeInSec;
 
-    public SimpleAuthority(CommonAbsSender sender, long creatorId) {
-        this.sender = sender;
+    public SimpleAuthority(long creatorId) {
         this.creatorId = creatorId;
         botAdmins = ConcurrentHashMap.newKeySet();
         chatAdmins = new ConcurrentHashMap<>();
@@ -59,11 +57,11 @@ public class SimpleAuthority implements Authority<For> {
         return !chat.isUserChat();
     }
 
-    public boolean isGroupAdmin(@NotNull Long userId, @NotNull Long chatId) {
-        return isGroupAdmin(userId, Long.toString(chatId));
+    public boolean isGroupAdmin(@NotNull CommonAbsSender sender, @NotNull Long userId, @NotNull Long chatId) {
+        return isGroupAdmin(sender, userId, Long.toString(chatId));
     }
 
-    public boolean isGroupAdmin(@NotNull Long userId, @NotNull String chatId) {
+    public boolean isGroupAdmin(@NotNull CommonAbsSender sender, @NotNull Long userId, @NotNull String chatId) {
         final var entry = chatAdmins.get(chatId);
         final Set<Long> admins;
         if (needUpdateChatAdmins(entry)) {
@@ -79,7 +77,7 @@ public class SimpleAuthority implements Authority<For> {
     }
 
     @Override
-    public boolean hasRights(Update update, @NotNull User user, @NotNull EnumSet<For> roles) {
+    public boolean hasRights(@NotNull CommonAbsSender sender, @NotNull Update update, @NotNull User user, @NotNull EnumSet<For> roles) {
         final long userId = user.getId();
         final boolean isCreator = (userId == creatorId);
         if (isCreator) {
@@ -91,7 +89,7 @@ public class SimpleAuthority implements Authority<For> {
 
         if (roles.contains(For.GROUP_ADMIN)){
             if (botAdmins.contains(userId)
-                || (isGroupChat(update) && isGroupAdmin(userId, update.getMessage().getChatId())))
+                || (isGroupChat(update) && isGroupAdmin(sender, userId, update.getMessage().getChatId())))
                 return true;
         }
 

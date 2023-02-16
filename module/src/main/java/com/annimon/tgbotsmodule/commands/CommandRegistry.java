@@ -1,12 +1,12 @@
 package com.annimon.tgbotsmodule.commands;
 
-import com.annimon.tgbotsmodule.BotHandler;
 import com.annimon.tgbotsmodule.analytics.UpdateHandler;
 import com.annimon.tgbotsmodule.commands.authority.Authority;
 import com.annimon.tgbotsmodule.commands.context.CallbackQueryContext;
 import com.annimon.tgbotsmodule.commands.context.InlineQueryContext;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.annimon.tgbotsmodule.commands.context.RegexMessageContext;
+import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import java.util.ArrayList;
@@ -105,14 +105,14 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
     }
 
     @Override
-    public boolean handleUpdate(@NotNull Update update, BotHandler handler) {
+    public boolean handleUpdate(@NotNull CommonAbsSender sender, @NotNull Update update) {
         if (update.hasMessage()) {
             // Text commands
             if (update.getMessage().hasText()) {
-                if ((!textCommands.isEmpty()) && handleTextCommands(update, handler)) {
+                if ((!textCommands.isEmpty()) && handleTextCommands(sender, update)) {
                     return true;
                 }
-                if ((!regexCommands.isEmpty()) && handleRegexCommands(update, handler)) {
+                if ((!regexCommands.isEmpty()) && handleRegexCommands(sender, update)) {
                     return true;
                 }
             }
@@ -120,91 +120,91 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
             // Callback query commands
             final var data = update.getCallbackQuery().getData();
             if (data != null && !data.isEmpty()) {
-                if ((!callbackCommands.isEmpty()) && handleCallbackQueryCommands(update, handler)) {
+                if ((!callbackCommands.isEmpty()) && handleCallbackQueryCommands(sender, update)) {
                     return true;
                 }
             }
         } else if (update.hasInlineQuery()) {
             // Inline query commands
             final var query = update.getInlineQuery().getQuery();
-            if ((!inlineCommands.isEmpty()) && handleInlineQueryCommands(update, handler)) {
+            if ((!inlineCommands.isEmpty()) && handleInlineQueryCommands(sender, update)) {
                 return true;
             }
         }
         return false;
     }
 
-    protected boolean handleTextCommands(@NotNull Update update, BotHandler handler) {
+    protected boolean handleTextCommands(@NotNull CommonAbsSender sender, @NotNull Update update) {
         final var message = update.getMessage();
         final var args = message.getText().split("\\s+", 2);
         final var command = stringToCommand(args[0]);
         final var commands = Stream.ofNullable(textCommands.get(command))
                 .flatMap(Collection::stream)
-                .filter(cmd -> authority.hasRights(update, message.getFrom(), cmd.authority()))
+                .filter(cmd -> authority.hasRights(sender, update, message.getFrom(), cmd.authority()))
                 .collect(Collectors.toList());
         if (commands.isEmpty()) {
             return false;
         }
 
         final var commandArguments = args.length >= 2 ? args[1] : "";
-        final var context = new MessageContext(handler, update, commandArguments);
+        final var context = new MessageContext(sender, update, commandArguments);
         for (TextCommand cmd : commands) {
             cmd.accept(context);
         }
         return true;
     }
 
-    protected boolean handleRegexCommands(@NotNull Update update, BotHandler handler) {
+    protected boolean handleRegexCommands(@NotNull CommonAbsSender sender, @NotNull Update update) {
         final var message = update.getMessage();
         final var text = message.getText();
         final long count = regexCommands.stream()
                 .map(cmd -> Map.entry(cmd, cmd.pattern().matcher(text)))
                 .filter(e -> e.getValue().find())
-                .filter(e -> authority.hasRights(update, message.getFrom(), e.getKey().authority()))
+                .filter(e -> authority.hasRights(sender, update, message.getFrom(), e.getKey().authority()))
                 .peek(e -> {
                     final RegexCommand command = e.getKey();
                     final var matcher = e.getValue();
-                    command.accept(new RegexMessageContext(handler, update, text, matcher));
+                    command.accept(new RegexMessageContext(sender, update, text, matcher));
                 })
                 .count();
         return (count > 0);
     }
 
-    protected boolean handleCallbackQueryCommands(@NotNull Update update, BotHandler handler) {
+    protected boolean handleCallbackQueryCommands(@NotNull CommonAbsSender sender, @NotNull Update update) {
         final var query = update.getCallbackQuery();
         final var args = query.getData().split(callbackCommandSplitPattern, 2);
         final var command = args[0];
         final var commands = Stream.ofNullable(callbackCommands.get(command))
                 .flatMap(Collection::stream)
-                .filter(cmd -> authority.hasRights(update, query.getFrom(), cmd.authority()))
+                .filter(cmd -> authority.hasRights(sender, update, query.getFrom(), cmd.authority()))
                 .collect(Collectors.toList());
         if (commands.isEmpty()) {
             return false;
         }
 
         final var commandArguments = args.length >= 2 ? args[1] : "";
-        final var context = new CallbackQueryContext(handler, update, commandArguments);
+        final var context = new CallbackQueryContext(sender, update, commandArguments);
         for (CallbackQueryCommand cmd : commands) {
             cmd.accept(context);
         }
         return true;
     }
 
-    private boolean handleInlineQueryCommands(Update update, BotHandler handler) {
+    private boolean handleInlineQueryCommands(@NotNull CommonAbsSender sender, @NotNull Update update) {
         final var inlineQuery = update.getInlineQuery();
         final var query = inlineQuery.getQuery();
         final var args = query.split("\\s+", 2);
         final var command = args[0];
         final var commands = Stream.ofNullable(inlineCommands.get(command))
                 .flatMap(Collection::stream)
-                .filter(cmd -> authority.hasRights(update, inlineQuery.getFrom(), cmd.authority()))
+                .filter(cmd -> authority.hasRights(sender, update, inlineQuery.getFrom(), cmd.authority()))
                 .collect(Collectors.toList());
         if (commands.isEmpty()) {
             return false;
         }
 
         final var commandArguments = args.length >= 2 ? args[1] : "";
-        final var context = new InlineQueryContext(handler, update, commandArguments);
+        final var context = new InlineQueryContext(sender, update, commandArguments);
         for (InlineQueryCommand cmd : commands) {
             cmd.accept(context);
         }
