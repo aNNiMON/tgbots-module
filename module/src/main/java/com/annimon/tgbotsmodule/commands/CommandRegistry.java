@@ -32,7 +32,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
 
     private String callbackCommandSplitPattern;
 
-    public CommandRegistry(@NotNull String botUsername,@NotNull Authority<TRole> authority) {
+    public CommandRegistry(@NotNull String botUsername, @NotNull Authority<TRole> authority) {
         this.authority = authority;
         this.botUsername = "@" + botUsername.toLowerCase(Locale.ENGLISH);
         textCommands = ArrayListMultimap.create();
