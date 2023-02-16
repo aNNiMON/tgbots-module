@@ -23,7 +23,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @SuppressWarnings({"UnusedReturnValue", "unused"})
 public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler {
 
-    private final BotHandler handler;
     private final String botUsername;
     private final ListMultimap<String, TextCommand> textCommands;
     private final List<RegexCommand> regexCommands;
@@ -33,10 +32,9 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
 
     private String callbackCommandSplitPattern;
 
-    public CommandRegistry(@NotNull BotHandler handler, @NotNull Authority<TRole> authority) {
-        this.handler = handler;
+    public CommandRegistry(@NotNull String botUsername,@NotNull Authority<TRole> authority) {
         this.authority = authority;
-        this.botUsername = "@" + handler.getBotUsername().toLowerCase(Locale.ENGLISH);
+        this.botUsername = "@" + botUsername.toLowerCase(Locale.ENGLISH);
         textCommands = ArrayListMultimap.create();
         regexCommands = new ArrayList<>();
         callbackCommands = ArrayListMultimap.create();
@@ -107,14 +105,14 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
     }
 
     @Override
-    public boolean handleUpdate(@NotNull Update update) {
+    public boolean handleUpdate(@NotNull Update update, BotHandler handler) {
         if (update.hasMessage()) {
             // Text commands
             if (update.getMessage().hasText()) {
-                if ((!textCommands.isEmpty()) && handleTextCommands(update)) {
+                if ((!textCommands.isEmpty()) && handleTextCommands(update, handler)) {
                     return true;
                 }
-                if ((!regexCommands.isEmpty()) && handleRegexCommands(update)) {
+                if ((!regexCommands.isEmpty()) && handleRegexCommands(update, handler)) {
                     return true;
                 }
             }
@@ -122,21 +120,21 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
             // Callback query commands
             final var data = update.getCallbackQuery().getData();
             if (data != null && !data.isEmpty()) {
-                if ((!callbackCommands.isEmpty()) && handleCallbackQueryCommands(update)) {
+                if ((!callbackCommands.isEmpty()) && handleCallbackQueryCommands(update, handler)) {
                     return true;
                 }
             }
         } else if (update.hasInlineQuery()) {
             // Inline query commands
             final var query = update.getInlineQuery().getQuery();
-            if ((!inlineCommands.isEmpty()) && handleInlineQueryCommands(update)) {
+            if ((!inlineCommands.isEmpty()) && handleInlineQueryCommands(update, handler)) {
                 return true;
             }
         }
         return false;
     }
 
-    protected boolean handleTextCommands(@NotNull Update update) {
+    protected boolean handleTextCommands(@NotNull Update update, BotHandler handler) {
         final var message = update.getMessage();
         final var args = message.getText().split("\\s+", 2);
         final var command = stringToCommand(args[0]);
@@ -156,7 +154,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         return true;
     }
 
-    protected boolean handleRegexCommands(@NotNull Update update) {
+    protected boolean handleRegexCommands(@NotNull Update update, BotHandler handler) {
         final var message = update.getMessage();
         final var text = message.getText();
         final long count = regexCommands.stream()
@@ -172,7 +170,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         return (count > 0);
     }
 
-    protected boolean handleCallbackQueryCommands(@NotNull Update update) {
+    protected boolean handleCallbackQueryCommands(@NotNull Update update, BotHandler handler) {
         final var query = update.getCallbackQuery();
         final var args = query.getData().split(callbackCommandSplitPattern, 2);
         final var command = args[0];
@@ -192,7 +190,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         return true;
     }
 
-    private boolean handleInlineQueryCommands(Update update) {
+    private boolean handleInlineQueryCommands(Update update, BotHandler handler) {
         final var inlineQuery = update.getInlineQuery();
         final var query = inlineQuery.getQuery();
         final var args = query.split("\\s+", 2);

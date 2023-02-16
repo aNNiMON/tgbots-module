@@ -34,7 +34,7 @@ public class TestBotHandler extends BotHandler {
         this.botConfig = botConfig;
 
         final var authority = new SimpleAuthority(this, botConfig.getCreatorId());
-        commands = new CommandRegistry<>(this, authority);
+        commands = new CommandRegistry<>(getBotUsername(), authority);
 
         commands.register(new SimpleCommand("/action", For.CREATOR, ctx -> {
             if (ctx.argumentsLength() != 1) return;
@@ -67,7 +67,7 @@ public class TestBotHandler extends BotHandler {
 
     @Override
     public BotApiMethod<?> onUpdate(@NotNull Update update) {
-        if (commands.handleUpdate(update)) {
+        if (commands.handleUpdate(update, this)) {
             return null;
         }
         // handle other updates

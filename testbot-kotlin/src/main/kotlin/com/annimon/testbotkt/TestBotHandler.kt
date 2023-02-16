@@ -17,7 +17,7 @@ import org.telegram.telegrambots.meta.api.objects.Update
 
 class TestBotHandler(private val botConfig: BotConfig) : BotHandler(botConfig.token) {
     private val authority = SimpleAuthority(this, botConfig.creatorId)
-    private val commands = CommandRegistry(this, authority)
+    private val commands = CommandRegistry(botUsername, authority)
 
     init {
         commands.register(SimpleCommand("/action", For.CREATOR) { ctx ->
@@ -64,7 +64,7 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler(botConfig.to
     }
 
     override fun onUpdate(update: Update): BotApiMethod<*>? {
-        if (commands.handleUpdate(update)) {
+        if (commands.handleUpdate(update, this)) {
             return null
         }
         // handle other updates
