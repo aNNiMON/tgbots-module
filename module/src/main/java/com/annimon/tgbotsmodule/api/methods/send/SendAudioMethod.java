@@ -162,13 +162,13 @@ public class SendAudioMethod implements
     }
 
     @Override
-    public InputFile getThumb() {
-        return method.getThumb();
+    public InputFile getThumbnail() {
+        return method.getThumbnail();
     }
 
     @Override
-    public SendAudioMethod setThumb(@NotNull InputFile thumb) {
-        method.setThumb(thumb);
+    public SendAudioMethod setThumbnail(@NotNull InputFile thumb) {
+        method.setThumbnail(thumb);
         return this;
     }
 

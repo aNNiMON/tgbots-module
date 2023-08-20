@@ -118,6 +118,15 @@ public class SendStickerMethod implements
         return this;
     }
 
+    public String getEmoji() {
+        return method.getEmoji();
+    }
+
+    public SendStickerMethod setEmoji(@NotNull String emoji) {
+        method.setEmoji(emoji);
+        return this;
+    }
+
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
         return sender.call(method);

@@ -25,6 +25,7 @@ import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope
 import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResult;
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.passport.dataerror.PassportElementError;
+import org.telegram.telegrambots.meta.api.objects.stickers.InputSticker;
 
 @SuppressWarnings("unused")
 public final class Methods {
@@ -482,6 +483,19 @@ public final class Methods {
         public static UnpinAllForumTopicMessagesMethod unpinAllForumTopicMessages(long chatId) {
             return new UnpinAllForumTopicMessagesMethod().setChatId(chatId);
         }
+
+
+        public static UnpinAllGeneralForumTopicMessagesMethod unpinAllGeneralForumTopicMessages() {
+            return new UnpinAllGeneralForumTopicMessagesMethod();
+        }
+
+        public static UnpinAllGeneralForumTopicMessagesMethod unpinAllGeneralForumTopicMessages(@NotNull String chatId) {
+            return unpinAllGeneralForumTopicMessages().setChatId(chatId);
+        }
+
+        public static UnpinAllGeneralForumTopicMessagesMethod unpinAllGeneralForumTopicMessages(long chatId) {
+            return unpinAllGeneralForumTopicMessages().setChatId(chatId);
+        }
     }
 
     public static class Games {
@@ -601,24 +615,8 @@ public final class Methods {
             return new AddStickerToSetMethod();
         }
 
-        public static AddStickerToSetMethod addStickerToSet(long userId, @NotNull String name, @NotNull String emojis) {
-            return new AddStickerToSetMethod().setUserId(userId).setName(name).setEmojis(emojis);
-        }
-
-        public static AddAnimatedStickerToSetMethod addAnimatedStickerToSet() {
-            return new AddAnimatedStickerToSetMethod();
-        }
-
-        public static AddAnimatedStickerToSetMethod addAnimatedStickerToSet(long userId, @NotNull String name, @NotNull String emojis) {
-            return new AddAnimatedStickerToSetMethod().setUserId(userId).setName(name).setEmojis(emojis);
-        }
-
-        public static AddWebmStickerToSetMethod addWebmStickerToSet() {
-            return new AddWebmStickerToSetMethod();
-        }
-
-        public static AddWebmStickerToSetMethod addWebmStickerToSet(long userId, @NotNull String name, @NotNull String emojis) {
-            return new AddWebmStickerToSetMethod().setUserId(userId).setName(name).setEmojis(emojis);
+        public static AddStickerToSetMethod addStickerToSet(long userId, @NotNull String name, @NotNull InputSticker sticker) {
+            return new AddStickerToSetMethod().setUserId(userId).setName(name).setSticker(sticker);
         }
 
 
@@ -627,29 +625,8 @@ public final class Methods {
         }
 
         public static CreateNewStickerSetMethod createNewStickerSet(
-                long userId, @NotNull String name,
-                @NotNull String title, @NotNull String emojis) {
-            return new CreateNewStickerSetMethod().setUserId(userId).setName(name).setTitle(title).setEmojis(emojis);
-        }
-
-        public static CreateNewAnimatedStickerSetMethod createNewAnimatedStickerSet() {
-            return new CreateNewAnimatedStickerSetMethod();
-        }
-
-        public static CreateNewAnimatedStickerSetMethod createNewAnimatedStickerSet(
-                long userId, @NotNull String name,
-                @NotNull String title, @NotNull String emojis) {
-            return new CreateNewAnimatedStickerSetMethod().setUserId(userId).setName(name).setTitle(title).setEmojis(emojis);
-        }
-
-        public static CreateNewWebmStickerSetMethod createNewWebmStickerSet() {
-            return new CreateNewWebmStickerSetMethod();
-        }
-
-        public static CreateNewWebmStickerSetMethod createNewWebmStickerSet(
-                long userId, @NotNull String name,
-                @NotNull String title, @NotNull String emojis) {
-            return new CreateNewWebmStickerSetMethod().setUserId(userId).setName(name).setTitle(title).setEmojis(emojis);
+                long userId, @NotNull String name, @NotNull String title) {
+            return new CreateNewStickerSetMethod().setUserId(userId).setName(name).setTitle(title);
         }
 
 
@@ -708,6 +685,11 @@ public final class Methods {
 
         public static UploadStickerFileMethod uploadStickerFile(long userId) {
             return new UploadStickerFileMethod().setUserId(userId);
+        }
+
+
+        public static SetCustomEmojiStickerSetThumbnailMethod setCustomEmojiStickerSetThumbnail() {
+            return new SetCustomEmojiStickerSetThumbnailMethod();
         }
     }
 
@@ -795,6 +777,69 @@ public final class Methods {
 
     public static GetMeMethod getMe() {
         return new GetMeMethod();
+    }
+
+
+    public static GetMyNameMethod getMyName() {
+        return new GetMyNameMethod();
+    }
+
+    public static GetMyNameMethod getMyName(@NotNull String languageCode) {
+        return new GetMyNameMethod().setLanguageCode(languageCode);
+    }
+
+    public static SetMyNameMethod setMyName() {
+        return new SetMyNameMethod();
+    }
+
+    public static SetMyNameMethod setMyName(@NotNull String name) {
+        return new SetMyNameMethod().setName(name);
+    }
+
+    public static SetMyNameMethod setMyName(@NotNull String name, @NotNull String languageCode) {
+        return new SetMyNameMethod().setName(name).setLanguageCode(languageCode);
+    }
+
+
+    public static GetMyDescriptionMethod getMyDescription() {
+        return new GetMyDescriptionMethod();
+    }
+
+    public static GetMyDescriptionMethod getMyDescription(@NotNull String languageCode) {
+        return new GetMyDescriptionMethod().setLanguageCode(languageCode);
+    }
+
+    public static SetMyDescriptionMethod setMyDescription() {
+        return new SetMyDescriptionMethod();
+    }
+
+    public static SetMyDescriptionMethod setMyDescription(@NotNull String description) {
+        return new SetMyDescriptionMethod().setDescription(description);
+    }
+
+    public static SetMyDescriptionMethod setMyDescription(@NotNull String description, @NotNull String languageCode) {
+        return new SetMyDescriptionMethod().setDescription(description).setLanguageCode(languageCode);
+    }
+
+
+    public static GetMyShortDescriptionMethod getMyShortDescription() {
+        return new GetMyShortDescriptionMethod();
+    }
+
+    public static GetMyShortDescriptionMethod getMyShortDescription(@NotNull String languageCode) {
+        return new GetMyShortDescriptionMethod().setLanguageCode(languageCode);
+    }
+
+    public static SetMyShortDescriptionMethod setMyShortDescription() {
+        return new SetMyShortDescriptionMethod();
+    }
+
+    public static SetMyShortDescriptionMethod setMyShortDescription(@NotNull String shortDescription) {
+        return new SetMyShortDescriptionMethod().setShortDescription(shortDescription);
+    }
+
+    public static SetMyShortDescriptionMethod setMyShortDescription(@NotNull String shortDescription, @NotNull String languageCode) {
+        return new SetMyShortDescriptionMethod().setShortDescription(shortDescription).setLanguageCode(languageCode);
     }
 
 

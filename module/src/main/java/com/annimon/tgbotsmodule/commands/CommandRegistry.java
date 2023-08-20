@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-@SuppressWarnings({"UnusedReturnValue", "unused"})
+@SuppressWarnings("RedundantIfStatement")
 public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler {
 
     private final String botUsername;
@@ -126,7 +126,6 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
             }
         } else if (update.hasInlineQuery()) {
             // Inline query commands
-            final var query = update.getInlineQuery().getQuery();
             if ((!inlineCommands.isEmpty()) && handleInlineQueryCommands(sender, update)) {
                 return true;
             }

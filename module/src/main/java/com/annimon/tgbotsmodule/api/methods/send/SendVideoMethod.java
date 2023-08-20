@@ -164,13 +164,13 @@ public class SendVideoMethod implements
     }
 
     @Override
-    public InputFile getThumb() {
-        return method.getThumb();
+    public InputFile getThumbnail() {
+        return method.getThumbnail();
     }
 
     @Override
-    public SendVideoMethod setThumb(InputFile thumb) {
-        method.setThumb(thumb);
+    public SendVideoMethod setThumbnail(InputFile thumb) {
+        method.setThumbnail(thumb);
         return this;
     }
 

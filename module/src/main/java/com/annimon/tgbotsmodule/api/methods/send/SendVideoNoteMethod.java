@@ -123,13 +123,13 @@ public class SendVideoNoteMethod implements
     }
 
     @Override
-    public InputFile getThumb() {
-        return method.getThumb();
+    public InputFile getThumbnail() {
+        return method.getThumbnail();
     }
 
     @Override
-    public SendVideoNoteMethod setThumb(InputFile thumb) {
-        method.setThumb(thumb);
+    public SendVideoNoteMethod setThumbnail(InputFile thumb) {
+        method.setThumbnail(thumb);
         return this;
     }
 

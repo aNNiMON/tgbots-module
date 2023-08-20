@@ -164,13 +164,13 @@ public class SendAnimationMethod implements
     }
 
     @Override
-    public InputFile getThumb() {
-        return method.getThumb();
+    public InputFile getThumbnail() {
+        return method.getThumbnail();
     }
 
     @Override
-    public SendAnimationMethod setThumb(InputFile thumb) {
-        method.setThumb(thumb);
+    public SendAnimationMethod setThumbnail(InputFile thumb) {
+        method.setThumbnail(thumb);
         return this;
     }
 

@@ -5,7 +5,24 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 
 public interface ThumbMethod<M extends Method, T extends Serializable> extends Method<T> {
 
-    InputFile getThumb();
+    InputFile getThumbnail();
 
-    M setThumb(InputFile thumb);
+    M setThumbnail(InputFile thumb);
+
+
+    /**
+     * @deprecated Use {@link #getThumbnail()}
+     */
+    @Deprecated
+    default InputFile getThumb() {
+        return getThumbnail();
+    }
+
+    /**
+     * @deprecated Use {@link #setThumbnail(InputFile)}
+     */
+    @Deprecated
+    default M setThumb(InputFile thumb) {
+        return setThumbnail(thumb);
+    }
 }
