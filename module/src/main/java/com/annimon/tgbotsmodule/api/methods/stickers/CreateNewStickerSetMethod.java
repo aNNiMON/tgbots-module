@@ -1,22 +1,24 @@
 package com.annimon.tgbotsmodule.api.methods.stickers;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.InputFileMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.StickerFormatMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
+import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.stickers.CreateNewStickerSet;
-import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.stickers.MaskPosition;
+import org.telegram.telegrambots.meta.api.objects.stickers.InputSticker;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class CreateNewStickerSetMethod implements
         UserMethod<CreateNewStickerSetMethod, Boolean>,
-        InputFileMethod<CreateNewStickerSetMethod, Boolean> {
+        StickerFormatMethod<CreateNewStickerSetMethod, Boolean> {
+
 
     private static final String REGULAR_TYPE = "regular";
     private static final String MASK_TYPE = "mask";
+    private static final String CUSTOM_EMOJI_TYPE = "custom_emoji";
     private final CreateNewStickerSet method;
 
     public CreateNewStickerSetMethod() {
@@ -38,14 +40,12 @@ public class CreateNewStickerSetMethod implements
         return this;
     }
 
-    @Override
-    public InputFile getFile() {
-        return method.getPngSticker();
+    public List<InputSticker> getStickers() {
+        return method.getStickers();
     }
 
-    @Override
-    public CreateNewStickerSetMethod setFile(@NotNull InputFile file) {
-        method.setPngSticker(file);
+    public CreateNewStickerSetMethod setStickers(@NotNull List<InputSticker> stickers) {
+        method.setStickers(stickers);
         return this;
     }
 
@@ -67,12 +67,14 @@ public class CreateNewStickerSetMethod implements
         return this;
     }
 
-    public String getEmojis() {
-        return method.getEmojis();
+    @Override
+    public String getStickerFormat() {
+        return method.getStickerFormat();
     }
 
-    public CreateNewStickerSetMethod setEmojis(@NotNull String emojis) {
-        method.setEmojis(emojis);
+    @Override
+    public CreateNewStickerSetMethod setStickerFormat(@NotNull String stickerFormat) {
+        method.setStickerFormat(stickerFormat);
         return this;
     }
 
@@ -101,12 +103,20 @@ public class CreateNewStickerSetMethod implements
         return setStickerType(MASK_TYPE);
     }
 
-    public MaskPosition getMaskPosition() {
-        return method.getMaskPosition();
+    public boolean isCustomEmoji() {
+        return CUSTOM_EMOJI_TYPE.equals(getStickerType());
     }
 
-    public CreateNewStickerSetMethod setMaskPosition(MaskPosition maskPosition) {
-        method.setMaskPosition(maskPosition);
+    public CreateNewStickerSetMethod setCustomEmojiType() {
+        return setStickerType(CUSTOM_EMOJI_TYPE);
+    }
+
+    public boolean getNeedsRepainting() {
+        return Boolean.TRUE.equals(method.getNeedsRepainting());
+    }
+
+    public CreateNewStickerSetMethod setNeedsRepainting(boolean needsRepainting) {
+        method.setNeedsRepainting(needsRepainting);
         return this;
     }
 

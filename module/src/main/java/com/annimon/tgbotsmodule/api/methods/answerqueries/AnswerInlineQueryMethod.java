@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.AnswerInlineQuery;
 import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResult;
+import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResultsButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class AnswerInlineQueryMethod implements Method<Boolean> {
@@ -58,21 +59,46 @@ public class AnswerInlineQueryMethod implements Method<Boolean> {
         return this;
     }
 
+    /**
+     * @deprecated Use {@link #getButton()}
+     */
+    @Deprecated
     public String getSwitchPmText() {
         return method.getSwitchPmText();
     }
 
+    /**
+     * @deprecated Use {@link #setButton(InlineQueryResultsButton)}
+     */
+    @Deprecated
     public AnswerInlineQueryMethod setSwitchPmText(String switchPmText) {
         method.setSwitchPmText(switchPmText);
         return this;
     }
 
+    /**
+     * @deprecated Use {@link #getButton()}
+     */
+    @Deprecated
     public String getSwitchPmParameter() {
         return method.getSwitchPmParameter();
     }
 
+    /**
+     * @deprecated Use {@link #setButton(InlineQueryResultsButton)}
+     */
+    @Deprecated
     public AnswerInlineQueryMethod setSwitchPmParameter(String switchPmParameter) {
         method.setSwitchPmParameter(switchPmParameter);
+        return this;
+    }
+
+    public InlineQueryResultsButton getButton() {
+        return method.getButton();
+    }
+
+    public AnswerInlineQueryMethod setButton(@Nullable InlineQueryResultsButton button) {
+        method.setButton(button);
         return this;
     }
 

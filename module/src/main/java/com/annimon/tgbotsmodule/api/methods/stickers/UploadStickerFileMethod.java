@@ -1,9 +1,9 @@
 package com.annimon.tgbotsmodule.api.methods.stickers;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.InputFileMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.StickerFormatMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.io.InputStream;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,12 +14,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class UploadStickerFileMethod implements
         UserMethod<UploadStickerFileMethod, File>,
-        InputFileMethod<UploadStickerFileMethod, File> {
+        InputFileMethod<UploadStickerFileMethod, File>,
+        StickerFormatMethod<UploadStickerFileMethod, File> {
 
     private final UploadStickerFile method;
 
     public UploadStickerFileMethod() {
         this(new UploadStickerFile());
+
     }
 
     public UploadStickerFileMethod(@NotNull UploadStickerFile method) {
@@ -38,13 +40,24 @@ public class UploadStickerFileMethod implements
     }
 
     @Override
+    public String getStickerFormat() {
+        return method.getStickerFormat();
+    }
+
+    @Override
+    public UploadStickerFileMethod setStickerFormat(@NotNull String stickerFormat) {
+        method.setStickerFormat(stickerFormat);
+        return this;
+    }
+
+    @Override
     public InputFile getFile() {
-        return method.getPngSticker();
+        return method.getSticker();
     }
 
     @Override
     public UploadStickerFileMethod setFile(@NotNull InputFile file) {
-        method.setPngSticker(file);
+        method.setSticker(file);
         return this;
     }
 
