@@ -158,7 +158,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         final var text = message.getText();
         final long count = regexCommands.stream()
                 .map(cmd -> Map.entry(cmd, cmd.pattern().matcher(text)))
-                .filter(e -> e.getValue().find())
+                .filter(e -> e.getValue().matches())
                 .filter(e -> authority.hasRights(sender, update, message.getFrom(), e.getKey().authority()))
                 .peek(e -> {
                     final RegexCommand command = e.getKey();
