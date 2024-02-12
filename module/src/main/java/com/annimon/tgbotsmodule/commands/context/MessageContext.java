@@ -22,6 +22,10 @@ public class MessageContext extends Context {
         this.argumentsLimit = 0;
     }
 
+    public @NotNull Long chatId() {
+        return chatId;
+    }
+
     public @NotNull Message message() {
         return update.getMessage();
     }
@@ -30,16 +34,24 @@ public class MessageContext extends Context {
         return message().getMessageId();
     }
 
-    public @NotNull Long chatId() {
-        return chatId;
-    }
-
     public @Nullable Integer messageThreadId() {
         return message().getMessageThreadId();
     }
 
+    public boolean isTopicMessage() {
+        return message().isTopicMessage();
+    }
+
+    public @Nullable Integer messageThreadIdForReplies() {
+        if (isTopicMessage()) {
+            return message().getMessageThreadId();
+        }
+        return null;
+    }
+
     public @NotNull SendAnimationMethod replyWithAnimation() {
-        return Methods.sendAnimation(chatId);
+        return Methods.sendAnimation(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendAnimationMethod replyToMessageWithAnimation() {
@@ -49,7 +61,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendAudioMethod replyWithAudio() {
-        return Methods.sendAudio(chatId);
+        return Methods.sendAudio(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendAudioMethod replyToMessageWithAudio() {
@@ -59,7 +72,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendContactMethod replyWithContact() {
-        return Methods.sendContact().setChatId(chatId);
+        return Methods.sendContact().setChatId(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendContactMethod replyToMessageWithContact() {
@@ -69,7 +83,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendDiceMethod replyWithDice() {
-        return Methods.sendDice(chatId);
+        return Methods.sendDice(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendDiceMethod replyToMessageWithDice() {
@@ -79,7 +94,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendDocumentMethod replyWithDocument() {
-        return Methods.sendDocument(chatId);
+        return Methods.sendDocument(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendDocumentMethod replyToMessageWithDocument() {
@@ -89,7 +105,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendGameMethod replyWithGame() {
-        return Methods.Games.sendGame().setChatId(chatId);
+        return Methods.Games.sendGame().setChatId(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendGameMethod replyToMessageWithGame() {
@@ -99,7 +116,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendInvoiceMethod replyWithInvoice() {
-        return Methods.Payments.sendInvoice(chatId);
+        return Methods.Payments.sendInvoice(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendInvoiceMethod replyToMessageWithInvoice() {
@@ -109,7 +127,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendLocationMethod replyWithLocation() {
-        return Methods.sendLocation().setChatId(chatId);
+        return Methods.sendLocation().setChatId(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendLocationMethod replyToMessageWithLocation() {
@@ -119,7 +138,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendMediaGroupMethod replyWithMediaGroup() {
-        return Methods.sendMediaGroup().setChatId(chatId);
+        return Methods.sendMediaGroup().setChatId(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendMediaGroupMethod replyToMessageWithMediaGroup() {
@@ -129,11 +149,13 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendMessageMethod reply() {
-        return Methods.sendMessage().setChatId(chatId);
+        return Methods.sendMessage().setChatId(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendMessageMethod reply(@NotNull String text) {
-        return Methods.sendMessage(chatId, text);
+        return Methods.sendMessage(chatId, text)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendMessageMethod replyToMessage() {
@@ -149,7 +171,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendPhotoMethod replyWithPhoto() {
-        return Methods.sendPhoto(chatId);
+        return Methods.sendPhoto(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendPhotoMethod replyToMessageWithPhoto() {
@@ -159,7 +182,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendStickerMethod replyWithSticker() {
-        return Methods.Stickers.sendSticker(chatId);
+        return Methods.Stickers.sendSticker(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendStickerMethod replyToMessageWithSticker() {
@@ -169,7 +193,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendVenueMethod replyWithVenue() {
-        return Methods.sendVenue().setChatId(chatId);
+        return Methods.sendVenue().setChatId(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendVenueMethod replyToMessageWithVenue() {
@@ -179,7 +204,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendVideoMethod replyWithVideo() {
-        return Methods.sendVideo(chatId);
+        return Methods.sendVideo(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendVideoMethod replyToMessageWithVideo() {
@@ -189,7 +215,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendVideoNoteMethod replyWithVideoNote() {
-        return Methods.sendVideoNote(chatId);
+        return Methods.sendVideoNote(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendVideoNoteMethod replyToMessageWithVideoNote() {
@@ -199,7 +226,8 @@ public class MessageContext extends Context {
     }
 
     public @NotNull SendVoiceMethod replyWithVoice() {
-        return Methods.sendVoice(chatId);
+        return Methods.sendVoice(chatId)
+                .setMessageThreadId(messageThreadIdForReplies());
     }
 
     public @NotNull SendVoiceMethod replyToMessageWithVoice() {
