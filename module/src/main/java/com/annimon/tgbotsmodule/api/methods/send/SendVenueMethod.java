@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendVenue;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -186,6 +187,16 @@ public class SendVenueMethod implements
         return this;
     }
 
+    @Override
+    public ReplyParameters getReplyParameters() {
+        return method.getReplyParameters();
+    }
+
+    @Override
+    public SendVenueMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
+        method.setReplyParameters(replyParameters);
+        return this;
+    }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {

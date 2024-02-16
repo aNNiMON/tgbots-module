@@ -1,30 +1,32 @@
 package com.annimon.tgbotsmodule.api.methods.other;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageThreadMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.NotificationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.RemoveCaptionMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.api.methods.ForwardMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.methods.CopyMessages;
+import org.telegram.telegrambots.meta.api.objects.MessageId;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class ForwardMessageMethod implements
-        ChatMessageMethod<ForwardMessageMethod, Message>,
-        ChatMessageThreadMethod<ForwardMessageMethod, Message>,
-        NotificationMethod<ForwardMessageMethod, Message>,
-        ProtectedContentMethod<ForwardMessageMethod, Message> {
+public class CopyMessagesMethod implements
+        ChatMessageThreadMethod<CopyMessagesMethod, ArrayList<MessageId>>,
+        NotificationMethod<CopyMessagesMethod, ArrayList<MessageId>>,
+        ProtectedContentMethod<CopyMessagesMethod, ArrayList<MessageId>>,
+        RemoveCaptionMethod<CopyMessagesMethod, ArrayList<MessageId>> {
 
-    private final ForwardMessage method;
+    private final CopyMessages method;
 
-    public ForwardMessageMethod() {
-        this(new ForwardMessage());
+    public CopyMessagesMethod() {
+        this(new CopyMessages());
     }
 
-    public ForwardMessageMethod(@NotNull ForwardMessage method) {
+    public CopyMessagesMethod(@NotNull CopyMessages method) {
         this.method = method;
     }
 
@@ -34,29 +36,16 @@ public class ForwardMessageMethod implements
     }
 
     @Override
-    public ForwardMessageMethod setChatId(@NotNull String chatId) {
+    public CopyMessagesMethod setChatId(@NotNull String chatId) {
         method.setChatId(chatId);
         return this;
     }
 
-    @Override
-    public Integer getMessageId() {
-        return method.getMessageId();
-    }
-
-    @Override
-    public ForwardMessageMethod setMessageId(@NotNull Integer messageId) {
-        method.setMessageId(messageId);
-        return this;
-    }
-
-    @Override
     public Integer getMessageThreadId() {
         return method.getMessageThreadId();
     }
 
-    @Override
-    public ForwardMessageMethod setMessageThreadId(@NotNull Integer messageThreadId) {
+    public CopyMessagesMethod setMessageThreadId(@NotNull Integer messageThreadId) {
         method.setMessageThreadId(messageThreadId);
         return this;
     }
@@ -65,13 +54,22 @@ public class ForwardMessageMethod implements
         return method.getFromChatId();
     }
 
-    public ForwardMessageMethod setFromChatId(@NotNull String chatId) {
+    public CopyMessagesMethod setFromChatId(@NotNull String chatId) {
         method.setFromChatId(chatId);
         return this;
     }
 
-    public ForwardMessageMethod setFromChatId(long chatId) {
+    public CopyMessagesMethod setFromChatId(long chatId) {
         method.setFromChatId(chatId);
+        return this;
+    }
+
+    public List<Integer> getMessageIds() {
+        return method.getMessageIds();
+    }
+
+    public CopyMessagesMethod setMessageIds(@NotNull List<Integer> messageIds) {
+        method.setMessageIds(messageIds);
         return this;
     }
 
@@ -81,13 +79,13 @@ public class ForwardMessageMethod implements
     }
 
     @Override
-    public ForwardMessageMethod enableNotification() {
+    public CopyMessagesMethod enableNotification() {
         method.setDisableNotification(false);
         return this;
     }
 
     @Override
-    public ForwardMessageMethod disableNotification() {
+    public CopyMessagesMethod disableNotification() {
         method.setDisableNotification(true);
         return this;
     }
@@ -98,19 +96,30 @@ public class ForwardMessageMethod implements
     }
 
     @Override
-    public ForwardMessageMethod setProtectContent(Boolean protectContent) {
+    public CopyMessagesMethod setProtectContent(Boolean protectContent) {
         method.setProtectContent(protectContent);
         return this;
     }
 
     @Override
-    public Message call(@NotNull CommonAbsSender sender) {
+    public Boolean getRemoveCaption() {
+        return method.getRemoveCaption();
+    }
+
+    @Override
+    public CopyMessagesMethod setRemoveCaption(Boolean removeCaption) {
+        method.setRemoveCaption(removeCaption);
+        return this;
+    }
+
+    @Override
+    public ArrayList<MessageId> call(@NotNull CommonAbsSender sender) {
         return sender.call(method);
     }
 
     @Override
     public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Message> responseConsumer,
+                          @Nullable Consumer<? super ArrayList<MessageId>> responseConsumer,
                           @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
                           @Nullable Consumer<Exception> exceptionConsumer) {
         sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);

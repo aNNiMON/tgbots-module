@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.polls.SendPollMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -8,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -124,6 +126,17 @@ public class SendStickerMethod implements
 
     public SendStickerMethod setEmoji(@NotNull String emoji) {
         method.setEmoji(emoji);
+        return this;
+    }
+
+    @Override
+    public ReplyParameters getReplyParameters() {
+        return method.getReplyParameters();
+    }
+
+    @Override
+    public SendStickerMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
+        method.setReplyParameters(replyParameters);
         return this;
     }
 

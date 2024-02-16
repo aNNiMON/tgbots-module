@@ -1,17 +1,12 @@
 package com.annimon.tgbotsmodule.api.methods.polls;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.polls.StopPoll;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.polls.Poll;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class StopPollMethod implements

@@ -1106,11 +1106,26 @@ public final class Methods {
     public static DeleteMessageMethod deleteMessage() {
         return new DeleteMessageMethod();
     }
+
     public static DeleteMessageMethod deleteMessage(@NotNull String chatId, int messageId) {
         return new DeleteMessageMethod().setChatId(chatId).setMessageId(messageId);
     }
+
     public static DeleteMessageMethod deleteMessage(long chatId, int messageId) {
         return new DeleteMessageMethod().setChatId(chatId).setMessageId(messageId);
+    }
+
+
+    public static DeleteMessagesMethod deleteMessages() {
+        return new DeleteMessagesMethod();
+    }
+
+    public static DeleteMessagesMethod deleteMessages(@NotNull String chatId) {
+        return new DeleteMessagesMethod().setChatId(chatId);
+    }
+
+    public static DeleteMessagesMethod deleteMessages(long chatId) {
+        return new DeleteMessagesMethod().setChatId(chatId);
     }
 
 
@@ -1238,6 +1253,19 @@ public final class Methods {
     }
 
 
+    public static ForwardMessagesMethod forwardMessages() {
+        return new ForwardMessagesMethod();
+    }
+
+    public static ForwardMessagesMethod forwardMessages(@NotNull String toChatId, @NotNull String fromChatId) {
+        return new ForwardMessagesMethod().setChatId(toChatId).setFromChatId(fromChatId);
+    }
+
+    public static ForwardMessagesMethod forwardMessages(long toChatId, long fromChatId) {
+        return new ForwardMessagesMethod().setChatId(toChatId).setFromChatId(fromChatId);
+    }
+
+
     public static CopyMessageMethod copyMessage() {
         return new CopyMessageMethod();
     }
@@ -1249,6 +1277,19 @@ public final class Methods {
 
     public static CopyMessageMethod copyMessage(long toChatId, long fromChatId, int messageId) {
         return new CopyMessageMethod().setChatId(toChatId).setFromChatId(fromChatId).setMessageId(messageId);
+    }
+
+
+    public static CopyMessagesMethod copyMessages() {
+        return new CopyMessagesMethod();
+    }
+
+    public static CopyMessagesMethod copyMessages(@NotNull String toChatId, @NotNull String fromChatId) {
+        return new CopyMessagesMethod().setChatId(toChatId).setFromChatId(fromChatId);
+    }
+
+    public static CopyMessagesMethod copyMessages(long toChatId, long fromChatId) {
+        return new CopyMessagesMethod().setChatId(toChatId).setFromChatId(fromChatId);
     }
 
 
@@ -1275,6 +1316,19 @@ public final class Methods {
 
     public static SendChatActionMethod sendChatAction(long chatId, @NotNull ActionType actionType) {
         return new SendChatActionMethod().setChatId(chatId).setAction(actionType);
+    }
+
+
+    public static SetMessageReactionMethod setMessageReaction() {
+        return new SetMessageReactionMethod();
+    }
+
+    public static SetMessageReactionMethod setMessageReaction(@NotNull String chatId, int messageId) {
+        return new SetMessageReactionMethod().setChatId(chatId).setMessageId(messageId);
+    }
+
+    public static SetMessageReactionMethod setMessageReaction(long chatId, int messageId) {
+        return new SetMessageReactionMethod().setChatId(chatId).setMessageId(messageId);
     }
 
 

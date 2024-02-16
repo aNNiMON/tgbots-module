@@ -15,6 +15,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendAnimation;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
+import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -211,6 +212,17 @@ public class SendAnimationMethod implements
     @Override
     public SendAnimationMethod setHasSpoiler(Boolean spoiler) {
         method.setHasSpoiler(spoiler);
+        return this;
+    }
+
+    @Override
+    public ReplyParameters getReplyParameters() {
+        return method.getReplyParameters();
+    }
+
+    @Override
+    public SendAnimationMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
+        method.setReplyParameters(replyParameters);
         return this;
     }
 

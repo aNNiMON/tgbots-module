@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendVideoNote;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -150,6 +151,17 @@ public class SendVideoNoteMethod implements
     @Override
     public SendVideoNoteMethod setProtectContent(Boolean protectContent) {
         method.setProtectContent(protectContent);
+        return this;
+    }
+
+    @Override
+    public ReplyParameters getReplyParameters() {
+        return method.getReplyParameters();
+    }
+
+    @Override
+    public SendVideoNoteMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
+        method.setReplyParameters(replyParameters);
         return this;
     }
 

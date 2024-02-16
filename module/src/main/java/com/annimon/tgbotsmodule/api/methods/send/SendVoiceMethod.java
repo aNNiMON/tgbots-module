@@ -13,6 +13,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendVoice;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
+import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -167,6 +168,17 @@ public class SendVoiceMethod implements
     @Override
     public SendVoiceMethod setProtectContent(Boolean protectContent) {
         method.setProtectContent(protectContent);
+        return this;
+    }
+
+    @Override
+    public ReplyParameters getReplyParameters() {
+        return method.getReplyParameters();
+    }
+
+    @Override
+    public SendVoiceMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
+        method.setReplyParameters(replyParameters);
         return this;
     }
 

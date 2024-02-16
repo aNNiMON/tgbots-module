@@ -6,6 +6,7 @@ import com.annimon.tgbotsmodule.api.methods.updatingmessages.EditMessageTextMeth
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+import org.telegram.telegrambots.meta.api.objects.MaybeInaccessibleMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -25,7 +26,8 @@ public class CallbackQueryContext extends Context {
     }
 
     public Message message() {
-        return callbackQuery().getMessage();
+        MaybeInaccessibleMessage message = callbackQuery().getMessage();
+        return (message instanceof Message) ? ((Message) message) : null;
     }
 
     public String data() {

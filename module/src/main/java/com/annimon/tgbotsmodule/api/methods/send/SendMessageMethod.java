@@ -11,8 +11,10 @@ import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.LinkPreviewOptions;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
+import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -161,6 +163,26 @@ public class SendMessageMethod implements
 
     public SendMessageMethod enableWebPagePreview() {
         method.enableWebPagePreview();
+        return this;
+    }
+
+    @Override
+    public ReplyParameters getReplyParameters() {
+        return method.getReplyParameters();
+    }
+
+    @Override
+    public SendMessageMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
+        method.setReplyParameters(replyParameters);
+        return this;
+    }
+
+    public LinkPreviewOptions getLinkPreviewOptions() {
+        return method.getLinkPreviewOptions();
+    }
+
+    public SendMessageMethod setLinkPreviewOptions(LinkPreviewOptions options) {
+        method.setLinkPreviewOptions(options);
         return this;
     }
 

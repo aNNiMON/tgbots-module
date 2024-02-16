@@ -12,6 +12,7 @@ import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.meta.api.objects.LinkPreviewOptions;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -130,6 +131,15 @@ public class EditMessageTextMethod implements
 
     public EditMessageTextMethod enableWebPagePreview() {
         method.enableWebPagePreview();
+        return this;
+    }
+
+    public LinkPreviewOptions getLinkPreviewOptions() {
+        return method.getLinkPreviewOptions();
+    }
+
+    public EditMessageTextMethod setLinkPreviewOptions(LinkPreviewOptions options) {
+        method.setLinkPreviewOptions(options);
         return this;
     }
 

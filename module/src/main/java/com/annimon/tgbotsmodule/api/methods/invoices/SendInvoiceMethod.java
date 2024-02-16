@@ -3,6 +3,7 @@ package com.annimon.tgbotsmodule.api.methods.invoices;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SendableMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.send.SendGameMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
 import java.util.function.Consumer;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.invoices.SendInvoice;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -310,6 +312,17 @@ public class SendInvoiceMethod implements
 
     public SendInvoiceMethod setSendPhoneNumberToProvider(Boolean sendPhoneNumberToProvider) {
         method.setSendPhoneNumberToProvider(sendPhoneNumberToProvider);
+        return this;
+    }
+
+    @Override
+    public ReplyParameters getReplyParameters() {
+        return null; // method.getReplyParameters(); TODO fix after ruben
+    }
+
+    @Override
+    public SendInvoiceMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
+        // method.setReplyParameters(replyParameters);
         return this;
     }
 

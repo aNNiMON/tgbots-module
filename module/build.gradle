@@ -24,7 +24,7 @@ ext.junit5Version = '5.9.0'
 ext.jaxbVersion = '2.3.1'
 
 dependencies {
-    api "org.telegram:telegrambots:6.8.0"
+    api "org.telegram:telegrambots:6.9.7.0"
     api 'com.google.guava:guava:31.1-jre'
     api "com.squareup.retrofit2:retrofit:$retrofitVersion"
     api "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
