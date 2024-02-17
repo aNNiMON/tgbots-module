@@ -141,6 +141,33 @@ public class PromoteChatMemberMethod implements ChatMemberMethod<PromoteChatMemb
         return this;
     }
 
+    public Boolean canPostStories() {
+        return method.getCanPostStories();
+    }
+
+    public PromoteChatMemberMethod setCanPostStories(Boolean canPostStories) {
+        method.setCanPostStories(canPostStories);
+        return this;
+    }
+
+    public Boolean canEditStories() {
+        return method.getCanEditStories();
+    }
+
+    public PromoteChatMemberMethod setCanEditStories(Boolean canEditStories) {
+        method.setCanEditStories(canEditStories);
+        return this;
+    }
+
+    public Boolean canDeleteStories() {
+        return method.getCanDeleteStories();
+    }
+
+    public PromoteChatMemberMethod setCanDeleteStories(Boolean canDeleteStories) {
+        method.setCanDeleteStories(canDeleteStories);
+        return this;
+    }
+
     public Boolean isAnonymous() {
         return method.getIsAnonymous();
     }

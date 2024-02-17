@@ -26,6 +26,7 @@ import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQuery
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.passport.dataerror.PassportElementError;
 import org.telegram.telegrambots.meta.api.objects.stickers.InputSticker;
+import org.telegram.telegrambots.meta.api.objects.stickers.MaskPosition;
 
 @SuppressWarnings("unused")
 public final class Methods {
@@ -40,11 +41,11 @@ public final class Methods {
         }
 
         public static ApproveChatJoinRequestMethod approveChatJoinRequest(@NotNull String chatId, long userId) {
-            return new ApproveChatJoinRequestMethod().setChatId(chatId).setUserId(userId);
+            return approveChatJoinRequest().setChatId(chatId).setUserId(userId);
         }
 
         public static ApproveChatJoinRequestMethod approveChatJoinRequest(long chatId, long userId) {
-            return new ApproveChatJoinRequestMethod().setChatId(chatId).setUserId(userId);
+            return approveChatJoinRequest().setChatId(chatId).setUserId(userId);
         }
 
 
@@ -53,11 +54,11 @@ public final class Methods {
         }
 
         public static CreateChatInviteLinkMethod createChatInviteLink(@NotNull String chatId) {
-            return new CreateChatInviteLinkMethod().setChatId(chatId);
+            return createChatInviteLink().setChatId(chatId);
         }
 
         public static CreateChatInviteLinkMethod createChatInviteLink(long chatId) {
-            return new CreateChatInviteLinkMethod().setChatId(chatId);
+            return createChatInviteLink().setChatId(chatId);
         }
 
 
@@ -66,11 +67,11 @@ public final class Methods {
         }
 
         public static DeclineChatJoinRequestMethod declineChatJoinRequest(@NotNull String chatId, long userId) {
-            return new DeclineChatJoinRequestMethod().setChatId(chatId).setUserId(userId);
+            return declineChatJoinRequest().setChatId(chatId).setUserId(userId);
         }
 
         public static DeclineChatJoinRequestMethod declineChatJoinRequest(long chatId, long userId) {
-            return new DeclineChatJoinRequestMethod().setChatId(chatId).setUserId(userId);
+            return declineChatJoinRequest().setChatId(chatId).setUserId(userId);
         }
 
 
@@ -79,11 +80,11 @@ public final class Methods {
         }
 
         public static DeleteChatPhotoMethod deleteChatPhoto(@NotNull String chatId) {
-            return new DeleteChatPhotoMethod().setChatId(chatId);
+            return deleteChatPhoto().setChatId(chatId);
         }
 
         public static DeleteChatPhotoMethod deleteChatPhoto(long chatId) {
-            return new DeleteChatPhotoMethod().setChatId(chatId);
+            return deleteChatPhoto().setChatId(chatId);
         }
 
 
@@ -92,11 +93,11 @@ public final class Methods {
         }
 
         public static DeleteChatStickerSetMethod deleteChatStickerSet(@NotNull String chatId) {
-            return new DeleteChatStickerSetMethod().setChatId(chatId);
+            return deleteChatStickerSet().setChatId(chatId);
         }
 
         public static DeleteChatStickerSetMethod deleteChatStickerSet(long chatId) {
-            return new DeleteChatStickerSetMethod().setChatId(chatId);
+            return deleteChatStickerSet().setChatId(chatId);
         }
 
 
@@ -105,11 +106,11 @@ public final class Methods {
         }
 
         public static EditChatInviteLinkMethod editChatInviteLink(@NotNull String chatId, String inviteLink) {
-            return new EditChatInviteLinkMethod().setChatId(chatId).setInviteLink(inviteLink);
+            return editChatInviteLink().setChatId(chatId).setInviteLink(inviteLink);
         }
 
         public static EditChatInviteLinkMethod editChatInviteLink(long chatId, String inviteLink) {
-            return new EditChatInviteLinkMethod().setChatId(chatId).setInviteLink(inviteLink);
+            return editChatInviteLink().setChatId(chatId).setInviteLink(inviteLink);
         }
 
 
@@ -118,11 +119,11 @@ public final class Methods {
         }
 
         public static ExportChatInviteLinkMethod exportChatInviteLink(@NotNull String chatId) {
-            return new ExportChatInviteLinkMethod().setChatId(chatId);
+            return exportChatInviteLink().setChatId(chatId);
         }
 
         public static ExportChatInviteLinkMethod exportChatInviteLink(long chatId) {
-            return new ExportChatInviteLinkMethod().setChatId(chatId);
+            return exportChatInviteLink().setChatId(chatId);
         }
 
 
@@ -131,11 +132,11 @@ public final class Methods {
         }
 
         public static BanChatMemberMethod banChatMember(@NotNull String chatId, long userId) {
-            return new BanChatMemberMethod().setChatId(chatId).setUserId(userId);
+            return banChatMember().setChatId(chatId).setUserId(userId);
         }
 
         public static BanChatMemberMethod banChatMember(long chatId, long userId) {
-            return new BanChatMemberMethod().setChatId(chatId).setUserId(userId);
+            return banChatMember().setChatId(chatId).setUserId(userId);
         }
 
 
@@ -144,11 +145,11 @@ public final class Methods {
         }
 
         public static BanChatSenderChatMethod banChatSenderChat(@NotNull String chatId, long senderChatId) {
-            return new BanChatSenderChatMethod().setChatId(chatId).setSenderChatId(senderChatId);
+            return banChatSenderChat().setChatId(chatId).setSenderChatId(senderChatId);
         }
 
         public static BanChatSenderChatMethod banChatSenderChat(long chatId, long senderChatId) {
-            return new BanChatSenderChatMethod().setChatId(chatId).setSenderChatId(senderChatId);
+            return banChatSenderChat().setChatId(chatId).setSenderChatId(senderChatId);
         }
 
 
@@ -157,11 +158,11 @@ public final class Methods {
         }
 
         public static PinChatMessageMethod pinChatMessage(@NotNull String chatId, int messageId) {
-            return new PinChatMessageMethod().setChatId(chatId).setMessageId(messageId);
+            return pinChatMessage().setChatId(chatId).setMessageId(messageId);
         }
 
         public static PinChatMessageMethod pinChatMessage(long chatId, int messageId) {
-            return new PinChatMessageMethod().setChatId(chatId).setMessageId(messageId);
+            return pinChatMessage().setChatId(chatId).setMessageId(messageId);
         }
 
 
@@ -170,11 +171,11 @@ public final class Methods {
         }
 
         public static PromoteChatMemberMethod promoteChatMember(@NotNull String chatId, long userId) {
-            return new PromoteChatMemberMethod().setChatId(chatId).setUserId(userId);
+            return promoteChatMember().setChatId(chatId).setUserId(userId);
         }
 
         public static PromoteChatMemberMethod promoteChatMember(long chatId, long userId) {
-            return new PromoteChatMemberMethod().setChatId(chatId).setUserId(userId);
+            return promoteChatMember().setChatId(chatId).setUserId(userId);
         }
 
 
@@ -183,11 +184,11 @@ public final class Methods {
         }
 
         public static RestrictChatMemberMethod restrictChatMember(@NotNull String chatId, long userId) {
-            return new RestrictChatMemberMethod().setChatId(chatId).setUserId(userId);
+            return restrictChatMember().setChatId(chatId).setUserId(userId);
         }
 
         public static RestrictChatMemberMethod restrictChatMember(long chatId, long userId) {
-            return new RestrictChatMemberMethod().setChatId(chatId).setUserId(userId);
+            return restrictChatMember().setChatId(chatId).setUserId(userId);
         }
 
 
@@ -196,11 +197,11 @@ public final class Methods {
         }
 
         public static RevokeChatInviteLinkMethod revokeChatInviteLink(@NotNull String chatId, String inviteLink) {
-            return new RevokeChatInviteLinkMethod().setChatId(chatId).setInviteLink(inviteLink);
+            return revokeChatInviteLink().setChatId(chatId).setInviteLink(inviteLink);
         }
 
         public static RevokeChatInviteLinkMethod revokeChatInviteLink(long chatId, String inviteLink) {
-            return new RevokeChatInviteLinkMethod().setChatId(chatId).setInviteLink(inviteLink);
+            return revokeChatInviteLink().setChatId(chatId).setInviteLink(inviteLink);
         }
 
 
@@ -209,11 +210,11 @@ public final class Methods {
         }
 
         public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle(@NotNull String chatId, long userId) {
-            return new SetChatAdministratorCustomTitleMethod().setChatId(chatId).setUserId(userId);
+            return setChatAdministratorCustomTitle().setChatId(chatId).setUserId(userId);
         }
 
         public static SetChatAdministratorCustomTitleMethod setChatAdministratorCustomTitle(long chatId, long userId) {
-            return new SetChatAdministratorCustomTitleMethod().setChatId(chatId).setUserId(userId);
+            return setChatAdministratorCustomTitle().setChatId(chatId).setUserId(userId);
         }
 
 
@@ -222,11 +223,11 @@ public final class Methods {
         }
 
         public static SetChatDescriptionMethod setChatDescription(@NotNull String chatId, @NotNull String description) {
-            return new SetChatDescriptionMethod().setChatId(chatId).setDescription(description);
+            return setChatDescription().setChatId(chatId).setDescription(description);
         }
 
         public static SetChatDescriptionMethod setChatDescription(long chatId, @NotNull String description) {
-            return new SetChatDescriptionMethod().setChatId(chatId).setDescription(description);
+            return setChatDescription().setChatId(chatId).setDescription(description);
         }
 
 
@@ -235,11 +236,11 @@ public final class Methods {
         }
 
         public static SetChatPermissionsMethod setChatDescription(@NotNull String chatId, @NotNull ChatPermissions permissions) {
-            return new SetChatPermissionsMethod().setChatId(chatId).setPermissions(permissions);
+            return setChatPermissions().setChatId(chatId).setPermissions(permissions);
         }
 
         public static SetChatPermissionsMethod setChatDescription(long chatId, @NotNull ChatPermissions permissions) {
-            return new SetChatPermissionsMethod().setChatId(chatId).setPermissions(permissions);
+            return setChatPermissions().setChatId(chatId).setPermissions(permissions);
         }
 
 
@@ -248,11 +249,11 @@ public final class Methods {
         }
 
         public static SetChatPhotoMethod setChatPhoto(@NotNull String chatId) {
-            return new SetChatPhotoMethod().setChatId(chatId);
+            return setChatPhoto().setChatId(chatId);
         }
 
         public static SetChatPhotoMethod setChatPhoto(long chatId) {
-            return new SetChatPhotoMethod().setChatId(chatId);
+            return setChatPhoto().setChatId(chatId);
         }
 
 
@@ -261,11 +262,11 @@ public final class Methods {
         }
 
         public static SetChatStickerSetMethod setChatStickerSet(@NotNull String chatId, @NotNull String stickerSetName) {
-            return new SetChatStickerSetMethod().setChatId(chatId).setStickerSetName(stickerSetName);
+            return setChatStickerSet().setChatId(chatId).setStickerSetName(stickerSetName);
         }
 
         public static SetChatStickerSetMethod setChatStickerSet(long chatId, @NotNull String stickerSetName) {
-            return new SetChatStickerSetMethod().setChatId(chatId).setStickerSetName(stickerSetName);
+            return setChatStickerSet().setChatId(chatId).setStickerSetName(stickerSetName);
         }
 
 
@@ -274,11 +275,11 @@ public final class Methods {
         }
 
         public static SetChatTitleMethod setChatTitle(@NotNull String chatId, @NotNull String title) {
-            return new SetChatTitleMethod().setChatId(chatId).setTitle(title);
+            return setChatTitle().setChatId(chatId).setTitle(title);
         }
 
         public static SetChatTitleMethod setChatTitle(long chatId, @NotNull String title) {
-            return new SetChatTitleMethod().setChatId(chatId).setTitle(title);
+            return setChatTitle().setChatId(chatId).setTitle(title);
         }
 
 
@@ -287,11 +288,11 @@ public final class Methods {
         }
 
         public static UnbanChatMemberMethod unbanChatMember(@NotNull String chatId, long userId) {
-            return new UnbanChatMemberMethod().setChatId(chatId).setUserId(userId);
+            return unbanChatMember().setChatId(chatId).setUserId(userId);
         }
 
         public static UnbanChatMemberMethod unbanChatMember(long chatId, long userId) {
-            return new UnbanChatMemberMethod().setChatId(chatId).setUserId(userId);
+            return unbanChatMember().setChatId(chatId).setUserId(userId);
         }
 
 
@@ -300,11 +301,11 @@ public final class Methods {
         }
 
         public static UnbanChatSenderChatMethod unbanChatSenderChat(@NotNull String chatId, long senderChatId) {
-            return new UnbanChatSenderChatMethod().setChatId(chatId).setSenderChatId(senderChatId);
+            return unbanChatSenderChat().setChatId(chatId).setSenderChatId(senderChatId);
         }
 
         public static UnbanChatSenderChatMethod unbanChatSenderChat(long chatId, long senderChatId) {
-            return new UnbanChatSenderChatMethod().setChatId(chatId).setSenderChatId(senderChatId);
+            return unbanChatSenderChat().setChatId(chatId).setSenderChatId(senderChatId);
         }
 
 
@@ -313,11 +314,11 @@ public final class Methods {
         }
 
         public static UnpinChatMessageMethod unpinChatMessage(@NotNull String chatId) {
-            return new UnpinChatMessageMethod().setChatId(chatId);
+            return unpinChatMessage().setChatId(chatId);
         }
 
         public static UnpinChatMessageMethod unpinChatMessage(long chatId) {
-            return new UnpinChatMessageMethod().setChatId(chatId);
+            return unpinChatMessage().setChatId(chatId);
         }
 
 
@@ -326,11 +327,11 @@ public final class Methods {
         }
 
         public static UnpinAllChatMessagesMethod unpinAllChatMessages(@NotNull String chatId) {
-            return new UnpinAllChatMessagesMethod().setChatId(chatId);
+            return unpinAllChatMessages().setChatId(chatId);
         }
 
         public static UnpinAllChatMessagesMethod unpinAllChatMessages(long chatId) {
-            return new UnpinAllChatMessagesMethod().setChatId(chatId);
+            return unpinAllChatMessages().setChatId(chatId);
         }
     }
 
@@ -342,11 +343,11 @@ public final class Methods {
         }
 
         public static CreateForumTopicMethod createForumTopic(@NotNull String chatId) {
-            return new CreateForumTopicMethod().setChatId(chatId);
+            return createForumTopic().setChatId(chatId);
         }
 
         public static CreateForumTopicMethod createForumTopic(long chatId) {
-            return new CreateForumTopicMethod().setChatId(chatId);
+            return createForumTopic().setChatId(chatId);
         }
 
 
@@ -355,11 +356,11 @@ public final class Methods {
         }
 
         public static EditForumTopicMethod editForumTopic(@NotNull String chatId, int messageThreadId) {
-            return new EditForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+            return editForumTopic().setChatId(chatId).setMessageThreadId(messageThreadId);
         }
 
         public static EditForumTopicMethod editForumTopic(long chatId, int messageThreadId) {
-            return new EditForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+            return editForumTopic().setChatId(chatId).setMessageThreadId(messageThreadId);
         }
 
 
@@ -368,11 +369,11 @@ public final class Methods {
         }
 
         public static CloseForumTopicMethod closeForumTopic(@NotNull String chatId, int messageThreadId) {
-            return new CloseForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+            return closeForumTopic().setChatId(chatId).setMessageThreadId(messageThreadId);
         }
 
         public static CloseForumTopicMethod closeForumTopic(long chatId, int messageThreadId) {
-            return new CloseForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+            return closeForumTopic().setChatId(chatId).setMessageThreadId(messageThreadId);
         }
 
 
@@ -381,11 +382,11 @@ public final class Methods {
         }
 
         public static ReopenForumTopicMethod reopenForumTopic(@NotNull String chatId, int messageThreadId) {
-            return new ReopenForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+            return reopenForumTopic().setChatId(chatId).setMessageThreadId(messageThreadId);
         }
 
         public static ReopenForumTopicMethod reopenForumTopic(long chatId, int messageThreadId) {
-            return new ReopenForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+            return reopenForumTopic().setChatId(chatId).setMessageThreadId(messageThreadId);
         }
 
 
@@ -394,11 +395,11 @@ public final class Methods {
         }
 
         public static DeleteForumTopicMethod deleteForumTopic(@NotNull String chatId, int messageThreadId) {
-            return new DeleteForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+            return deleteForumTopic().setChatId(chatId).setMessageThreadId(messageThreadId);
         }
 
         public static DeleteForumTopicMethod deleteForumTopic(long chatId, int messageThreadId) {
-            return new DeleteForumTopicMethod().setChatId(chatId).setMessageThreadId(messageThreadId);
+            return deleteForumTopic().setChatId(chatId).setMessageThreadId(messageThreadId);
         }
 
 
@@ -407,11 +408,11 @@ public final class Methods {
         }
 
         public static EditGeneralForumTopicMethod editGeneralForumTopic(@NotNull String chatId) {
-            return new EditGeneralForumTopicMethod().setChatId(chatId);
+            return editGeneralForumTopic().setChatId(chatId);
         }
 
         public static EditGeneralForumTopicMethod editGeneralForumTopic(long chatId) {
-            return new EditGeneralForumTopicMethod().setChatId(chatId);
+            return editGeneralForumTopic().setChatId(chatId);
         }
 
 
@@ -420,11 +421,11 @@ public final class Methods {
         }
 
         public static CloseGeneralForumTopicMethod closeGeneralForumTopic(@NotNull String chatId) {
-            return new CloseGeneralForumTopicMethod().setChatId(chatId);
+            return closeGeneralForumTopic().setChatId(chatId);
         }
 
         public static CloseGeneralForumTopicMethod closeGeneralForumTopic(long chatId) {
-            return new CloseGeneralForumTopicMethod().setChatId(chatId);
+            return closeGeneralForumTopic().setChatId(chatId);
         }
 
 
@@ -433,11 +434,11 @@ public final class Methods {
         }
 
         public static ReopenGeneralForumTopicMethod reopenGeneralForumTopic(@NotNull String chatId) {
-            return new ReopenGeneralForumTopicMethod().setChatId(chatId);
+            return reopenGeneralForumTopic().setChatId(chatId);
         }
 
         public static ReopenGeneralForumTopicMethod reopenGeneralForumTopic(long chatId) {
-            return new ReopenGeneralForumTopicMethod().setChatId(chatId);
+            return reopenGeneralForumTopic().setChatId(chatId);
         }
 
 
@@ -446,11 +447,11 @@ public final class Methods {
         }
 
         public static HideGeneralForumTopicMethod hideGeneralForumTopic(@NotNull String chatId) {
-            return new HideGeneralForumTopicMethod().setChatId(chatId);
+            return hideGeneralForumTopic().setChatId(chatId);
         }
 
         public static HideGeneralForumTopicMethod hideGeneralForumTopic(long chatId) {
-            return new HideGeneralForumTopicMethod().setChatId(chatId);
+            return hideGeneralForumTopic().setChatId(chatId);
         }
 
 
@@ -459,11 +460,11 @@ public final class Methods {
         }
 
         public static UnhideGeneralForumTopicMethod unhideGeneralForumTopic(@NotNull String chatId) {
-            return new UnhideGeneralForumTopicMethod().setChatId(chatId);
+            return unhideGeneralForumTopic().setChatId(chatId);
         }
 
         public static UnhideGeneralForumTopicMethod unhideGeneralForumTopic(long chatId) {
-            return new UnhideGeneralForumTopicMethod().setChatId(chatId);
+            return unhideGeneralForumTopic().setChatId(chatId);
         }
 
 
@@ -477,11 +478,11 @@ public final class Methods {
         }
 
         public static UnpinAllForumTopicMessagesMethod unpinAllForumTopicMessages(@NotNull String chatId) {
-            return new UnpinAllForumTopicMessagesMethod().setChatId(chatId);
+            return unpinAllForumTopicMessages().setChatId(chatId);
         }
 
         public static UnpinAllForumTopicMessagesMethod unpinAllForumTopicMessages(long chatId) {
-            return new UnpinAllForumTopicMessagesMethod().setChatId(chatId);
+            return unpinAllForumTopicMessages().setChatId(chatId);
         }
 
 
@@ -506,11 +507,11 @@ public final class Methods {
         }
 
         public static SendGameMethod sendGame(@NotNull String chatId, @NotNull String gameShortName) {
-            return new SendGameMethod().setChatId(chatId).setGameShortName(gameShortName);
+            return sendGame().setChatId(chatId).setGameShortName(gameShortName);
         }
 
         public static SendGameMethod sendGame(long chatId, @NotNull String gameShortName) {
-            return new SendGameMethod().setChatId(chatId).setGameShortName(gameShortName);
+            return sendGame().setChatId(chatId).setGameShortName(gameShortName);
         }
 
 
@@ -532,11 +533,11 @@ public final class Methods {
         }
 
         public static SetPassportDataErrorsMethod setPassportDataErrors(long userId) {
-            return new SetPassportDataErrorsMethod().setUserId(userId);
+            return setPassportDataErrors().setUserId(userId);
         }
 
         public static SetPassportDataErrorsMethod setPassportDataErrors(long userId, @NotNull List<PassportElementError> errors) {
-            return new SetPassportDataErrorsMethod().setUserId(userId).setErrors(errors);
+            return setPassportDataErrors().setUserId(userId).setErrors(errors);
         }
     }
 
@@ -548,11 +549,11 @@ public final class Methods {
         }
 
         public static SendInvoiceMethod sendInvoice(@NotNull String chatId) {
-            return new SendInvoiceMethod().setChatId(chatId);
+            return sendInvoice().setChatId(chatId);
         }
 
         public static SendInvoiceMethod sendInvoice(long chatId) {
-            return new SendInvoiceMethod().setChatId(chatId);
+            return sendInvoice().setChatId(chatId);
         }
 
 
@@ -566,7 +567,7 @@ public final class Methods {
         }
 
         public static AnswerShippingQueryMethod answerShippingQuery(@NotNull String shippingQueryId, boolean ok) {
-            return new AnswerShippingQueryMethod().setShippingQueryId(shippingQueryId).setOk(ok);
+            return answerShippingQuery().setShippingQueryId(shippingQueryId).setOk(ok);
         }
 
 
@@ -575,7 +576,7 @@ public final class Methods {
         }
 
         public static AnswerPreCheckoutQueryMethod answerPreCheckoutQuery(@NotNull String preCheckoutQueryId, boolean ok) {
-            return new AnswerPreCheckoutQueryMethod().setPreCheckoutQueryId(preCheckoutQueryId).setOk(ok);
+            return answerPreCheckoutQuery().setPreCheckoutQueryId(preCheckoutQueryId).setOk(ok);
         }
     }
 
@@ -616,7 +617,7 @@ public final class Methods {
         }
 
         public static AddStickerToSetMethod addStickerToSet(long userId, @NotNull String name, @NotNull InputSticker sticker) {
-            return new AddStickerToSetMethod().setUserId(userId).setName(name).setSticker(sticker);
+            return addStickerToSet().setUserId(userId).setName(name).setSticker(sticker);
         }
 
 
@@ -626,7 +627,7 @@ public final class Methods {
 
         public static CreateNewStickerSetMethod createNewStickerSet(
                 long userId, @NotNull String name, @NotNull String title) {
-            return new CreateNewStickerSetMethod().setUserId(userId).setName(name).setTitle(title);
+            return createNewStickerSet().setUserId(userId).setName(name).setTitle(title);
         }
 
 
@@ -635,7 +636,7 @@ public final class Methods {
         }
 
         public static DeleteStickerFromSetMethod deleteStickerFromSet(@NotNull String sticker) {
-            return new DeleteStickerFromSetMethod().setSticker(sticker);
+            return deleteStickerFromSet().setSticker(sticker);
         }
 
 
@@ -644,7 +645,16 @@ public final class Methods {
         }
 
         public static GetStickerSetMethod getStickerSet(@NotNull String name) {
-            return new GetStickerSetMethod().setName(name);
+            return getStickerSet().setName(name);
+        }
+
+
+        public static DeleteStickerSetMethod deleteStickerSet() {
+            return new DeleteStickerSetMethod();
+        }
+
+        public static DeleteStickerSetMethod deleteStickerSet(@NotNull String name) {
+            return deleteStickerSet().setName(name);
         }
 
 
@@ -653,16 +663,16 @@ public final class Methods {
         }
 
         public static SetStickerPositionInSetMethod setStickerPositionInSet(@NotNull String sticker, int position) {
-            return new SetStickerPositionInSetMethod().setSticker(sticker).setPosition(position);
+            return setStickerPositionInSet().setSticker(sticker).setPosition(position);
         }
 
 
-        public static SetStickerSetThumbMethod setStickerSetThumb() {
-            return new SetStickerSetThumbMethod();
+        public static SetStickerSetThumbnailMethod setStickerSetThumbnail() {
+            return new SetStickerSetThumbnailMethod();
         }
 
-        public static SetStickerSetThumbMethod setStickerSetThumb(long userId) {
-            return new SetStickerSetThumbMethod().setUserId(userId);
+        public static SetStickerSetThumbnailMethod setStickerSetThumbnail(long userId) {
+            return setStickerSetThumbnail().setUserId(userId);
         }
 
 
@@ -671,11 +681,11 @@ public final class Methods {
         }
 
         public static SendStickerMethod sendSticker(@NotNull String chatId) {
-            return new SendStickerMethod().setChatId(chatId);
+            return sendSticker().setChatId(chatId);
         }
 
         public static SendStickerMethod sendSticker(long chatId) {
-            return new SendStickerMethod().setChatId(chatId);
+            return sendSticker().setChatId(chatId);
         }
 
 
@@ -684,12 +694,46 @@ public final class Methods {
         }
 
         public static UploadStickerFileMethod uploadStickerFile(long userId) {
-            return new UploadStickerFileMethod().setUserId(userId);
+            return uploadStickerFile().setUserId(userId);
         }
 
 
         public static SetCustomEmojiStickerSetThumbnailMethod setCustomEmojiStickerSetThumbnail() {
             return new SetCustomEmojiStickerSetThumbnailMethod();
+        }
+
+
+        public static SetStickerEmojiListMethod setStickerEmojiList() {
+            return new SetStickerEmojiListMethod();
+        }
+
+
+        public static SetStickerSetTitleMethod setStickerSetTitle() {
+            return new SetStickerSetTitleMethod();
+        }
+
+        public static SetStickerSetTitleMethod setStickerSetTitle(@NotNull String name, @NotNull String title) {
+            return setStickerSetTitle().setName(name).setTitle(title);
+        }
+
+
+        public static SetStickerKeywordsMethod setStickerKeywords() {
+            return new SetStickerKeywordsMethod();
+        }
+
+        public static SetStickerKeywordsMethod setStickerKeywords(@NotNull String sticker) {
+            return setStickerKeywords().setSticker(sticker);
+        }
+
+
+        public static SetStickerMaskPositionMethod setStickerMaskPosition() {
+            return new SetStickerMaskPositionMethod();
+        }
+
+        public static SetStickerMaskPositionMethod setStickerMaskPosition(
+                @NotNull String sticker,
+                @NotNull MaskPosition maskPosition) {
+            return setStickerMaskPosition().setSticker(sticker).setMaskPosition(maskPosition);
         }
     }
 
@@ -719,11 +763,11 @@ public final class Methods {
     }
 
     public static GetChatAdministratorsMethod getChatAdministrators(@NotNull String chatId) {
-        return new GetChatAdministratorsMethod().setChatId(chatId);
+        return getChatAdministrators().setChatId(chatId);
     }
 
     public static GetChatAdministratorsMethod getChatAdministrators(long chatId) {
-        return new GetChatAdministratorsMethod().setChatId(chatId);
+        return getChatAdministrators().setChatId(chatId);
     }
 
 
@@ -732,11 +776,11 @@ public final class Methods {
     }
 
     public static GetChatMemberMethod getChatMember(@NotNull String chatId, long userId) {
-        return new GetChatMemberMethod().setChatId(chatId).setUserId(userId);
+        return getChatMember().setChatId(chatId).setUserId(userId);
     }
 
     public static GetChatMemberMethod getChatMember(long chatId, long userId) {
-        return new GetChatMemberMethod().setChatId(chatId).setUserId(userId);
+        return getChatMember().setChatId(chatId).setUserId(userId);
     }
 
 
@@ -745,11 +789,11 @@ public final class Methods {
     }
 
     public static GetChatMemberCountMethod getChatMemberCount(@NotNull String chatId) {
-        return new GetChatMemberCountMethod().setChatId(chatId);
+        return getChatMemberCount().setChatId(chatId);
     }
 
     public static GetChatMemberCountMethod getChatMemberCount(long chatId) {
-        return new GetChatMemberCountMethod().setChatId(chatId);
+        return getChatMemberCount().setChatId(chatId);
     }
 
 
@@ -758,11 +802,11 @@ public final class Methods {
     }
 
     public static GetChatMethod getChat(@NotNull String chatId) {
-        return new GetChatMethod().setChatId(chatId);
+        return getChat().setChatId(chatId);
     }
 
     public static GetChatMethod getChat(long chatId) {
-        return new GetChatMethod().setChatId(chatId);
+        return getChat().setChatId(chatId);
     }
 
 
@@ -771,7 +815,7 @@ public final class Methods {
     }
 
     public static GetFileMethod getFile(@NotNull String fileId) {
-        return new GetFileMethod().setFileId(fileId);
+        return getFile().setFileId(fileId);
     }
 
 
@@ -785,7 +829,7 @@ public final class Methods {
     }
 
     public static GetMyNameMethod getMyName(@NotNull String languageCode) {
-        return new GetMyNameMethod().setLanguageCode(languageCode);
+        return getMyName().setLanguageCode(languageCode);
     }
 
     public static SetMyNameMethod setMyName() {
@@ -793,11 +837,11 @@ public final class Methods {
     }
 
     public static SetMyNameMethod setMyName(@NotNull String name) {
-        return new SetMyNameMethod().setName(name);
+        return setMyName().setName(name);
     }
 
     public static SetMyNameMethod setMyName(@NotNull String name, @NotNull String languageCode) {
-        return new SetMyNameMethod().setName(name).setLanguageCode(languageCode);
+        return setMyName().setName(name).setLanguageCode(languageCode);
     }
 
 
@@ -806,7 +850,7 @@ public final class Methods {
     }
 
     public static GetMyDescriptionMethod getMyDescription(@NotNull String languageCode) {
-        return new GetMyDescriptionMethod().setLanguageCode(languageCode);
+        return getMyDescription().setLanguageCode(languageCode);
     }
 
     public static SetMyDescriptionMethod setMyDescription() {
@@ -814,11 +858,11 @@ public final class Methods {
     }
 
     public static SetMyDescriptionMethod setMyDescription(@NotNull String description) {
-        return new SetMyDescriptionMethod().setDescription(description);
+        return setMyDescription().setDescription(description);
     }
 
     public static SetMyDescriptionMethod setMyDescription(@NotNull String description, @NotNull String languageCode) {
-        return new SetMyDescriptionMethod().setDescription(description).setLanguageCode(languageCode);
+        return setMyDescription().setDescription(description).setLanguageCode(languageCode);
     }
 
 
@@ -827,7 +871,7 @@ public final class Methods {
     }
 
     public static GetMyShortDescriptionMethod getMyShortDescription(@NotNull String languageCode) {
-        return new GetMyShortDescriptionMethod().setLanguageCode(languageCode);
+        return getMyShortDescription().setLanguageCode(languageCode);
     }
 
     public static SetMyShortDescriptionMethod setMyShortDescription() {
@@ -835,11 +879,11 @@ public final class Methods {
     }
 
     public static SetMyShortDescriptionMethod setMyShortDescription(@NotNull String shortDescription) {
-        return new SetMyShortDescriptionMethod().setShortDescription(shortDescription);
+        return setMyShortDescription().setShortDescription(shortDescription);
     }
 
     public static SetMyShortDescriptionMethod setMyShortDescription(@NotNull String shortDescription, @NotNull String languageCode) {
-        return new SetMyShortDescriptionMethod().setShortDescription(shortDescription).setLanguageCode(languageCode);
+        return setMyShortDescription().setShortDescription(shortDescription).setLanguageCode(languageCode);
     }
 
 
@@ -848,40 +892,41 @@ public final class Methods {
     }
 
     public static GetUserProfilePhotosMethod getUserProfilePhotos(long userId) {
-        return new GetUserProfilePhotosMethod().setUserId(userId);
+        return getUserProfilePhotos().setUserId(userId);
     }
 
 
-    public static GetMyDefaultAdministratorRightsMethod getMyDefaultAdministratorRightsMethod() {
+    public static GetMyDefaultAdministratorRightsMethod getMyDefaultAdministratorRights() {
         return new GetMyDefaultAdministratorRightsMethod();
     }
 
-    public static GetMyDefaultAdministratorRightsMethod getMyDefaultAdministratorRightsMethod(boolean forChannels) {
-        return new GetMyDefaultAdministratorRightsMethod().setForChannels(forChannels);
+    public static GetMyDefaultAdministratorRightsMethod getMyDefaultAdministratorRights(boolean forChannels) {
+        return getMyDefaultAdministratorRights().setForChannels(forChannels);
     }
 
-    public static SetMyDefaultAdministratorRightsMethod setMyDefaultAdministratorRightsMethod() {
+    public static SetMyDefaultAdministratorRightsMethod setMyDefaultAdministratorRights() {
         return new SetMyDefaultAdministratorRightsMethod();
     }
 
-    public static SetMyDefaultAdministratorRightsMethod setMyDefaultAdministratorRightsMethod(boolean forChannels) {
-        return new SetMyDefaultAdministratorRightsMethod().setForChannels(forChannels);
+    public static SetMyDefaultAdministratorRightsMethod setMyDefaultAdministratorRights(boolean forChannels) {
+        return setMyDefaultAdministratorRights().setForChannels(forChannels);
     }
 
-    public static SetMyDefaultAdministratorRightsMethod setMyDefaultAdministratorRightsMethod(ChatAdministratorRights rights) {
-        return new SetMyDefaultAdministratorRightsMethod().setRights(rights);
+    public static SetMyDefaultAdministratorRightsMethod setMyDefaultAdministratorRights(ChatAdministratorRights rights) {
+        return setMyDefaultAdministratorRights().setRights(rights);
     }
+
 
     public static GetChatMenuButtonMethod getChatMenuButton() {
         return new GetChatMenuButtonMethod();
     }
 
     public static GetChatMenuButtonMethod getChatMenuButton(@NotNull String chatId) {
-        return new GetChatMenuButtonMethod().setChatId(chatId);
+        return getChatMenuButton().setChatId(chatId);
     }
 
     public static GetChatMenuButtonMethod getChatMenuButton(long chatId) {
-        return new GetChatMenuButtonMethod().setChatId(chatId);
+        return getChatMenuButton().setChatId(chatId);
     }
 
     public static SetChatMenuButtonMethod setChatMenuButton() {
@@ -889,11 +934,11 @@ public final class Methods {
     }
 
     public static SetChatMenuButtonMethod setChatMenuButton(@NotNull String chatId) {
-        return new SetChatMenuButtonMethod().setChatId(chatId);
+        return setChatMenuButton().setChatId(chatId);
     }
 
     public static SetChatMenuButtonMethod setChatMenuButton(long chatId) {
-        return new SetChatMenuButtonMethod().setChatId(chatId);
+        return setChatMenuButton().setChatId(chatId);
     }
 
 
@@ -902,7 +947,7 @@ public final class Methods {
     }
 
     public static GetMyCommandsMethod getMyCommands(BotCommandScope scope){
-        return new GetMyCommandsMethod().setScope(scope);
+        return getMyCommands().setScope(scope);
     }
 
     public static SetMyCommandsMethod setMyCommands() {
@@ -910,7 +955,7 @@ public final class Methods {
     }
 
     public static SetMyCommandsMethod setMyCommands(List<BotCommand> commands) {
-        return new SetMyCommandsMethod().setCommands(commands);
+        return setMyCommands().setCommands(commands);
     }
 
     public static DeleteMyCommandsMethod deleteMyCommands(){
@@ -918,7 +963,7 @@ public final class Methods {
     }
 
     public static DeleteMyCommandsMethod deleteMyCommands(BotCommandScope scope){
-        return new DeleteMyCommandsMethod().setScope(scope);
+        return deleteMyCommands().setScope(scope);
     }
 
 
@@ -929,11 +974,11 @@ public final class Methods {
     }
 
     public static SendAnimationMethod sendAnimation(@NotNull String chatId) {
-        return new SendAnimationMethod().setChatId(chatId);
+        return sendAnimation().setChatId(chatId);
     }
 
     public static SendAnimationMethod sendAnimation(long chatId) {
-        return new SendAnimationMethod().setChatId(chatId);
+        return sendAnimation().setChatId(chatId);
     }
 
 
@@ -942,11 +987,11 @@ public final class Methods {
     }
 
     public static SendAudioMethod sendAudio(@NotNull String chatId) {
-        return new SendAudioMethod().setChatId(chatId);
+        return sendAudio().setChatId(chatId);
     }
 
     public static SendAudioMethod sendAudio(long chatId) {
-        return new SendAudioMethod().setChatId(chatId);
+        return sendAudio().setChatId(chatId);
     }
 
 
@@ -956,12 +1001,12 @@ public final class Methods {
 
     public static SendContactMethod sendContact(@NotNull String chatId,
                                                 @NotNull String phoneNumber, @NotNull String firstName) {
-        return new SendContactMethod().setChatId(chatId).setPhoneNumber(phoneNumber).setFirstName(firstName);
+        return sendContact().setChatId(chatId).setPhoneNumber(phoneNumber).setFirstName(firstName);
     }
 
     public static SendContactMethod sendContact(long chatId,
                                                 @NotNull String phoneNumber, @NotNull String firstName) {
-        return new SendContactMethod().setChatId(chatId).setPhoneNumber(phoneNumber).setFirstName(firstName);
+        return sendContact().setChatId(chatId).setPhoneNumber(phoneNumber).setFirstName(firstName);
     }
 
 
@@ -970,11 +1015,11 @@ public final class Methods {
     }
 
     public static SendDiceMethod sendDice(@NotNull String chatId) {
-        return new SendDiceMethod().setChatId(chatId);
+        return sendDice().setChatId(chatId);
     }
 
     public static SendDiceMethod sendDice(long chatId) {
-        return new SendDiceMethod().setChatId(chatId);
+        return sendDice().setChatId(chatId);
     }
 
 
@@ -983,11 +1028,11 @@ public final class Methods {
     }
 
     public static SendDocumentMethod sendDocument(@NotNull String chatId) {
-        return new SendDocumentMethod().setChatId(chatId);
+        return sendDocument().setChatId(chatId);
     }
 
     public static SendDocumentMethod sendDocument(long chatId) {
-        return new SendDocumentMethod().setChatId(chatId);
+        return sendDocument().setChatId(chatId);
     }
 
 
@@ -996,11 +1041,11 @@ public final class Methods {
     }
 
     public static SendLocationMethod sendLocation(@NotNull String chatId, double latitude, double longitude) {
-        return new SendLocationMethod().setChatId(chatId).setLatitude(latitude).setLongitude(longitude);
+        return sendLocation().setChatId(chatId).setLatitude(latitude).setLongitude(longitude);
     }
 
     public static SendLocationMethod sendLocation(long chatId, double latitude, double longitude) {
-        return new SendLocationMethod().setChatId(chatId).setLatitude(latitude).setLongitude(longitude);
+        return sendLocation().setChatId(chatId).setLatitude(latitude).setLongitude(longitude);
     }
 
 
@@ -1009,11 +1054,11 @@ public final class Methods {
     }
 
     public static SendMediaGroupMethod sendMediaGroup(@NotNull String chatId, @NotNull List<InputMedia> media) {
-        return new SendMediaGroupMethod().setChatId(chatId).setMedias(media);
+        return sendMediaGroup().setChatId(chatId).setMedias(media);
     }
 
     public static SendMediaGroupMethod sendMediaGroup(long chatId, @NotNull List<InputMedia> media) {
-        return new SendMediaGroupMethod().setChatId(chatId).setMedias(media);
+        return sendMediaGroup().setChatId(chatId).setMedias(media);
     }
 
 
@@ -1022,11 +1067,11 @@ public final class Methods {
     }
 
     public static SendMessageMethod sendMessage(@NotNull String chatId, @NotNull String text) {
-        return new SendMessageMethod().setChatId(chatId).setText(text);
+        return sendMessage().setChatId(chatId).setText(text);
     }
 
     public static SendMessageMethod sendMessage(long chatId, @NotNull String text) {
-        return new SendMessageMethod().setChatId(chatId).setText(text);
+        return sendMessage().setChatId(chatId).setText(text);
     }
 
 
@@ -1035,11 +1080,11 @@ public final class Methods {
     }
 
     public static SendPhotoMethod sendPhoto(@NotNull String chatId) {
-        return new SendPhotoMethod().setChatId(chatId);
+        return sendPhoto().setChatId(chatId);
     }
 
     public static SendPhotoMethod sendPhoto(long chatId) {
-        return new SendPhotoMethod().setChatId(chatId);
+        return sendPhoto().setChatId(chatId);
     }
 
 
@@ -1049,14 +1094,14 @@ public final class Methods {
 
     public static SendVenueMethod sendVenue(@NotNull String chatId, double latitude, double longitude,
                                             @NotNull String title, @NotNull String address) {
-        return new SendVenueMethod().setChatId(chatId)
+        return sendVenue().setChatId(chatId)
                 .setLatitude(latitude).setLongitude(longitude)
                 .setTitle(title).setAddress(address);
     }
 
     public static SendVenueMethod sendVenue(long chatId, double latitude, double longitude,
                                             @NotNull String title, @NotNull String address) {
-        return new SendVenueMethod().setChatId(chatId)
+        return sendVenue().setChatId(chatId)
                 .setLatitude(latitude).setLongitude(longitude)
                 .setTitle(title).setAddress(address);
     }
@@ -1067,11 +1112,11 @@ public final class Methods {
     }
 
     public static SendVideoMethod sendVideo(@NotNull String chatId) {
-        return new SendVideoMethod().setChatId(chatId);
+        return sendVideo().setChatId(chatId);
     }
 
     public static SendVideoMethod sendVideo(long chatId) {
-        return new SendVideoMethod().setChatId(chatId);
+        return sendVideo().setChatId(chatId);
     }
 
 
@@ -1080,11 +1125,11 @@ public final class Methods {
     }
 
     public static SendVideoNoteMethod sendVideoNote(@NotNull String chatId) {
-        return new SendVideoNoteMethod().setChatId(chatId);
+        return sendVideoNote().setChatId(chatId);
     }
 
     public static SendVideoNoteMethod sendVideoNote(long chatId) {
-        return new SendVideoNoteMethod().setChatId(chatId);
+        return sendVideoNote().setChatId(chatId);
     }
 
 
@@ -1093,11 +1138,11 @@ public final class Methods {
     }
 
     public static SendVoiceMethod sendVoice(@NotNull String chatId) {
-        return new SendVoiceMethod().setChatId(chatId);
+        return sendVoice().setChatId(chatId);
     }
 
     public static SendVoiceMethod sendVoice(long chatId) {
-        return new SendVoiceMethod().setChatId(chatId);
+        return sendVoice().setChatId(chatId);
     }
 
 
@@ -1108,11 +1153,11 @@ public final class Methods {
     }
 
     public static DeleteMessageMethod deleteMessage(@NotNull String chatId, int messageId) {
-        return new DeleteMessageMethod().setChatId(chatId).setMessageId(messageId);
+        return deleteMessage().setChatId(chatId).setMessageId(messageId);
     }
 
     public static DeleteMessageMethod deleteMessage(long chatId, int messageId) {
-        return new DeleteMessageMethod().setChatId(chatId).setMessageId(messageId);
+        return deleteMessage().setChatId(chatId).setMessageId(messageId);
     }
 
 
@@ -1121,11 +1166,11 @@ public final class Methods {
     }
 
     public static DeleteMessagesMethod deleteMessages(@NotNull String chatId) {
-        return new DeleteMessagesMethod().setChatId(chatId);
+        return deleteMessages().setChatId(chatId);
     }
 
     public static DeleteMessagesMethod deleteMessages(long chatId) {
-        return new DeleteMessagesMethod().setChatId(chatId);
+        return deleteMessages().setChatId(chatId);
     }
 
 
@@ -1134,15 +1179,15 @@ public final class Methods {
     }
 
     public static EditMessageCaptionMethod editMessageCaption(@NotNull String inlineMessageId) {
-        return new EditMessageCaptionMethod().setInlineMessageId(inlineMessageId);
+        return editMessageCaption().setInlineMessageId(inlineMessageId);
     }
 
     public static EditMessageCaptionMethod editMessageCaption(@NotNull String chatId, int messageId) {
-        return new EditMessageCaptionMethod().setChatId(chatId).setMessageId(messageId);
+        return editMessageCaption().setChatId(chatId).setMessageId(messageId);
     }
 
     public static EditMessageCaptionMethod editMessageCaption(long chatId, int messageId) {
-        return new EditMessageCaptionMethod().setChatId(chatId).setMessageId(messageId);
+        return editMessageCaption().setChatId(chatId).setMessageId(messageId);
     }
 
 
@@ -1152,19 +1197,19 @@ public final class Methods {
 
     public static EditMessageLiveLocationMethod editMessageLiveLocation(@NotNull String inlineMessageId,
                                                                         double latitude, double longitude) {
-        return new EditMessageLiveLocationMethod().setInlineMessageId(inlineMessageId)
+        return editMessageLiveLocation().setInlineMessageId(inlineMessageId)
                 .setLatitude(latitude).setLongitude(longitude);
     }
 
     public static EditMessageLiveLocationMethod editMessageLiveLocation(@NotNull String chatId, int messageId,
                                                                         double latitude, double longitude) {
-        return new EditMessageLiveLocationMethod().setChatId(chatId).setMessageId(messageId)
+        return editMessageLiveLocation().setChatId(chatId).setMessageId(messageId)
                 .setLatitude(latitude).setLongitude(longitude);
     }
 
     public static EditMessageLiveLocationMethod editMessageLiveLocation(long chatId, int messageId,
                                                                         double latitude, double longitude) {
-        return new EditMessageLiveLocationMethod().setChatId(chatId).setMessageId(messageId)
+        return editMessageLiveLocation().setChatId(chatId).setMessageId(messageId)
                 .setLatitude(latitude).setLongitude(longitude);
     }
 
@@ -1174,15 +1219,15 @@ public final class Methods {
     }
 
     public static EditMessageMediaMethod editMessageMedia(@NotNull String inlineMessageId) {
-        return new EditMessageMediaMethod().setInlineMessageId(inlineMessageId);
+        return editMessageMedia().setInlineMessageId(inlineMessageId);
     }
 
     public static EditMessageMediaMethod editMessageMedia(@NotNull String chatId, int messageId) {
-        return new EditMessageMediaMethod().setChatId(chatId).setMessageId(messageId);
+        return editMessageMedia().setChatId(chatId).setMessageId(messageId);
     }
 
     public static EditMessageMediaMethod editMessageMedia(long chatId, int messageId) {
-        return new EditMessageMediaMethod().setChatId(chatId).setMessageId(messageId);
+        return editMessageMedia().setChatId(chatId).setMessageId(messageId);
     }
 
 
@@ -1191,15 +1236,15 @@ public final class Methods {
     }
 
     public static EditMessageReplyMarkupMethod editMessageReplyMarkup(@NotNull String inlineMessageId) {
-        return new EditMessageReplyMarkupMethod().setInlineMessageId(inlineMessageId);
+        return editMessageReplyMarkup().setInlineMessageId(inlineMessageId);
     }
 
     public static EditMessageReplyMarkupMethod editMessageReplyMarkup(@NotNull String chatId, int messageId) {
-        return new EditMessageReplyMarkupMethod().setChatId(chatId).setMessageId(messageId);
+        return editMessageReplyMarkup().setChatId(chatId).setMessageId(messageId);
     }
 
     public static EditMessageReplyMarkupMethod editMessageReplyMarkup(long chatId, int messageId) {
-        return new EditMessageReplyMarkupMethod().setChatId(chatId).setMessageId(messageId);
+        return editMessageReplyMarkup().setChatId(chatId).setMessageId(messageId);
     }
 
 
@@ -1208,15 +1253,15 @@ public final class Methods {
     }
 
     public static EditMessageTextMethod editMessageText(@NotNull String inlineMessageId, @NotNull String text) {
-        return new EditMessageTextMethod().setInlineMessageId(inlineMessageId).setText(text);
+        return editMessageText().setInlineMessageId(inlineMessageId).setText(text);
     }
 
     public static EditMessageTextMethod editMessageText(@NotNull String chatId, int messageId, @NotNull String text) {
-        return new EditMessageTextMethod().setChatId(chatId).setMessageId(messageId).setText(text);
+        return editMessageText().setChatId(chatId).setMessageId(messageId).setText(text);
     }
 
     public static EditMessageTextMethod editMessageText(long chatId, int messageId, @NotNull String text) {
-        return new EditMessageTextMethod().setChatId(chatId).setMessageId(messageId).setText(text);
+        return editMessageText().setChatId(chatId).setMessageId(messageId).setText(text);
     }
 
 
@@ -1225,15 +1270,15 @@ public final class Methods {
     }
 
     public static StopMessageLiveLocationMethod stopMessageLiveLocation(@NotNull String inlineMessageId) {
-        return new StopMessageLiveLocationMethod().setInlineMessageId(inlineMessageId);
+        return stopMessageLiveLocation().setInlineMessageId(inlineMessageId);
     }
 
     public static StopMessageLiveLocationMethod stopMessageLiveLocation(@NotNull String chatId, int messageId) {
-        return new StopMessageLiveLocationMethod().setChatId(chatId).setMessageId(messageId);
+        return stopMessageLiveLocation().setChatId(chatId).setMessageId(messageId);
     }
 
     public static StopMessageLiveLocationMethod stopMessageLiveLocation(long chatId, int messageId) {
-        return new StopMessageLiveLocationMethod().setChatId(chatId).setMessageId(messageId);
+        return stopMessageLiveLocation().setChatId(chatId).setMessageId(messageId);
     }
 
 
@@ -1245,11 +1290,11 @@ public final class Methods {
 
     public static ForwardMessageMethod forwardMessage(@NotNull String toChatId,
                                                       @NotNull String fromChatId, int messageId) {
-        return new ForwardMessageMethod().setChatId(toChatId).setFromChatId(fromChatId).setMessageId(messageId);
+        return forwardMessage().setChatId(toChatId).setFromChatId(fromChatId).setMessageId(messageId);
     }
 
     public static ForwardMessageMethod forwardMessage(long toChatId, long fromChatId, int messageId) {
-        return new ForwardMessageMethod().setChatId(toChatId).setFromChatId(fromChatId).setMessageId(messageId);
+        return forwardMessage().setChatId(toChatId).setFromChatId(fromChatId).setMessageId(messageId);
     }
 
 
@@ -1258,11 +1303,11 @@ public final class Methods {
     }
 
     public static ForwardMessagesMethod forwardMessages(@NotNull String toChatId, @NotNull String fromChatId) {
-        return new ForwardMessagesMethod().setChatId(toChatId).setFromChatId(fromChatId);
+        return forwardMessages().setChatId(toChatId).setFromChatId(fromChatId);
     }
 
     public static ForwardMessagesMethod forwardMessages(long toChatId, long fromChatId) {
-        return new ForwardMessagesMethod().setChatId(toChatId).setFromChatId(fromChatId);
+        return forwardMessages().setChatId(toChatId).setFromChatId(fromChatId);
     }
 
 
@@ -1272,11 +1317,11 @@ public final class Methods {
 
     public static CopyMessageMethod copyMessage(@NotNull String toChatId,
                                                 @NotNull String fromChatId, int messageId) {
-        return new CopyMessageMethod().setChatId(toChatId).setFromChatId(fromChatId).setMessageId(messageId);
+        return copyMessage().setChatId(toChatId).setFromChatId(fromChatId).setMessageId(messageId);
     }
 
     public static CopyMessageMethod copyMessage(long toChatId, long fromChatId, int messageId) {
-        return new CopyMessageMethod().setChatId(toChatId).setFromChatId(fromChatId).setMessageId(messageId);
+        return copyMessage().setChatId(toChatId).setFromChatId(fromChatId).setMessageId(messageId);
     }
 
 
@@ -1285,11 +1330,11 @@ public final class Methods {
     }
 
     public static CopyMessagesMethod copyMessages(@NotNull String toChatId, @NotNull String fromChatId) {
-        return new CopyMessagesMethod().setChatId(toChatId).setFromChatId(fromChatId);
+        return copyMessages().setChatId(toChatId).setFromChatId(fromChatId);
     }
 
     public static CopyMessagesMethod copyMessages(long toChatId, long fromChatId) {
-        return new CopyMessagesMethod().setChatId(toChatId).setFromChatId(fromChatId);
+        return copyMessages().setChatId(toChatId).setFromChatId(fromChatId);
     }
 
 
@@ -1298,11 +1343,11 @@ public final class Methods {
     }
 
     public static LeaveChatMethod leaveChat(@NotNull String chatId) {
-        return new LeaveChatMethod().setChatId(chatId);
+        return leaveChat().setChatId(chatId);
     }
 
     public static LeaveChatMethod leaveChat(long chatId) {
-        return new LeaveChatMethod().setChatId(chatId);
+        return leaveChat().setChatId(chatId);
     }
 
 
@@ -1311,11 +1356,11 @@ public final class Methods {
     }
 
     public static SendChatActionMethod sendChatAction(@NotNull String chatId, @NotNull ActionType actionType) {
-        return new SendChatActionMethod().setChatId(chatId);
+        return sendChatAction().setChatId(chatId).setAction(actionType);
     }
 
     public static SendChatActionMethod sendChatAction(long chatId, @NotNull ActionType actionType) {
-        return new SendChatActionMethod().setChatId(chatId).setAction(actionType);
+        return sendChatAction().setChatId(chatId).setAction(actionType);
     }
 
 
@@ -1324,11 +1369,11 @@ public final class Methods {
     }
 
     public static SetMessageReactionMethod setMessageReaction(@NotNull String chatId, int messageId) {
-        return new SetMessageReactionMethod().setChatId(chatId).setMessageId(messageId);
+        return setMessageReaction().setChatId(chatId).setMessageId(messageId);
     }
 
     public static SetMessageReactionMethod setMessageReaction(long chatId, int messageId) {
-        return new SetMessageReactionMethod().setChatId(chatId).setMessageId(messageId);
+        return setMessageReaction().setChatId(chatId).setMessageId(messageId);
     }
 
 
@@ -1337,7 +1382,7 @@ public final class Methods {
     }
 
     public static AnswerCallbackQueryMethod answerCallbackQuery(@NotNull String callbackQueryId) {
-        return new AnswerCallbackQueryMethod().setCallbackQueryId(callbackQueryId);
+        return answerCallbackQuery().setCallbackQueryId(callbackQueryId);
     }
 
 
@@ -1347,12 +1392,12 @@ public final class Methods {
 
     public static AnswerInlineQueryMethod answerInlineQuery(@NotNull String inlineQueryId,
                                                             @NotNull List<InlineQueryResult> results) {
-        return new AnswerInlineQueryMethod().setInlineQueryId(inlineQueryId).setResults(results);
+        return answerInlineQuery().setInlineQueryId(inlineQueryId).setResults(results);
     }
 
     public static AnswerInlineQueryMethod answerInlineQuery(@NotNull String inlineQueryId,
                                                             @NotNull InlineQueryResult... results) {
-        return new AnswerInlineQueryMethod().setInlineQueryId(inlineQueryId).setResults(results);
+        return answerInlineQuery().setInlineQueryId(inlineQueryId).setResults(results);
     }
 
     public static AnswerWebAppQueryMethod answerWebAppQuery() {
@@ -1361,6 +1406,6 @@ public final class Methods {
 
     public static AnswerWebAppQueryMethod answerWebAppQuery(@NotNull String webAppQueryId,
                                                             @NotNull InlineQueryResult queryResult) {
-        return new AnswerWebAppQueryMethod().setWebAppQueryId(webAppQueryId).setQueryResult(queryResult);
+        return answerWebAppQuery().setWebAppQueryId(webAppQueryId).setQueryResult(queryResult);
     }
 }

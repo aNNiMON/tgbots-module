@@ -10,23 +10,13 @@ import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.reactions.SetMessageReaction;
 import org.telegram.telegrambots.meta.api.objects.reactions.ReactionType;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiValidationException;
 
 public class SetMessageReactionMethod implements ChatMessageMethod<SetMessageReactionMethod, Boolean> {
 
     private final SetMessageReaction method;
 
     public SetMessageReactionMethod() {
-        this(new SetMessageReaction() {
-            @Override
-            public void validate() throws TelegramApiValidationException {
-                if (getChatId().isEmpty()) {
-                    throw new TelegramApiValidationException("ChatId parameter can't be empty", this);
-                }
-                // Ruben's lib 6.9.7.0 has invalid reaction type validation
-                // TODO Remove overridden method in the next update
-            }
-        });
+        this(new SetMessageReaction());
     }
 
     public SetMessageReactionMethod(@NotNull SetMessageReaction method) {

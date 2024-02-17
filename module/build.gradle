@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.annimon'
-version '6.9.0-SNAPSHOT'
+version '7.1.0-SNAPSHOT'
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 java {
@@ -24,7 +24,7 @@ ext.junit5Version = '5.10.2'
 ext.jaxbVersion = '2.3.1'
 
 dependencies {
-    api "org.telegram:telegrambots:6.9.7.0"
+    api "org.telegram:telegrambots:6.9.7.1"
     api 'com.google.guava:guava:33.0.0-jre'
     api "com.squareup.retrofit2:retrofit:$retrofitVersion"
     api "com.squareup.retrofit2:converter-jackson:$retrofitVersion"

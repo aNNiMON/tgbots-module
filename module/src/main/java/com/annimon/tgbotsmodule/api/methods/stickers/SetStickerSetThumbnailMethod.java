@@ -6,21 +6,21 @@ import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerSetThumb;
+import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerSetThumbnail;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class SetStickerSetThumbMethod implements
-        UserMethod<SetStickerSetThumbMethod, Boolean>,
-        InputFileMethod<SetStickerSetThumbMethod, Boolean> {
+public class SetStickerSetThumbnailMethod implements
+        UserMethod<SetStickerSetThumbnailMethod, Boolean>,
+        InputFileMethod<SetStickerSetThumbnailMethod, Boolean> {
 
-    private final SetStickerSetThumb method;
+    private final SetStickerSetThumbnail method;
 
-    public SetStickerSetThumbMethod() {
-        this(new SetStickerSetThumb());
+    public SetStickerSetThumbnailMethod() {
+        this(new SetStickerSetThumbnail());
     }
 
-    public SetStickerSetThumbMethod(@NotNull SetStickerSetThumb method) {
+    public SetStickerSetThumbnailMethod(@NotNull SetStickerSetThumbnail method) {
         this.method = method;
     }
 
@@ -30,19 +30,19 @@ public class SetStickerSetThumbMethod implements
     }
 
     @Override
-    public SetStickerSetThumbMethod setUserId(@NotNull Long userId) {
+    public SetStickerSetThumbnailMethod setUserId(@NotNull Long userId) {
         method.setUserId(userId);
         return this;
     }
 
     @Override
     public InputFile getFile() {
-        return method.getThumb();
+        return method.getThumbnail();
     }
 
     @Override
-    public SetStickerSetThumbMethod setFile(@NotNull InputFile file) {
-        method.setThumb(file);
+    public SetStickerSetThumbnailMethod setFile(@NotNull InputFile file) {
+        method.setThumbnail(file);
         return this;
     }
 

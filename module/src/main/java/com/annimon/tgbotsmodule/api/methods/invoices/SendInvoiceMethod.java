@@ -3,7 +3,6 @@ package com.annimon.tgbotsmodule.api.methods.invoices;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SendableMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.send.SendGameMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
 import java.util.function.Consumer;
@@ -317,12 +316,12 @@ public class SendInvoiceMethod implements
 
     @Override
     public ReplyParameters getReplyParameters() {
-        return null; // method.getReplyParameters(); TODO fix after ruben
+        return method.getReplyParameters();
     }
 
     @Override
     public SendInvoiceMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
-        // method.setReplyParameters(replyParameters);
+        method.setReplyParameters(replyParameters);
         return this;
     }
 
