@@ -59,40 +59,6 @@ public class AnswerInlineQueryMethod implements Method<Boolean> {
         return this;
     }
 
-    /**
-     * @deprecated Use {@link #getButton()}
-     */
-    @Deprecated
-    public String getSwitchPmText() {
-        return method.getSwitchPmText();
-    }
-
-    /**
-     * @deprecated Use {@link #setButton(InlineQueryResultsButton)}
-     */
-    @Deprecated
-    public AnswerInlineQueryMethod setSwitchPmText(String switchPmText) {
-        method.setSwitchPmText(switchPmText);
-        return this;
-    }
-
-    /**
-     * @deprecated Use {@link #getButton()}
-     */
-    @Deprecated
-    public String getSwitchPmParameter() {
-        return method.getSwitchPmParameter();
-    }
-
-    /**
-     * @deprecated Use {@link #setButton(InlineQueryResultsButton)}
-     */
-    @Deprecated
-    public AnswerInlineQueryMethod setSwitchPmParameter(String switchPmParameter) {
-        method.setSwitchPmParameter(switchPmParameter);
-        return this;
-    }
-
     public InlineQueryResultsButton getButton() {
         return method.getButton();
     }
