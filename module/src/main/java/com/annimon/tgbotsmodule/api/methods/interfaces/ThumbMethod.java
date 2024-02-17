@@ -8,21 +8,4 @@ public interface ThumbMethod<M extends Method, T extends Serializable> extends M
     InputFile getThumbnail();
 
     M setThumbnail(InputFile thumb);
-
-
-    /**
-     * @deprecated Use {@link #getThumbnail()}
-     */
-    @Deprecated
-    default InputFile getThumb() {
-        return getThumbnail();
-    }
-
-    /**
-     * @deprecated Use {@link #setThumbnail(InputFile)}
-     */
-    @Deprecated
-    default M setThumb(InputFile thumb) {
-        return setThumbnail(thumb);
-    }
 }
