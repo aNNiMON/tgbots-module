@@ -2,53 +2,48 @@ package com.annimon.tgbotsmodule.api.methods.info;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.adminrights.SetMyDefaultAdministratorRights;
 import org.telegram.telegrambots.meta.api.objects.adminrights.ChatAdministratorRights;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetMyDefaultAdministratorRightsMethod implements Method<Boolean> {
 
-    private final SetMyDefaultAdministratorRights method;
+    private final SetMyDefaultAdministratorRights.SetMyDefaultAdministratorRightsBuilder method;
 
     public SetMyDefaultAdministratorRightsMethod() {
-        this(new SetMyDefaultAdministratorRights());
+        this(SetMyDefaultAdministratorRights.builder());
     }
 
-    public SetMyDefaultAdministratorRightsMethod(@NotNull SetMyDefaultAdministratorRights method) {
+    public SetMyDefaultAdministratorRightsMethod(@NotNull SetMyDefaultAdministratorRights.SetMyDefaultAdministratorRightsBuilder method) {
         this.method = method;
     }
 
     public boolean getForChannels() {
-        return Boolean.TRUE.equals(method.getForChannels());
+        return Boolean.TRUE.equals(method.build().getForChannels());
     }
 
     public SetMyDefaultAdministratorRightsMethod setForChannels(boolean forChannels) {
-        method.setForChannels(forChannels);
+        method.forChannels(forChannels);
         return this;
     }
 
     public ChatAdministratorRights getRights() {
-        return method.getRights();
+        return method.build().getRights();
     }
 
     public SetMyDefaultAdministratorRightsMethod setRights(ChatAdministratorRights rights) {
-        method.setRights(rights);
+        method.rights(rights);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

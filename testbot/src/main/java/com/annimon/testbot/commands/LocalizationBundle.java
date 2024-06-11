@@ -14,6 +14,7 @@ import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardRow;
 
 public class LocalizationBundle implements CommandBundle<For> {
 
@@ -49,14 +50,14 @@ public class LocalizationBundle implements CommandBundle<For> {
 
     private void switchLanguage(MessageContext ctx) {
         // Setup inline keyboard
-        final var keyboard = new ArrayList<List<InlineKeyboardButton>>(2);
+        final var keyboard = new ArrayList<InlineKeyboardRow>(2);
         for (var lang : List.of("en", "ru")) {
             var languageName = localization.getString("lang_" + lang, globalLocale);
             var btn = InlineKeyboardButton.builder()
                     .text(languageName)
                     .callbackData("lang:" + lang)
                     .build();
-            keyboard.add(List.of(btn));
+            keyboard.add(new InlineKeyboardRow(btn));
         }
 
         ctx.reply(localization.getString("choose_language", globalLocale))

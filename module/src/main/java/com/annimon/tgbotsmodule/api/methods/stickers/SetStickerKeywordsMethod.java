@@ -3,35 +3,33 @@ package com.annimon.tgbotsmodule.api.methods.stickers;
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerKeywords;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetStickerKeywordsMethod implements Method<Boolean> {
 
-    private final SetStickerKeywords method;
+    private final SetStickerKeywords.SetStickerKeywordsBuilder method;
 
     public SetStickerKeywordsMethod() {
-        this(new SetStickerKeywords());
+        this(SetStickerKeywords.builder());
     }
 
-    public SetStickerKeywordsMethod(@NotNull SetStickerKeywords method) {
+    public SetStickerKeywordsMethod(@NotNull SetStickerKeywords.SetStickerKeywordsBuilder method) {
         this.method = method;
     }
 
     public String getSticker() {
-        return method.getSticker();
+        return method.build().getSticker();
     }
 
     public SetStickerKeywordsMethod setSticker(@NotNull String sticker) {
-        method.setSticker(sticker);
+        method.sticker(sticker);
         return this;
     }
 
     public List<String> getKeywords() {
-        return method.getKeywords();
+        return method.build().getKeywords();
     }
 
     public SetStickerKeywordsMethod setKeyword(@NotNull String keyword) {
@@ -39,20 +37,17 @@ public class SetStickerKeywordsMethod implements Method<Boolean> {
     }
 
     public SetStickerKeywordsMethod setKeywords(@NotNull List<String> keywords) {
-        method.setKeywords(keywords);
+        method.keywords(keywords);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

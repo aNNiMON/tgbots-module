@@ -9,6 +9,7 @@ import com.annimon.tgbotsmodule.commands.context.MessageContext
 import com.annimon.tgbotsmodule.services.ResourceBundleLocalizationService
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardRow
 
 class LocalizationBundle : CommandBundle<For> {
 
@@ -38,14 +39,14 @@ class LocalizationBundle : CommandBundle<For> {
 
     private fun switchLanguage(ctx: MessageContext) {
         // Setup inline keyboard
-        val keyboard = ArrayList<List<InlineKeyboardButton>>(2)
+        val keyboard = ArrayList<InlineKeyboardRow>(2)
         for (lang in listOf("en", "ru")) {
             val languageName = localization.getString("lang_$lang", globalLocale)
             val btn = InlineKeyboardButton.builder()
                     .text(languageName)
                     .callbackData("lang:$lang")
                     .build()
-            keyboard.add(listOf(btn))
+            keyboard.add(InlineKeyboardRow((btn)))
         }
 
         ctx.reply(localization.getString("choose_language", globalLocale))

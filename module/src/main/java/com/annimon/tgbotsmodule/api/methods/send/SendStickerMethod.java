@@ -1,155 +1,149 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.polls.SendPollMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendStickerMethod implements
         MediaMessageMethod<SendStickerMethod, Message> {
 
-    private final SendSticker method;
+    private final SendSticker.SendStickerBuilder method;
 
     public SendStickerMethod() {
-        this(new SendSticker());
+        this(SendSticker.builder());
     }
 
-    public SendStickerMethod(@NotNull SendSticker method) {
+    public SendStickerMethod(@NotNull SendSticker.SendStickerBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public SendStickerMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Integer getReplyToMessageId() {
-        return method.getReplyToMessageId();
+        return method.build().getReplyToMessageId();
     }
 
     @Override
     public SendStickerMethod setReplyToMessageId(Integer messageId) {
-        method.setReplyToMessageId(messageId);
+        method.replyToMessageId(messageId);
         return this;
     }
 
     @Override
     public Integer getMessageThreadId() {
-        return method.getMessageThreadId();
+        return method.build().getMessageThreadId();
     }
 
     @Override
     public SendStickerMethod setMessageThreadId(Integer messageThreadId) {
-        method.setMessageThreadId(messageThreadId);
+        method.messageThreadId(messageThreadId);
         return this;
     }
 
     @Override
     public Boolean getAllowSendingWithoutReply() {
-        return method.getAllowSendingWithoutReply();
+        return method.build().getAllowSendingWithoutReply();
     }
 
     @Override
     public SendStickerMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
-        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        method.allowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 
     @Override
     public boolean isNotificationDisabled() {
-        return Boolean.TRUE.equals(method.getDisableNotification());
+        return Boolean.TRUE.equals(method.build().getDisableNotification());
     }
 
     @Override
     public SendStickerMethod enableNotification() {
-        method.enableNotification();
+        method.disableNotification(false);
         return this;
     }
 
     @Override
     public SendStickerMethod disableNotification() {
-        method.disableNotification();
+        method.disableNotification(true);
         return this;
     }
 
     @Override
     public ReplyKeyboard getReplyMarkup() {
-        return method.getReplyMarkup();
+        return method.build().getReplyMarkup();
     }
 
     @Override
     public SendStickerMethod setReplyMarkup(ReplyKeyboard replyMarkup) {
-        method.setReplyMarkup(replyMarkup);
+        method.replyMarkup(replyMarkup);
         return this;
     }
 
     @Override
     public InputFile getFile() {
-        return method.getSticker();
+        return method.build().getSticker();
     }
 
     @Override
     public SendStickerMethod setFile(@NotNull InputFile file) {
-        method.setSticker(file);
+        method.sticker(file);
         return this;
     }
 
     @Override
     public Boolean getProtectContent() {
-        return method.getProtectContent();
+        return method.build().getProtectContent();
     }
 
     @Override
     public SendStickerMethod setProtectContent(Boolean protectContent) {
-        method.setProtectContent(protectContent);
+        method.protectContent(protectContent);
         return this;
     }
 
     public String getEmoji() {
-        return method.getEmoji();
+        return method.build().getEmoji();
     }
 
     public SendStickerMethod setEmoji(@NotNull String emoji) {
-        method.setEmoji(emoji);
+        method.emoji(emoji);
         return this;
     }
 
     @Override
     public ReplyParameters getReplyParameters() {
-        return method.getReplyParameters();
+        return method.build().getReplyParameters();
     }
 
     @Override
     public SendStickerMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
-        method.setReplyParameters(replyParameters);
+        method.replyParameters(replyParameters);
         return this;
     }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Message> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer);
+    public CompletableFuture<Message> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

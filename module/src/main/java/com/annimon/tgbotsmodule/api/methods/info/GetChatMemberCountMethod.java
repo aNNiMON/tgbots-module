@@ -2,45 +2,40 @@ package com.annimon.tgbotsmodule.api.methods.info;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.GetChatMemberCount;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class GetChatMemberCountMethod implements ChatMethod<GetChatMemberCountMethod, Integer> {
 
-    private final GetChatMemberCount method;
+    private final GetChatMemberCount.GetChatMemberCountBuilder method;
 
     public GetChatMemberCountMethod() {
-        this(new GetChatMemberCount());
+        this(GetChatMemberCount.builder());
     }
 
-    public GetChatMemberCountMethod(@NotNull GetChatMemberCount method) {
+    public GetChatMemberCountMethod(@NotNull GetChatMemberCount.GetChatMemberCountBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public GetChatMemberCountMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Integer call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Integer> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Integer> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

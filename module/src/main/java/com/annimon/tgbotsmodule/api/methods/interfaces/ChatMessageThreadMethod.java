@@ -1,7 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.interfaces;
 
 import java.io.Serializable;
-import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 
 public interface ChatMessageThreadMethod<M extends Method, T extends Serializable>
         extends ChatMethod<M, T> {

@@ -6,15 +6,12 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageCaption;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class EditMessageCaptionMethod implements
         InlineOrChatMessageMethod<EditMessageCaptionMethod, Serializable>,
@@ -22,110 +19,107 @@ public class EditMessageCaptionMethod implements
         ParseModeMethod<EditMessageCaptionMethod, Serializable>,
         CaptionMethod<EditMessageCaptionMethod, Serializable> {
 
-    private final EditMessageCaption method;
+    private final EditMessageCaption.EditMessageCaptionBuilder method;
 
     public EditMessageCaptionMethod() {
-        this(new EditMessageCaption());
+        this(EditMessageCaption.builder());
     }
 
-    public EditMessageCaptionMethod(@NotNull EditMessageCaption method) {
+    public EditMessageCaptionMethod(@NotNull EditMessageCaption.EditMessageCaptionBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public EditMessageCaptionMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         // Clear inline message id
-        method.setInlineMessageId(null);
+        method.inlineMessageId(null);
         return this;
     }
 
     @Override
     public Integer getMessageId() {
-        return method.getMessageId();
+        return method.build().getMessageId();
     }
 
     @Override
     public EditMessageCaptionMethod setMessageId(@NotNull Integer messageId) {
-        method.setMessageId(messageId);
+        method.messageId(messageId);
         // Clear inline message id
-        method.setInlineMessageId(null);
+        method.inlineMessageId(null);
         return this;
     }
 
     @Override
     public String getInlineMessageId() {
-        return method.getInlineMessageId();
+        return method.build().getInlineMessageId();
     }
 
     @Override
     public EditMessageCaptionMethod setInlineMessageId(@NotNull String inlineMessageId) {
-        method.setInlineMessageId(inlineMessageId);
+        method.inlineMessageId(inlineMessageId);
         // Clear chat id and message id
-        method.setChatId((String) null);
-        method.setMessageId(null);
+        method.chatId((String) null);
+        method.messageId(null);
         return this;
     }
 
     @Override
     public InlineKeyboardMarkup getReplyMarkup() {
-        return method.getReplyMarkup();
+        return method.build().getReplyMarkup();
     }
 
     @Override
     public EditMessageCaptionMethod setReplyMarkup(InlineKeyboardMarkup replyMarkup) {
-        method.setReplyMarkup(replyMarkup);
+        method.replyMarkup(replyMarkup);
         return this;
     }
 
     @Override
     public String getParseMode() {
-        return method.getParseMode();
+        return method.build().getParseMode();
     }
 
     @Override
     public EditMessageCaptionMethod setParseMode(String parseMode) {
-        method.setParseMode(parseMode);
+        method.parseMode(parseMode);
         return this;
     }
 
     @Override
     public List<MessageEntity> getEntities() {
-        return method.getCaptionEntities();
+        return method.build().getCaptionEntities();
     }
 
     @Override
     public EditMessageCaptionMethod setEntities(List<MessageEntity> entities) {
-        method.setCaptionEntities(entities);
+        method.captionEntities(entities);
         return this;
     }
 
     @Override
     public String getCaption() {
-        return method.getCaption();
+        return method.build().getCaption();
     }
 
     @Override
     public EditMessageCaptionMethod setCaption(String caption) {
-        method.setCaption(caption);
+        method.caption(caption);
         return this;
     }
 
     @Override
     public Serializable call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Serializable> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Serializable> callAsync(CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

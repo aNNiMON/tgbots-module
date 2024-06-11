@@ -1,22 +1,20 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ThumbMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendAudio;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendAudioMethod implements
         MediaMessageMethod<SendAudioMethod, Message>,
@@ -25,204 +23,201 @@ public class SendAudioMethod implements
         DurationMethod<SendAudioMethod, Message>,
         ThumbMethod<SendAudioMethod, Message> {
 
-    private final SendAudio method;
+    private final SendAudio.SendAudioBuilder method;
 
     public SendAudioMethod() {
-        this(new SendAudio());
+        this(SendAudio.builder());
     }
 
-    public SendAudioMethod(@NotNull SendAudio method) {
+    public SendAudioMethod(@NotNull SendAudio.SendAudioBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public SendAudioMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Integer getReplyToMessageId() {
-        return method.getReplyToMessageId();
+        return method.build().getReplyToMessageId();
     }
 
     @Override
     public SendAudioMethod setReplyToMessageId(Integer messageId) {
-        method.setReplyToMessageId(messageId);
+        method.replyToMessageId(messageId);
         return this;
     }
 
     @Override
     public Integer getMessageThreadId() {
-        return method.getMessageThreadId();
+        return method.build().getMessageThreadId();
     }
 
     @Override
     public SendAudioMethod setMessageThreadId(Integer messageThreadId) {
-        method.setMessageThreadId(messageThreadId);
+        method.messageThreadId(messageThreadId);
         return this;
     }
 
     @Override
     public Boolean getAllowSendingWithoutReply() {
-        return method.getAllowSendingWithoutReply();
+        return method.build().getAllowSendingWithoutReply();
     }
 
     @Override
     public SendAudioMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
-        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        method.allowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 
     @Override
     public boolean isNotificationDisabled() {
-        return Boolean.TRUE.equals(method.getDisableNotification());
+        return Boolean.TRUE.equals(method.build().getDisableNotification());
     }
 
     @Override
     public SendAudioMethod enableNotification() {
-        method.enableNotification();
+        method.disableNotification(false);
         return this;
     }
 
     @Override
     public SendAudioMethod disableNotification() {
-        method.disableNotification();
+        method.disableNotification(true);
         return this;
     }
 
     @Override
     public ReplyKeyboard getReplyMarkup() {
-        return method.getReplyMarkup();
+        return method.build().getReplyMarkup();
     }
 
     @Override
     public SendAudioMethod setReplyMarkup(ReplyKeyboard replyMarkup) {
-        method.setReplyMarkup(replyMarkup);
+        method.replyMarkup(replyMarkup);
         return this;
     }
 
     @Override
     public InputFile getFile() {
-        return method.getAudio();
+        return method.build().getAudio();
     }
 
     @Override
     public SendAudioMethod setFile(@NotNull InputFile file) {
-        method.setAudio(file);
+        method.audio(file);
         return this;
     }
 
     @Override
     public String getParseMode() {
-        return method.getParseMode();
+        return method.build().getParseMode();
     }
 
     @Override
     public SendAudioMethod setParseMode(String parseMode) {
-        method.setParseMode(parseMode);
+        method.parseMode(parseMode);
         return this;
     }
 
     @Override
     public List<MessageEntity> getEntities() {
-        return method.getCaptionEntities();
+        return method.build().getCaptionEntities();
     }
 
     @Override
     public SendAudioMethod setEntities(List<MessageEntity> entities) {
-        method.setCaptionEntities(entities);
+        method.captionEntities(entities);
         return this;
     }
     
     @Override
     public String getCaption() {
-        return method.getCaption();
+        return method.build().getCaption();
     }
 
     @Override
     public SendAudioMethod setCaption(String caption) {
-        method.setCaption(caption);
+        method.caption(caption);
         return this;
     }
 
     @Override
     public Integer getDuration() {
-        return method.getDuration();
+        return method.build().getDuration();
     }
 
     @Override
     public SendAudioMethod setDuration(@NotNull Integer duration) {
-        method.setDuration(duration);
+        method.duration(duration);
         return this;
     }
 
     @Override
     public InputFile getThumbnail() {
-        return method.getThumbnail();
+        return method.build().getThumbnail();
     }
 
     @Override
     public SendAudioMethod setThumbnail(@NotNull InputFile thumb) {
-        method.setThumbnail(thumb);
+        method.thumbnail(thumb);
         return this;
     }
 
     public String getPerformer() {
-        return method.getPerformer();
+        return method.build().getPerformer();
     }
 
     public SendAudioMethod setPerformer(String performer) {
-        method.setPerformer(performer);
+        method.performer(performer);
         return this;
     }
 
     public String getTitle() {
-        return method.getTitle();
+        return method.build().getTitle();
     }
 
     public SendAudioMethod setTitle(String title) {
-        method.setTitle(title);
+        method.title(title);
         return this;
     }
 
     @Override
     public Boolean getProtectContent() {
-        return method.getProtectContent();
+        return method.build().getProtectContent();
     }
 
     @Override
     public SendAudioMethod setProtectContent(Boolean protectContent) {
-        method.setProtectContent(protectContent);
+        method.protectContent(protectContent);
         return this;
     }
 
     @Override
     public ReplyParameters getReplyParameters() {
-        return method.getReplyParameters();
+        return method.build().getReplyParameters();
     }
 
     @Override
     public SendAudioMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
-        method.setReplyParameters(replyParameters);
+        method.replyParameters(replyParameters);
         return this;
     }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Message> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer);
+    public CompletableFuture<Message> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

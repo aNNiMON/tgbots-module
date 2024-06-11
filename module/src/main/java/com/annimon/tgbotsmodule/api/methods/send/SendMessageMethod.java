@@ -7,16 +7,14 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.TextMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.WebPagePreviewMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.LinkPreviewOptions;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendMessageMethod implements
         ReplyMarkupSupportedMessageMethod<SendMessageMethod, Message>,
@@ -25,177 +23,174 @@ public class SendMessageMethod implements
         ProtectedContentMethod<SendMessageMethod, Message>,
         TextMethod<SendMessageMethod, Message> {
 
-    private final SendMessage method;
+    private final SendMessage.SendMessageBuilder method;
 
     public SendMessageMethod() {
-        this(new SendMessage());
+        this(SendMessage.builder());
     }
 
-    public SendMessageMethod(@NotNull SendMessage method) {
+    public SendMessageMethod(@NotNull SendMessage.SendMessageBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public SendMessageMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Integer getReplyToMessageId() {
-        return method.getReplyToMessageId();
+        return method.build().getReplyToMessageId();
     }
 
     @Override
     public SendMessageMethod setReplyToMessageId(Integer messageId) {
-        method.setReplyToMessageId(messageId);
+        method.replyToMessageId(messageId);
         return this;
     }
 
     @Override
     public Integer getMessageThreadId() {
-        return method.getMessageThreadId();
+        return method.build().getMessageThreadId();
     }
 
     @Override
     public SendMessageMethod setMessageThreadId(Integer messageThreadId) {
-        method.setMessageThreadId(messageThreadId);
+        method.messageThreadId(messageThreadId);
         return this;
     }
 
     @Override
     public Boolean getAllowSendingWithoutReply() {
-        return method.getAllowSendingWithoutReply();
+        return method.build().getAllowSendingWithoutReply();
     }
 
     @Override
     public SendMessageMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
-        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        method.allowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 
     @Override
     public Boolean getProtectContent() {
-        return method.getProtectContent();
+        return method.build().getProtectContent();
     }
 
     @Override
     public SendMessageMethod setProtectContent(Boolean protectContent) {
-        method.setProtectContent(protectContent);
+        method.protectContent(protectContent);
         return this;
     }
 
     @Override
     public boolean isNotificationDisabled() {
-        return Boolean.TRUE.equals(method.getDisableNotification());
+        return Boolean.TRUE.equals(method.build().getDisableNotification());
     }
 
     @Override
     public SendMessageMethod enableNotification() {
-        method.enableNotification();
+        method.disableNotification(false);
         return this;
     }
 
     @Override
     public SendMessageMethod disableNotification() {
-        method.disableNotification();
+        method.disableNotification(true);
         return this;
     }
 
     @Override
     public ReplyKeyboard getReplyMarkup() {
-        return method.getReplyMarkup();
+        return method.build().getReplyMarkup();
     }
 
     @Override
     public SendMessageMethod setReplyMarkup(ReplyKeyboard replyMarkup) {
-        method.setReplyMarkup(replyMarkup);
+        method.replyMarkup(replyMarkup);
         return this;
     }
 
     @Override
     public String getParseMode() {
-        return method.getParseMode();
+        return method.build().getParseMode();
     }
 
     @Override
     public SendMessageMethod setParseMode(String parseMode) {
-        method.setParseMode(parseMode);
+        method.parseMode(parseMode);
         return this;
     }
 
     @Override
     public List<MessageEntity> getEntities() {
-        return method.getEntities();
+        return method.build().getEntities();
     }
 
     @Override
     public SendMessageMethod setEntities(List<MessageEntity> entities) {
-        method.setEntities(entities);
+        method.build().setEntities(entities);
         return this;
     }
 
     @Override
     public String getText() {
-        return method.getText();
+        return method.build().getText();
     }
 
     @Override
     public SendMessageMethod setText(@NotNull String text) {
-        method.setText(text);
+        method.text(text);
         return this;
     }
 
     @Override
     public boolean isWebPagePreviewDisabled() {
-        return Boolean.TRUE.equals(method.getDisableWebPagePreview());
+        return Boolean.TRUE.equals(method.build().getDisableWebPagePreview());
     }
 
     public SendMessageMethod disableWebPagePreview() {
-        method.disableWebPagePreview();
+        method.disableWebPagePreview(true);
         return this;
     }
 
     public SendMessageMethod enableWebPagePreview() {
-        method.enableWebPagePreview();
+        method.disableWebPagePreview(false);
         return this;
     }
 
     @Override
     public ReplyParameters getReplyParameters() {
-        return method.getReplyParameters();
+        return method.build().getReplyParameters();
     }
 
     @Override
     public SendMessageMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
-        method.setReplyParameters(replyParameters);
+        method.replyParameters(replyParameters);
         return this;
     }
 
     public LinkPreviewOptions getLinkPreviewOptions() {
-        return method.getLinkPreviewOptions();
+        return method.build().getLinkPreviewOptions();
     }
 
     public SendMessageMethod setLinkPreviewOptions(LinkPreviewOptions options) {
-        method.setLinkPreviewOptions(options);
+        method.linkPreviewOptions(options);
         return this;
     }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Message> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Message> callAsync(CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

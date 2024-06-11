@@ -4,73 +4,68 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.InputFileMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.StickerFormatMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.stickers.UploadStickerFile;
 import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class UploadStickerFileMethod implements
         UserMethod<UploadStickerFileMethod, File>,
         InputFileMethod<UploadStickerFileMethod, File>,
         StickerFormatMethod<UploadStickerFileMethod, File> {
 
-    private final UploadStickerFile method;
+    private final UploadStickerFile.UploadStickerFileBuilder method;
 
     public UploadStickerFileMethod() {
-        this(new UploadStickerFile());
+        this(UploadStickerFile.builder());
 
     }
 
-    public UploadStickerFileMethod(@NotNull UploadStickerFile method) {
+    public UploadStickerFileMethod(@NotNull UploadStickerFile.UploadStickerFileBuilder method) {
         this.method = method;
     }
 
     @Override
     public Long getUserId() {
-        return method.getUserId();
+        return method.build().getUserId();
     }
 
     @Override
     public UploadStickerFileMethod setUserId(@NotNull Long userId) {
-        method.setUserId(userId);
+        method.userId(userId);
         return this;
     }
 
     @Override
     public String getStickerFormat() {
-        return method.getStickerFormat();
+        return method.build().getStickerFormat();
     }
 
     @Override
     public UploadStickerFileMethod setStickerFormat(@NotNull String stickerFormat) {
-        method.setStickerFormat(stickerFormat);
+        method.stickerFormat(stickerFormat);
         return this;
     }
 
     @Override
     public InputFile getFile() {
-        return method.getSticker();
+        return method.build().getSticker();
     }
 
     @Override
     public UploadStickerFileMethod setFile(@NotNull InputFile file) {
-        method.setSticker(file);
+        method.sticker(file);
         return this;
     }
 
     @Override
     public File call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super File> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer);
+    public CompletableFuture<File> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

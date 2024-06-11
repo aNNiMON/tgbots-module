@@ -2,54 +2,49 @@ package com.annimon.tgbotsmodule.api.methods.answerqueries;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.webapp.AnswerWebAppQuery;
 import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResult;
 import org.telegram.telegrambots.meta.api.objects.webapp.SentWebAppMessage;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class AnswerWebAppQueryMethod implements Method<SentWebAppMessage> {
 
-    private final AnswerWebAppQuery method;
+    private final AnswerWebAppQuery.AnswerWebAppQueryBuilder method;
 
     public AnswerWebAppQueryMethod() {
-        this(new AnswerWebAppQuery());
+        this(AnswerWebAppQuery.builder());
     }
 
-    public AnswerWebAppQueryMethod(@NotNull AnswerWebAppQuery method) {
+    public AnswerWebAppQueryMethod(@NotNull AnswerWebAppQuery.AnswerWebAppQueryBuilder method) {
         this.method = method;
     }
 
     public String getWebAppQueryId() {
-        return method.getWebAppQueryId();
+        return method.build().getWebAppQueryId();
     }
 
     public AnswerWebAppQueryMethod setWebAppQueryId(@NotNull String webAppQueryId) {
-        method.setWebAppQueryId(webAppQueryId);
+        method.webAppQueryId(webAppQueryId);
         return this;
     }
 
     public InlineQueryResult getQueryResult() {
-        return method.getQueryResult();
+        return method.build().getQueryResult();
     }
 
     public AnswerWebAppQueryMethod setQueryResult(InlineQueryResult queryResult) {
-        method.setQueryResult(queryResult);
+        method.queryResult(queryResult);
         return this;
     }
 
     @Override
     public SentWebAppMessage call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super SentWebAppMessage> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<SentWebAppMessage> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

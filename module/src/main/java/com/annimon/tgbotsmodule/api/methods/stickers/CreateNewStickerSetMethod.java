@@ -1,89 +1,73 @@
 package com.annimon.tgbotsmodule.api.methods.stickers;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.StickerFormatMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.stickers.CreateNewStickerSet;
 import org.telegram.telegrambots.meta.api.objects.stickers.InputSticker;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class CreateNewStickerSetMethod implements
-        UserMethod<CreateNewStickerSetMethod, Boolean>,
-        StickerFormatMethod<CreateNewStickerSetMethod, Boolean> {
-
+        UserMethod<CreateNewStickerSetMethod, Boolean> {
 
     private static final String REGULAR_TYPE = "regular";
     private static final String MASK_TYPE = "mask";
     private static final String CUSTOM_EMOJI_TYPE = "custom_emoji";
-    private final CreateNewStickerSet method;
+    private final CreateNewStickerSet.CreateNewStickerSetBuilder method;
 
     public CreateNewStickerSetMethod() {
-        this(new CreateNewStickerSet());
+        this(CreateNewStickerSet.builder());
     }
 
-    public CreateNewStickerSetMethod(@NotNull CreateNewStickerSet method) {
+    public CreateNewStickerSetMethod(@NotNull CreateNewStickerSet.CreateNewStickerSetBuilder method) {
         this.method = method;
     }
 
     @Override
     public Long getUserId() {
-        return method.getUserId();
+        return method.build().getUserId();
     }
 
     @Override
     public CreateNewStickerSetMethod setUserId(@NotNull Long userId) {
-        method.setUserId(userId);
+        method.userId(userId);
         return this;
     }
 
     public List<InputSticker> getStickers() {
-        return method.getStickers();
+        return method.build().getStickers();
     }
 
     public CreateNewStickerSetMethod setStickers(@NotNull List<InputSticker> stickers) {
-        method.setStickers(stickers);
+        method.stickers(stickers);
         return this;
     }
 
     public String getName() {
-        return method.getName();
+        return method.build().getName();
     }
 
     public CreateNewStickerSetMethod setName(@NotNull String name) {
-        method.setName(name);
+        method.name(name);
         return this;
     }
 
     public String getTitle() {
-        return method.getTitle();
+        return method.build().getTitle();
     }
 
     public CreateNewStickerSetMethod setTitle(@NotNull String title) {
-        method.setTitle(title);
-        return this;
-    }
-
-    @Override
-    public String getStickerFormat() {
-        return method.getStickerFormat();
-    }
-
-    @Override
-    public CreateNewStickerSetMethod setStickerFormat(@NotNull String stickerFormat) {
-        method.setStickerFormat(stickerFormat);
+        method.title(title);
         return this;
     }
 
     public String getStickerType() {
-        return method.getStickerType();
+        return method.build().getStickerType();
     }
 
     public CreateNewStickerSetMethod setStickerType(String stickerType) {
-        method.setStickerType(stickerType);
+        method.stickerType(stickerType);
         return this;
     }
 
@@ -112,24 +96,21 @@ public class CreateNewStickerSetMethod implements
     }
 
     public boolean getNeedsRepainting() {
-        return Boolean.TRUE.equals(method.getNeedsRepainting());
+        return Boolean.TRUE.equals(method.build().getNeedsRepainting());
     }
 
     public CreateNewStickerSetMethod setNeedsRepainting(boolean needsRepainting) {
-        method.setNeedsRepainting(needsRepainting);
+        method.needsRepainting(needsRepainting);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

@@ -2,58 +2,53 @@ package com.annimon.tgbotsmodule.api.methods.polls;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.polls.StopPoll;
 import org.telegram.telegrambots.meta.api.objects.polls.Poll;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class StopPollMethod implements
         ChatMessageMethod<StopPollMethod, Poll> {
 
-    private final StopPoll method;
+    private final StopPoll.StopPollBuilder method;
 
     public StopPollMethod() {
-        this(new StopPoll());
+        this(StopPoll.builder());
     }
 
-    public StopPollMethod(@NotNull StopPoll method) {
+    public StopPollMethod(@NotNull StopPoll.StopPollBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public StopPollMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Integer getMessageId() {
-        return method.getMessageId();
+        return method.build().getMessageId();
     }
 
     @Override
     public StopPollMethod setMessageId(Integer messageId) {
-        method.setMessageId(messageId);
+        method.messageId(messageId);
         return this;
     }
 
     @Override
     public Poll call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Poll> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Poll> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

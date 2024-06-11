@@ -1,57 +1,47 @@
 package com.annimon.tgbotsmodule;
 
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import org.jetbrains.annotations.NotNull;
-import org.telegram.telegrambots.bots.DefaultBotOptions;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
+import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
-import org.telegram.telegrambots.meta.generics.LongPollingBot;
-import org.telegram.telegrambots.meta.generics.WebhookBot;
-import org.telegram.telegrambots.util.WebhookUtils;
 
 public abstract class BotHandler extends CommonAbsSender
-        implements LongPollingBot, WebhookBot {
+        implements LongPollingUpdateConsumer {
+
+    private final String botToken;
+    private final Executor updatesProcessorExecutor;
 
     public BotHandler(@NotNull String botToken) {
-        this(new DefaultBotOptions(), botToken);
-    }
-
-    public BotHandler(@NotNull DefaultBotOptions options, @NotNull String botToken) {
-        super(options, botToken);
-    }
-
-    @Override
-    public void onUpdateReceived(@NotNull Update update) {
-        onUpdate(update);
+        super(botToken);
+        this.botToken = botToken;
+        updatesProcessorExecutor = Executors.newSingleThreadExecutor();
     }
 
     @Override
+    public void consume(List<Update> updates) {
+        for (Update update : updates) {
+            updatesProcessorExecutor.execute(() -> onUpdate(update));
+        }
+    }
+
     public BotApiMethod<?> onWebhookUpdateReceived(@NotNull Update update) {
         return onUpdate(update);
     }
 
     protected abstract BotApiMethod<?> onUpdate(@NotNull Update update);
 
-    @Override
-    public String getBotPath() {
-        return getBotUsername();
+    public void setWebhook(SetWebhook setWebhook) {
     }
 
-    @Override
-    public void setWebhook(SetWebhook setWebhook) throws TelegramApiException {
-        WebhookUtils.setWebhook(this, this, setWebhook);
+    public void clearWebhook() {
     }
 
-    @Override
-    public void clearWebhook() throws TelegramApiRequestException {
-        WebhookUtils.clearWebhook(this);
-    }
-
-    @Override
-    public void onClosing() {
-        exe.shutdown();
+    public String getBotToken() {
+        return botToken;
     }
 }

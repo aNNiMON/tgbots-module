@@ -3,71 +3,66 @@ package com.annimon.tgbotsmodule.api.methods.answerqueries;
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.AnswerShippingQuery;
 import org.telegram.telegrambots.meta.api.objects.payments.ShippingOption;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class AnswerShippingQueryMethod implements Method<Boolean> {
 
-    private final AnswerShippingQuery method;
+    private final AnswerShippingQuery.AnswerShippingQueryBuilder method;
 
     public AnswerShippingQueryMethod() {
-        this(new AnswerShippingQuery());
+        this(AnswerShippingQuery.builder());
     }
 
-    public AnswerShippingQueryMethod(@NotNull AnswerShippingQuery method) {
+    public AnswerShippingQueryMethod(@NotNull AnswerShippingQuery.AnswerShippingQueryBuilder method) {
         this.method = method;
     }
 
     public String getShippingQueryId() {
-        return method.getShippingQueryId();
+        return method.build().getShippingQueryId();
     }
 
     public AnswerShippingQueryMethod setShippingQueryId(@NotNull String shippingQueryId) {
-        method.setShippingQueryId(shippingQueryId);
+        method.shippingQueryId(shippingQueryId);
         return this;
     }
 
     public List<ShippingOption> getShippingOptions() {
-        return method.getShippingOptions();
+        return method.build().getShippingOptions();
     }
 
     public AnswerShippingQueryMethod setShippingOptions(List<ShippingOption> shippingOptions) {
-        method.setShippingOptions(shippingOptions);
+        method.shippingOptions(shippingOptions);
         return this;
     }
 
     public boolean getOk() {
-        return Boolean.TRUE.equals(method.getOk());
+        return Boolean.TRUE.equals(method.build().getOk());
     }
 
     public AnswerShippingQueryMethod setOk(boolean isPersonal) {
-        method.setOk(isPersonal);
+        method.ok(isPersonal);
         return this;
     }
 
     public String getErrorMessage() {
-        return method.getErrorMessage();
+        return method.build().getErrorMessage();
     }
 
     public AnswerShippingQueryMethod setErrorMessage(String errorMessage) {
-        method.setErrorMessage(errorMessage);
+        method.errorMessage(errorMessage);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

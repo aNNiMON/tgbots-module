@@ -2,52 +2,46 @@ package com.annimon.tgbotsmodule.api.methods.stickers;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.api.methods.stickers.GetCustomEmojiStickers;
-import org.telegram.telegrambots.meta.api.objects.stickers.Sticker;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
+import org.jetbrains.annotations.NotNull;
+import org.telegram.telegrambots.meta.api.methods.stickers.GetCustomEmojiStickers;
+import org.telegram.telegrambots.meta.api.objects.stickers.Sticker;
 
 public class GetCustomEmojiStickersMethod implements Method<ArrayList<Sticker>> {
 
-    private final GetCustomEmojiStickers method;
+    private final GetCustomEmojiStickers.GetCustomEmojiStickersBuilder method;
 
     public GetCustomEmojiStickersMethod() {
-        this(new GetCustomEmojiStickers());
+        this(GetCustomEmojiStickers.builder());
     }
 
-    public GetCustomEmojiStickersMethod(@NotNull GetCustomEmojiStickers method) {
+    public GetCustomEmojiStickersMethod(@NotNull GetCustomEmojiStickers.GetCustomEmojiStickersBuilder method) {
         this.method = method;
     }
 
     public List<String> getCustomEmojiIds() {
-        return method.getCustomEmojiIds();
+        return method.build().getCustomEmojiIds();
     }
 
     public GetCustomEmojiStickersMethod setCustomEmojiIds(@NotNull List<String> emojiIds) {
-        method.setCustomEmojiIds(emojiIds);
+        method.customEmojiIds(emojiIds);
         return this;
     }
 
     public GetCustomEmojiStickersMethod setCustomEmojiIds(@NotNull String... emojiIds) {
-        method.setCustomEmojiIds(List.of(emojiIds));
+        method.customEmojiIds(List.of(emojiIds));
         return this;
     }
 
     @Override
     public ArrayList<Sticker> call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super ArrayList<Sticker>> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<ArrayList<Sticker>> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

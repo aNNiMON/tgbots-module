@@ -3,169 +3,164 @@ package com.annimon.tgbotsmodule.api.methods.send;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendContact;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendContactMethod implements
         ReplyMarkupSupportedMessageMethod<SendContactMethod, Message>,
         ProtectedContentMethod<SendContactMethod, Message> {
 
-    private final SendContact method;
+    private final SendContact.SendContactBuilder method;
 
     public SendContactMethod() {
-        this(new SendContact());
+        this(SendContact.builder());
     }
 
-    public SendContactMethod(@NotNull SendContact method) {
+    public SendContactMethod(@NotNull SendContact.SendContactBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public SendContactMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Integer getReplyToMessageId() {
-        return method.getReplyToMessageId();
+        return method.build().getReplyToMessageId();
     }
 
     @Override
     public SendContactMethod setReplyToMessageId(Integer messageId) {
-        method.setReplyToMessageId(messageId);
+        method.replyToMessageId(messageId);
         return this;
     }
 
     @Override
     public Integer getMessageThreadId() {
-        return method.getMessageThreadId();
+        return method.build().getMessageThreadId();
     }
 
     @Override
     public SendContactMethod setMessageThreadId(Integer messageThreadId) {
-        method.setMessageThreadId(messageThreadId);
+        method.messageThreadId(messageThreadId);
         return this;
     }
 
     @Override
     public Boolean getAllowSendingWithoutReply() {
-        return method.getAllowSendingWithoutReply();
+        return method.build().getAllowSendingWithoutReply();
     }
 
     @Override
     public SendContactMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
-        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        method.allowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 
     @Override
     public boolean isNotificationDisabled() {
-        return Boolean.TRUE.equals(method.getDisableNotification());
+        return Boolean.TRUE.equals(method.build().getDisableNotification());
     }
 
     @Override
     public SendContactMethod enableNotification() {
-        method.enableNotification();
+        method.disableNotification(false);
         return this;
     }
 
     @Override
     public SendContactMethod disableNotification() {
-        method.disableNotification();
+        method.disableNotification(true);
         return this;
     }
 
     @Override
     public ReplyKeyboard getReplyMarkup() {
-        return method.getReplyMarkup();
+        return method.build().getReplyMarkup();
     }
 
     @Override
     public SendContactMethod setReplyMarkup(ReplyKeyboard replyMarkup) {
-        method.setReplyMarkup(replyMarkup);
+        method.replyMarkup(replyMarkup);
         return this;
     }
 
     public String getPhoneNumber() {
-        return method.getPhoneNumber();
+        return method.build().getPhoneNumber();
     }
 
     public SendContactMethod setPhoneNumber(@NotNull String phoneNumber) {
-        method.setPhoneNumber(phoneNumber);
+        method.phoneNumber(phoneNumber);
         return this;
     }
 
     public String getFirstName() {
-        return method.getFirstName();
+        return method.build().getFirstName();
     }
 
     public SendContactMethod setFirstName(@NotNull String firstName) {
-        method.setFirstName(firstName);
+        method.firstName(firstName);
         return this;
     }
 
     public String getLastName() {
-        return method.getLastName();
+        return method.build().getLastName();
     }
 
     public SendContactMethod setLastName(String lastName) {
-        method.setLastName(lastName);
+        method.lastName(lastName);
         return this;
     }
 
     public String getVCard() {
-        return method.getVCard();
+        return method.build().getVCard();
     }
 
     public SendContactMethod setVCard(String vCard) {
-        method.setVCard(vCard);
+        method.vCard(vCard);
         return this;
     }
 
     @Override
     public Boolean getProtectContent() {
-        return method.getProtectContent();
+        return method.build().getProtectContent();
     }
 
     @Override
     public SendContactMethod setProtectContent(Boolean protectContent) {
-        method.setProtectContent(protectContent);
+        method.protectContent(protectContent);
         return this;
     }
 
     @Override
     public ReplyParameters getReplyParameters() {
-        return method.getReplyParameters();
+        return method.build().getReplyParameters();
     }
 
     @Override
     public SendContactMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
-        method.setReplyParameters(replyParameters);
+        method.replyParameters(replyParameters);
         return this;
     }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Message> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Message> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

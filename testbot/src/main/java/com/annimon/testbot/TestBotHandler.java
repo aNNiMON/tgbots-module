@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
@@ -26,12 +26,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class TestBotHandler extends BotHandler {
 
-    private final BotConfig botConfig;
     private final CommandRegistry<For> commands;
 
     public TestBotHandler(BotConfig botConfig) {
         super(botConfig.getToken());
-        this.botConfig = botConfig;
 
         final var authority = new SimpleAuthority(botConfig.getCreatorId());
         commands = new CommandRegistry<>(botConfig.getUsername(), authority);
@@ -122,10 +120,5 @@ public class TestBotHandler extends BotHandler {
         } catch (NumberFormatException nfe) {
             return 0;
         }
-    }
-
-    @Override
-    public String getBotUsername() {
-        return botConfig.getUsername();
     }
 }

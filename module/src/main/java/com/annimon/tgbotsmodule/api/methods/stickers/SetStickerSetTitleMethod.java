@@ -2,52 +2,47 @@ package com.annimon.tgbotsmodule.api.methods.stickers;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerSetTitle;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetStickerSetTitleMethod implements Method<Boolean> {
 
-    private final SetStickerSetTitle method;
+    private final SetStickerSetTitle.SetStickerSetTitleBuilder method;
 
     public SetStickerSetTitleMethod() {
-        this(new SetStickerSetTitle());
+        this(SetStickerSetTitle.builder());
     }
 
-    public SetStickerSetTitleMethod(@NotNull SetStickerSetTitle method) {
+    public SetStickerSetTitleMethod(@NotNull SetStickerSetTitle.SetStickerSetTitleBuilder method) {
         this.method = method;
     }
 
     public String getName() {
-        return method.getName();
+        return method.build().getName();
     }
 
     public SetStickerSetTitleMethod setName(@NotNull String name) {
-        method.setName(name);
+        method.name(name);
         return this;
     }
 
     public String getTitle() {
-        return method.getTitle();
+        return method.build().getTitle();
     }
 
     public SetStickerSetTitleMethod setTitle(@NotNull String title) {
-        method.setTitle(title);
+        method.title(title);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

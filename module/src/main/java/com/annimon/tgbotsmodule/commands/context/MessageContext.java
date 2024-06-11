@@ -9,7 +9,7 @@ import com.annimon.tgbotsmodule.api.methods.updatingmessages.DeleteMessageMethod
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class MessageContext extends Context {

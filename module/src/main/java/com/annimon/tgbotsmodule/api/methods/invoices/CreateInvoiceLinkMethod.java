@@ -3,215 +3,210 @@ package com.annimon.tgbotsmodule.api.methods.invoices;
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.invoices.CreateInvoiceLink;
 import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class CreateInvoiceLinkMethod implements Method<String> {
 
-    private final CreateInvoiceLink method;
+    private final CreateInvoiceLink.CreateInvoiceLinkBuilder method;
 
     public CreateInvoiceLinkMethod() {
-        this(new CreateInvoiceLink());
+        this(CreateInvoiceLink.builder());
     }
 
-    public CreateInvoiceLinkMethod(@NotNull CreateInvoiceLink method) {
+    public CreateInvoiceLinkMethod(@NotNull CreateInvoiceLink.CreateInvoiceLinkBuilder method) {
         this.method = method;
     }
 
     public String getTitle() {
-        return method.getTitle();
+        return method.build().getTitle();
     }
 
     public CreateInvoiceLinkMethod setTitle(String title) {
-        method.setTitle(title);
+        method.title(title);
         return this;
     }
 
     public String getDescription() {
-        return method.getDescription();
+        return method.build().getDescription();
     }
 
     public CreateInvoiceLinkMethod setDescription(String description) {
-        method.setDescription(description);
+        method.description(description);
         return this;
     }
 
     public String getPayload() {
-        return method.getPayload();
+        return method.build().getPayload();
     }
 
     public CreateInvoiceLinkMethod setPayload(String payload) {
-        method.setPayload(payload);
+        method.payload(payload);
         return this;
     }
 
     public String getProviderToken() {
-        return method.getProviderToken();
+        return method.build().getProviderToken();
     }
 
     public CreateInvoiceLinkMethod setProviderToken(String providerToken) {
-        method.setProviderToken(providerToken);
+        method.providerToken(providerToken);
         return this;
     }
 
     public String getCurrency() {
-        return method.getCurrency();
+        return method.build().getCurrency();
     }
 
     public CreateInvoiceLinkMethod setCurrency(String currency) {
-        method.setCurrency(currency);
+        method.currency(currency);
         return this;
     }
 
     public List<LabeledPrice> getPrices() {
-        return method.getPrices();
+        return method.build().getPrices();
     }
 
     public CreateInvoiceLinkMethod setPrices(List<LabeledPrice> prices) {
-        method.setPrices(prices);
+        method.prices(prices);
         return this;
     }
 
     public String getPhotoUrl() {
-        return method.getPhotoUrl();
+        return method.build().getPhotoUrl();
     }
 
     public CreateInvoiceLinkMethod setPhotoUrl(String photoUrl) {
-        method.setPhotoUrl(photoUrl);
+        method.photoUrl(photoUrl);
         return this;
     }
 
     public Integer getPhotoSize() {
-        return method.getPhotoSize();
+        return method.build().getPhotoSize();
     }
 
     public CreateInvoiceLinkMethod setPhotoSize(Integer photoSize) {
-        method.setPhotoSize(photoSize);
+        method.photoSize(photoSize);
         return this;
     }
 
     public Integer getPhotoWidth() {
-        return method.getPhotoWidth();
+        return method.build().getPhotoWidth();
     }
 
     public CreateInvoiceLinkMethod setPhotoWidth(Integer photoWidth) {
-        method.setPhotoWidth(photoWidth);
+        method.photoWidth(photoWidth);
         return this;
     }
 
     public Integer getPhotoHeight() {
-        return method.getPhotoHeight();
+        return method.build().getPhotoHeight();
     }
 
     public CreateInvoiceLinkMethod setPhotoHeight(Integer photoHeight) {
-        method.setPhotoHeight(photoHeight);
+        method.photoHeight(photoHeight);
         return this;
     }
 
     public Boolean getNeedName() {
-        return method.getNeedName();
+        return method.build().getNeedName();
     }
 
     public CreateInvoiceLinkMethod setNeedName(Boolean needName) {
-        method.setNeedName(needName);
+        method.needName(needName);
         return this;
     }
 
     public Boolean getNeedPhoneNumber() {
-        return method.getNeedPhoneNumber();
+        return method.build().getNeedPhoneNumber();
     }
 
     public CreateInvoiceLinkMethod setNeedPhoneNumber(Boolean needPhoneNumber) {
-        method.setNeedPhoneNumber(needPhoneNumber);
+        method.needPhoneNumber(needPhoneNumber);
         return this;
     }
 
     public Boolean getNeedEmail() {
-        return method.getNeedEmail();
+        return method.build().getNeedEmail();
     }
 
     public CreateInvoiceLinkMethod setNeedEmail(Boolean needEmail) {
-        method.setNeedEmail(needEmail);
+        method.needEmail(needEmail);
         return this;
     }
 
     public Boolean getNeedShippingAddress() {
-        return method.getNeedShippingAddress();
+        return method.build().getNeedShippingAddress();
     }
 
     public CreateInvoiceLinkMethod setNeedShippingAddress(Boolean needShippingAddress) {
-        method.setNeedShippingAddress(needShippingAddress);
+        method.needShippingAddress(needShippingAddress);
         return this;
     }
 
     public Boolean getIsFlexible() {
-        return method.getIsFlexible();
+        return method.build().getIsFlexible();
     }
 
     public CreateInvoiceLinkMethod setIsFlexible(Boolean flexible) {
-        method.setIsFlexible(flexible);
+        method.isFlexible(flexible);
         return this;
     }
 
     public Boolean getSendEmailToProvider() {
-        return method.getSendEmailToProvider();
+        return method.build().getSendEmailToProvider();
     }
 
     public CreateInvoiceLinkMethod setSendEmailToProvider(Boolean sendEmailToProvider) {
-        method.setSendEmailToProvider(sendEmailToProvider);
+        method.sendEmailToProvider(sendEmailToProvider);
         return this;
     }
 
     public Boolean getSendPhoneNumberToProvider() {
-        return method.getSendPhoneNumberToProvider();
+        return method.build().getSendPhoneNumberToProvider();
     }
 
     public CreateInvoiceLinkMethod setSendPhoneNumberToProvider(Boolean sendPhoneNumberToProvider) {
-        method.setSendPhoneNumberToProvider(sendPhoneNumberToProvider);
+        method.sendPhoneNumberToProvider(sendPhoneNumberToProvider);
         return this;
     }
 
     public String getProviderData() {
-        return method.getProviderData();
+        return method.build().getProviderData();
     }
 
     public CreateInvoiceLinkMethod setProviderData(String providerData) {
-        method.setProviderData(providerData);
+        method.providerData(providerData);
         return this;
     }
 
     public Integer getMaxTipAmount() {
-        return method.getMaxTipAmount();
+        return method.build().getMaxTipAmount();
     }
 
     public CreateInvoiceLinkMethod setMaxTipAmount(Integer maxTipAmount) {
-        method.setMaxTipAmount(maxTipAmount);
+        method.maxTipAmount(maxTipAmount);
         return this;
     }
 
     public List<Integer> getSuggestedTipAmounts() {
-        return method.getSuggestedTipAmounts();
+        return method.build().getSuggestedTipAmounts();
     }
 
     public CreateInvoiceLinkMethod setSuggestedTipAmounts(List<Integer> suggestedTipAmounts) {
-        method.setSuggestedTipAmounts(suggestedTipAmounts);
+        method.suggestedTipAmounts(suggestedTipAmounts);
         return this;
     }
 
     @Override
     public String call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super String> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<String> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

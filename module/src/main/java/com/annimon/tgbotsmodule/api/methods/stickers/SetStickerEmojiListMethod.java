@@ -3,26 +3,24 @@ package com.annimon.tgbotsmodule.api.methods.stickers;
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerEmojiList;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetStickerEmojiListMethod implements Method<Boolean> {
 
-    private final SetStickerEmojiList method;
+    private final SetStickerEmojiList.SetStickerEmojiListBuilder method;
 
     public SetStickerEmojiListMethod() {
-        this(new SetStickerEmojiList());
+        this(SetStickerEmojiList.builder());
     }
 
-    public SetStickerEmojiListMethod(@NotNull SetStickerEmojiList method) {
+    public SetStickerEmojiListMethod(@NotNull SetStickerEmojiList.SetStickerEmojiListBuilder method) {
         this.method = method;
     }
 
     public List<String> getEmojiList() {
-        return method.getEmojiList();
+        return method.build().getEmojiList();
     }
 
     public SetStickerEmojiListMethod setEmoji(@NotNull String emoji) {
@@ -30,20 +28,17 @@ public class SetStickerEmojiListMethod implements Method<Boolean> {
     }
 
     public SetStickerEmojiListMethod setEmojiList(@NotNull List<String> emojiList) {
-        method.setEmojiList(emojiList);
+        method.emojiList(emojiList);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

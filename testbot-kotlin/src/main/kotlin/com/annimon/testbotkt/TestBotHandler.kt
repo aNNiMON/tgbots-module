@@ -9,11 +9,12 @@ import com.annimon.tgbotsmodule.commands.SimpleCommand
 import com.annimon.tgbotsmodule.commands.authority.For
 import com.annimon.tgbotsmodule.commands.authority.SimpleAuthority
 import org.telegram.telegrambots.meta.api.methods.ActionType
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod
+import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethod
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText
 import org.telegram.telegrambots.meta.api.objects.Update
+import org.telegram.telegrambots.meta.api.objects.polls.input.InputPollOption
 
 class TestBotHandler(private val botConfig: BotConfig) : BotHandler(botConfig.token) {
     private val authority = SimpleAuthority(botConfig.creatorId)
@@ -35,7 +36,7 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler(botConfig.to
             } else {
                 Methods.Polls.sendPoll(ctx.chatId())
                         .setQuestion(lines[0])
-                        .setOptions(lines.drop(1))
+                        .setOptions(lines.drop(1).map { InputPollOption(it) })
                         .callAsync(ctx.sender)
             }
         })
@@ -70,6 +71,4 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler(botConfig.to
         // handle other updates
         return null
     }
-
-    override fun getBotUsername() = botConfig.username
 }

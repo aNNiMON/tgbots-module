@@ -2,64 +2,59 @@ package com.annimon.tgbotsmodule.api.methods.administration;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatPermissions;
 import org.telegram.telegrambots.meta.api.objects.ChatPermissions;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetChatPermissionsMethod implements ChatMethod<SetChatPermissionsMethod, Boolean> {
 
-    private final SetChatPermissions method;
+    private final SetChatPermissions.SetChatPermissionsBuilder method;
 
     public SetChatPermissionsMethod() {
-        this(new SetChatPermissions());
+        this(SetChatPermissions.builder());
     }
 
-    public SetChatPermissionsMethod(@NotNull SetChatPermissions method) {
+    public SetChatPermissionsMethod(@NotNull SetChatPermissions.SetChatPermissionsBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public SetChatPermissionsMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     public ChatPermissions getPermissions() {
-        return method.getPermissions();
+        return method.build().getPermissions();
     }
 
     public SetChatPermissionsMethod setPermissions(@NotNull ChatPermissions permissions) {
-        method.setPermissions(permissions);
+        method.permissions(permissions);
         return this;
     }
 
     public Boolean getUseIndependentChatPermissions() {
-        return method.getUseIndependentChatPermissions();
+        return method.build().getUseIndependentChatPermissions();
     }
 
     public SetChatPermissionsMethod setUseIndependentChatPermissions(Boolean flag) {
-        method.setUseIndependentChatPermissions(flag);
+        method.useIndependentChatPermissions(flag);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

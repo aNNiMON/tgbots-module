@@ -2,65 +2,60 @@ package com.annimon.tgbotsmodule.api.methods.stickers;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.stickers.AddStickerToSet;
 import org.telegram.telegrambots.meta.api.objects.stickers.InputSticker;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class AddStickerToSetMethod implements
         UserMethod<AddStickerToSetMethod, Boolean> {
 
-    private final AddStickerToSet method;
+    private final AddStickerToSet.AddStickerToSetBuilder method;
 
     public AddStickerToSetMethod() {
-        this(new AddStickerToSet());
+        this(AddStickerToSet.builder());
     }
 
-    public AddStickerToSetMethod(@NotNull AddStickerToSet method) {
+    public AddStickerToSetMethod(@NotNull AddStickerToSet.AddStickerToSetBuilder method) {
         this.method = method;
     }
 
     @Override
     public Long getUserId() {
-        return method.getUserId();
+        return method.build().getUserId();
     }
 
     @Override
     public AddStickerToSetMethod setUserId(@NotNull Long userId) {
-        method.setUserId(userId);
+        method.userId(userId);
         return this;
     }
 
     public InputSticker getSticker() {
-        return method.getSticker();
+        return method.build().getSticker();
     }
 
     public AddStickerToSetMethod setSticker(@NotNull InputSticker sticker) {
-        method.setSticker(sticker);
+        method.sticker(sticker);
         return this;
     }
 
     public String getName() {
-        return method.getName();
+        return method.build().getName();
     }
 
     public AddStickerToSetMethod setName(@NotNull String name) {
-        method.setName(name);
+        method.name(name);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

@@ -2,47 +2,45 @@ package com.annimon.tgbotsmodule.api.methods.forum;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.forum.CreateForumTopic;
 import org.telegram.telegrambots.meta.api.objects.forum.ForumTopic;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class CreateForumTopicMethod implements ChatMethod<CreateForumTopicMethod, ForumTopic> {
 
-    private final CreateForumTopic method;
+    private final CreateForumTopic.CreateForumTopicBuilder method;
 
     public CreateForumTopicMethod() {
-        this(new CreateForumTopic());
+        this(CreateForumTopic.builder());
     }
 
-    public CreateForumTopicMethod(@NotNull CreateForumTopic method) {
+    public CreateForumTopicMethod(@NotNull CreateForumTopic.CreateForumTopicBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public CreateForumTopicMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     public String getName() {
-        return method.getName();
+        return method.build().getName();
     }
 
     public CreateForumTopicMethod setName(String name) {
-        method.setName(name);
+        method.name(name);
         return this;
     }
 
     public Integer getIconColor() {
-        return method.getIconColor();
+        return method.build().getIconColor();
     }
 
     /**
@@ -54,29 +52,26 @@ public class CreateForumTopicMethod implements ChatMethod<CreateForumTopicMethod
      * @return {@code CreateForumTopicMethod} instance
      */
     public CreateForumTopicMethod setIconColor(Integer iconColor) {
-        method.setIconColor(iconColor);
+        method.iconColor(iconColor);
         return this;
     }
 
     public String getIconCustomEmojiId() {
-        return method.getIconCustomEmojiId();
+        return method.build().getIconCustomEmojiId();
     }
 
     public CreateForumTopicMethod setIconCustomEmojiId(String iconCustomEmojiId) {
-        method.setIconCustomEmojiId(iconCustomEmojiId);
+        method.iconCustomEmojiId(iconCustomEmojiId);
         return this;
     }
 
     @Override
     public ForumTopic call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super ForumTopic> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<ForumTopic> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

@@ -6,154 +6,154 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessa
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.polls.SendPoll;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
+import org.telegram.telegrambots.meta.api.objects.polls.input.InputPollOption;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendPollMethod implements
         ReplyMarkupSupportedMessageMethod<SendPollMethod, Message>,
         ParseModeMethod<SendPollMethod, Message>,
         ProtectedContentMethod<SendPollMethod, Message> {
 
-    private final SendPoll method;
+    private final SendPoll.SendPollBuilder method;
 
     public SendPollMethod() {
-        this(new SendPoll());
+        this(SendPoll.builder());
     }
 
-    public SendPollMethod(@NotNull SendPoll method) {
+    public SendPollMethod(@NotNull SendPoll.SendPollBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public SendPollMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Integer getReplyToMessageId() {
-        return method.getReplyToMessageId();
+        return method.build().getReplyToMessageId();
     }
 
     @Override
     public SendPollMethod setReplyToMessageId(Integer messageId) {
-        method.setReplyToMessageId(messageId);
+        method.replyToMessageId(messageId);
         return this;
     }
 
     @Override
     public Integer getMessageThreadId() {
-        return method.getMessageThreadId();
+        return method.build().getMessageThreadId();
     }
 
     @Override
     public SendPollMethod setMessageThreadId(Integer messageThreadId) {
-        method.setMessageThreadId(messageThreadId);
+        method.messageThreadId(messageThreadId);
         return this;
     }
 
     @Override
     public Boolean getAllowSendingWithoutReply() {
-        return method.getAllowSendingWithoutReply();
+        return method.build().getAllowSendingWithoutReply();
     }
 
     @Override
     public SendPollMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
-        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        method.allowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 
     @Override
     public ReplyKeyboard getReplyMarkup() {
-        return method.getReplyMarkup();
+        return method.build().getReplyMarkup();
     }
 
     @Override
     public SendPollMethod setReplyMarkup(ReplyKeyboard replyMarkup) {
-        method.setReplyMarkup(replyMarkup);
+        method.replyMarkup(replyMarkup);
         return this;
     }
 
     @Override
     public boolean isNotificationDisabled() {
-        return Boolean.TRUE.equals(method.getDisableNotification());
+        return Boolean.TRUE.equals(method.build().getDisableNotification());
     }
 
     @Override
     public SendPollMethod enableNotification() {
-        method.enableNotification();
+        method.disableNotification(false);
         return this;
     }
 
     @Override
     public SendPollMethod disableNotification() {
-        method.disableNotification();
+        method.disableNotification(true);
         return this;
     }
 
     @Override
     public String getParseMode() {
-        return method.getExplanationParseMode();
+        return method.build().getExplanationParseMode();
     }
 
     @Override
     public SendPollMethod setParseMode(String parseMode) {
-        method.setExplanationParseMode(parseMode);
+        method.explanationParseMode(parseMode);
         return this;
     }
 
     @Override
     public List<MessageEntity> getEntities() {
-        return method.getExplanationEntities();
+        return method.build().getExplanationEntities();
     }
 
     @Override
     public SendPollMethod setEntities(List<MessageEntity> entities) {
-        method.setExplanationEntities(entities);
+        method.explanationEntities(entities);
         return this;
     }
 
     public String getQuestion() {
-        return method.getQuestion();
+        return method.build().getQuestion();
     }
 
     public SendPollMethod setQuestion(String question) {
-        method.setQuestion(question);
+        method.question(question);
         return this;
     }
 
-    public List<String> getOptions() {
-        return method.getOptions();
+    public List<InputPollOption> getOptions() {
+        return method.build().getOptions();
     }
 
-    public SendPollMethod setOptions(@NotNull List<String> options) {
-        method.setOptions(options);
+    public SendPollMethod setOptions(@NotNull List<InputPollOption> options) {
+        method.options(options);
         return this;
     }
 
-    public SendPollMethod setOptions(@NotNull String option1) {
+    public SendPollMethod setOptions(@NotNull InputPollOption option1) {
         return setOptions(List.of(option1));
     }
 
-    public SendPollMethod setOptions(@NotNull String option1, @NotNull String option2) {
+    public SendPollMethod setOptions(@NotNull InputPollOption option1, @NotNull InputPollOption option2) {
         return setOptions(List.of(option1, option2));
     }
 
-    public SendPollMethod setOptions(@NotNull String option1, @NotNull String option2,
-                                     @NotNull String option3, @Nullable String... rest) {
-        final var options = new ArrayList<String>(10);
+    public SendPollMethod setOptions(@NotNull InputPollOption option1, @NotNull InputPollOption option2,
+                                     @NotNull InputPollOption option3, @Nullable InputPollOption... rest) {
+        final var options = new ArrayList<InputPollOption>(10);
         options.add(option1);
         options.add(option2);
         options.add(option3);
@@ -164,109 +164,106 @@ public class SendPollMethod implements
     }
 
     public Boolean getIsAnonymous() {
-        return method.getIsAnonymous();
+        return method.build().getIsAnonymous();
     }
 
     public SendPollMethod setIsAnonymous(boolean anonymous) {
-        method.setIsAnonymous(anonymous);
+        method.isAnonymous(anonymous);
         return this;
     }
 
     public String getType() {
-        return method.getType();
+        return method.build().getType();
     }
 
     public SendPollMethod setType(String type) {
-        method.setType(type);
+        method.type(type);
         return this;
     }
 
     public Boolean getAllowMultipleAnswers() {
-        return method.getAllowMultipleAnswers();
+        return method.build().getAllowMultipleAnswers();
     }
 
     public SendPollMethod setAllowMultipleAnswers(boolean allowMultipleAnswers) {
-        method.setAllowMultipleAnswers(allowMultipleAnswers);
+        method.allowMultipleAnswers(allowMultipleAnswers);
         return this;
     }
 
     public Integer getCorrectOptionId() {
-        return method.getCorrectOptionId();
+        return method.build().getCorrectOptionId();
     }
 
     public SendPollMethod setCorrectOptionId(Integer correctOptionId) {
-        method.setCorrectOptionId(correctOptionId);
+        method.correctOptionId(correctOptionId);
         return this;
     }
 
     public Boolean getIsClosed() {
-        return method.getIsClosed();
+        return method.build().getIsClosed();
     }
 
     public SendPollMethod setIsClosed(boolean closed) {
-        method.setIsClosed(closed);
+        method.isClosed(closed);
         return this;
     }
 
     public Integer getOpenPeriod() {
-        return method.getOpenPeriod();
+        return method.build().getOpenPeriod();
     }
 
     public SendPollMethod setOpenPeriod(Integer openPeriod) {
-        method.setOpenPeriod(openPeriod);
+        method.openPeriod(openPeriod);
         return this;
     }
 
     public Integer getCloseDate() {
-        return method.getCloseDate();
+        return method.build().getCloseDate();
     }
 
     public SendPollMethod setCloseDate(Integer closeDate) {
-        method.setCloseDate(closeDate);
+        method.closeDate(closeDate);
         return this;
     }
 
     public String getExplanation() {
-        return method.getExplanation();
+        return method.build().getExplanation();
     }
 
     public SendPollMethod setExplanation(String explanation) {
-        method.setExplanation(explanation);
+        method.explanation(explanation);
         return this;
     }
 
     @Override
     public Boolean getProtectContent() {
-        return method.getProtectContent();
+        return method.build().getProtectContent();
     }
 
     @Override
     public SendPollMethod setProtectContent(Boolean protectContent) {
-        method.setProtectContent(protectContent);
+        method.protectContent(protectContent);
         return this;
     }
 
     @Override
     public ReplyParameters getReplyParameters() {
-        return method.getReplyParameters();
+        return method.build().getReplyParameters();
     }
 
     @Override
     public SendPollMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
-        method.setReplyParameters(replyParameters);
+        method.replyParameters(replyParameters);
         return this;
     }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Message> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Message> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

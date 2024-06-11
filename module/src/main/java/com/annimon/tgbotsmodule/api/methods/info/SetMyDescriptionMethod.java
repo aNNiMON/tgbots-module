@@ -2,52 +2,47 @@ package com.annimon.tgbotsmodule.api.methods.info;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.description.SetMyDescription;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetMyDescriptionMethod implements Method<Boolean> {
 
-    private final SetMyDescription method;
+    private final SetMyDescription.SetMyDescriptionBuilder method;
 
     public SetMyDescriptionMethod() {
-        this(new SetMyDescription());
+        this(SetMyDescription.builder());
     }
 
-    public SetMyDescriptionMethod(@NotNull SetMyDescription method) {
+    public SetMyDescriptionMethod(@NotNull SetMyDescription.SetMyDescriptionBuilder method) {
         this.method = method;
     }
 
     public String getDescription() {
-        return method.getDescription();
+        return method.build().getDescription();
     }
 
     public SetMyDescriptionMethod setDescription(@NotNull String description) {
-        method.setDescription(description);
+        method.description(description);
         return this;
     }
 
     public String getLanguageCode() {
-        return method.getLanguageCode();
+        return method.build().getLanguageCode();
     }
 
     public SetMyDescriptionMethod setLanguageCode(@NotNull String languageCode) {
-        method.setLanguageCode(languageCode);
+        method.languageCode(languageCode);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

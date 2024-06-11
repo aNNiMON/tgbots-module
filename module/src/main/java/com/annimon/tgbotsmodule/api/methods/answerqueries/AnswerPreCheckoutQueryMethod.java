@@ -2,61 +2,56 @@ package com.annimon.tgbotsmodule.api.methods.answerqueries;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.AnswerPreCheckoutQuery;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class AnswerPreCheckoutQueryMethod implements Method<Boolean> {
 
-    private final AnswerPreCheckoutQuery method;
+    private final AnswerPreCheckoutQuery.AnswerPreCheckoutQueryBuilder method;
 
     public AnswerPreCheckoutQueryMethod() {
-        this(new AnswerPreCheckoutQuery());
+        this(AnswerPreCheckoutQuery.builder());
     }
 
-    public AnswerPreCheckoutQueryMethod(@NotNull AnswerPreCheckoutQuery method) {
+    public AnswerPreCheckoutQueryMethod(@NotNull AnswerPreCheckoutQuery.AnswerPreCheckoutQueryBuilder method) {
         this.method = method;
     }
 
     public String getPreCheckoutQueryId() {
-        return method.getPreCheckoutQueryId();
+        return method.build().getPreCheckoutQueryId();
     }
 
     public AnswerPreCheckoutQueryMethod setPreCheckoutQueryId(@NotNull String preCheckoutQueryId) {
-        method.setPreCheckoutQueryId(preCheckoutQueryId);
+        method.preCheckoutQueryId(preCheckoutQueryId);
         return this;
     }
 
     public boolean getOk() {
-        return method.getOk();
+        return method.build().getOk();
     }
 
     public AnswerPreCheckoutQueryMethod setOk(boolean isPersonal) {
-        method.setOk(isPersonal);
+        method.ok(isPersonal);
         return this;
     }
 
     public String getErrorMessage() {
-        return method.getErrorMessage();
+        return method.build().getErrorMessage();
     }
 
     public AnswerPreCheckoutQueryMethod setErrorMessage(String errorMessage) {
-        method.setErrorMessage(errorMessage);
+        method.errorMessage(errorMessage);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

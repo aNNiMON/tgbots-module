@@ -2,46 +2,41 @@ package com.annimon.tgbotsmodule.api.methods.info;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.GetChat;
-import org.telegram.telegrambots.meta.api.objects.Chat;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.api.objects.chat.ChatFullInfo;
 
-public class GetChatMethod implements ChatMethod<GetChatMethod, Chat> {
+public class GetChatMethod implements ChatMethod<GetChatMethod, ChatFullInfo> {
 
-    private final GetChat method;
+    private final GetChat.GetChatBuilder method;
 
     public GetChatMethod() {
-        this(new GetChat());
+        this(GetChat.builder());
     }
 
-    public GetChatMethod(@NotNull GetChat method) {
+    public GetChatMethod(@NotNull GetChat.GetChatBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public GetChatMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
-    public Chat call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+    public ChatFullInfo call(@NotNull CommonAbsSender sender) {
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Chat> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<ChatFullInfo> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

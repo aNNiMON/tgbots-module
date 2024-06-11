@@ -2,11 +2,10 @@ package com.annimon.tgbotsmodule.api.methods.interfaces;
 
 import java.io.Serializable;
 import java.util.List;
-
-import java.util.stream.Collectors;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardRow;
 
 public interface ReplyMarkupSupportedMessageMethod<M extends Method, T extends Serializable>
         extends SendableMessageMethod<M, T> {
@@ -15,7 +14,7 @@ public interface ReplyMarkupSupportedMessageMethod<M extends Method, T extends S
 
     M setReplyMarkup(ReplyKeyboard replyMarkup);
 
-    default M setInlineKeyboard(List<List<InlineKeyboardButton>> keyboard) {
+    default M setInlineKeyboard(List<InlineKeyboardRow> keyboard) {
         return setReplyMarkup(new InlineKeyboardMarkup(keyboard));
     }
 
@@ -24,7 +23,7 @@ public interface ReplyMarkupSupportedMessageMethod<M extends Method, T extends S
     }
 
     default M setSingleRowInlineKeyboard(List<InlineKeyboardButton> row) {
-        return setInlineKeyboard(List.of(row));
+        return setInlineKeyboard(List.of(new InlineKeyboardRow(row)));
     }
 
     default M setSingleRowInlineKeyboard(InlineKeyboardButton... buttons) {
@@ -32,7 +31,7 @@ public interface ReplyMarkupSupportedMessageMethod<M extends Method, T extends S
     }
 
     default M setSingleColumnInlineKeyboard(List<InlineKeyboardButton> column) {
-        return setInlineKeyboard(column.stream().map(List::of).collect(Collectors.toList()));
+        return setInlineKeyboard(column.stream().map(InlineKeyboardRow::new).toList());
     }
 
     default M setSingleColumnInlineKeyboard(InlineKeyboardButton... buttons) {

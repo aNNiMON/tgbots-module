@@ -4,80 +4,75 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.reactions.SetMessageReaction;
 import org.telegram.telegrambots.meta.api.objects.reactions.ReactionType;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetMessageReactionMethod implements ChatMessageMethod<SetMessageReactionMethod, Boolean> {
 
-    private final SetMessageReaction method;
+    private final SetMessageReaction.SetMessageReactionBuilder method;
 
     public SetMessageReactionMethod() {
-        this(new SetMessageReaction());
+        this(SetMessageReaction.builder());
     }
 
-    public SetMessageReactionMethod(@NotNull SetMessageReaction method) {
+    public SetMessageReactionMethod(@NotNull SetMessageReaction.SetMessageReactionBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public SetMessageReactionMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Integer getMessageId() {
-        return method.getMessageId();
+        return method.build().getMessageId();
     }
 
     @Override
     public SetMessageReactionMethod setMessageId(Integer messageId) {
-        method.setMessageId(messageId);
+        method.messageId(messageId);
         return this;
     }
 
     public List<ReactionType> getReactionTypes() {
-        return method.getReactionTypes();
+        return method.build().getReactionTypes();
     }
 
     public SetMessageReactionMethod setReactionType(ReactionType reactionType) {
-        method.setReactionTypes(Collections.singletonList(reactionType));
+        method.reactionTypes(Collections.singletonList(reactionType));
         return this;
     }
 
     public SetMessageReactionMethod setReactionTypes(List<ReactionType> reactionTypes) {
-        method.setReactionTypes(reactionTypes);
+        method.reactionTypes(reactionTypes);
         return this;
     }
 
     public boolean isBig() {
-        return Boolean.TRUE.equals(method.getIsBig());
+        return Boolean.TRUE.equals(method.build().getIsBig());
     }
 
     public SetMessageReactionMethod setIsBig(boolean isBig) {
-        method.setIsBig(isBig);
+        method.isBig(isBig);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

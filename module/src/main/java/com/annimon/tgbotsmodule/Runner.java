@@ -8,18 +8,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.longpolling.TelegramBotsLongPollingApplication;
 import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-import org.telegram.telegrambots.updatesreceivers.DefaultWebhook;
+import org.telegram.telegrambots.webhook.DefaultTelegramWebhookBot;
+import org.telegram.telegrambots.webhook.TelegramBotsWebhookApplication;
+import org.telegram.telegrambots.webhook.WebhookOptions;
 
 public class Runner {
 
@@ -73,7 +73,7 @@ public class Runner {
         // Remove nullable modules
         final var modules = modulesStream
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                .toList();
         if (modules.isEmpty()) {
             log.info("No modules found. Exiting…");
             return;
@@ -85,19 +85,25 @@ public class Runner {
         }
     }
 
-    private void initWebHook(@NotNull List<@NotNull ? extends BotModule> botModules) {
-        final Predicate<String> nullOrBlank = s -> (s == null) || (s.isEmpty());
+    @SuppressWarnings("resource")
+    private void initWebHook(@NotNull List<? extends BotModule> botModules) {
         try {
             // Configure local server
             final var wh = config.getWebhook();
-            final var webhook = new DefaultWebhook();
-            webhook.setInternalUrl(wh.getInternalUrl());
+            final var webhook = WebhookOptions.builder()
+                    .useHttps(false)
+                    .port(wh.getPort())
+                    .enableRequestLogging("DEBUG".equals(config.getLogLevel()))
+                    .build();
+            final Predicate<String> nullOrBlank = s -> (s == null) || (s.isEmpty());
             if (!nullOrBlank.test(wh.getKeystorePath()) && wh.getKeystorePassword() != null) {
-                webhook.setKeyStore(wh.getKeystorePath(), wh.getKeystorePassword());
+                webhook.setUseHttps(wh.getExternalUrl().startsWith("https"));
+                webhook.setKeyStorePath(wh.getKeystorePath());
+                webhook.setKeyStorePassword(wh.getKeystorePassword());
             }
 
             // Configure bot modules
-            final var telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class, webhook);
+            final var telegramBotsApi = new TelegramBotsWebhookApplication(webhook);
             for (var module : botModules) {
                 try {
                     // Make sure to call botHandler first to init bots
@@ -113,9 +119,14 @@ public class Runner {
                             .filter(f -> f.exists() && f.canRead())
                             .map(InputFile::new)
                             .ifPresent(webhookBuilder::certificate);
-                    // Configure webhook (updates, max connections, etc)
+                    // Configure webhook (updates, max connections, etc.)
                     module.configureWebHook(webhookBuilder);
-                    telegramBotsApi.registerBot(bot, webhookBuilder.build());
+                    telegramBotsApi.registerBot(DefaultTelegramWebhookBot.builder()
+                            .botPath(wh.getExternalUrl())
+                            .setWebhook(() -> bot.setWebhook(webhookBuilder.build()))
+                            .deleteWebhook(bot::clearWebhook)
+                            .updateHandler(bot::onWebhookUpdateReceived)
+                            .build());
                 } catch (TelegramApiException ex) {
                     log.error("register webhook bot", ex);
                 }
@@ -125,17 +136,19 @@ public class Runner {
         }
     }
 
+    @SuppressWarnings("resource")
     private void initLongPolling(@NotNull List<@NotNull ? extends BotModule> botModules) {
         try {
-            final var telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+            final var telegramBotsApi = new TelegramBotsLongPollingApplication();
             for (var module : botModules) {
                 try {
-                    telegramBotsApi.registerBot(module.botHandler(config));
+                    final BotHandler handler = module.botHandler(config);
+                    telegramBotsApi.registerBot(handler.getBotToken(), handler);
                 } catch (TelegramApiException ex) {
                     log.error("register long polling bot", ex);
                 }
             }
-        } catch (TelegramApiException ex) {
+        } catch (Exception ex) {
             log.error("init long polling bot", ex);
         }
     }
@@ -154,6 +167,7 @@ public class Runner {
                 return Optional.of(configLoader.loadResource(path, Config.class));
             }
         } catch (ConfigLoaderException cle) {
+            // TODO more informative message
             log.info("Unable to load config from resource. Trying to load from file…");
         }
         return Optional.empty();
@@ -164,6 +178,7 @@ public class Runner {
             var path = configLoader.configFile("config", profile);
             return Optional.of(configLoader.loadFile(path, Config.class));
         } catch (ConfigLoaderException cle) {
+            // TODO more informative message
             log.info("Unable to load config file. Switch to default configuration.");
         }
         return Optional.empty();

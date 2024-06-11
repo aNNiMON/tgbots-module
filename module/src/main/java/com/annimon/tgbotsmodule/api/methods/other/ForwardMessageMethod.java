@@ -5,12 +5,10 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageThreadMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.NotificationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.ForwardMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 
 public class ForwardMessageMethod implements
         ChatMessageMethod<ForwardMessageMethod, Message>,
@@ -18,101 +16,98 @@ public class ForwardMessageMethod implements
         NotificationMethod<ForwardMessageMethod, Message>,
         ProtectedContentMethod<ForwardMessageMethod, Message> {
 
-    private final ForwardMessage method;
+    private final ForwardMessage.ForwardMessageBuilder method;
 
     public ForwardMessageMethod() {
-        this(new ForwardMessage());
+        this(ForwardMessage.builder());
     }
 
-    public ForwardMessageMethod(@NotNull ForwardMessage method) {
+    public ForwardMessageMethod(@NotNull ForwardMessage.ForwardMessageBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public ForwardMessageMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Integer getMessageId() {
-        return method.getMessageId();
+        return method.build().getMessageId();
     }
 
     @Override
     public ForwardMessageMethod setMessageId(@NotNull Integer messageId) {
-        method.setMessageId(messageId);
+        method.messageId(messageId);
         return this;
     }
 
     @Override
     public Integer getMessageThreadId() {
-        return method.getMessageThreadId();
+        return method.build().getMessageThreadId();
     }
 
     @Override
     public ForwardMessageMethod setMessageThreadId(@NotNull Integer messageThreadId) {
-        method.setMessageThreadId(messageThreadId);
+        method.messageThreadId(messageThreadId);
         return this;
     }
 
     public String getFromChatId() {
-        return method.getFromChatId();
+        return method.build().getFromChatId();
     }
 
     public ForwardMessageMethod setFromChatId(@NotNull String chatId) {
-        method.setFromChatId(chatId);
+        method.fromChatId(chatId);
         return this;
     }
 
     public ForwardMessageMethod setFromChatId(long chatId) {
-        method.setFromChatId(chatId);
+        method.fromChatId(chatId);
         return this;
     }
 
     @Override
     public boolean isNotificationDisabled() {
-        return Boolean.TRUE.equals(method.getDisableNotification());
+        return Boolean.TRUE.equals(method.build().getDisableNotification());
     }
 
     @Override
     public ForwardMessageMethod enableNotification() {
-        method.setDisableNotification(false);
+        method.disableNotification(false);
         return this;
     }
 
     @Override
     public ForwardMessageMethod disableNotification() {
-        method.setDisableNotification(true);
+        method.disableNotification(true);
         return this;
     }
 
     @Override
     public Boolean getProtectContent() {
-        return method.getProtectContent();
+        return method.build().getProtectContent();
     }
 
     @Override
     public ForwardMessageMethod setProtectContent(Boolean protectContent) {
-        method.setProtectContent(protectContent);
+        method.protectContent(protectContent);
         return this;
     }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Message> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Message> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

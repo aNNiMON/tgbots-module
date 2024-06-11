@@ -8,16 +8,14 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.SpoilerMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ThumbMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendVideoMethod implements
         MediaMessageMethod<SendVideoMethod, Message>,
@@ -27,224 +25,221 @@ public class SendVideoMethod implements
         ThumbMethod<SendVideoMethod, Message>,
         SpoilerMethod<SendVideoMethod, Message> {
 
-    private final SendVideo method;
+    private final SendVideo.SendVideoBuilder method;
 
     public SendVideoMethod() {
-        this(new SendVideo());
+        this(SendVideo.builder());
     }
 
-    public SendVideoMethod(@NotNull SendVideo method) {
+    public SendVideoMethod(@NotNull SendVideo.SendVideoBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public SendVideoMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Integer getReplyToMessageId() {
-        return method.getReplyToMessageId();
+        return method.build().getReplyToMessageId();
     }
 
     @Override
     public SendVideoMethod setReplyToMessageId(Integer messageId) {
-        method.setReplyToMessageId(messageId);
+        method.replyToMessageId(messageId);
         return this;
     }
 
     @Override
     public Integer getMessageThreadId() {
-        return method.getMessageThreadId();
+        return method.build().getMessageThreadId();
     }
 
     @Override
     public SendVideoMethod setMessageThreadId(Integer messageThreadId) {
-        method.setMessageThreadId(messageThreadId);
+        method.messageThreadId(messageThreadId);
         return this;
     }
 
     @Override
     public Boolean getAllowSendingWithoutReply() {
-        return method.getAllowSendingWithoutReply();
+        return method.build().getAllowSendingWithoutReply();
     }
 
     @Override
     public SendVideoMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
-        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        method.allowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 
     @Override
     public boolean isNotificationDisabled() {
-        return Boolean.TRUE.equals(method.getDisableNotification());
+        return Boolean.TRUE.equals(method.build().getDisableNotification());
     }
 
     @Override
     public SendVideoMethod enableNotification() {
-        method.enableNotification();
+        method.disableNotification(false);
         return this;
     }
 
     @Override
     public SendVideoMethod disableNotification() {
-        method.disableNotification();
+        method.disableNotification(true);
         return this;
     }
 
     @Override
     public ReplyKeyboard getReplyMarkup() {
-        return method.getReplyMarkup();
+        return method.build().getReplyMarkup();
     }
 
     @Override
     public SendVideoMethod setReplyMarkup(ReplyKeyboard replyMarkup) {
-        method.setReplyMarkup(replyMarkup);
+        method.replyMarkup(replyMarkup);
         return this;
     }
 
     @Override
     public InputFile getFile() {
-        return method.getVideo();
+        return method.build().getVideo();
     }
 
     @Override
     public SendVideoMethod setFile(@NotNull InputFile file) {
-        method.setVideo(file);
+        method.video(file);
         return this;
     }
 
     @Override
     public String getParseMode() {
-        return method.getParseMode();
+        return method.build().getParseMode();
     }
 
     @Override
     public SendVideoMethod setParseMode(String parseMode) {
-        method.setParseMode(parseMode);
+        method.parseMode(parseMode);
         return this;
     }
 
     @Override
     public List<MessageEntity> getEntities() {
-        return method.getCaptionEntities();
+        return method.build().getCaptionEntities();
     }
 
     @Override
     public SendVideoMethod setEntities(List<MessageEntity> entities) {
-        method.setCaptionEntities(entities);
+        method.captionEntities(entities);
         return this;
     }
     
     @Override
     public String getCaption() {
-        return method.getCaption();
+        return method.build().getCaption();
     }
 
     @Override
     public SendVideoMethod setCaption(String caption) {
-        method.setCaption(caption);
+        method.caption(caption);
         return this;
     }
 
     @Override
     public Integer getDuration() {
-        return method.getDuration();
+        return method.build().getDuration();
     }
 
     @Override
     public SendVideoMethod setDuration(Integer duration) {
-        method.setDuration(duration);
+        method.duration(duration);
         return this;
     }
 
     @Override
     public InputFile getThumbnail() {
-        return method.getThumbnail();
+        return method.build().getThumbnail();
     }
 
     @Override
     public SendVideoMethod setThumbnail(InputFile thumb) {
-        method.setThumbnail(thumb);
+        method.thumbnail(thumb);
         return this;
     }
 
     public Integer getWidth() {
-        return method.getWidth();
+        return method.build().getWidth();
     }
 
     public SendVideoMethod setWidth(Integer width) {
-        method.setWidth(width);
+        method.width(width);
         return this;
     }
 
     public Integer getHeight() {
-        return method.getHeight();
+        return method.build().getHeight();
     }
 
     public SendVideoMethod setHeight(Integer height) {
-        method.setHeight(height);
+        method.height(height);
         return this;
     }
 
     public Boolean getSupportsStreaming() {
-        return method.getSupportsStreaming();
+        return method.build().getSupportsStreaming();
     }
 
     public SendVideoMethod setSupportsStreaming(Boolean supportsStreaming) {
-        method.setSupportsStreaming(supportsStreaming);
+        method.supportsStreaming(supportsStreaming);
         return this;
     }
 
     @Override
     public Boolean getProtectContent() {
-        return method.getProtectContent();
+        return method.build().getProtectContent();
     }
 
     @Override
     public SendVideoMethod setProtectContent(Boolean protectContent) {
-        method.setProtectContent(protectContent);
+        method.protectContent(protectContent);
         return this;
     }
 
     @Override
     public Boolean getHasSpoiler() {
-        return method.getHasSpoiler();
+        return method.build().getHasSpoiler();
     }
 
     @Override
     public SendVideoMethod setHasSpoiler(Boolean spoiler) {
-        method.setHasSpoiler(spoiler);
+        method.hasSpoiler(spoiler);
         return this;
     }
 
     @Override
     public ReplyParameters getReplyParameters() {
-        return method.getReplyParameters();
+        return method.build().getReplyParameters();
     }
 
     @Override
     public SendVideoMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
-        method.setReplyParameters(replyParameters);
+        method.replyParameters(replyParameters);
         return this;
     }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Message> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer);
+    public CompletableFuture<Message> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

@@ -3,59 +3,54 @@ package com.annimon.tgbotsmodule.api.methods.administration;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InputFileMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetChatPhotoMethod implements
         ChatMethod<SetChatPhotoMethod, Boolean>,
         InputFileMethod<SetChatPhotoMethod, Boolean> {
 
-    private final SetChatPhoto method;
+    private final SetChatPhoto.SetChatPhotoBuilder method;
 
     public SetChatPhotoMethod() {
-        this(new SetChatPhoto());
+        this(SetChatPhoto.builder());
     }
 
-    public SetChatPhotoMethod(@NotNull SetChatPhoto method) {
+    public SetChatPhotoMethod(@NotNull SetChatPhoto.SetChatPhotoBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public SetChatPhotoMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public InputFile getFile() {
-        return method.getPhoto();
+        return method.build().getPhoto();
     }
 
     @Override
     public SetChatPhotoMethod setFile(@NotNull InputFile file) {
-        method.setPhoto(file);
+        method.photo(file);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

@@ -3,70 +3,65 @@ package com.annimon.tgbotsmodule.api.methods.info;
 import com.annimon.tgbotsmodule.api.methods.interfaces.PaginableMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.GetUserProfilePhotos;
 import org.telegram.telegrambots.meta.api.objects.UserProfilePhotos;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class GetUserProfilePhotosMethod implements
         UserMethod<GetUserProfilePhotosMethod, UserProfilePhotos>,
         PaginableMethod<GetUserProfilePhotosMethod, UserProfilePhotos> {
 
-    private final GetUserProfilePhotos method;
+    private final GetUserProfilePhotos.GetUserProfilePhotosBuilder method;
 
     public GetUserProfilePhotosMethod() {
-        this(new GetUserProfilePhotos());
+        this(GetUserProfilePhotos.builder());
     }
 
-    public GetUserProfilePhotosMethod(@NotNull GetUserProfilePhotos method) {
+    public GetUserProfilePhotosMethod(@NotNull GetUserProfilePhotos.GetUserProfilePhotosBuilder method) {
         this.method = method;
     }
 
     @Override
     public Long getUserId() {
-        return method.getUserId();
+        return method.build().getUserId();
     }
 
     @Override
     public GetUserProfilePhotosMethod setUserId(@NotNull Long userId) {
-        method.setUserId(userId);
+        method.userId(userId);
         return this;
     }
 
     @Override
     public Integer getOffset() {
-        return method.getOffset();
+        return method.build().getOffset();
     }
 
     @Override
     public GetUserProfilePhotosMethod setOffset(Integer offset) {
-        method.setOffset(offset);
+        method.offset(offset);
         return this;
     }
 
     @Override
     public Integer getLimit() {
-        return method.getLimit();
+        return method.build().getLimit();
     }
 
     @Override
     public GetUserProfilePhotosMethod setLimit(Integer limit) {
-        method.setLimit(limit);
+        method.limit(limit);
         return this;
     }
 
     @Override
     public UserProfilePhotos call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super UserProfilePhotos> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<UserProfilePhotos> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

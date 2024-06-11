@@ -3,63 +3,58 @@ package com.annimon.tgbotsmodule.api.methods.info;
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetMyCommandsMethod implements Method<Boolean> {
 
-    private final SetMyCommands method;
+    private final SetMyCommands.SetMyCommandsBuilder method;
 
     public SetMyCommandsMethod() {
-        this(new SetMyCommands());
+        this(SetMyCommands.builder());
     }
 
-    public SetMyCommandsMethod(@NotNull SetMyCommands method) {
+    public SetMyCommandsMethod(@NotNull SetMyCommands.SetMyCommandsBuilder method) {
         this.method = method;
     }
 
     public List<BotCommand> getCommands() {
-        return method.getCommands();
+        return method.build().getCommands();
     }
 
     public SetMyCommandsMethod setCommands(List<BotCommand> commands) {
-        method.setCommands(commands);
+        method.commands(commands);
         return this;
     }
 
     public BotCommandScope getScope() {
-        return method.getScope();
+        return method.build().getScope();
     }
 
     public SetMyCommandsMethod setScope(BotCommandScope scope){
-        method.setScope(scope);
+        method.scope(scope);
         return this;
     }
 
     public String getLanguageCode() {
-        return method.getLanguageCode();
+        return method.build().getLanguageCode();
     }
 
     public SetMyCommandsMethod setLanguageCode(String languageCode){
-        method.setLanguageCode(languageCode);
+        method.languageCode(languageCode);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

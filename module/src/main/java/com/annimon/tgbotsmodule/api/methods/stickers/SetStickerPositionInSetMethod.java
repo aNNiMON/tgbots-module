@@ -2,52 +2,47 @@ package com.annimon.tgbotsmodule.api.methods.stickers;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerPositionInSet;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetStickerPositionInSetMethod implements Method<Boolean> {
 
-    private final SetStickerPositionInSet method;
+    private final SetStickerPositionInSet.SetStickerPositionInSetBuilder method;
 
     public SetStickerPositionInSetMethod() {
-        this(new SetStickerPositionInSet());
+        this(SetStickerPositionInSet.builder());
     }
 
-    public SetStickerPositionInSetMethod(@NotNull SetStickerPositionInSet method) {
+    public SetStickerPositionInSetMethod(@NotNull SetStickerPositionInSet.SetStickerPositionInSetBuilder method) {
         this.method = method;
     }
 
     public String getSticker() {
-        return method.getSticker();
+        return method.build().getSticker();
     }
 
     public SetStickerPositionInSetMethod setSticker(@NotNull String sticker) {
-        method.setSticker(sticker);
+        method.sticker(sticker);
         return this;
     }
 
     public Integer getPosition() {
-        return method.getPosition();
+        return method.build().getPosition();
     }
 
     public SetStickerPositionInSetMethod setPosition(@NotNull Integer position) {
-        method.setPosition(position);
+        method.position(position);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

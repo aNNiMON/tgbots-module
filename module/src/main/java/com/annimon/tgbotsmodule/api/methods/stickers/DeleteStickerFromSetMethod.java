@@ -2,43 +2,38 @@ package com.annimon.tgbotsmodule.api.methods.stickers;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.stickers.DeleteStickerFromSet;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class DeleteStickerFromSetMethod implements Method<Boolean> {
 
-    private final DeleteStickerFromSet method;
+    private final DeleteStickerFromSet.DeleteStickerFromSetBuilder method;
 
     public DeleteStickerFromSetMethod() {
-        this(new DeleteStickerFromSet());
+        this(DeleteStickerFromSet.builder());
     }
 
-    public DeleteStickerFromSetMethod(@NotNull DeleteStickerFromSet method) {
+    public DeleteStickerFromSetMethod(@NotNull DeleteStickerFromSet.DeleteStickerFromSetBuilder method) {
         this.method = method;
     }
 
     public String getSticker() {
-        return method.getSticker();
+        return method.build().getSticker();
     }
 
     public DeleteStickerFromSetMethod setSticker(@NotNull String sticker) {
-        method.setSticker(sticker);
+        method.sticker(sticker);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

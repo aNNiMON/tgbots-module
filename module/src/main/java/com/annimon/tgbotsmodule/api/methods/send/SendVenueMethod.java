@@ -4,210 +4,205 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.LocationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendVenue;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendVenueMethod implements
         ReplyMarkupSupportedMessageMethod<SendVenueMethod, Message>,
         LocationMethod<SendVenueMethod, Message>,
         ProtectedContentMethod<SendVenueMethod, Message> {
 
-    private final SendVenue method;
+    private final SendVenue.SendVenueBuilder method;
 
     public SendVenueMethod() {
-        this(new SendVenue());
+        this(SendVenue.builder());
     }
 
-    public SendVenueMethod(@NotNull SendVenue method) {
+    public SendVenueMethod(@NotNull SendVenue.SendVenueBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public SendVenueMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Integer getReplyToMessageId() {
-        return method.getReplyToMessageId();
+        return method.build().getReplyToMessageId();
     }
 
     @Override
     public SendVenueMethod setReplyToMessageId(Integer messageId) {
-        method.setReplyToMessageId(messageId);
+        method.replyToMessageId(messageId);
         return this;
     }
 
     @Override
     public Integer getMessageThreadId() {
-        return method.getMessageThreadId();
+        return method.build().getMessageThreadId();
     }
 
     @Override
     public SendVenueMethod setMessageThreadId(Integer messageThreadId) {
-        method.setMessageThreadId(messageThreadId);
+        method.messageThreadId(messageThreadId);
         return this;
     }
 
     @Override
     public Boolean getAllowSendingWithoutReply() {
-        return method.getAllowSendingWithoutReply();
+        return method.build().getAllowSendingWithoutReply();
     }
 
     @Override
     public SendVenueMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
-        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        method.allowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 
     @Override
     public boolean isNotificationDisabled() {
-        return Boolean.TRUE.equals(method.getDisableNotification());
+        return Boolean.TRUE.equals(method.build().getDisableNotification());
     }
 
     @Override
     public SendVenueMethod enableNotification() {
-        method.enableNotification();
+        method.disableNotification(false);
         return this;
     }
 
     @Override
     public SendVenueMethod disableNotification() {
-        method.disableNotification();
+        method.disableNotification(true);
         return this;
     }
 
     @Override
     public ReplyKeyboard getReplyMarkup() {
-        return method.getReplyMarkup();
+        return method.build().getReplyMarkup();
     }
 
     @Override
     public SendVenueMethod setReplyMarkup(ReplyKeyboard replyMarkup) {
-        method.setReplyMarkup(replyMarkup);
+        method.replyMarkup(replyMarkup);
         return this;
     }
 
     @Override
     public Double getLatitude() {
-        return method.getLatitude();
+        return method.build().getLatitude();
     }
 
     @Override
     public SendVenueMethod setLatitude(@NotNull Double latitude) {
-        method.setLatitude(latitude);
+        method.latitude(latitude);
         return this;
     }
 
     @Override
     public Double getLongitude() {
-        return method.getLongitude();
+        return method.build().getLongitude();
     }
 
     @Override
     public SendVenueMethod setLongitude(@NotNull Double longitude) {
-        method.setLongitude(longitude);
+        method.longitude(longitude);
         return this;
     }
 
     public String getTitle() {
-        return method.getTitle();
+        return method.build().getTitle();
     }
 
     public SendVenueMethod setTitle(@NotNull String title) {
-        method.setTitle(title);
+        method.title(title);
         return this;
     }
 
     public String getAddress() {
-        return method.getAddress();
+        return method.build().getAddress();
     }
 
     public SendVenueMethod setAddress(@NotNull String address) {
-        method.setAddress(address);
+        method.address(address);
         return this;
     }
 
     public String getFoursquareId() {
-        return method.getFoursquareId();
+        return method.build().getFoursquareId();
     }
 
     public SendVenueMethod setFoursquareId(String foursquareId) {
-        method.setFoursquareId(foursquareId);
+        method.foursquareId(foursquareId);
         return this;
     }
 
     public String getFoursquareType() {
-        return method.getFoursquareType();
+        return method.build().getFoursquareType();
     }
 
     public SendVenueMethod setFoursquareType(String foursquareType) {
-        method.setFoursquareType(foursquareType);
+        method.foursquareType(foursquareType);
         return this;
     }
 
     public String getGooglePlaceId() {
-        return method.getGooglePlaceId();
+        return method.build().getGooglePlaceId();
     }
 
     public SendVenueMethod setGooglePlaceId(String googlePlaceId) {
-        method.setGooglePlaceId(googlePlaceId);
+        method.googlePlaceId(googlePlaceId);
         return this;
     }
 
     public String getGooglePlaceType() {
-        return method.getGooglePlaceType();
+        return method.build().getGooglePlaceType();
     }
 
     public SendVenueMethod setGooglePlaceType(String googlePlaceType) {
-        method.setGooglePlaceType(googlePlaceType);
+        method.googlePlaceType(googlePlaceType);
         return this;
     }
 
     @Override
     public Boolean getProtectContent() {
-        return method.getProtectContent();
+        return method.build().getProtectContent();
     }
 
     @Override
     public SendVenueMethod setProtectContent(Boolean protectContent) {
-        method.setProtectContent(protectContent);
+        method.protectContent(protectContent);
         return this;
     }
 
     @Override
     public ReplyParameters getReplyParameters() {
-        return method.getReplyParameters();
+        return method.build().getReplyParameters();
     }
 
     @Override
     public SendVenueMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
-        method.setReplyParameters(replyParameters);
+        method.replyParameters(replyParameters);
         return this;
     }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Message> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Message> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

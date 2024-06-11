@@ -6,109 +6,104 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.ForwardMessages;
 import org.telegram.telegrambots.meta.api.objects.MessageId;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class ForwardMessagesMethod implements
         ChatMessageThreadMethod<ForwardMessagesMethod, ArrayList<MessageId>>,
         NotificationMethod<ForwardMessagesMethod, ArrayList<MessageId>>,
         ProtectedContentMethod<ForwardMessagesMethod, ArrayList<MessageId>> {
 
-    private final ForwardMessages method;
+    private final ForwardMessages.ForwardMessagesBuilder method;
 
     public ForwardMessagesMethod() {
-        this(new ForwardMessages());
+        this(ForwardMessages.builder());
     }
 
-    public ForwardMessagesMethod(@NotNull ForwardMessages method) {
+    public ForwardMessagesMethod(@NotNull ForwardMessages.ForwardMessagesBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public ForwardMessagesMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     public Integer getMessageThreadId() {
-        return method.getMessageThreadId();
+        return method.build().getMessageThreadId();
     }
 
     public ForwardMessagesMethod setMessageThreadId(@NotNull Integer messageThreadId) {
-        method.setMessageThreadId(messageThreadId);
+        method.messageThreadId(messageThreadId);
         return this;
     }
 
     public String getFromChatId() {
-        return method.getFromChatId();
+        return method.build().getFromChatId();
     }
 
     public ForwardMessagesMethod setFromChatId(@NotNull String chatId) {
-        method.setFromChatId(chatId);
+        method.fromChatId(chatId);
         return this;
     }
 
     public ForwardMessagesMethod setFromChatId(long chatId) {
-        method.setFromChatId(chatId);
+        method.fromChatId(chatId);
         return this;
     }
 
     public List<Integer> getMessageIds() {
-        return method.getMessageIds();
+        return method.build().getMessageIds();
     }
 
     public ForwardMessagesMethod setMessageIds(@NotNull List<Integer> messageIds) {
-        method.setMessageIds(messageIds);
+        method.messageIds(messageIds);
         return this;
     }
 
     @Override
     public boolean isNotificationDisabled() {
-        return Boolean.TRUE.equals(method.getDisableNotification());
+        return Boolean.TRUE.equals(method.build().getDisableNotification());
     }
 
     @Override
     public ForwardMessagesMethod enableNotification() {
-        method.setDisableNotification(false);
+        method.disableNotification(false);
         return this;
     }
 
     @Override
     public ForwardMessagesMethod disableNotification() {
-        method.setDisableNotification(true);
+        method.disableNotification(true);
         return this;
     }
 
     @Override
     public Boolean getProtectContent() {
-        return method.getProtectContent();
+        return method.build().getProtectContent();
     }
 
     @Override
     public ForwardMessagesMethod setProtectContent(Boolean protectContent) {
-        method.setProtectContent(protectContent);
+        method.protectContent(protectContent);
         return this;
     }
 
     @Override
     public ArrayList<MessageId> call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super ArrayList<MessageId>> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<ArrayList<MessageId>> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

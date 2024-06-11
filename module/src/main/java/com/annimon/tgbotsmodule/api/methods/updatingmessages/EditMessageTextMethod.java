@@ -1,21 +1,19 @@
 package com.annimon.tgbotsmodule.api.methods.updatingmessages;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.TextMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.WebPagePreviewMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.io.Serializable;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.LinkPreviewOptions;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class EditMessageTextMethod implements
         InlineOrChatMessageMethod<EditMessageTextMethod, Serializable>,
@@ -24,135 +22,132 @@ public class EditMessageTextMethod implements
         WebPagePreviewMethod<EditMessageTextMethod, Serializable>,
         TextMethod<EditMessageTextMethod, Serializable> {
 
-    private final EditMessageText method;
+    private final EditMessageText.EditMessageTextBuilder method;
 
     public EditMessageTextMethod() {
-        this(new EditMessageText());
+        this(EditMessageText.builder());
     }
 
-    public EditMessageTextMethod(@NotNull EditMessageText method) {
+    public EditMessageTextMethod(@NotNull EditMessageText.EditMessageTextBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public EditMessageTextMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         // Clear inline message id
-        method.setInlineMessageId(null);
+        method.inlineMessageId(null);
         return this;
     }
 
     @Override
     public Integer getMessageId() {
-        return method.getMessageId();
+        return method.build().getMessageId();
     }
 
     @Override
     public EditMessageTextMethod setMessageId(@NotNull Integer messageId) {
-        method.setMessageId(messageId);
+        method.messageId(messageId);
         // Clear inline message id
-        method.setInlineMessageId(null);
+        method.inlineMessageId(null);
         return this;
     }
 
     @Override
     public String getInlineMessageId() {
-        return method.getInlineMessageId();
+        return method.build().getInlineMessageId();
     }
 
     @Override
     public EditMessageTextMethod setInlineMessageId(@NotNull String inlineMessageId) {
-        method.setInlineMessageId(inlineMessageId);
+        method.inlineMessageId(inlineMessageId);
         // Clear chat id and message id
-        method.setChatId((String) null);
-        method.setMessageId(null);
+        method.chatId((String) null);
+        method.messageId(null);
         return this;
     }
 
     @Override
     public InlineKeyboardMarkup getReplyMarkup() {
-        return method.getReplyMarkup();
+        return method.build().getReplyMarkup();
     }
 
     @Override
     public EditMessageTextMethod setReplyMarkup(InlineKeyboardMarkup replyMarkup) {
-        method.setReplyMarkup(replyMarkup);
+        method.replyMarkup(replyMarkup);
         return this;
     }
 
     @Override
     public String getParseMode() {
-        return method.getParseMode();
+        return method.build().getParseMode();
     }
 
     @Override
     public EditMessageTextMethod setParseMode(String parseMode) {
-        method.setParseMode(parseMode);
+        method.parseMode(parseMode);
         return this;
     }
 
     @Override
     public List<MessageEntity> getEntities() {
-        return method.getEntities();
+        return method.build().getEntities();
     }
 
     @Override
     public EditMessageTextMethod setEntities(List<MessageEntity> entities) {
-        method.setEntities(entities);
+        method.entities(entities);
         return this;
     }
 
     @Override
     public String getText() {
-        return method.getText();
+        return method.build().getText();
     }
 
     @Override
     public EditMessageTextMethod setText(@NotNull String text) {
-        method.setText(text);
+        method.text(text);
         return this;
     }
 
     @Override
     public boolean isWebPagePreviewDisabled() {
-        return Boolean.TRUE.equals(method.getDisableWebPagePreview());
+        return Boolean.TRUE.equals(method.build().getDisableWebPagePreview());
     }
 
     public EditMessageTextMethod disableWebPagePreview() {
-        method.disableWebPagePreview();
+        method.disableWebPagePreview(true);
         return this;
     }
 
 
     public EditMessageTextMethod enableWebPagePreview() {
-        method.enableWebPagePreview();
+        method.disableWebPagePreview(false);
         return this;
     }
 
     public LinkPreviewOptions getLinkPreviewOptions() {
-        return method.getLinkPreviewOptions();
+        return method.build().getLinkPreviewOptions();
     }
 
     public EditMessageTextMethod setLinkPreviewOptions(LinkPreviewOptions options) {
-        method.setLinkPreviewOptions(options);
+        method.linkPreviewOptions(options);
         return this;
     }
 
     @Override
     public Serializable call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Serializable> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Serializable> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

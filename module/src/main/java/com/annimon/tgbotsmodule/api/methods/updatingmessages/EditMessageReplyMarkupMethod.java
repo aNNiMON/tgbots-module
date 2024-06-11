@@ -4,88 +4,83 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMetho
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.io.Serializable;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class EditMessageReplyMarkupMethod implements
         InlineOrChatMessageMethod<EditMessageReplyMarkupMethod, Serializable>,
         InlineKeyboardMarkupMethod<EditMessageReplyMarkupMethod, Serializable> {
 
-    private final EditMessageReplyMarkup method;
+    private final EditMessageReplyMarkup.EditMessageReplyMarkupBuilder method;
 
     public EditMessageReplyMarkupMethod() {
-        this(new EditMessageReplyMarkup());
+        this(EditMessageReplyMarkup.builder());
     }
 
-    public EditMessageReplyMarkupMethod(@NotNull EditMessageReplyMarkup method) {
+    public EditMessageReplyMarkupMethod(@NotNull EditMessageReplyMarkup.EditMessageReplyMarkupBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public EditMessageReplyMarkupMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         // Clear inline message id
-        method.setInlineMessageId(null);
+        method.inlineMessageId(null);
         return this;
     }
 
     @Override
     public Integer getMessageId() {
-        return method.getMessageId();
+        return method.build().getMessageId();
     }
 
     @Override
     public EditMessageReplyMarkupMethod setMessageId(@NotNull Integer messageId) {
-        method.setMessageId(messageId);
+        method.messageId(messageId);
         // Clear inline message id
-        method.setInlineMessageId(null);
+        method.inlineMessageId(null);
         return this;
     }
 
     @Override
     public String getInlineMessageId() {
-        return method.getInlineMessageId();
+        return method.build().getInlineMessageId();
     }
 
     @Override
     public EditMessageReplyMarkupMethod setInlineMessageId(@NotNull String inlineMessageId) {
-        method.setInlineMessageId(inlineMessageId);
+        method.inlineMessageId(inlineMessageId);
         // Clear chat id and message id
-        method.setChatId((String) null);
-        method.setMessageId(null);
+        method.chatId((String) null);
+        method.messageId(null);
         return this;
     }
 
     @Override
     public InlineKeyboardMarkup getReplyMarkup() {
-        return method.getReplyMarkup();
+        return method.build().getReplyMarkup();
     }
 
     @Override
     public EditMessageReplyMarkupMethod setReplyMarkup(InlineKeyboardMarkup replyMarkup) {
-        method.setReplyMarkup(replyMarkup);
+        method.replyMarkup(replyMarkup);
         return this;
     }
 
     @Override
     public Serializable call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Serializable> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Serializable> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

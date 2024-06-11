@@ -1,91 +1,86 @@
 package com.annimon.tgbotsmodule.api.methods.games;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMemberMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.ArrayList;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.games.GetGameHighScores;
 import org.telegram.telegrambots.meta.api.objects.games.GameHighScore;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class GetGameHighScoresMethod implements
         InlineOrChatMessageMethod<GetGameHighScoresMethod, ArrayList<GameHighScore>>,
         ChatMemberMethod<GetGameHighScoresMethod, ArrayList<GameHighScore>> {
 
-    private final GetGameHighScores method;
+    private final GetGameHighScores.GetGameHighScoresBuilder method;
 
     public GetGameHighScoresMethod() {
-        this(new GetGameHighScores());
+        this(GetGameHighScores.builder());
     }
 
-    public GetGameHighScoresMethod(@NotNull GetGameHighScores method) {
+    public GetGameHighScoresMethod(@NotNull GetGameHighScores.GetGameHighScoresBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public GetGameHighScoresMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         // Clear inline message id
-        method.setInlineMessageId(null);
+        method.inlineMessageId(null);
         return this;
     }
 
     @Override
     public Integer getMessageId() {
-        return method.getMessageId();
+        return method.build().getMessageId();
     }
 
     @Override
     public GetGameHighScoresMethod setMessageId(@NotNull Integer messageId) {
-        method.setMessageId(messageId);
+        method.messageId(messageId);
         // Clear inline message id
-        method.setInlineMessageId(null);
+        method.inlineMessageId(null);
         return this;
     }
 
     @Override
     public String getInlineMessageId() {
-        return method.getInlineMessageId();
+        return method.build().getInlineMessageId();
     }
 
     @Override
     public GetGameHighScoresMethod setInlineMessageId(@NotNull String inlineMessageId) {
-        method.setInlineMessageId(inlineMessageId);
+        method.inlineMessageId(inlineMessageId);
         // Clear chat id and message id
-        method.setChatId((String) null);
-        method.setMessageId(null);
+        method.chatId((String) null);
+        method.messageId(null);
         return this;
     }
 
     @Override
     public Long getUserId() {
-        return method.getUserId();
+        return method.build().getUserId();
     }
 
     @Override
     public GetGameHighScoresMethod setUserId(@NotNull Long userId) {
-        method.setUserId(userId);
+        method.userId(userId);
         return this;
     }
 
     @Override
     public ArrayList<GameHighScore> call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super ArrayList<GameHighScore>> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<ArrayList<GameHighScore>> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

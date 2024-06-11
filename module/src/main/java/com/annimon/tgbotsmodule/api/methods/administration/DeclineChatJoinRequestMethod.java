@@ -2,56 +2,51 @@ package com.annimon.tgbotsmodule.api.methods.administration;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMemberMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.DeclineChatJoinRequest;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class DeclineChatJoinRequestMethod implements ChatMemberMethod<DeclineChatJoinRequestMethod, Boolean> {
 
-    private final DeclineChatJoinRequest method;
+    private final DeclineChatJoinRequest.DeclineChatJoinRequestBuilder method;
 
     public DeclineChatJoinRequestMethod() {
-        this(new DeclineChatJoinRequest());
+        this(DeclineChatJoinRequest.builder());
     }
 
-    public DeclineChatJoinRequestMethod(@NotNull DeclineChatJoinRequest method) {
+    public DeclineChatJoinRequestMethod(@NotNull DeclineChatJoinRequest.DeclineChatJoinRequestBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public DeclineChatJoinRequestMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Long getUserId() {
-        return method.getUserId();
+        return method.build().getUserId();
     }
 
     @Override
     public DeclineChatJoinRequestMethod setUserId(@NotNull Long userId) {
-        method.setUserId(userId);
+        method.userId(userId);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

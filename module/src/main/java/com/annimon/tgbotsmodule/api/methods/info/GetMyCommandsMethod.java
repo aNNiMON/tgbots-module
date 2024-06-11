@@ -3,54 +3,49 @@ package com.annimon.tgbotsmodule.api.methods.info;
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.ArrayList;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.commands.GetMyCommands;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class GetMyCommandsMethod implements Method<ArrayList<BotCommand>> {
 
-    private final GetMyCommands method;
+    private final GetMyCommands.GetMyCommandsBuilder method;
 
     public GetMyCommandsMethod() {
-        this(new GetMyCommands());
+        this(GetMyCommands.builder());
     }
 
-    public GetMyCommandsMethod(@NotNull GetMyCommands method) {
+    public GetMyCommandsMethod(@NotNull GetMyCommands.GetMyCommandsBuilder method) {
         this.method = method;
     }
 
     public BotCommandScope getScope() {
-        return method.getScope();
+        return method.build().getScope();
     }
 
     public GetMyCommandsMethod setScope(BotCommandScope scope){
-        method.setScope(scope);
+        method.scope(scope);
         return this;
     }
 
     public String getLanguageCode() {
-        return method.getLanguageCode();
+        return method.build().getLanguageCode();
     }
 
     public GetMyCommandsMethod setLanguageCode(String languageCode){
-        method.setLanguageCode(languageCode);
+        method.languageCode(languageCode);
         return this;
     }
 
     @Override
     public ArrayList<BotCommand> call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super ArrayList<BotCommand>> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<ArrayList<BotCommand>> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

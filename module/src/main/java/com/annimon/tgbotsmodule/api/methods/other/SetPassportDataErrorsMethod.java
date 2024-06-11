@@ -4,65 +4,60 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.SetPassportDataErrors;
 import org.telegram.telegrambots.meta.api.objects.passport.dataerror.PassportElementError;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetPassportDataErrorsMethod implements UserMethod<SetPassportDataErrorsMethod, Boolean> {
 
-    private final SetPassportDataErrors method;
+    private final SetPassportDataErrors.SetPassportDataErrorsBuilder method;
 
     public SetPassportDataErrorsMethod() {
-        this(new SetPassportDataErrors());
+        this(SetPassportDataErrors.builder());
     }
 
-    public SetPassportDataErrorsMethod(@NotNull SetPassportDataErrors method) {
+    public SetPassportDataErrorsMethod(@NotNull SetPassportDataErrors.SetPassportDataErrorsBuilder method) {
         this.method = method;
     }
 
     @Override
     public Long getUserId() {
-        return method.getUserId();
+        return method.build().getUserId();
     }
 
     @Override
     public SetPassportDataErrorsMethod setUserId(@NotNull Long userId) {
-        method.setUserId(userId);
+        method.userId(userId);
         return this;
     }
 
     public List<PassportElementError> getErrors() {
-        return method.getErrors();
+        return method.build().getErrors();
     }
 
     public SetPassportDataErrorsMethod setErrors(@NotNull List<PassportElementError> errors) {
-        method.setErrors(errors);
+        method.errors(errors);
         return this;
     }
 
     public SetPassportDataErrorsMethod addError(@NotNull PassportElementError error) {
-        var errors = method.getErrors();
+        var errors = method.build().getErrors();
         if (errors == null) {
             errors = new ArrayList<>();
         }
         errors.add(error);
-        method.setErrors(errors);
+        method.errors(errors);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

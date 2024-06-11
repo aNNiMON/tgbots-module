@@ -1,117 +1,112 @@
 package com.annimon.tgbotsmodule.api.methods.games;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMemberMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.io.Serializable;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.games.SetGameScore;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SetGameScoreMethod implements
         InlineOrChatMessageMethod<SetGameScoreMethod, Serializable>,
         ChatMemberMethod<SetGameScoreMethod, Serializable> {
 
-    private final SetGameScore method;
+    private final SetGameScore.SetGameScoreBuilder method;
 
     public SetGameScoreMethod() {
-        this(new SetGameScore());
+        this(SetGameScore.builder());
     }
 
-    public SetGameScoreMethod(@NotNull SetGameScore method) {
+    public SetGameScoreMethod(@NotNull SetGameScore.SetGameScoreBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public SetGameScoreMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         // Clear inline message id
-        method.setInlineMessageId(null);
+        method.inlineMessageId(null);
         return this;
     }
 
     @Override
     public Integer getMessageId() {
-        return method.getMessageId();
+        return method.build().getMessageId();
     }
 
     @Override
     public SetGameScoreMethod setMessageId(@NotNull Integer messageId) {
-        method.setMessageId(messageId);
+        method.messageId(messageId);
         // Clear inline message id
-        method.setInlineMessageId(null);
+        method.inlineMessageId(null);
         return this;
     }
 
     @Override
     public String getInlineMessageId() {
-        return method.getInlineMessageId();
+        return method.build().getInlineMessageId();
     }
 
     @Override
     public SetGameScoreMethod setInlineMessageId(@NotNull String inlineMessageId) {
-        method.setInlineMessageId(inlineMessageId);
+        method.inlineMessageId(inlineMessageId);
         // Clear chat id and message id
-        method.setChatId((String) null);
-        method.setMessageId(null);
+        method.chatId((String) null);
+        method.messageId(null);
         return this;
     }
 
     @Override
     public Long getUserId() {
-        return method.getUserId();
+        return method.build().getUserId();
     }
 
     @Override
     public SetGameScoreMethod setUserId(@NotNull Long userId) {
-        method.setUserId(userId);
+        method.userId(userId);
         return this;
     }
 
     public Integer getScore() {
-        return method.getScore();
+        return method.build().getScore();
     }
 
     public SetGameScoreMethod setScore(@NotNull Integer score) {
-        method.setScore(score);
+        method.score(score);
         return this;
     }
 
     public Boolean getForce() {
-        return method.getForce();
+        return method.build().getForce();
     }
 
     public SetGameScoreMethod setForce(Boolean force) {
-        method.setForce(force);
+        method.force(force);
         return this;
     }
 
     public Boolean getDisableEditMessage() {
-        return method.getDisableEditMessage();
+        return method.build().getDisableEditMessage();
     }
 
     public SetGameScoreMethod setDisableEditMessage(Boolean disableEditMessage) {
-        method.setDisableEditMessage(disableEditMessage);
+        method.disableEditMessage(disableEditMessage);
         return this;
     }
 
     @Override
     public Serializable call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Serializable> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Serializable> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

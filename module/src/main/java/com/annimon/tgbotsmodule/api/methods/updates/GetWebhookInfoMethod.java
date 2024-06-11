@@ -2,35 +2,30 @@ package com.annimon.tgbotsmodule.api.methods.updates;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.updates.GetWebhookInfo;
 import org.telegram.telegrambots.meta.api.objects.WebhookInfo;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class GetWebhookInfoMethod implements Method<WebhookInfo> {
 
-    private final GetWebhookInfo method;
+    private final GetWebhookInfo.GetWebhookInfoBuilder method;
 
     public GetWebhookInfoMethod() {
-        this(new GetWebhookInfo());
+        this(GetWebhookInfo.builder());
     }
 
-    public GetWebhookInfoMethod(@NotNull GetWebhookInfo method) {
+    public GetWebhookInfoMethod(@NotNull GetWebhookInfo.GetWebhookInfoBuilder method) {
         this.method = method;
     }
 
     @Override
     public WebhookInfo call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super WebhookInfo> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<WebhookInfo> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

@@ -5,336 +5,331 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SendableMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.invoices.SendInvoice;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class SendInvoiceMethod implements
         SendableMessageMethod<SendInvoiceMethod, Message>,
         InlineKeyboardMarkupMethod<SendInvoiceMethod, Message>,
         ProtectedContentMethod<SendInvoiceMethod, Message> {
 
-    private final SendInvoice method;
+    private final SendInvoice.SendInvoiceBuilder method;
 
     public SendInvoiceMethod() {
-        this(new SendInvoice());
+        this(SendInvoice.builder());
     }
 
-    public SendInvoiceMethod(@NotNull SendInvoice method) {
+    public SendInvoiceMethod(@NotNull SendInvoice.SendInvoiceBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public SendInvoiceMethod setChatId(long chatId) {
-        method.setChatId(Long.toString(chatId));
+        method.chatId(Long.toString(chatId));
         return this;
     }
 
     @Override
     public SendInvoiceMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Integer getReplyToMessageId() {
-        return method.getReplyToMessageId();
+        return method.build().getReplyToMessageId();
     }
 
     @Override
     public SendInvoiceMethod setReplyToMessageId(@NotNull Integer messageId) {
-        method.setReplyToMessageId(messageId);
+        method.replyToMessageId(messageId);
         return this;
     }
 
     @Override
     public Integer getMessageThreadId() {
-        return method.getMessageThreadId();
+        return method.build().getMessageThreadId();
     }
 
     @Override
     public SendInvoiceMethod setMessageThreadId(Integer messageThreadId) {
-        method.setMessageThreadId(messageThreadId);
+        method.messageThreadId(messageThreadId);
         return this;
     }
 
     @Override
     public Boolean getAllowSendingWithoutReply() {
-        return method.getAllowSendingWithoutReply();
+        return method.build().getAllowSendingWithoutReply();
     }
 
     @Override
     public SendInvoiceMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
-        method.setAllowSendingWithoutReply(allowSendingWithoutReply);
+        method.allowSendingWithoutReply(allowSendingWithoutReply);
         return this;
     }
 
     @Override
     public boolean isNotificationDisabled() {
-        return Boolean.TRUE.equals(method.getDisableNotification());
+        return Boolean.TRUE.equals(method.build().getDisableNotification());
     }
 
     @Override
     public SendInvoiceMethod enableNotification() {
-        method.setDisableNotification(false);
+        method.disableNotification(false);
         return this;
     }
 
     @Override
     public SendInvoiceMethod disableNotification() {
-        method.setDisableNotification(true);
+        method.disableNotification(true);
         return this;
     }
 
     @Override
     public SendInvoiceMethod setNotificationEnabled(boolean status) {
-        method.setDisableNotification(!status);
+        method.disableNotification(!status);
         return this;
     }
 
     @Override
     public InlineKeyboardMarkup getReplyMarkup() {
-        return method.getReplyMarkup();
+        return method.build().getReplyMarkup();
     }
 
     @Override
     public SendInvoiceMethod setReplyMarkup(@NotNull InlineKeyboardMarkup replyMarkup) {
-        method.setReplyMarkup(replyMarkup);
+        method.replyMarkup(replyMarkup);
         return this;
     }
 
     public String getTitle() {
-        return method.getTitle();
+        return method.build().getTitle();
     }
 
     public SendInvoiceMethod setTitle(String title) {
-        method.setTitle(title);
+        method.title(title);
         return this;
     }
 
     public String getDescription() {
-        return method.getDescription();
+        return method.build().getDescription();
     }
 
     public SendInvoiceMethod setDescription(String description) {
-        method.setDescription(description);
+        method.description(description);
         return this;
     }
 
     public String getPayload() {
-        return method.getPayload();
+        return method.build().getPayload();
     }
 
     public SendInvoiceMethod setPayload(String payload) {
-        method.setPayload(payload);
+        method.payload(payload);
         return this;
     }
 
     public String getProviderToken() {
-        return method.getProviderToken();
+        return method.build().getProviderToken();
     }
 
     public SendInvoiceMethod setProviderToken(String providerToken) {
-        method.setProviderToken(providerToken);
+        method.providerToken(providerToken);
         return this;
     }
 
     public String getStartParameter() {
-        return method.getStartParameter();
+        return method.build().getStartParameter();
     }
 
     public SendInvoiceMethod setStartParameter(String startParameter) {
-        method.setStartParameter(startParameter);
+        method.startParameter(startParameter);
         return this;
     }
 
     public String getCurrency() {
-        return method.getCurrency();
+        return method.build().getCurrency();
     }
 
     public SendInvoiceMethod setCurrency(String currency) {
-        method.setCurrency(currency);
+        method.currency(currency);
         return this;
     }
 
     public List<LabeledPrice> getPrices() {
-        return method.getPrices();
+        return method.build().getPrices();
     }
 
     public SendInvoiceMethod setPrices(List<LabeledPrice> prices) {
-        method.setPrices(prices);
+        method.prices(prices);
         return this;
     }
 
     public String getPhotoUrl() {
-        return method.getPhotoUrl();
+        return method.build().getPhotoUrl();
     }
 
     public SendInvoiceMethod setPhotoUrl(String photoUrl) {
-        method.setPhotoUrl(photoUrl);
+        method.photoUrl(photoUrl);
         return this;
     }
 
     public Integer getPhotoSize() {
-        return method.getPhotoSize();
+        return method.build().getPhotoSize();
     }
 
     public SendInvoiceMethod setPhotoSize(Integer photoSize) {
-        method.setPhotoSize(photoSize);
+        method.photoSize(photoSize);
         return this;
     }
 
     public Integer getPhotoWidth() {
-        return method.getPhotoWidth();
+        return method.build().getPhotoWidth();
     }
 
     public SendInvoiceMethod setPhotoWidth(Integer photoWidth) {
-        method.setPhotoWidth(photoWidth);
+        method.photoWidth(photoWidth);
         return this;
     }
 
     public Integer getPhotoHeight() {
-        return method.getPhotoHeight();
+        return method.build().getPhotoHeight();
     }
 
     public SendInvoiceMethod setPhotoHeight(Integer photoHeight) {
-        method.setPhotoHeight(photoHeight);
+        method.photoHeight(photoHeight);
         return this;
     }
 
     public Boolean getNeedName() {
-        return method.getNeedName();
+        return method.build().getNeedName();
     }
 
     public SendInvoiceMethod setNeedName(Boolean needName) {
-        method.setNeedName(needName);
+        method.needName(needName);
         return this;
     }
 
     public Boolean getNeedPhoneNumber() {
-        return method.getNeedPhoneNumber();
+        return method.build().getNeedPhoneNumber();
     }
 
     public SendInvoiceMethod setNeedPhoneNumber(Boolean needPhoneNumber) {
-        method.setNeedPhoneNumber(needPhoneNumber);
+        method.needPhoneNumber(needPhoneNumber);
         return this;
     }
 
     public Boolean getNeedEmail() {
-        return method.getNeedEmail();
+        return method.build().getNeedEmail();
     }
 
     public SendInvoiceMethod setNeedEmail(Boolean needEmail) {
-        method.setNeedEmail(needEmail);
+        method.needEmail(needEmail);
         return this;
     }
 
     public Boolean getNeedShippingAddress() {
-        return method.getNeedShippingAddress();
+        return method.build().getNeedShippingAddress();
     }
 
     public SendInvoiceMethod setNeedShippingAddress(Boolean needShippingAddress) {
-        method.setNeedShippingAddress(needShippingAddress);
+        method.needShippingAddress(needShippingAddress);
         return this;
     }
 
     public Boolean getIsFlexible() {
-        return method.getIsFlexible();
+        return method.build().getIsFlexible();
     }
 
     public SendInvoiceMethod setIsFlexible(Boolean flexible) {
-        method.setIsFlexible(flexible);
+        method.isFlexible(flexible);
         return this;
     }
 
     public String getProviderData() {
-        return method.getProviderData();
+        return method.build().getProviderData();
     }
 
     public SendInvoiceMethod setProviderData(String providerData) {
-        method.setProviderData(providerData);
+        method.providerData(providerData);
         return this;
     }
 
     public Integer getMaxTipAmount() {
-        return method.getMaxTipAmount();
+        return method.build().getMaxTipAmount();
     }
 
     public SendInvoiceMethod setMaxTipAmount(Integer maxTipAmount) {
-        method.setMaxTipAmount(maxTipAmount);
+        method.maxTipAmount(maxTipAmount);
         return this;
     }
 
     public List<Integer> getSuggestedTipAmounts() {
-        return method.getSuggestedTipAmounts();
+        return method.build().getSuggestedTipAmounts();
     }
 
     public SendInvoiceMethod setSuggestedTipAmounts(List<Integer> suggestedTipAmounts) {
-        method.setSuggestedTipAmounts(suggestedTipAmounts);
+        method.suggestedTipAmounts(suggestedTipAmounts);
         return this;
     }
 
     @Override
     public Boolean getProtectContent() {
-        return method.getProtectContent();
+        return method.build().getProtectContent();
     }
 
     @Override
     public SendInvoiceMethod setProtectContent(Boolean protectContent) {
-        method.setProtectContent(protectContent);
+        method.protectContent(protectContent);
         return this;
     }
 
     public Boolean getSendEmailToProvider() {
-        return method.getSendEmailToProvider();
+        return method.build().getSendEmailToProvider();
     }
 
     public SendInvoiceMethod setSendEmailToProvider(Boolean sendEmailToProvider) {
-        method.setSendEmailToProvider(sendEmailToProvider);
+        method.sendEmailToProvider(sendEmailToProvider);
         return this;
     }
 
     public Boolean getSendPhoneNumberToProvider() {
-        return method.getSendPhoneNumberToProvider();
+        return method.build().getSendPhoneNumberToProvider();
     }
 
     public SendInvoiceMethod setSendPhoneNumberToProvider(Boolean sendPhoneNumberToProvider) {
-        method.setSendPhoneNumberToProvider(sendPhoneNumberToProvider);
+        method.sendPhoneNumberToProvider(sendPhoneNumberToProvider);
         return this;
     }
 
     @Override
     public ReplyParameters getReplyParameters() {
-        return method.getReplyParameters();
+        return method.build().getReplyParameters();
     }
 
     @Override
     public SendInvoiceMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
-        method.setReplyParameters(replyParameters);
+        method.replyParameters(replyParameters);
         return this;
     }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Message> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Message> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

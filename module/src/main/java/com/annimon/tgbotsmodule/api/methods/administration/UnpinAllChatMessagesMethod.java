@@ -2,45 +2,40 @@ package com.annimon.tgbotsmodule.api.methods.administration;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.pinnedmessages.UnpinAllChatMessages;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class UnpinAllChatMessagesMethod implements ChatMethod<UnpinAllChatMessagesMethod, Boolean> {
 
-    private final UnpinAllChatMessages method;
+    private final UnpinAllChatMessages.UnpinAllChatMessagesBuilder method;
 
     public UnpinAllChatMessagesMethod() {
-        this(new UnpinAllChatMessages());
+        this(UnpinAllChatMessages.builder());
     }
 
-    public UnpinAllChatMessagesMethod(@NotNull UnpinAllChatMessages method) {
+    public UnpinAllChatMessagesMethod(@NotNull UnpinAllChatMessages.UnpinAllChatMessagesBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public UnpinAllChatMessagesMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Boolean> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

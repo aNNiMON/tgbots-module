@@ -1,23 +1,43 @@
 package com.annimon.tgbotsmodule.api.methods;
 
 import com.annimon.tgbotsmodule.api.methods.administration.*;
-import com.annimon.tgbotsmodule.api.methods.answerqueries.*;
+import com.annimon.tgbotsmodule.api.methods.answerqueries.AnswerCallbackQueryMethod;
+import com.annimon.tgbotsmodule.api.methods.answerqueries.AnswerInlineQueryMethod;
+import com.annimon.tgbotsmodule.api.methods.answerqueries.AnswerPreCheckoutQueryMethod;
+import com.annimon.tgbotsmodule.api.methods.answerqueries.AnswerShippingQueryMethod;
+import com.annimon.tgbotsmodule.api.methods.answerqueries.AnswerWebAppQueryMethod;
 import com.annimon.tgbotsmodule.api.methods.forum.*;
-import com.annimon.tgbotsmodule.api.methods.games.*;
+import com.annimon.tgbotsmodule.api.methods.games.GetGameHighScoresMethod;
+import com.annimon.tgbotsmodule.api.methods.games.SetGameScoreMethod;
 import com.annimon.tgbotsmodule.api.methods.info.*;
 import com.annimon.tgbotsmodule.api.methods.invoices.CreateInvoiceLinkMethod;
 import com.annimon.tgbotsmodule.api.methods.invoices.SendInvoiceMethod;
-import com.annimon.tgbotsmodule.api.methods.other.*;
+import com.annimon.tgbotsmodule.api.methods.other.CopyMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.other.CopyMessagesMethod;
+import com.annimon.tgbotsmodule.api.methods.other.ForwardMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.other.ForwardMessagesMethod;
+import com.annimon.tgbotsmodule.api.methods.other.LeaveChatMethod;
+import com.annimon.tgbotsmodule.api.methods.other.SendChatActionMethod;
+import com.annimon.tgbotsmodule.api.methods.other.SetMessageReactionMethod;
+import com.annimon.tgbotsmodule.api.methods.other.SetPassportDataErrorsMethod;
 import com.annimon.tgbotsmodule.api.methods.polls.SendPollMethod;
 import com.annimon.tgbotsmodule.api.methods.polls.StopPollMethod;
 import com.annimon.tgbotsmodule.api.methods.send.*;
 import com.annimon.tgbotsmodule.api.methods.stickers.*;
-import com.annimon.tgbotsmodule.api.methods.updates.*;
-import com.annimon.tgbotsmodule.api.methods.updatingmessages.*;
+import com.annimon.tgbotsmodule.api.methods.updates.DeleteWebhookMethod;
+import com.annimon.tgbotsmodule.api.methods.updates.GetUpdatesMethod;
+import com.annimon.tgbotsmodule.api.methods.updates.GetWebhookInfoMethod;
+import com.annimon.tgbotsmodule.api.methods.updatingmessages.DeleteMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.updatingmessages.DeleteMessagesMethod;
+import com.annimon.tgbotsmodule.api.methods.updatingmessages.EditMessageCaptionMethod;
+import com.annimon.tgbotsmodule.api.methods.updatingmessages.EditMessageLiveLocationMethod;
+import com.annimon.tgbotsmodule.api.methods.updatingmessages.EditMessageMediaMethod;
+import com.annimon.tgbotsmodule.api.methods.updatingmessages.EditMessageReplyMarkupMethod;
+import com.annimon.tgbotsmodule.api.methods.updatingmessages.EditMessageTextMethod;
+import com.annimon.tgbotsmodule.api.methods.updatingmessages.StopMessageLiveLocationMethod;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
-import org.telegram.telegrambots.meta.api.methods.polls.StopPoll;
 import org.telegram.telegrambots.meta.api.objects.ChatPermissions;
 import org.telegram.telegrambots.meta.api.objects.adminrights.ChatAdministratorRights;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
@@ -601,7 +621,7 @@ public final class Methods {
         }
 
         public static StopPollMethod stopPoll(@NotNull String chatId, int messageId) {
-            return new StopPollMethod(new StopPoll(chatId, messageId));
+            return new StopPollMethod().setChatId(chatId).setMessageId(messageId);
         }
 
         public static StopPollMethod stopPoll(long chatId, int messageId) {

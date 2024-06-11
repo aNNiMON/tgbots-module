@@ -2,44 +2,39 @@ package com.annimon.tgbotsmodule.api.methods.info;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.name.GetMyName;
 import org.telegram.telegrambots.meta.api.objects.name.BotName;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class GetMyNameMethod implements Method<BotName> {
 
-    private final GetMyName method;
+    private final GetMyName.GetMyNameBuilder method;
 
     public GetMyNameMethod() {
-        this(new GetMyName());
+        this(GetMyName.builder());
     }
 
-    public GetMyNameMethod(@NotNull GetMyName method) {
+    public GetMyNameMethod(@NotNull GetMyName.GetMyNameBuilder method) {
         this.method = method;
     }
 
     public String getLanguageCode() {
-        return method.getLanguageCode();
+        return method.build().getLanguageCode();
     }
 
     public GetMyNameMethod setLanguageCode(@NotNull String languageCode) {
-        method.setLanguageCode(languageCode);
+        method.languageCode(languageCode);
         return this;
     }
 
     @Override
     public BotName call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super BotName> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<BotName> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

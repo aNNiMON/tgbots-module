@@ -2,57 +2,52 @@ package com.annimon.tgbotsmodule.api.methods.info;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMemberMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.boosts.GetUserChatBoosts;
 import org.telegram.telegrambots.meta.api.objects.boost.UserChatBoosts;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class GetUserChatBoostsMethod implements ChatMemberMethod<GetUserChatBoostsMethod, UserChatBoosts> {
 
-    private final GetUserChatBoosts method;
+    private final GetUserChatBoosts.GetUserChatBoostsBuilder method;
 
     public GetUserChatBoostsMethod() {
-        this(new GetUserChatBoosts());
+        this(GetUserChatBoosts.builder());
     }
 
-    public GetUserChatBoostsMethod(@NotNull GetUserChatBoosts method) {
+    public GetUserChatBoostsMethod(@NotNull GetUserChatBoosts.GetUserChatBoostsBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public GetUserChatBoostsMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         return this;
     }
 
     @Override
     public Long getUserId() {
-        return method.getUserId();
+        return method.build().getUserId();
     }
 
     @Override
     public GetUserChatBoostsMethod setUserId(@NotNull Long userId) {
-        method.setUserId(userId);
+        method.userId(userId);
         return this;
     }
 
     @Override
     public UserChatBoosts call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super UserChatBoosts> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<UserChatBoosts> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }

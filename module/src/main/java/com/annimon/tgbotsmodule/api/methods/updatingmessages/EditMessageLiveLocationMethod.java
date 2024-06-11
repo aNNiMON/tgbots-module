@@ -5,138 +5,133 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod
 import com.annimon.tgbotsmodule.api.methods.interfaces.LocationMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.io.Serializable;
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageLiveLocation;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class EditMessageLiveLocationMethod implements
         InlineOrChatMessageMethod<EditMessageLiveLocationMethod, Serializable>,
         InlineKeyboardMarkupMethod<EditMessageLiveLocationMethod, Serializable>,
         LocationMethod<EditMessageLiveLocationMethod, Serializable> {
 
-    private final EditMessageLiveLocation method;
+    private final EditMessageLiveLocation.EditMessageLiveLocationBuilder method;
 
     public EditMessageLiveLocationMethod() {
-        this(new EditMessageLiveLocation());
+        this(EditMessageLiveLocation.builder());
     }
 
-    public EditMessageLiveLocationMethod(@NotNull EditMessageLiveLocation method) {
+    public EditMessageLiveLocationMethod(@NotNull EditMessageLiveLocation.EditMessageLiveLocationBuilder method) {
         this.method = method;
     }
 
     @Override
     public String getChatId() {
-        return method.getChatId();
+        return method.build().getChatId();
     }
 
     @Override
     public EditMessageLiveLocationMethod setChatId(@NotNull String chatId) {
-        method.setChatId(chatId);
+        method.chatId(chatId);
         // Clear inline message id
-        method.setInlineMessageId(null);
+        method.inlineMessageId(null);
         return this;
     }
 
     @Override
     public Integer getMessageId() {
-        return method.getMessageId();
+        return method.build().getMessageId();
     }
 
     @Override
     public EditMessageLiveLocationMethod setMessageId(@NotNull Integer messageId) {
-        method.setMessageId(messageId);
+        method.messageId(messageId);
         // Clear inline message id
-        method.setInlineMessageId(null);
+        method.inlineMessageId(null);
         return this;
     }
 
     @Override
     public String getInlineMessageId() {
-        return method.getInlineMessageId();
+        return method.build().getInlineMessageId();
     }
 
     @Override
     public EditMessageLiveLocationMethod setInlineMessageId(@NotNull String inlineMessageId) {
-        method.setInlineMessageId(inlineMessageId);
+        method.inlineMessageId(inlineMessageId);
         // Clear chat id and message id
-        method.setChatId((String) null);
-        method.setMessageId(null);
+        method.chatId((String) null);
+        method.messageId(null);
         return this;
     }
 
     @Override
     public InlineKeyboardMarkup getReplyMarkup() {
-        return method.getReplyMarkup();
+        return method.build().getReplyMarkup();
     }
 
     @Override
     public EditMessageLiveLocationMethod setReplyMarkup(InlineKeyboardMarkup replyMarkup) {
-        method.setReplyMarkup(replyMarkup);
+        method.replyMarkup(replyMarkup);
         return this;
     }
 
     @Override
     public Double getLatitude() {
-        return method.getLatitude();
+        return method.build().getLatitude();
     }
 
     @Override
     public EditMessageLiveLocationMethod setLatitude(@NotNull Double latitude) {
-        method.setLatitude(latitude);
+        method.latitude(latitude);
         return this;
     }
 
     @Override
     public Double getLongitude() {
-        return method.getLongitude();
+        return method.build().getLongitude();
     }
 
     @Override
     public EditMessageLiveLocationMethod setLongitude(@NotNull Double longitude) {
-        method.setLongitude(longitude);
+        method.longitude(longitude);
         return this;
     }
 
     public Integer getHeading() {
-        return method.getHeading();
+        return method.build().getHeading();
     }
 
     public EditMessageLiveLocationMethod setHeading(Integer heading) {
-        method.setHeading(heading);
+        method.heading(heading);
         return this;
     }
 
     public Double getHorizontalAccuracy() {
-        return method.getHorizontalAccuracy();
+        return method.build().getHorizontalAccuracy();
     }
 
     public EditMessageLiveLocationMethod setHorizontalAccuracy(Double accuracy) {
-        method.setHorizontalAccuracy(accuracy);
+        method.horizontalAccuracy(accuracy);
         return this;
     }
 
     public Integer getProximityAlertRadius() {
-        return method.getProximityAlertRadius();
+        return method.build().getProximityAlertRadius();
     }
 
     public EditMessageLiveLocationMethod setProximityAlertRadius(Integer proximityAlertRadius) {
-        method.setProximityAlertRadius(proximityAlertRadius);
+        method.proximityAlertRadius(proximityAlertRadius);
         return this;
     }
 
     @Override
     public Serializable call(@NotNull CommonAbsSender sender) {
-        return sender.call(method);
+        return sender.call(method.build());
     }
 
     @Override
-    public void callAsync(@NotNull CommonAbsSender sender,
-                          @Nullable Consumer<? super Serializable> responseConsumer,
-                          @Nullable Consumer<TelegramApiException> apiExceptionConsumer,
-                          @Nullable Consumer<Exception> exceptionConsumer) {
-        sender.callAsync(method, responseConsumer, apiExceptionConsumer, exceptionConsumer);
+    public CompletableFuture<Serializable> callAsync(@NotNull CommonAbsSender sender) {
+        return sender.callAsync(method.build());
     }
 }
