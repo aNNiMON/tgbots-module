@@ -1,5 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SendableMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
@@ -14,7 +16,9 @@ import org.telegram.telegrambots.meta.api.objects.message.Message;
 
 public class SendMediaGroupMethod implements
         SendableMessageMethod<SendMediaGroupMethod, ArrayList<Message>>,
-        ProtectedContentMethod<SendMediaGroupMethod, ArrayList<Message>> {
+        ProtectedContentMethod<SendMediaGroupMethod, ArrayList<Message>>,
+        MessageEffectMethod<SendMediaGroupMethod, ArrayList<Message>>,
+        BusinessConnectionMethod<SendMediaGroupMethod, ArrayList<Message>> {
 
     private final SendMediaGroup.SendMediaGroupBuilder method;
 
@@ -115,6 +119,28 @@ public class SendMediaGroupMethod implements
     @Override
     public SendMediaGroupMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
         method.replyParameters(replyParameters);
+        return this;
+    }
+
+    @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public SendMediaGroupMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public SendMediaGroupMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 

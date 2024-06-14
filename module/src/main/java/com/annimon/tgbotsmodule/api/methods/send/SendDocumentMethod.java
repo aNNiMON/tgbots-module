@@ -190,6 +190,28 @@ public class SendDocumentMethod implements
     }
 
     @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public SendDocumentMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public SendDocumentMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
+        return this;
+    }
+
+    @Override
     public Message call(@NotNull CommonAbsSender sender) {
         return sender.call(method.build());
     }

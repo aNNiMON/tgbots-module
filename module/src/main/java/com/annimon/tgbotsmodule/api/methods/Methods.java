@@ -11,6 +11,7 @@ import com.annimon.tgbotsmodule.api.methods.games.GetGameHighScoresMethod;
 import com.annimon.tgbotsmodule.api.methods.games.SetGameScoreMethod;
 import com.annimon.tgbotsmodule.api.methods.info.*;
 import com.annimon.tgbotsmodule.api.methods.invoices.CreateInvoiceLinkMethod;
+import com.annimon.tgbotsmodule.api.methods.invoices.RefundStarPaymentMethod;
 import com.annimon.tgbotsmodule.api.methods.invoices.SendInvoiceMethod;
 import com.annimon.tgbotsmodule.api.methods.other.CopyMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.other.CopyMessagesMethod;
@@ -582,6 +583,15 @@ public final class Methods {
         }
 
 
+        public static RefundStarPaymentMethod refundStarPayment() {
+            return new RefundStarPaymentMethod();
+        }
+
+        public static RefundStarPaymentMethod refundStarPayment(long userId) {
+            return refundStarPayment().setUserId(userId);
+        }
+
+
         public static AnswerShippingQueryMethod answerShippingQuery() {
             return new AnswerShippingQueryMethod();
         }
@@ -755,6 +765,10 @@ public final class Methods {
                 @NotNull MaskPosition maskPosition) {
             return setStickerMaskPosition().setSticker(sticker).setMaskPosition(maskPosition);
         }
+
+        public static ReplaceStickerInSetMethod replaceStickerInSet() {
+            return new ReplaceStickerInSetMethod();
+        }
     }
 
     public static class Updates {
@@ -777,6 +791,15 @@ public final class Methods {
 
 
     // Info
+
+    public static GetBusinessConnectionMethod getBusinessConnection() {
+        return new GetBusinessConnectionMethod();
+    }
+
+    public static GetBusinessConnectionMethod getBusinessConnection(String businessConnectionId) {
+        return getBusinessConnection().setBusinessConnectionId(businessConnectionId);
+    }
+
 
     public static GetChatAdministratorsMethod getChatAdministrators() {
         return new GetChatAdministratorsMethod();

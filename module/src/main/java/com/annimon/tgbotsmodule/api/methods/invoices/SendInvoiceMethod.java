@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.invoices;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SendableMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
@@ -16,7 +17,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 public class SendInvoiceMethod implements
         SendableMessageMethod<SendInvoiceMethod, Message>,
         InlineKeyboardMarkupMethod<SendInvoiceMethod, Message>,
-        ProtectedContentMethod<SendInvoiceMethod, Message> {
+        ProtectedContentMethod<SendInvoiceMethod, Message>,
+        MessageEffectMethod<SendInvoiceMethod, Message> {
 
     private final SendInvoice.SendInvoiceBuilder method;
 
@@ -320,6 +322,17 @@ public class SendInvoiceMethod implements
     @Override
     public SendInvoiceMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
         method.replyParameters(replyParameters);
+        return this;
+    }
+
+    @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public SendInvoiceMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
         return this;
     }
 

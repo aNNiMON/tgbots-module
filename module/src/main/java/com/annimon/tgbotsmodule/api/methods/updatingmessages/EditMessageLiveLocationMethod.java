@@ -98,6 +98,15 @@ public class EditMessageLiveLocationMethod implements
         return this;
     }
 
+    public Integer getLivePeriod() {
+        return method.build().getLivePeriod();
+    }
+
+    public EditMessageLiveLocationMethod setLivePeriod(Integer livePeriod) {
+        method.livePeriod(livePeriod);
+        return this;
+    }
+
     public Integer getHeading() {
         return method.build().getHeading();
     }

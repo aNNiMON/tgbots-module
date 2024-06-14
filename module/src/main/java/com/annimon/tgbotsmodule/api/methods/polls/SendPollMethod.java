@@ -1,5 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.polls;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
@@ -19,7 +21,9 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 public class SendPollMethod implements
         ReplyMarkupSupportedMessageMethod<SendPollMethod, Message>,
         ParseModeMethod<SendPollMethod, Message>,
-        ProtectedContentMethod<SendPollMethod, Message> {
+        ProtectedContentMethod<SendPollMethod, Message>,
+        MessageEffectMethod<SendPollMethod, Message>,
+        BusinessConnectionMethod<SendPollMethod, Message> {
 
     private final SendPoll.SendPollBuilder method;
 
@@ -254,6 +258,46 @@ public class SendPollMethod implements
     @Override
     public SendPollMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
         method.replyParameters(replyParameters);
+        return this;
+    }
+
+    @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public SendPollMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public SendPollMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
+        return this;
+    }
+
+    public String getQuestionParseMode() {
+        return method.build().getQuestionParseMode();
+    }
+
+    public SendPollMethod setQuestionParseMode(String parseMode) {
+        method.questionParseMode(parseMode);
+        return this;
+    }
+
+    public List<MessageEntity> getQuestionEntities() {
+        return method.build().getQuestionEntities();
+    }
+
+    public SendPollMethod setQuestionEntities(List<MessageEntity> questionEntities) {
+        method.questionEntities(questionEntities);
         return this;
     }
 

@@ -5,35 +5,36 @@ import org.jetbrains.annotations.NotNull;
 
 public interface StickerFormatMethod<M extends Method, T extends Serializable> extends Method<T> {
 
-    String getStickerFormat();
+    String getFormat();
 
-    M setStickerFormat(@NotNull String stickerFormat);
+    M setFormat(@NotNull String format);
 
     default boolean isStaticFormat() {
-        return Format.STATIC.equals(getStickerFormat());
+        return Format.STATIC.equals(getFormat());
     }
 
     default M setStaticFormat() {
-        return setStickerFormat(Format.STATIC);
+        return setFormat(Format.STATIC);
     }
 
     default boolean isAnimatedFormat() {
-        return Format.ANIMATED.equals(getStickerFormat());
+        return Format.ANIMATED.equals(getFormat());
     }
 
     default M setAnimatedFormat() {
-        return setStickerFormat(Format.ANIMATED);
+        return setFormat(Format.ANIMATED);
     }
 
     default boolean isVideoFormat() {
-        return Format.VIDEO.equals(getStickerFormat());
+        return Format.VIDEO.equals(getFormat());
     }
 
     default M setVideoFormat() {
-        return setStickerFormat(Format.VIDEO);
+        return setFormat(Format.VIDEO);
     }
     
     class Format {
+        private Format() {}
         static final String STATIC = "static";
         static final String ANIMATED = "animated";
         static final String VIDEO = "video";

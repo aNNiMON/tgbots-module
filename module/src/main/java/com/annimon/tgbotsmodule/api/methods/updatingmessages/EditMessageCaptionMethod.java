@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.updatingmessages;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionAboveMediaMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
@@ -17,7 +18,8 @@ public class EditMessageCaptionMethod implements
         InlineOrChatMessageMethod<EditMessageCaptionMethod, Serializable>,
         InlineKeyboardMarkupMethod<EditMessageCaptionMethod, Serializable>,
         ParseModeMethod<EditMessageCaptionMethod, Serializable>,
-        CaptionMethod<EditMessageCaptionMethod, Serializable> {
+        CaptionMethod<EditMessageCaptionMethod, Serializable>,
+        CaptionAboveMediaMethod<EditMessageCaptionMethod, Serializable> {
 
     private final EditMessageCaption.EditMessageCaptionBuilder method;
 
@@ -110,6 +112,17 @@ public class EditMessageCaptionMethod implements
     @Override
     public EditMessageCaptionMethod setCaption(String caption) {
         method.caption(caption);
+        return this;
+    }
+
+    @Override
+    public Boolean getShowCaptionAboveMedia() {
+        return method.build().getShowCaptionAboveMedia();
+    }
+
+    @Override
+    public EditMessageCaptionMethod setShowCaptionAboveMedia(Boolean showCaptionAboveMedia) {
+        method.showCaptionAboveMedia(showCaptionAboveMedia);
         return this;
     }
 

@@ -18,6 +18,7 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatPho
 import org.telegram.telegrambots.meta.api.methods.send.*;
 import org.telegram.telegrambots.meta.api.methods.stickers.AddStickerToSet;
 import org.telegram.telegrambots.meta.api.methods.stickers.CreateNewStickerSet;
+import org.telegram.telegrambots.meta.api.methods.stickers.ReplaceStickerInSet;
 import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerSetThumbnail;
 import org.telegram.telegrambots.meta.api.methods.stickers.UploadStickerFile;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageMedia;
@@ -235,6 +236,24 @@ public abstract class CommonAbsSender extends OkHttpTelegramClient {
 
     public CompletableFuture<Boolean> callAsync(
             @NotNull CreateNewStickerSet method) {
+        return callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return executeAsync(method);
+        });
+    }
+
+    public Boolean call(@NotNull ReplaceStickerInSet method) {
+        try {
+            preprocessMethod(method);
+            return execute(method);
+        } catch (TelegramApiException e) {
+            handleTelegramApiException(e);
+            return false;
+        }
+    }
+
+    public CompletableFuture<Boolean> callAsync(
+            @NotNull ReplaceStickerInSet method) {
         return callApiMethodAsync(() -> {
             preprocessMethod(method);
             return executeAsync(method);

@@ -1,5 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
@@ -12,7 +14,9 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
 public class SendContactMethod implements
         ReplyMarkupSupportedMessageMethod<SendContactMethod, Message>,
-        ProtectedContentMethod<SendContactMethod, Message> {
+        ProtectedContentMethod<SendContactMethod, Message>,
+        MessageEffectMethod<SendContactMethod, Message>,
+        BusinessConnectionMethod<SendContactMethod, Message> {
 
     private final SendContact.SendContactBuilder method;
 
@@ -151,6 +155,28 @@ public class SendContactMethod implements
     @Override
     public SendContactMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
         method.replyParameters(replyParameters);
+        return this;
+    }
+
+    @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public SendContactMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public SendContactMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 

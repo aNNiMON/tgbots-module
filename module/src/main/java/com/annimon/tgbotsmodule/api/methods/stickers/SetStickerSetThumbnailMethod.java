@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.stickers;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.InputFileMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.StickerFormatMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.concurrent.CompletableFuture;
@@ -10,7 +11,8 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 
 public class SetStickerSetThumbnailMethod implements
         UserMethod<SetStickerSetThumbnailMethod, Boolean>,
-        InputFileMethod<SetStickerSetThumbnailMethod, Boolean> {
+        InputFileMethod<SetStickerSetThumbnailMethod, Boolean>,
+        StickerFormatMethod<SetStickerSetThumbnailMethod, Boolean> {
 
     private final SetStickerSetThumbnail.SetStickerSetThumbnailBuilder method;
 
@@ -30,6 +32,17 @@ public class SetStickerSetThumbnailMethod implements
     @Override
     public SetStickerSetThumbnailMethod setUserId(@NotNull Long userId) {
         method.userId(userId);
+        return this;
+    }
+
+    @Override
+    public String getFormat() {
+        return method.build().getFormat();
+    }
+
+    @Override
+    public SetStickerSetThumbnailMethod setFormat(@NotNull String format) {
+        method.format(format);
         return this;
     }
 

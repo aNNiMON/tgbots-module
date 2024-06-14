@@ -38,13 +38,13 @@ public class UploadStickerFileMethod implements
     }
 
     @Override
-    public String getStickerFormat() {
+    public String getFormat() {
         return method.build().getStickerFormat();
     }
 
     @Override
-    public UploadStickerFileMethod setStickerFormat(@NotNull String stickerFormat) {
-        method.stickerFormat(stickerFormat);
+    public UploadStickerFileMethod setFormat(@NotNull String format) {
+        method.stickerFormat(format);
         return this;
     }
 

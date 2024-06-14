@@ -1,6 +1,8 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.LocationMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
@@ -14,7 +16,9 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 public class SendLocationMethod implements
         ReplyMarkupSupportedMessageMethod<SendLocationMethod, Message>,
         LocationMethod<SendLocationMethod, Message>,
-        ProtectedContentMethod<SendLocationMethod, Message> {
+        ProtectedContentMethod<SendLocationMethod, Message>,
+        MessageEffectMethod<SendLocationMethod, Message>,
+        BusinessConnectionMethod<SendLocationMethod, Message> {
 
     private final SendLocation.SendLocationBuilder method;
 
@@ -175,6 +179,28 @@ public class SendLocationMethod implements
     @Override
     public SendLocationMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
         method.replyParameters(replyParameters);
+        return this;
+    }
+
+    @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public SendLocationMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public SendLocationMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 

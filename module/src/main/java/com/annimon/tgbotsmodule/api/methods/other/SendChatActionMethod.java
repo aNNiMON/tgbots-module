@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.other;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageThreadMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.concurrent.CompletableFuture;
@@ -7,7 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
 import org.telegram.telegrambots.meta.api.methods.send.SendChatAction;
 
-public class SendChatActionMethod implements ChatMessageThreadMethod<SendChatActionMethod, Boolean> {
+public class SendChatActionMethod implements
+        ChatMessageThreadMethod<SendChatActionMethod, Boolean>,
+        BusinessConnectionMethod<SendChatActionMethod, Boolean> {
 
     private final SendChatAction.SendChatActionBuilder method;
 
@@ -58,5 +61,16 @@ public class SendChatActionMethod implements ChatMessageThreadMethod<SendChatAct
     @Override
     public CompletableFuture<Boolean> callAsync(@NotNull CommonAbsSender sender) {
         return sender.callAsync(method.build());
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public SendChatActionMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
+        return this;
     }
 }

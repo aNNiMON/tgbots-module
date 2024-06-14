@@ -18,7 +18,7 @@ repositories {
     mavenCentral()
 }
 
-ext.telegramBotsVersion = '7.4.0'
+ext.telegramBotsVersion = '7.4.1'
 ext.retrofitVersion = '2.9.0'
 ext.jacksonVersion = '2.14.2'
 ext.junit5Version = '5.10.2'

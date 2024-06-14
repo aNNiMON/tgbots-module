@@ -1,5 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
@@ -21,7 +23,9 @@ public class SendMessageMethod implements
         ParseModeMethod<SendMessageMethod, Message>,
         WebPagePreviewMethod<SendMessageMethod, Message>,
         ProtectedContentMethod<SendMessageMethod, Message>,
-        TextMethod<SendMessageMethod, Message> {
+        TextMethod<SendMessageMethod, Message>,
+        MessageEffectMethod<SendMessageMethod, Message>,
+        BusinessConnectionMethod<SendMessageMethod, Message> {
 
     private final SendMessage.SendMessageBuilder method;
 
@@ -181,6 +185,28 @@ public class SendMessageMethod implements
 
     public SendMessageMethod setLinkPreviewOptions(LinkPreviewOptions options) {
         method.linkPreviewOptions(options);
+        return this;
+    }
+
+    @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public SendMessageMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public SendMessageMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 

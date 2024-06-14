@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionAboveMediaMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
@@ -19,7 +20,8 @@ public class SendPhotoMethod implements
         MediaMessageMethod<SendPhotoMethod, Message>,
         ParseModeMethod<SendPhotoMethod, Message>,
         CaptionMethod<SendPhotoMethod, Message>,
-        SpoilerMethod<SendPhotoMethod, Message> {
+        SpoilerMethod<SendPhotoMethod, Message>,
+        CaptionAboveMediaMethod<SendPhotoMethod, Message> {
 
     private final SendPhoto.SendPhotoBuilder method;
 
@@ -177,6 +179,39 @@ public class SendPhotoMethod implements
     @Override
     public SendPhotoMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
         method.replyParameters(replyParameters);
+        return this;
+    }
+
+    @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public SendPhotoMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public SendPhotoMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
+        return this;
+    }
+
+    @Override
+    public Boolean getShowCaptionAboveMedia() {
+        return method.build().getShowCaptionAboveMedia();
+    }
+
+    @Override
+    public SendPhotoMethod setShowCaptionAboveMedia(Boolean showCaptionAboveMedia) {
+        method.showCaptionAboveMedia(showCaptionAboveMedia);
         return this;
     }
 

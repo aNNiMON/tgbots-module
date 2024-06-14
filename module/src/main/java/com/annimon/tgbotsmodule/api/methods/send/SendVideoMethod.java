@@ -23,7 +23,8 @@ public class SendVideoMethod implements
         CaptionMethod<SendVideoMethod, Message>,
         DurationMethod<SendVideoMethod, Message>,
         ThumbMethod<SendVideoMethod, Message>,
-        SpoilerMethod<SendVideoMethod, Message> {
+        SpoilerMethod<SendVideoMethod, Message>/*, TODO see comment below
+        CaptionAboveMediaMethod<SendVideoMethod, Message>*/ {
 
     private final SendVideo.SendVideoBuilder method;
 
@@ -232,6 +233,40 @@ public class SendVideoMethod implements
         method.replyParameters(replyParameters);
         return this;
     }
+
+    @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public SendVideoMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public SendVideoMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
+        return this;
+    }
+
+    /* TODO uncomment when telegrambots will add this field
+    @Override
+    public Boolean getShowCaptionAboveMedia() {
+        return method.build().getShowCaptionAboveMedia();
+    }
+
+    @Override
+    public SendVideoMethod setShowCaptionAboveMedia(Boolean showCaptionAboveMedia) {
+        method.showCaptionAboveMedia(showCaptionAboveMedia);
+        return this;
+    }*/
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {

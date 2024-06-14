@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
@@ -11,7 +12,8 @@ import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
 public class SendStickerMethod implements
-        MediaMessageMethod<SendStickerMethod, Message> {
+        MediaMessageMethod<SendStickerMethod, Message>,
+        MessageEffectMethod<SendStickerMethod, Message> {
 
     private final SendSticker.SendStickerBuilder method;
 
@@ -134,6 +136,28 @@ public class SendStickerMethod implements
     @Override
     public SendStickerMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
         method.replyParameters(replyParameters);
+        return this;
+    }
+
+    @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public SendStickerMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public SendStickerMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 

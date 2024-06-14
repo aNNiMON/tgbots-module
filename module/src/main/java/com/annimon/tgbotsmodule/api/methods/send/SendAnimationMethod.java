@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionAboveMediaMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
@@ -23,7 +24,8 @@ public class SendAnimationMethod implements
         CaptionMethod<SendAnimationMethod, Message>,
         DurationMethod<SendAnimationMethod, Message>,
         ThumbMethod<SendAnimationMethod, Message>,
-        SpoilerMethod<SendAnimationMethod, Message> {
+        SpoilerMethod<SendAnimationMethod, Message>,
+        CaptionAboveMediaMethod<SendAnimationMethod, Message> {
 
     private final SendAnimation.SendAnimationBuilder method;
 
@@ -221,6 +223,39 @@ public class SendAnimationMethod implements
     @Override
     public SendAnimationMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
         method.replyParameters(replyParameters);
+        return this;
+    }
+
+    @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public SendAnimationMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
+        return this;
+    }
+
+    @Override
+    public Boolean getShowCaptionAboveMedia() {
+        return method.build().getShowCaptionAboveMedia();
+    }
+
+    @Override
+    public SendAnimationMethod setShowCaptionAboveMedia(Boolean showCaptionAboveMedia) {
+        method.showCaptionAboveMedia(showCaptionAboveMedia);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public SendAnimationMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 

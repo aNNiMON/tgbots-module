@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.other;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionAboveMediaMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
@@ -14,7 +15,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 public class CopyMessageMethod implements
         ChatMessageMethod<CopyMessageMethod, MessageId>,
         ReplyMarkupSupportedMessageMethod<CopyMessageMethod, MessageId>,
-        ProtectedContentMethod<CopyMessageMethod, MessageId> {
+        ProtectedContentMethod<CopyMessageMethod, MessageId>,
+        CaptionAboveMediaMethod<CopyMessageMethod, MessageId> {
 
     private final CopyMessage.CopyMessageBuilder method;
 
@@ -142,6 +144,17 @@ public class CopyMessageMethod implements
     @Override
     public CopyMessageMethod setReplyParameters(@NotNull ReplyParameters replyParameters) {
         method.replyParameters(replyParameters);
+        return this;
+    }
+
+    @Override
+    public Boolean getShowCaptionAboveMedia() {
+        return method.build().getShowCaptionAboveMedia();
+    }
+
+    @Override
+    public CopyMessageMethod setShowCaptionAboveMedia(Boolean showCaptionAboveMedia) {
+        method.showCaptionAboveMedia(showCaptionAboveMedia);
         return this;
     }
 
