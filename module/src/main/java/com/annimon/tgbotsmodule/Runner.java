@@ -128,7 +128,7 @@ public class Runner {
                             .updateHandler(bot::onWebhookUpdateReceived)
                             .build());
                 } catch (TelegramApiException ex) {
-                    log.error("register webhook bot", ex);
+                    log.error("register webhook bot: " + module, ex);
                 }
             }
         } catch (TelegramApiException e) {
@@ -150,7 +150,7 @@ public class Runner {
                             options.getUpdatesGenerator(),
                             handler);
                 } catch (TelegramApiException ex) {
-                    log.error("register long polling bot", ex);
+                    log.error("register long polling bot: " + module, ex);
                 }
             }
         } catch (Exception ex) {
@@ -172,8 +172,8 @@ public class Runner {
                 return Optional.of(configLoader.loadResource(path, Config.class));
             }
         } catch (ConfigLoaderException cle) {
-            // TODO more informative message
-            log.info("Unable to load config from resource. Trying to load from file…");
+            log.info("Unable to load a config from resource for profile " + profile
+                    + ". Trying to load from file…", cle);
         }
         return Optional.empty();
     }
@@ -183,8 +183,8 @@ public class Runner {
             var path = configLoader.configFile("config", profile);
             return Optional.of(configLoader.loadFile(path, Config.class));
         } catch (ConfigLoaderException cle) {
-            // TODO more informative message
-            log.info("Unable to load config file. Switch to default configuration.");
+            log.info("Unable to load a config file for profile " + profile
+                    + ". Switching to default configuration.", cle);
         }
         return Optional.empty();
     }
@@ -197,7 +197,7 @@ public class Runner {
                     .getDeclaredConstructor()
                     .newInstance();
         } catch (Exception ex) {
-            log.warn("Unable to load module " + className);
+            log.warn("Unable to load module {}", className);
             return null;
         }
     }
