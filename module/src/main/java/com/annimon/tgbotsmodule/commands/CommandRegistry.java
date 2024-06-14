@@ -7,15 +7,13 @@ import com.annimon.tgbotsmodule.commands.context.InlineQueryContext;
 import com.annimon.tgbotsmodule.commands.context.MessageContext;
 import com.annimon.tgbotsmodule.commands.context.RegexMessageContext;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -24,10 +22,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler {
 
     private final String botUsername;
-    private final ListMultimap<String, TextCommand> textCommands;
+    private final Map<String, List<TextCommand>> textCommands;
     private final List<RegexCommand> regexCommands;
-    private final ListMultimap<String, CallbackQueryCommand> callbackCommands;
-    private final ListMultimap<String, InlineQueryCommand> inlineCommands;
+    private final Map<String, List<CallbackQueryCommand>> callbackCommands;
+    private final Map<String, List<InlineQueryCommand>> inlineCommands;
     private final Authority<TRole> authority;
 
     private String callbackCommandSplitPattern;
@@ -35,10 +33,10 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
     public CommandRegistry(@NotNull String botUsername, @NotNull Authority<TRole> authority) {
         this.authority = authority;
         this.botUsername = "@" + botUsername.toLowerCase(Locale.ENGLISH);
-        textCommands = ArrayListMultimap.create();
+        textCommands = new HashMap<>();
         regexCommands = new ArrayList<>();
-        callbackCommands = ArrayListMultimap.create();
-        inlineCommands = ArrayListMultimap.create();
+        callbackCommands = new HashMap<>();
+        inlineCommands = new HashMap<>();
 
         callbackCommandSplitPattern = ":";
     }
@@ -47,7 +45,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         Objects.requireNonNull(command);
         Stream.concat(Stream.of(command.command()), command.aliases().stream())
                 .map(this::stringToCommand)
-                .forEach(key -> textCommands.put(key, command));
+                .forEach(key -> addCommand(textCommands, key, command));
         return this;
     }
 
@@ -59,13 +57,13 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
 
     public CommandRegistry<TRole> register(@NotNull CallbackQueryCommand command) {
         Objects.requireNonNull(command);
-        callbackCommands.put(command.command(), command);
+        addCommand(callbackCommands, command.command(), command);
         return this;
     }
 
     public CommandRegistry<TRole> register(@NotNull InlineQueryCommand command) {
         Objects.requireNonNull(command);
-        inlineCommands.put(command.command(), command);
+        addCommand(inlineCommands, command.command(), command);
         return this;
     }
 
@@ -140,7 +138,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         final var commands = Stream.ofNullable(textCommands.get(command))
                 .flatMap(Collection::stream)
                 .filter(cmd -> authority.hasRights(sender, update, message.getFrom(), cmd.authority()))
-                .collect(Collectors.toList());
+                .toList();
         if (commands.isEmpty()) {
             return false;
         }
@@ -176,7 +174,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         final var commands = Stream.ofNullable(callbackCommands.get(command))
                 .flatMap(Collection::stream)
                 .filter(cmd -> authority.hasRights(sender, update, query.getFrom(), cmd.authority()))
-                .collect(Collectors.toList());
+                .toList();
         if (commands.isEmpty()) {
             return false;
         }
@@ -197,7 +195,7 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
         final var commands = Stream.ofNullable(inlineCommands.get(command))
                 .flatMap(Collection::stream)
                 .filter(cmd -> authority.hasRights(sender, update, inlineQuery.getFrom(), cmd.authority()))
-                .collect(Collectors.toList());
+                .toList();
         if (commands.isEmpty()) {
             return false;
         }
@@ -212,5 +210,9 @@ public class CommandRegistry<TRole extends Enum<TRole>> implements UpdateHandler
 
     protected String stringToCommand(String str) {
         return str.toLowerCase(Locale.ENGLISH).replace(botUsername, "");
+    }
+
+    private static <K, V> void addCommand(Map<K, List<V>> map, K key, V value) {
+        map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
     }
 }

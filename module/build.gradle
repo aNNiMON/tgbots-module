@@ -19,8 +19,7 @@ repositories {
 }
 
 ext.telegramBotsVersion = '7.4.1'
-ext.retrofitVersion = '2.9.0'
-ext.jacksonVersion = '2.14.2'
+ext.jacksonVersion = '2.17.1'
 ext.junit5Version = '5.10.2'
 ext.jaxbVersion = '2.3.1'
 
@@ -28,23 +27,15 @@ dependencies {
     api "org.telegram:telegrambots-longpolling:$telegramBotsVersion"
     api "org.telegram:telegrambots-webhook:$telegramBotsVersion"
     api "org.telegram:telegrambots-client:$telegramBotsVersion"
-    api "com.google.guava:guava:33.0.0-jre"
-    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    api "com.squareup.retrofit2:converter-jackson:$retrofitVersion"
     api "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
     api "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    api 'org.glassfish:javax.el:3.0.1-b12'
-    api "javax.xml.bind:jaxb-api:$jaxbVersion"
-    api "com.sun.xml.bind:jaxb-impl:$jaxbVersion"
-    api "org.glassfish.jaxb:jaxb-runtime:$jaxbVersion"
-    api 'javax.activation:activation:1.1.1'
     api 'org.jetbrains:annotations:24.1.0'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.7.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junit5Version"
     testImplementation "org.junit.jupiter:junit-jupiter-params:$junit5Version"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$junit5Version"
     testImplementation "org.junit.vintage:junit-vintage-engine:$junit5Version"
-    testImplementation "org.assertj:assertj-core:3.25.3"
+    testImplementation 'org.assertj:assertj-core:3.26.0'
 }
 
 test {
