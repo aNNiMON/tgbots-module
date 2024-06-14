@@ -3,6 +3,7 @@ package com.annimon.testbotkt
 import com.annimon.testbotkt.commands.LocalizationBundle
 import com.annimon.testbotkt.commands.ReverseBundle
 import com.annimon.tgbotsmodule.BotHandler
+import com.annimon.tgbotsmodule.BotModuleOptions
 import com.annimon.tgbotsmodule.api.methods.Methods
 import com.annimon.tgbotsmodule.commands.CommandRegistry
 import com.annimon.tgbotsmodule.commands.SimpleCommand
@@ -15,8 +16,9 @@ import org.telegram.telegrambots.meta.api.methods.send.SendPhoto
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.api.objects.polls.input.InputPollOption
+import kotlin.math.abs
 
-class TestBotHandler(private val botConfig: BotConfig) : BotHandler(botConfig.token) {
+class TestBotHandler(botModuleOptions: BotModuleOptions, private val botConfig: BotConfig) : BotHandler(botModuleOptions) {
     private val authority = SimpleAuthority(botConfig.creatorId)
     private val commands = CommandRegistry(botConfig.username, authority)
 
@@ -26,6 +28,25 @@ class TestBotHandler(private val botConfig: BotConfig) : BotHandler(botConfig.to
                 Methods.sendChatAction(ctx.chatId(), ActionType.get(ctx.argument(0, ActionType.TYPING.toString())))
                         .callAsync(ctx.sender)
             }
+        })
+        commands.register(SimpleCommand("/effect", For.all()) { ctx ->
+            val effects = arrayOf(
+                "5104841245755180586", "5107584321108051014", "5104858069142078462",
+                "5104858069142078462", "5044134455711629726", "5046509860389126442", "5046589136895476101"
+            )
+            val text: String
+            val effectId: String?
+            if (ctx.message().isUserMessage) {
+                effectId = effects[(abs(System.currentTimeMillis() % effects.size)).toInt()]
+                text = "Message effect `${effectId}`"
+            } else {
+                text = "Message effects works only in private chats"
+                effectId = null
+            }
+            ctx.reply(text)
+                .enableMarkdown()
+                .setMessageEffectId(effectId)
+                .callAsync(ctx.sender)
         })
 
         // Polls

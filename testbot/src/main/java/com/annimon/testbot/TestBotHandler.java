@@ -3,6 +3,7 @@ package com.annimon.testbot;
 import com.annimon.testbot.commands.CalcBundle;
 import com.annimon.testbot.commands.LocalizationBundle;
 import com.annimon.tgbotsmodule.BotHandler;
+import com.annimon.tgbotsmodule.BotModuleOptions;
 import com.annimon.tgbotsmodule.api.methods.Methods;
 import com.annimon.tgbotsmodule.commands.CommandRegistry;
 import com.annimon.tgbotsmodule.commands.SimpleCommand;
@@ -28,8 +29,8 @@ public class TestBotHandler extends BotHandler {
 
     private final CommandRegistry<For> commands;
 
-    public TestBotHandler(BotConfig botConfig) {
-        super(botConfig.getToken());
+    public TestBotHandler(BotModuleOptions botModuleOptions, BotConfig botConfig) {
+        super(botModuleOptions);
 
         final var authority = new SimpleAuthority(botConfig.getCreatorId());
         commands = new CommandRegistry<>(botConfig.getUsername(), authority);
@@ -37,6 +38,23 @@ public class TestBotHandler extends BotHandler {
         commands.register(new SimpleCommand("/action", For.CREATOR, ctx -> {
             if (ctx.argumentsLength() != 1) return;
             Methods.sendChatAction(ctx.chatId(), ActionType.get(ctx.argument(0, "typing")))
+                    .callAsync(ctx.sender);
+        }));
+        commands.register(new SimpleCommand("/effect", For.all(), ctx -> {
+            String[] effects = {"5104841245755180586", "5107584321108051014", "5104858069142078462",
+                    "5104858069142078462", "5044134455711629726", "5046509860389126442", "5046589136895476101"};
+            final String text;
+            final String effectId;
+            if (ctx.message().isUserMessage()) {
+                effectId = effects[(int) Math.abs(System.currentTimeMillis() % effects.length)];
+                text = "Message effect `%s`".formatted(effectId);
+            } else {
+                effectId = null;
+                text = "Message effects works only in private chats";
+            }
+            ctx.reply(text)
+                    .enableMarkdown()
+                    .setMessageEffectId(effectId)
                     .callAsync(ctx.sender);
         }));
         commands.register(new SimpleCommand("/reverse", ctx -> {

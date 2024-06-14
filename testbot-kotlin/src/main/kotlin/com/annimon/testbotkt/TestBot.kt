@@ -2,6 +2,7 @@ package com.annimon.testbotkt
 
 import com.annimon.tgbotsmodule.BotHandler
 import com.annimon.tgbotsmodule.BotModule
+import com.annimon.tgbotsmodule.BotModuleOptions
 import com.annimon.tgbotsmodule.Runner
 import com.annimon.tgbotsmodule.beans.Config
 import com.annimon.tgbotsmodule.services.YamlConfigLoaderService
@@ -24,7 +25,8 @@ class TestBot : BotModule {
         val botConfig = configLoader.loadFile(configFile, BotConfig::class.java) {
             it.registerModule(KotlinModule.Builder().build())
         }
-        return TestBotHandler(botConfig)
+        val botModuleOptions = BotModuleOptions.createDefault(botConfig.token);
+        return TestBotHandler(botModuleOptions, botConfig)
     }
 }
 

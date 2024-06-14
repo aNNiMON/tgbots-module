@@ -2,6 +2,7 @@ package com.annimon.testbot;
 
 import com.annimon.tgbotsmodule.BotHandler;
 import com.annimon.tgbotsmodule.BotModule;
+import com.annimon.tgbotsmodule.BotModuleOptions;
 import com.annimon.tgbotsmodule.Runner;
 import com.annimon.tgbotsmodule.beans.Config;
 import com.annimon.tgbotsmodule.services.YamlConfigLoaderService;
@@ -20,6 +21,7 @@ public class TestBot implements BotModule {
         final var configLoader = new YamlConfigLoaderService();
         final var configFile = configLoader.configFile("testbot", config.getProfile());
         final var botConfig = configLoader.loadFile(configFile, BotConfig.class);
-        return new TestBotHandler(botConfig);
+        final var botModuleOptions = BotModuleOptions.createDefault(botConfig.getToken());
+        return new TestBotHandler(botModuleOptions, botConfig);
     }
 }
