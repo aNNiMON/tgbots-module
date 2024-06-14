@@ -13,12 +13,12 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public abstract class BotHandler extends CommonAbsSender
         implements LongPollingUpdateConsumer {
 
-    private final String botToken;
+    private final BotModuleOptions botModuleOptions;
     private final Executor updatesProcessorExecutor;
 
-    public BotHandler(@NotNull String botToken) {
-        super(botToken);
-        this.botToken = botToken;
+    public BotHandler(@NotNull BotModuleOptions botModuleOptions) {
+        super(botModuleOptions.botToken());
+        this.botModuleOptions = botModuleOptions;
         updatesProcessorExecutor = Executors.newSingleThreadExecutor();
     }
 
@@ -41,7 +41,7 @@ public abstract class BotHandler extends CommonAbsSender
     public void clearWebhook() {
     }
 
-    public String getBotToken() {
-        return botToken;
+    public BotModuleOptions getBotModuleOptions() {
+        return botModuleOptions;
     }
 }

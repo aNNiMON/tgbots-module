@@ -143,7 +143,12 @@ public class Runner {
             for (var module : botModules) {
                 try {
                     final BotHandler handler = module.botHandler(config);
-                    telegramBotsApi.registerBot(handler.getBotToken(), handler);
+                    final var options = handler.getBotModuleOptions();
+                    telegramBotsApi.registerBot(
+                            options.botToken(),
+                            options.telegramUrlSupplier(),
+                            options.getUpdatesGenerator(),
+                            handler);
                 } catch (TelegramApiException ex) {
                     log.error("register long polling bot", ex);
                 }
