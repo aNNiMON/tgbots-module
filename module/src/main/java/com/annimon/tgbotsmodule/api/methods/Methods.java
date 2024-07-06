@@ -11,6 +11,7 @@ import com.annimon.tgbotsmodule.api.methods.games.GetGameHighScoresMethod;
 import com.annimon.tgbotsmodule.api.methods.games.SetGameScoreMethod;
 import com.annimon.tgbotsmodule.api.methods.info.*;
 import com.annimon.tgbotsmodule.api.methods.invoices.CreateInvoiceLinkMethod;
+import com.annimon.tgbotsmodule.api.methods.invoices.GetStarTransactionsMethod;
 import com.annimon.tgbotsmodule.api.methods.invoices.RefundStarPaymentMethod;
 import com.annimon.tgbotsmodule.api.methods.invoices.SendInvoiceMethod;
 import com.annimon.tgbotsmodule.api.methods.other.CopyMessageMethod;
@@ -580,6 +581,11 @@ public final class Methods {
 
         public static CreateInvoiceLinkMethod createInvoiceLink() {
             return new CreateInvoiceLinkMethod();
+        }
+
+
+        public static GetStarTransactionsMethod getStarTransactions() {
+            return new GetStarTransactionsMethod();
         }
 
 
@@ -1186,6 +1192,19 @@ public final class Methods {
 
     public static SendVoiceMethod sendVoice(long chatId) {
         return sendVoice().setChatId(chatId);
+    }
+
+
+    public static SendPaidMediaMethod sendPaidMedia() {
+        return new SendPaidMediaMethod();
+    }
+
+    public static SendPaidMediaMethod sendPaidMedia(@NotNull String chatId) {
+        return sendPaidMedia().setChatId(chatId);
+    }
+
+    public static SendPaidMediaMethod sendPaidMedia(long chatId) {
+        return sendPaidMedia().setChatId(chatId);
     }
 
 

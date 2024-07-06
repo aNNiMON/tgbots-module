@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.updatingmessages;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.LocationMethod;
@@ -13,6 +14,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 public class EditMessageLiveLocationMethod implements
         InlineOrChatMessageMethod<EditMessageLiveLocationMethod, Serializable>,
         InlineKeyboardMarkupMethod<EditMessageLiveLocationMethod, Serializable>,
+        BusinessConnectionMethod<EditMessageLiveLocationMethod, Serializable>,
         LocationMethod<EditMessageLiveLocationMethod, Serializable> {
 
     private final EditMessageLiveLocation.EditMessageLiveLocationBuilder method;
@@ -131,6 +133,17 @@ public class EditMessageLiveLocationMethod implements
 
     public EditMessageLiveLocationMethod setProximityAlertRadius(Integer proximityAlertRadius) {
         method.proximityAlertRadius(proximityAlertRadius);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public EditMessageLiveLocationMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 

@@ -20,12 +20,12 @@ public class RefundStarPaymentMethod implements UserMethod<RefundStarPaymentMeth
 
     @Override
     public Long getUserId() {
-        return /* TODO fix */Long.valueOf(method.build().getUserId());
+        return method.build().getUserId();
     }
 
     @Override
     public RefundStarPaymentMethod setUserId(Long userId) {
-        method.userId(userId.intValue() /* FIX */);
+        method.userId(userId);
         return this;
     }
 

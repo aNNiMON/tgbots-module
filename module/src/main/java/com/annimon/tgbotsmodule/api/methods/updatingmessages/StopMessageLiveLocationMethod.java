@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.updatingmessages;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
@@ -11,7 +12,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 
 public class StopMessageLiveLocationMethod implements
         InlineOrChatMessageMethod<StopMessageLiveLocationMethod, Serializable>,
-        InlineKeyboardMarkupMethod<StopMessageLiveLocationMethod, Serializable> {
+        InlineKeyboardMarkupMethod<StopMessageLiveLocationMethod, Serializable>,
+        BusinessConnectionMethod<StopMessageLiveLocationMethod, Serializable> {
 
     private final StopMessageLiveLocation.StopMessageLiveLocationBuilder method;
 
@@ -71,6 +73,17 @@ public class StopMessageLiveLocationMethod implements
     @Override
     public StopMessageLiveLocationMethod setReplyMarkup(InlineKeyboardMarkup replyMarkup) {
         method.replyMarkup(replyMarkup);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public StopMessageLiveLocationMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 

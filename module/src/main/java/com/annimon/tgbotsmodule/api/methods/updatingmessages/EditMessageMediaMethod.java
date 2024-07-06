@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.updatingmessages;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
@@ -12,7 +13,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 
 public class EditMessageMediaMethod implements
         InlineOrChatMessageMethod<EditMessageMediaMethod, Serializable>,
-        InlineKeyboardMarkupMethod<EditMessageMediaMethod, Serializable> {
+        InlineKeyboardMarkupMethod<EditMessageMediaMethod, Serializable>,
+        BusinessConnectionMethod<EditMessageMediaMethod, Serializable> {
 
     private final EditMessageMedia.EditMessageMediaBuilder method;
 
@@ -81,6 +83,17 @@ public class EditMessageMediaMethod implements
 
     public EditMessageMediaMethod setMedia(@NotNull InputMedia media) {
         method.media(media);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public EditMessageMediaMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 

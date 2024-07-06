@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.updatingmessages;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionAboveMediaMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
@@ -19,7 +20,8 @@ public class EditMessageCaptionMethod implements
         InlineKeyboardMarkupMethod<EditMessageCaptionMethod, Serializable>,
         ParseModeMethod<EditMessageCaptionMethod, Serializable>,
         CaptionMethod<EditMessageCaptionMethod, Serializable>,
-        CaptionAboveMediaMethod<EditMessageCaptionMethod, Serializable> {
+        CaptionAboveMediaMethod<EditMessageCaptionMethod, Serializable>,
+        BusinessConnectionMethod<EditMessageCaptionMethod, Serializable> {
 
     private final EditMessageCaption.EditMessageCaptionBuilder method;
 
@@ -123,6 +125,17 @@ public class EditMessageCaptionMethod implements
     @Override
     public EditMessageCaptionMethod setShowCaptionAboveMedia(Boolean showCaptionAboveMedia) {
         method.showCaptionAboveMedia(showCaptionAboveMedia);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public EditMessageCaptionMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 

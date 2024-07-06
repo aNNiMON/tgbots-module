@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.updatingmessages;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
@@ -20,7 +21,8 @@ public class EditMessageTextMethod implements
         InlineKeyboardMarkupMethod<EditMessageTextMethod, Serializable>,
         ParseModeMethod<EditMessageTextMethod, Serializable>,
         WebPagePreviewMethod<EditMessageTextMethod, Serializable>,
-        TextMethod<EditMessageTextMethod, Serializable> {
+        TextMethod<EditMessageTextMethod, Serializable>,
+        BusinessConnectionMethod<EditMessageTextMethod, Serializable> {
 
     private final EditMessageText.EditMessageTextBuilder method;
 
@@ -138,6 +140,17 @@ public class EditMessageTextMethod implements
 
     public EditMessageTextMethod setLinkPreviewOptions(LinkPreviewOptions options) {
         method.linkPreviewOptions(options);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public EditMessageTextMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 

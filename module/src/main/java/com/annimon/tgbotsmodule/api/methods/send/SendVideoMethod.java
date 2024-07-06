@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionAboveMediaMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DurationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MediaMessageMethod;
@@ -23,8 +24,8 @@ public class SendVideoMethod implements
         CaptionMethod<SendVideoMethod, Message>,
         DurationMethod<SendVideoMethod, Message>,
         ThumbMethod<SendVideoMethod, Message>,
-        SpoilerMethod<SendVideoMethod, Message>/*, TODO see comment below
-        CaptionAboveMediaMethod<SendVideoMethod, Message>*/ {
+        SpoilerMethod<SendVideoMethod, Message>,
+        CaptionAboveMediaMethod<SendVideoMethod, Message> {
 
     private final SendVideo.SendVideoBuilder method;
 
@@ -256,7 +257,6 @@ public class SendVideoMethod implements
         return this;
     }
 
-    /* TODO uncomment when telegrambots will add this field
     @Override
     public Boolean getShowCaptionAboveMedia() {
         return method.build().getShowCaptionAboveMedia();
@@ -266,7 +266,7 @@ public class SendVideoMethod implements
     public SendVideoMethod setShowCaptionAboveMedia(Boolean showCaptionAboveMedia) {
         method.showCaptionAboveMedia(showCaptionAboveMedia);
         return this;
-    }*/
+    }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {

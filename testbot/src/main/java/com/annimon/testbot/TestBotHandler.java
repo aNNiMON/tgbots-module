@@ -42,7 +42,7 @@ public class TestBotHandler extends BotHandler {
         }));
         commands.register(new SimpleCommand("/effect", For.all(), ctx -> {
             String[] effects = {"5104841245755180586", "5107584321108051014", "5104858069142078462",
-                    "5104858069142078462", "5044134455711629726", "5046509860389126442", "5046589136895476101"};
+                    "5159385139981059251", "5046509860389126442", "5046589136895476101"};
             final String text;
             final String effectId;
             if (ctx.message().isUserMessage()) {

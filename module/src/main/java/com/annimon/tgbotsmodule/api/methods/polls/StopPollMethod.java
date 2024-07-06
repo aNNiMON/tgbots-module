@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.polls;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.concurrent.CompletableFuture;
@@ -8,7 +9,8 @@ import org.telegram.telegrambots.meta.api.methods.polls.StopPoll;
 import org.telegram.telegrambots.meta.api.objects.polls.Poll;
 
 public class StopPollMethod implements
-        ChatMessageMethod<StopPollMethod, Poll> {
+        ChatMessageMethod<StopPollMethod, Poll>,
+        BusinessConnectionMethod<StopPollMethod, Poll> {
 
     private final StopPoll.StopPollBuilder method;
 
@@ -39,6 +41,17 @@ public class StopPollMethod implements
     @Override
     public StopPollMethod setMessageId(Integer messageId) {
         method.messageId(messageId);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public StopPollMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 

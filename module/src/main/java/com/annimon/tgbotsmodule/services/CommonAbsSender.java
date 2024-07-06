@@ -206,6 +206,23 @@ public abstract class CommonAbsSender extends OkHttpTelegramClient {
         return executeAsync(method);
     }
 
+    @Nullable
+    public List<Message> call(@NotNull SendPaidMedia method) {
+        try {
+            preprocessMethod(method);
+            return execute(method);
+        } catch (TelegramApiException e) {
+            handleTelegramApiException(e);
+            return Collections.emptyList();
+        }
+    }
+
+    public CompletableFuture<List<Message>> callAsync(
+            @NotNull SendPaidMedia method) {
+        preprocessMethod(method);
+        return executeAsync(method);
+    }
+
     public Boolean call(@NotNull AddStickerToSet method) {
         try {
             preprocessMethod(method);

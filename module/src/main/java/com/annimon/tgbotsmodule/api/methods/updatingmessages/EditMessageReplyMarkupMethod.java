@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.updatingmessages;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineOrChatMessageMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
@@ -11,7 +12,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 
 public class EditMessageReplyMarkupMethod implements
         InlineOrChatMessageMethod<EditMessageReplyMarkupMethod, Serializable>,
-        InlineKeyboardMarkupMethod<EditMessageReplyMarkupMethod, Serializable> {
+        InlineKeyboardMarkupMethod<EditMessageReplyMarkupMethod, Serializable>,
+        BusinessConnectionMethod<EditMessageReplyMarkupMethod, Serializable> {
 
     private final EditMessageReplyMarkup.EditMessageReplyMarkupBuilder method;
 
@@ -71,6 +73,17 @@ public class EditMessageReplyMarkupMethod implements
     @Override
     public EditMessageReplyMarkupMethod setReplyMarkup(InlineKeyboardMarkup replyMarkup) {
         method.replyMarkup(replyMarkup);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public EditMessageReplyMarkupMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 
