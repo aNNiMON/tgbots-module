@@ -31,7 +31,6 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
     public class TestBot implements BotModule {   
        @Override
        public BotHandler botHandler(Config config) {
-           super(config.getToken());
            return new TestBotHandler();
        }
     }
@@ -83,7 +82,8 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
            final var configLoader = new YamlConfigLoaderService();
            final var configFile = configLoader.configFile("testbot", config.getProfile());
            final var botConfig = configLoader.loadFile(configFile, BotConfig.class);
-           return new TestBotHandler(botConfig);
+           final var botModuleOptions = BotModuleOptions.createDefault(botConfig.getToken());
+           return new TestBotHandler(botModuleOptions, botConfig);
        }
     }
     ```
@@ -110,20 +110,15 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
     
         private final BotConfig botConfig;
     
-        public TestBotHandler(BotConfig botConfig) {
-            super(botConfig.getToken());
+        public TestBotHandler(BotModuleOptions botModuleOptions, BotConfig botConfig) {
+            super(botModuleOptions);
             this.botConfig = botConfig;
         }
     
         @Override
-        public BotApiMethod onUpdate(Update update) {
+        public BotApiMethod<?> onUpdate(@NotNull Update update) {
             // your code here
             return null;
-        }
-    
-        @Override
-        public String getBotUsername() {
-            return botConfig.getUsername();
         }
     }
     ```
