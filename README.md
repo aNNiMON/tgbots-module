@@ -22,13 +22,13 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
  - Add gradle dependency:
  
     ```groovy
-    implementation 'com.annimon:tgbots-module:7.7.0'
+    implementation 'com.annimon:tgbots-module:7.9.0'
     ```
 
 - Or if you don't want to use webhooks:
 
     ```groovy
-    implementation ('com.annimon:tgbots-module:7.7.0') {
+    implementation ('com.annimon:tgbots-module:7.9.0') {
         exclude group: 'org.telegram', module: 'telegrambots-webhook'
     }
     ```
