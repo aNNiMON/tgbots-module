@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionAboveMediaMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
@@ -28,7 +29,8 @@ public class SendPaidMediaMethod implements
         ReplyParametersMessageMethod<SendPaidMediaMethod, ArrayList<Message>>,
         ReplyMarkupSupportedMessageMethod<SendPaidMediaMethod, ArrayList<Message>>,
         CaptionMethod<SendPaidMediaMethod, ArrayList<Message>>,
-        CaptionAboveMediaMethod<SendPaidMediaMethod, ArrayList<Message>> {
+        CaptionAboveMediaMethod<SendPaidMediaMethod, ArrayList<Message>>,
+        BusinessConnectionMethod<SendPaidMediaMethod, ArrayList<Message>> {
 
     private final SendPaidMedia.SendPaidMediaBuilder method;
 
@@ -184,6 +186,17 @@ public class SendPaidMediaMethod implements
     }
 
     @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public SendPaidMediaMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
+        return this;
+    }
+
+    @Override
     public ArrayList<Message> call(@NotNull CommonAbsSender sender) {
         return listToArrayList(sender.call(method.build()));
     }
@@ -205,11 +218,11 @@ public class SendPaidMediaMethod implements
 
     @Override
     public Boolean getAllowSendingWithoutReply() {
-        return null;
+        return false;
     }
 
     @Override
     public SendPaidMediaMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
-        return null;
+        return this;
     }
 }

@@ -84,6 +84,19 @@ public final class Methods {
         }
 
 
+        public static CreateChatSubscriptionInviteLinkMethod createChatSubscriptionInviteLink() {
+            return new CreateChatSubscriptionInviteLinkMethod();
+        }
+
+        public static CreateChatSubscriptionInviteLinkMethod createChatSubscriptionInviteLink(@NotNull String chatId) {
+            return createChatSubscriptionInviteLink().setChatId(chatId);
+        }
+
+        public static CreateChatSubscriptionInviteLinkMethod createChatSubscriptionInviteLink(long chatId) {
+            return createChatSubscriptionInviteLink().setChatId(chatId);
+        }
+
+
         public static DeclineChatJoinRequestMethod declineChatJoinRequest() {
             return new DeclineChatJoinRequestMethod();
         }
@@ -133,6 +146,19 @@ public final class Methods {
 
         public static EditChatInviteLinkMethod editChatInviteLink(long chatId, String inviteLink) {
             return editChatInviteLink().setChatId(chatId).setInviteLink(inviteLink);
+        }
+
+
+        public static EditChatSubscriptionInviteLinkMethod editChatSubscriptionInviteLink() {
+            return new EditChatSubscriptionInviteLinkMethod();
+        }
+
+        public static EditChatSubscriptionInviteLinkMethod editChatSubscriptionInviteLink(@NotNull String chatId, String inviteLink) {
+            return editChatSubscriptionInviteLink().setChatId(chatId).setInviteLink(inviteLink);
+        }
+
+        public static EditChatSubscriptionInviteLinkMethod editChatSubscriptionInviteLink(long chatId, String inviteLink) {
+            return editChatSubscriptionInviteLink().setChatId(chatId).setInviteLink(inviteLink);
         }
 
 

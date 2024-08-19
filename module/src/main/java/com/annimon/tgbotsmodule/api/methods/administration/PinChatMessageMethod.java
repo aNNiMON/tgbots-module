@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.administration;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.NotificationMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
@@ -9,7 +10,8 @@ import org.telegram.telegrambots.meta.api.methods.pinnedmessages.PinChatMessage;
 
 public class PinChatMessageMethod implements
         ChatMessageMethod<PinChatMessageMethod, Boolean>,
-        NotificationMethod<PinChatMessageMethod, Boolean> {
+        NotificationMethod<PinChatMessageMethod, Boolean>,
+        BusinessConnectionMethod<PinChatMessageMethod, Boolean> {
 
     private final PinChatMessage.PinChatMessageBuilder method;
 
@@ -63,6 +65,17 @@ public class PinChatMessageMethod implements
     @Override
     public PinChatMessageMethod setNotificationEnabled(boolean status) {
         method.disableNotification(!status);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public PinChatMessageMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
         return this;
     }
 
