@@ -196,6 +196,15 @@ public class SendPaidMediaMethod implements
         return this;
     }
 
+    public String getPayload() {
+        return method.build().getPayload();
+    }
+
+    public SendPaidMediaMethod setPayload(String payload) {
+        method.payload(payload);
+        return this;
+    }
+
     @Override
     public ArrayList<Message> call(@NotNull CommonAbsSender sender) {
         return listToArrayList(sender.call(method.build()));
