@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
@@ -17,6 +18,7 @@ import org.telegram.telegrambots.meta.api.objects.message.Message;
 public class SendMediaGroupMethod implements
         SendableMessageMethod<SendMediaGroupMethod, ArrayList<Message>>,
         ProtectedContentMethod<SendMediaGroupMethod, ArrayList<Message>>,
+        AllowPaidBroadcastMethod<SendMediaGroupMethod, ArrayList<Message>>,
         MessageEffectMethod<SendMediaGroupMethod, ArrayList<Message>>,
         BusinessConnectionMethod<SendMediaGroupMethod, ArrayList<Message>> {
 
@@ -141,6 +143,17 @@ public class SendMediaGroupMethod implements
     @Override
     public SendMediaGroupMethod setBusinessConnectionId(String id) {
         method.businessConnectionId(id);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowPaidBroadcast() {
+        return method.build().getAllowPaidBroadcast();
+    }
+
+    @Override
+    public SendMediaGroupMethod setAllowPaidBroadcast(Boolean flag) {
+        method.allowPaidBroadcast(flag);
         return this;
     }
 

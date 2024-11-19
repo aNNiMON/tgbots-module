@@ -260,6 +260,17 @@ public class SendAnimationMethod implements
     }
 
     @Override
+    public Boolean getAllowPaidBroadcast() {
+        return method.build().getAllowPaidBroadcast();
+    }
+
+    @Override
+    public SendAnimationMethod setAllowPaidBroadcast(Boolean flag) {
+        method.allowPaidBroadcast(flag);
+        return this;
+    }
+
+    @Override
     public Message call(@NotNull CommonAbsSender sender) {
         return sender.call(method.build());
     }

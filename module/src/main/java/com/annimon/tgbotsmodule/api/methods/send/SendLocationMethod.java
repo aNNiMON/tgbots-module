@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.LocationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
@@ -17,6 +18,7 @@ public class SendLocationMethod implements
         ReplyMarkupSupportedMessageMethod<SendLocationMethod, Message>,
         LocationMethod<SendLocationMethod, Message>,
         ProtectedContentMethod<SendLocationMethod, Message>,
+        AllowPaidBroadcastMethod<SendLocationMethod, Message>,
         MessageEffectMethod<SendLocationMethod, Message>,
         BusinessConnectionMethod<SendLocationMethod, Message> {
 
@@ -201,6 +203,17 @@ public class SendLocationMethod implements
     @Override
     public SendLocationMethod setBusinessConnectionId(String id) {
         method.businessConnectionId(id);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowPaidBroadcast() {
+        return method.build().getAllowPaidBroadcast();
+    }
+
+    @Override
+    public SendLocationMethod setAllowPaidBroadcast(Boolean flag) {
+        method.allowPaidBroadcast(flag);
         return this;
     }
 

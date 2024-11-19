@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.polls;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
@@ -22,6 +23,7 @@ public class SendPollMethod implements
         ReplyMarkupSupportedMessageMethod<SendPollMethod, Message>,
         ParseModeMethod<SendPollMethod, Message>,
         ProtectedContentMethod<SendPollMethod, Message>,
+        AllowPaidBroadcastMethod<SendPollMethod, Message>,
         MessageEffectMethod<SendPollMethod, Message>,
         BusinessConnectionMethod<SendPollMethod, Message> {
 
@@ -298,6 +300,17 @@ public class SendPollMethod implements
 
     public SendPollMethod setQuestionEntities(List<MessageEntity> questionEntities) {
         method.questionEntities(questionEntities);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowPaidBroadcast() {
+        return method.build().getAllowPaidBroadcast();
+    }
+
+    @Override
+    public SendPollMethod setAllowPaidBroadcast(Boolean flag) {
+        method.allowPaidBroadcast(flag);
         return this;
     }
 

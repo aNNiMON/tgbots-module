@@ -1,14 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionAboveMediaMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.NotificationMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyParametersMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.*;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +16,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 public class SendPaidMediaMethod implements
         ChatMethod<SendPaidMediaMethod, ArrayList<Message>>,
         ProtectedContentMethod<SendPaidMediaMethod, ArrayList<Message>>,
+        AllowPaidBroadcastMethod<SendPaidMediaMethod, ArrayList<Message>>,
         NotificationMethod<SendPaidMediaMethod, ArrayList<Message>>,
         ParseModeMethod<SendPaidMediaMethod, ArrayList<Message>>,
         ReplyParametersMessageMethod<SendPaidMediaMethod, ArrayList<Message>>,
@@ -202,6 +195,17 @@ public class SendPaidMediaMethod implements
 
     public SendPaidMediaMethod setPayload(String payload) {
         method.payload(payload);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowPaidBroadcast() {
+        return method.build().getAllowPaidBroadcast();
+    }
+
+    @Override
+    public SendPaidMediaMethod setAllowPaidBroadcast(Boolean flag) {
+        method.allowPaidBroadcast(flag);
         return this;
     }
 

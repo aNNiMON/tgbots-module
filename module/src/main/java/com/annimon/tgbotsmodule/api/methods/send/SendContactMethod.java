@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
@@ -15,6 +16,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 public class SendContactMethod implements
         ReplyMarkupSupportedMessageMethod<SendContactMethod, Message>,
         ProtectedContentMethod<SendContactMethod, Message>,
+        AllowPaidBroadcastMethod<SendContactMethod, Message>,
         MessageEffectMethod<SendContactMethod, Message>,
         BusinessConnectionMethod<SendContactMethod, Message> {
 
@@ -177,6 +179,17 @@ public class SendContactMethod implements
     @Override
     public SendContactMethod setBusinessConnectionId(String id) {
         method.businessConnectionId(id);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowPaidBroadcast() {
+        return method.build().getAllowPaidBroadcast();
+    }
+
+    @Override
+    public SendContactMethod setAllowPaidBroadcast(Boolean flag) {
+        method.allowPaidBroadcast(flag);
         return this;
     }
 

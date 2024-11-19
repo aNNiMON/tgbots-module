@@ -162,6 +162,17 @@ public class SendStickerMethod implements
     }
 
     @Override
+    public Boolean getAllowPaidBroadcast() {
+        return method.build().getAllowPaidBroadcast();
+    }
+
+    @Override
+    public SendStickerMethod setAllowPaidBroadcast(Boolean flag) {
+        method.allowPaidBroadcast(flag);
+        return this;
+    }
+
+    @Override
     public Message call(@NotNull CommonAbsSender sender) {
         return sender.call(method.build());
     }

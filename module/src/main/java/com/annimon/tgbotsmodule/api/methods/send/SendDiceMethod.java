@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
@@ -15,6 +16,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 public class SendDiceMethod implements
         ReplyMarkupSupportedMessageMethod<SendDiceMethod, Message>,
         ProtectedContentMethod<SendDiceMethod, Message>,
+        AllowPaidBroadcastMethod<SendDiceMethod, Message>,
         MessageEffectMethod<SendDiceMethod, Message>,
         BusinessConnectionMethod<SendDiceMethod, Message> {
 
@@ -150,6 +152,17 @@ public class SendDiceMethod implements
     @Override
     public SendDiceMethod setBusinessConnectionId(String id) {
         method.businessConnectionId(id);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowPaidBroadcast() {
+        return method.build().getAllowPaidBroadcast();
+    }
+
+    @Override
+    public SendDiceMethod setAllowPaidBroadcast(Boolean flag) {
+        method.allowPaidBroadcast(flag);
         return this;
     }
 

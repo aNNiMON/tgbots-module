@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.other;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionAboveMediaMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
@@ -16,6 +17,7 @@ public class CopyMessageMethod implements
         ChatMessageMethod<CopyMessageMethod, MessageId>,
         ReplyMarkupSupportedMessageMethod<CopyMessageMethod, MessageId>,
         ProtectedContentMethod<CopyMessageMethod, MessageId>,
+        AllowPaidBroadcastMethod<CopyMessageMethod, MessageId>,
         CaptionAboveMediaMethod<CopyMessageMethod, MessageId> {
 
     private final CopyMessage.CopyMessageBuilder method;
@@ -155,6 +157,17 @@ public class CopyMessageMethod implements
     @Override
     public CopyMessageMethod setShowCaptionAboveMedia(Boolean showCaptionAboveMedia) {
         method.showCaptionAboveMedia(showCaptionAboveMedia);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowPaidBroadcast() {
+        return method.build().getAllowPaidBroadcast();
+    }
+
+    @Override
+    public CopyMessageMethod setAllowPaidBroadcast(Boolean flag) {
+        method.allowPaidBroadcast(flag);
         return this;
     }
 

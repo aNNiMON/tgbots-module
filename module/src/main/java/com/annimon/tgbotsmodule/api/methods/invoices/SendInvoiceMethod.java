@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.invoices;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
@@ -18,6 +19,7 @@ public class SendInvoiceMethod implements
         SendableMessageMethod<SendInvoiceMethod, Message>,
         InlineKeyboardMarkupMethod<SendInvoiceMethod, Message>,
         ProtectedContentMethod<SendInvoiceMethod, Message>,
+        AllowPaidBroadcastMethod<SendInvoiceMethod, Message>,
         MessageEffectMethod<SendInvoiceMethod, Message> {
 
     private final SendInvoice.SendInvoiceBuilder method;
@@ -282,6 +284,17 @@ public class SendInvoiceMethod implements
 
     public SendInvoiceMethod setSuggestedTipAmounts(List<Integer> suggestedTipAmounts) {
         method.suggestedTipAmounts(suggestedTipAmounts);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowPaidBroadcast() {
+        return method.build().getAllowPaidBroadcast();
+    }
+
+    @Override
+    public SendInvoiceMethod setAllowPaidBroadcast(Boolean flag) {
+        method.allowPaidBroadcast(flag);
         return this;
     }
 

@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
@@ -23,6 +24,7 @@ public class SendMessageMethod implements
         ParseModeMethod<SendMessageMethod, Message>,
         WebPagePreviewMethod<SendMessageMethod, Message>,
         ProtectedContentMethod<SendMessageMethod, Message>,
+        AllowPaidBroadcastMethod<SendMessageMethod, Message>,
         TextMethod<SendMessageMethod, Message>,
         MessageEffectMethod<SendMessageMethod, Message>,
         BusinessConnectionMethod<SendMessageMethod, Message> {
@@ -207,6 +209,17 @@ public class SendMessageMethod implements
     @Override
     public SendMessageMethod setBusinessConnectionId(String id) {
         method.businessConnectionId(id);
+        return this;
+    }
+
+    @Override
+    public Boolean getAllowPaidBroadcast() {
+        return method.build().getAllowPaidBroadcast();
+    }
+
+    @Override
+    public SendMessageMethod setAllowPaidBroadcast(Boolean flag) {
+        method.allowPaidBroadcast(flag);
         return this;
     }
 
