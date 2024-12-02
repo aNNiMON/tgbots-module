@@ -9,8 +9,11 @@ import com.annimon.tgbotsmodule.api.methods.answerqueries.AnswerWebAppQueryMetho
 import com.annimon.tgbotsmodule.api.methods.forum.*;
 import com.annimon.tgbotsmodule.api.methods.games.GetGameHighScoresMethod;
 import com.annimon.tgbotsmodule.api.methods.games.SetGameScoreMethod;
+import com.annimon.tgbotsmodule.api.methods.gifts.GetAvailableGiftsMethod;
+import com.annimon.tgbotsmodule.api.methods.gifts.SendGiftMethod;
 import com.annimon.tgbotsmodule.api.methods.info.*;
 import com.annimon.tgbotsmodule.api.methods.invoices.CreateInvoiceLinkMethod;
+import com.annimon.tgbotsmodule.api.methods.invoices.EditUserStarSubscriptionMethod;
 import com.annimon.tgbotsmodule.api.methods.invoices.GetStarTransactionsMethod;
 import com.annimon.tgbotsmodule.api.methods.invoices.RefundStarPaymentMethod;
 import com.annimon.tgbotsmodule.api.methods.invoices.SendInvoiceMethod;
@@ -624,6 +627,15 @@ public final class Methods {
         }
 
 
+        public static EditUserStarSubscriptionMethod editUserStarSubscription() {
+            return new EditUserStarSubscriptionMethod();
+        }
+
+        public static EditUserStarSubscriptionMethod editUserStarSubscription(long userId) {
+            return editUserStarSubscription().setUserId(userId);
+        }
+
+
         public static AnswerShippingQueryMethod answerShippingQuery() {
             return new AnswerShippingQueryMethod();
         }
@@ -818,6 +830,22 @@ public final class Methods {
 
         public static GetWebhookInfoMethod getWebhookInfo() {
             return new GetWebhookInfoMethod();
+        }
+    }
+
+    public static class Gifts {
+        private Gifts() {}
+
+        public static GetAvailableGiftsMethod getAvailableGifts() {
+            return new GetAvailableGiftsMethod();
+        }
+
+        public static SendGiftMethod sendGift() {
+            return new SendGiftMethod();
+        }
+
+        public static SendGiftMethod sendGift(long userId) {
+            return sendGift().setUserId(userId);
         }
     }
 
@@ -1039,6 +1067,14 @@ public final class Methods {
 
     public static DeleteMyCommandsMethod deleteMyCommands(BotCommandScope scope){
         return deleteMyCommands().setScope(scope);
+    }
+
+    public static SetUserEmojiStatusMethod setUserEmojiStatus() {
+        return new SetUserEmojiStatusMethod();
+    }
+
+    public static SetUserEmojiStatusMethod setUserEmojiStatus(long userId) {
+        return setUserEmojiStatus().setUserId(userId);
     }
 
 

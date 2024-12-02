@@ -12,13 +12,13 @@ import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQuery
 
 public class AnswerInlineQueryMethod implements Method<Boolean> {
 
-    private final AnswerInlineQuery.AnswerInlineQueryBuilder method;
+    private final AnswerInlineQuery.AnswerInlineQueryBuilder<?, ?> method;
 
     public AnswerInlineQueryMethod() {
         this(AnswerInlineQuery.builder());
     }
 
-    public AnswerInlineQueryMethod(@NotNull AnswerInlineQuery.AnswerInlineQueryBuilder method) {
+    public AnswerInlineQueryMethod(@NotNull AnswerInlineQuery.AnswerInlineQueryBuilder<?, ?> method) {
         this.method = method;
     }
 

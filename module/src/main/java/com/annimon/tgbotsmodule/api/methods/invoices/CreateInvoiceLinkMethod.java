@@ -1,6 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.invoices;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.Method;
+import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -8,15 +8,15 @@ import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.invoices.CreateInvoiceLink;
 import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
 
-public class CreateInvoiceLinkMethod implements Method<String> {
+public class CreateInvoiceLinkMethod implements BusinessConnectionMethod<CreateInvoiceLinkMethod, String> {
 
-    private final CreateInvoiceLink.CreateInvoiceLinkBuilder method;
+    private final CreateInvoiceLink.CreateInvoiceLinkBuilder<?, ?> method;
 
     public CreateInvoiceLinkMethod() {
         this(CreateInvoiceLink.builder());
     }
 
-    public CreateInvoiceLinkMethod(@NotNull CreateInvoiceLink.CreateInvoiceLinkBuilder method) {
+    public CreateInvoiceLinkMethod(@NotNull CreateInvoiceLink.CreateInvoiceLinkBuilder<?, ?> method) {
         this.method = method;
     }
 
@@ -197,6 +197,26 @@ public class CreateInvoiceLinkMethod implements Method<String> {
 
     public CreateInvoiceLinkMethod setSuggestedTipAmounts(List<Integer> suggestedTipAmounts) {
         method.suggestedTipAmounts(suggestedTipAmounts);
+        return this;
+    }
+
+    @Override
+    public String getBusinessConnectionId() {
+        return method.build().getBusinessConnectionId();
+    }
+
+    @Override
+    public CreateInvoiceLinkMethod setBusinessConnectionId(String id) {
+        method.businessConnectionId(id);
+        return this;
+    }
+
+    public Integer getSubscriptionPeriod() {
+        return method.build().getSubscriptionPeriod();
+    }
+
+    public CreateInvoiceLinkMethod setSubscriptionPeriod(Integer period) {
+        method.subscriptionPeriod(period);
         return this;
     }
 
