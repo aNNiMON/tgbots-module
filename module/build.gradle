@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.annimon'
-version '7.11.0-SNAPSHOT'
+version '8.0.0-SNAPSHOT'
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 java {
@@ -18,10 +18,9 @@ repositories {
     mavenCentral()
 }
 
-ext.telegramBotsVersion = '7.11.0'
-ext.jacksonVersion = '2.17.2'
-ext.junit5Version = '5.11.0'
-ext.jaxbVersion = '2.3.1'
+ext.telegramBotsVersion = '8.0.0'
+ext.jacksonVersion = '2.18.2'
+ext.junit5Version = '5.11.3'
 
 dependencies {
     api "org.telegram:telegrambots-longpolling:$telegramBotsVersion"
@@ -29,13 +28,13 @@ dependencies {
     api "org.telegram:telegrambots-client:$telegramBotsVersion"
     api "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
     api "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    api 'org.jetbrains:annotations:24.1.0'
+    api 'org.jetbrains:annotations:26.0.1'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junit5Version"
     testImplementation "org.junit.jupiter:junit-jupiter-params:$junit5Version"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$junit5Version"
     testImplementation "org.junit.vintage:junit-vintage-engine:$junit5Version"
-    testImplementation 'org.assertj:assertj-core:3.26.0'
+    testImplementation 'org.assertj:assertj-core:3.26.3'
 }
 
 test {
