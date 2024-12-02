@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.PromoteCha
 
 public class PromoteChatMemberMethod implements ChatMemberMethod<PromoteChatMemberMethod, Boolean> {
 
-    private final PromoteChatMember.PromoteChatMemberBuilder method;
+    private final PromoteChatMember.PromoteChatMemberBuilder<?, ?> method;
     
     public PromoteChatMemberMethod() {
         this(PromoteChatMember.builder());
     }
 
-    public PromoteChatMemberMethod(@NotNull PromoteChatMember.PromoteChatMemberBuilder method) {
+    public PromoteChatMemberMethod(@NotNull PromoteChatMember.PromoteChatMemberBuilder<?, ?> method) {
         this.method = method;
     }
 

@@ -12,13 +12,13 @@ public class GetUserProfilePhotosMethod implements
         UserMethod<GetUserProfilePhotosMethod, UserProfilePhotos>,
         PaginableMethod<GetUserProfilePhotosMethod, UserProfilePhotos> {
 
-    private final GetUserProfilePhotos.GetUserProfilePhotosBuilder method;
+    private final GetUserProfilePhotos.GetUserProfilePhotosBuilder<?, ?> method;
 
     public GetUserProfilePhotosMethod() {
         this(GetUserProfilePhotos.builder());
     }
 
-    public GetUserProfilePhotosMethod(@NotNull GetUserProfilePhotos.GetUserProfilePhotosBuilder method) {
+    public GetUserProfilePhotosMethod(@NotNull GetUserProfilePhotos.GetUserProfilePhotosBuilder<?, ?> method) {
         this.method = method;
     }
 

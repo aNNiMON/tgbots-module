@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerSetTitle;
 
 public class SetStickerSetTitleMethod implements Method<Boolean> {
 
-    private final SetStickerSetTitle.SetStickerSetTitleBuilder method;
+    private final SetStickerSetTitle.SetStickerSetTitleBuilder<?, ?> method;
 
     public SetStickerSetTitleMethod() {
         this(SetStickerSetTitle.builder());
     }
 
-    public SetStickerSetTitleMethod(@NotNull SetStickerSetTitle.SetStickerSetTitleBuilder method) {
+    public SetStickerSetTitleMethod(@NotNull SetStickerSetTitle.SetStickerSetTitleBuilder<?, ?> method) {
         this.method = method;
     }
 

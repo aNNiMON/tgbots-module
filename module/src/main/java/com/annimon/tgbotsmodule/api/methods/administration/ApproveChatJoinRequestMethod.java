@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.ApproveCha
 
 public class ApproveChatJoinRequestMethod implements ChatMemberMethod<ApproveChatJoinRequestMethod, Boolean> {
 
-    private final ApproveChatJoinRequest.ApproveChatJoinRequestBuilder method;
+    private final ApproveChatJoinRequest.ApproveChatJoinRequestBuilder<?, ?> method;
 
     public ApproveChatJoinRequestMethod() {
         this(ApproveChatJoinRequest.builder());
     }
 
-    public ApproveChatJoinRequestMethod(@NotNull ApproveChatJoinRequest.ApproveChatJoinRequestBuilder method) {
+    public ApproveChatJoinRequestMethod(@NotNull ApproveChatJoinRequest.ApproveChatJoinRequestBuilder<?, ?> method) {
         this.method = method;
     }
 

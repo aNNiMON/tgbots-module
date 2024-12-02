@@ -20,13 +20,13 @@ public class SendContactMethod implements
         MessageEffectMethod<SendContactMethod, Message>,
         BusinessConnectionMethod<SendContactMethod, Message> {
 
-    private final SendContact.SendContactBuilder method;
+    private final SendContact.SendContactBuilder<?, ?> method;
 
     public SendContactMethod() {
         this(SendContact.builder());
     }
 
-    public SendContactMethod(@NotNull SendContact.SendContactBuilder method) {
+    public SendContactMethod(@NotNull SendContact.SendContactBuilder<?, ?> method) {
         this.method = method;
     }
 

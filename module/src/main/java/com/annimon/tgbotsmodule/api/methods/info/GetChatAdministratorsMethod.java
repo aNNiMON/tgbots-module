@@ -11,7 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.chatmember.ChatMember;
 public class GetChatAdministratorsMethod implements
         ChatMethod<GetChatAdministratorsMethod, ArrayList<ChatMember>> {
 
-    private final GetChatAdministrators.GetChatAdministratorsBuilder method;
+    private final GetChatAdministrators.GetChatAdministratorsBuilder<?, ?> method;
 
     public GetChatAdministratorsMethod() {
         this(GetChatAdministrators.builder());

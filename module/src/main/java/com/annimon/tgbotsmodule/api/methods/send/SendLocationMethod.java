@@ -22,13 +22,13 @@ public class SendLocationMethod implements
         MessageEffectMethod<SendLocationMethod, Message>,
         BusinessConnectionMethod<SendLocationMethod, Message> {
 
-    private final SendLocation.SendLocationBuilder method;
+    private final SendLocation.SendLocationBuilder<?, ?> method;
 
     public SendLocationMethod() {
         this(SendLocation.builder());
     }
 
-    public SendLocationMethod(@NotNull SendLocation.SendLocationBuilder method) {
+    public SendLocationMethod(@NotNull SendLocation.SendLocationBuilder<?, ?> method) {
         this.method = method;
     }
 

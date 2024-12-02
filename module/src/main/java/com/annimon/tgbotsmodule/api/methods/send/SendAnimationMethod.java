@@ -27,13 +27,13 @@ public class SendAnimationMethod implements
         SpoilerMethod<SendAnimationMethod, Message>,
         CaptionAboveMediaMethod<SendAnimationMethod, Message> {
 
-    private final SendAnimation.SendAnimationBuilder method;
+    private final SendAnimation.SendAnimationBuilder<?, ?> method;
 
     public SendAnimationMethod() {
         this(SendAnimation.builder());
     }
 
-    public SendAnimationMethod(@NotNull SendAnimation.SendAnimationBuilder method) {
+    public SendAnimationMethod(@NotNull SendAnimation.SendAnimationBuilder<?, ?> method) {
         this.method = method;
     }
 

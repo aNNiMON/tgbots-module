@@ -12,7 +12,7 @@ public class SetChatPhotoMethod implements
         ChatMethod<SetChatPhotoMethod, Boolean>,
         InputFileMethod<SetChatPhotoMethod, Boolean> {
 
-    private final SetChatPhoto.SetChatPhotoBuilder method;
+    private final SetChatPhoto.SetChatPhotoBuilder<?, ?> method;
 
     public SetChatPhotoMethod() {
         this(SetChatPhoto.builder());

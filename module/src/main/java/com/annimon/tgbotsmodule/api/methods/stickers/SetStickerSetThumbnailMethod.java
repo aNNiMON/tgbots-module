@@ -14,13 +14,13 @@ public class SetStickerSetThumbnailMethod implements
         InputFileMethod<SetStickerSetThumbnailMethod, Boolean>,
         StickerFormatMethod<SetStickerSetThumbnailMethod, Boolean> {
 
-    private final SetStickerSetThumbnail.SetStickerSetThumbnailBuilder method;
+    private final SetStickerSetThumbnail.SetStickerSetThumbnailBuilder<?, ?> method;
 
     public SetStickerSetThumbnailMethod() {
         this(SetStickerSetThumbnail.builder());
     }
 
-    public SetStickerSetThumbnailMethod(@NotNull SetStickerSetThumbnail.SetStickerSetThumbnailBuilder method) {
+    public SetStickerSetThumbnailMethod(@NotNull SetStickerSetThumbnail.SetStickerSetThumbnailBuilder<?, ?> method) {
         this.method = method;
     }
 

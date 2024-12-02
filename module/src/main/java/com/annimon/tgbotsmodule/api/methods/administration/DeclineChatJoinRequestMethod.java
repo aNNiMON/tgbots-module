@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.DeclineCha
 
 public class DeclineChatJoinRequestMethod implements ChatMemberMethod<DeclineChatJoinRequestMethod, Boolean> {
 
-    private final DeclineChatJoinRequest.DeclineChatJoinRequestBuilder method;
+    private final DeclineChatJoinRequest.DeclineChatJoinRequestBuilder<?, ?> method;
 
     public DeclineChatJoinRequestMethod() {
         this(DeclineChatJoinRequest.builder());
     }
 
-    public DeclineChatJoinRequestMethod(@NotNull DeclineChatJoinRequest.DeclineChatJoinRequestBuilder method) {
+    public DeclineChatJoinRequestMethod(@NotNull DeclineChatJoinRequest.DeclineChatJoinRequestBuilder<?, ?> method) {
         this.method = method;
     }
 

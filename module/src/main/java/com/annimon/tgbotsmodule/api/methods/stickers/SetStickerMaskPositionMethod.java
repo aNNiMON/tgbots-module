@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.objects.stickers.MaskPosition;
 
 public class SetStickerMaskPositionMethod implements Method<Boolean> {
 
-    private final SetStickerMaskPosition.SetStickerMaskPositionBuilder method;
+    private final SetStickerMaskPosition.SetStickerMaskPositionBuilder<?, ?> method;
 
     public SetStickerMaskPositionMethod() {
         this(SetStickerMaskPosition.builder());
     }
 
-    public SetStickerMaskPositionMethod(@NotNull SetStickerMaskPosition.SetStickerMaskPositionBuilder method) {
+    public SetStickerMaskPositionMethod(@NotNull SetStickerMaskPosition.SetStickerMaskPositionBuilder<?, ?> method) {
         this.method = method;
     }
 

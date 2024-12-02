@@ -22,13 +22,13 @@ public class SendInvoiceMethod implements
         AllowPaidBroadcastMethod<SendInvoiceMethod, Message>,
         MessageEffectMethod<SendInvoiceMethod, Message> {
 
-    private final SendInvoice.SendInvoiceBuilder method;
+    private final SendInvoice.SendInvoiceBuilder<?, ?> method;
 
     public SendInvoiceMethod() {
         this(SendInvoice.builder());
     }
 
-    public SendInvoiceMethod(@NotNull SendInvoice.SendInvoiceBuilder method) {
+    public SendInvoiceMethod(@NotNull SendInvoice.SendInvoiceBuilder<?, ?> method) {
         this.method = method;
     }
 

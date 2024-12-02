@@ -17,13 +17,13 @@ public class SendVideoNoteMethod implements
         DurationMethod<SendVideoNoteMethod, Message>,
         ThumbMethod<SendVideoNoteMethod, Message> {
 
-    private final SendVideoNote.SendVideoNoteBuilder method;
+    private final SendVideoNote.SendVideoNoteBuilder<?, ?> method;
 
     public SendVideoNoteMethod() {
         this(SendVideoNote.builder());
     }
 
-    public SendVideoNoteMethod(@NotNull SendVideoNote.SendVideoNoteBuilder method) {
+    public SendVideoNoteMethod(@NotNull SendVideoNote.SendVideoNoteBuilder<?, ?> method) {
         this.method = method;
     }
 

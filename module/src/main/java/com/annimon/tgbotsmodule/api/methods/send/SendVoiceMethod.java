@@ -22,7 +22,7 @@ public class SendVoiceMethod implements
         CaptionMethod<SendVoiceMethod, Message>,
         DurationMethod<SendVoiceMethod, Message> {
 
-    private final SendVoice.SendVoiceBuilder method;
+    private final SendVoice.SendVoiceBuilder<?, ?> method;
 
     public SendVoiceMethod() {
         this(SendVoice.builder());

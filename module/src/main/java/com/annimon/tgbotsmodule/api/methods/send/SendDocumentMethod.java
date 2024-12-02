@@ -21,13 +21,13 @@ public class SendDocumentMethod implements
         CaptionMethod<SendDocumentMethod, Message>,
         ThumbMethod<SendDocumentMethod, Message> {
 
-    private final SendDocument.SendDocumentBuilder method;
+    private final SendDocument.SendDocumentBuilder<?, ?> method;
 
     public SendDocumentMethod() {
         this(SendDocument.builder());
     }
 
-    public SendDocumentMethod(@NotNull SendDocument.SendDocumentBuilder method) {
+    public SendDocumentMethod(@NotNull SendDocument.SendDocumentBuilder<?, ?> method) {
         this.method = method;
     }
 

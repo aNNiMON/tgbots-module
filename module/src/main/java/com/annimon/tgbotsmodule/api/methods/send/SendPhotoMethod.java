@@ -23,13 +23,13 @@ public class SendPhotoMethod implements
         SpoilerMethod<SendPhotoMethod, Message>,
         CaptionAboveMediaMethod<SendPhotoMethod, Message> {
 
-    private final SendPhoto.SendPhotoBuilder method;
+    private final SendPhoto.SendPhotoBuilder<?, ?> method;
 
     public SendPhotoMethod() {
         this(SendPhoto.builder());
     }
 
-    public SendPhotoMethod(@NotNull SendPhoto.SendPhotoBuilder method) {
+    public SendPhotoMethod(@NotNull SendPhoto.SendPhotoBuilder<?, ?> method) {
         this.method = method;
     }
 

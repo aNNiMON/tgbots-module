@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.objects.stickers.StickerSet;
 
 public class GetStickerSetMethod implements Method<StickerSet> {
 
-    private final GetStickerSet.GetStickerSetBuilder method;
+    private final GetStickerSet.GetStickerSetBuilder<?, ?> method;
 
     public GetStickerSetMethod() {
         this(GetStickerSet.builder());
     }
 
-    public GetStickerSetMethod(@NotNull GetStickerSet.GetStickerSetBuilder method) {
+    public GetStickerSetMethod(@NotNull GetStickerSet.GetStickerSetBuilder<?, ?> method) {
         this.method = method;
     }
 

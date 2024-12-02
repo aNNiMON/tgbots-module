@@ -16,13 +16,13 @@ public class EditMessageMediaMethod implements
         InlineKeyboardMarkupMethod<EditMessageMediaMethod, Serializable>,
         BusinessConnectionMethod<EditMessageMediaMethod, Serializable> {
 
-    private final EditMessageMedia.EditMessageMediaBuilder method;
+    private final EditMessageMedia.EditMessageMediaBuilder<?, ?> method;
 
     public EditMessageMediaMethod() {
         this(EditMessageMedia.builder());
     }
 
-    public EditMessageMediaMethod(@NotNull EditMessageMedia.EditMessageMediaBuilder method) {
+    public EditMessageMediaMethod(@NotNull EditMessageMedia.EditMessageMediaBuilder<?, ?> method) {
         this.method = method;
     }
 

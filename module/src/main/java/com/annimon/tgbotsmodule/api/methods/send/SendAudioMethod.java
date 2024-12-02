@@ -23,13 +23,13 @@ public class SendAudioMethod implements
         DurationMethod<SendAudioMethod, Message>,
         ThumbMethod<SendAudioMethod, Message> {
 
-    private final SendAudio.SendAudioBuilder method;
+    private final SendAudio.SendAudioBuilder<?, ?> method;
 
     public SendAudioMethod() {
         this(SendAudio.builder());
     }
 
-    public SendAudioMethod(@NotNull SendAudio.SendAudioBuilder method) {
+    public SendAudioMethod(@NotNull SendAudio.SendAudioBuilder<?, ?> method) {
         this.method = method;
     }
 

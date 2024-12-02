@@ -15,13 +15,13 @@ public class SendStickerMethod implements
         MediaMessageMethod<SendStickerMethod, Message>,
         MessageEffectMethod<SendStickerMethod, Message> {
 
-    private final SendSticker.SendStickerBuilder method;
+    private final SendSticker.SendStickerBuilder<?, ?> method;
 
     public SendStickerMethod() {
         this(SendSticker.builder());
     }
 
-    public SendStickerMethod(@NotNull SendSticker.SendStickerBuilder method) {
+    public SendStickerMethod(@NotNull SendSticker.SendStickerBuilder<?, ?> method) {
         this.method = method;
     }
 

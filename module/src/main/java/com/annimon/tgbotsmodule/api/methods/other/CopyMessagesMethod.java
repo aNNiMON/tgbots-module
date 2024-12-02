@@ -18,13 +18,13 @@ public class CopyMessagesMethod implements
         ProtectedContentMethod<CopyMessagesMethod, ArrayList<MessageId>>,
         RemoveCaptionMethod<CopyMessagesMethod, ArrayList<MessageId>> {
 
-    private final CopyMessages.CopyMessagesBuilder method;
+    private final CopyMessages.CopyMessagesBuilder<?, ?> method;
 
     public CopyMessagesMethod() {
         this(CopyMessages.builder());
     }
 
-    public CopyMessagesMethod(@NotNull CopyMessages.CopyMessagesBuilder method) {
+    public CopyMessagesMethod(@NotNull CopyMessages.CopyMessagesBuilder<?, ?> method) {
         this.method = method;
     }
 

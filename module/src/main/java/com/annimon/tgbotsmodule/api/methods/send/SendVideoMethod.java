@@ -27,13 +27,13 @@ public class SendVideoMethod implements
         SpoilerMethod<SendVideoMethod, Message>,
         CaptionAboveMediaMethod<SendVideoMethod, Message> {
 
-    private final SendVideo.SendVideoBuilder method;
+    private final SendVideo.SendVideoBuilder<?, ?> method;
 
     public SendVideoMethod() {
         this(SendVideo.builder());
     }
 
-    public SendVideoMethod(@NotNull SendVideo.SendVideoBuilder method) {
+    public SendVideoMethod(@NotNull SendVideo.SendVideoBuilder<?, ?> method) {
         this.method = method;
     }
 

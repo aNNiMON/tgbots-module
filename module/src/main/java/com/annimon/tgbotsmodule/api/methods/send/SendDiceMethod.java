@@ -20,13 +20,13 @@ public class SendDiceMethod implements
         MessageEffectMethod<SendDiceMethod, Message>,
         BusinessConnectionMethod<SendDiceMethod, Message> {
 
-    private final SendDice.SendDiceBuilder method;
+    private final SendDice.SendDiceBuilder<?, ?> method;
 
     public SendDiceMethod() {
         this(SendDice.builder());
     }
 
-    public SendDiceMethod(@NotNull SendDice.SendDiceBuilder method) {
+    public SendDiceMethod(@NotNull SendDice.SendDiceBuilder<?, ?> method) {
         this.method = method;
     }
 

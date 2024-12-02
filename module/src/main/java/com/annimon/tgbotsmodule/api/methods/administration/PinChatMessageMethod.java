@@ -13,7 +13,7 @@ public class PinChatMessageMethod implements
         NotificationMethod<PinChatMessageMethod, Boolean>,
         BusinessConnectionMethod<PinChatMessageMethod, Boolean> {
 
-    private final PinChatMessage.PinChatMessageBuilder method;
+    private final PinChatMessage.PinChatMessageBuilder<?, ?> method;
 
     public PinChatMessageMethod() {
         this(PinChatMessage.builder());

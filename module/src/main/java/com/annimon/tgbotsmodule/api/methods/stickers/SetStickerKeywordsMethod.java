@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerKeywords;
 
 public class SetStickerKeywordsMethod implements Method<Boolean> {
 
-    private final SetStickerKeywords.SetStickerKeywordsBuilder method;
+    private final SetStickerKeywords.SetStickerKeywordsBuilder<?, ?> method;
 
     public SetStickerKeywordsMethod() {
         this(SetStickerKeywords.builder());
     }
 
-    public SetStickerKeywordsMethod(@NotNull SetStickerKeywords.SetStickerKeywordsBuilder method) {
+    public SetStickerKeywordsMethod(@NotNull SetStickerKeywords.SetStickerKeywordsBuilder<?, ?> method) {
         this.method = method;
     }
 

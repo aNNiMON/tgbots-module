@@ -22,13 +22,13 @@ public class SendMediaGroupMethod implements
         MessageEffectMethod<SendMediaGroupMethod, ArrayList<Message>>,
         BusinessConnectionMethod<SendMediaGroupMethod, ArrayList<Message>> {
 
-    private final SendMediaGroup.SendMediaGroupBuilder method;
+    private final SendMediaGroup.SendMediaGroupBuilder<?, ?> method;
 
     public SendMediaGroupMethod() {
         this(SendMediaGroup.builder());
     }
 
-    public SendMediaGroupMethod(@NotNull SendMediaGroup.SendMediaGroupBuilder method) {
+    public SendMediaGroupMethod(@NotNull SendMediaGroup.SendMediaGroupBuilder<?, ?> method) {
         this.method = method;
     }
 

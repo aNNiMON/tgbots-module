@@ -10,13 +10,13 @@ import org.telegram.telegrambots.meta.api.objects.payments.ShippingOption;
 
 public class AnswerShippingQueryMethod implements Method<Boolean> {
 
-    private final AnswerShippingQuery.AnswerShippingQueryBuilder method;
+    private final AnswerShippingQuery.AnswerShippingQueryBuilder<?, ?> method;
 
     public AnswerShippingQueryMethod() {
         this(AnswerShippingQuery.builder());
     }
 
-    public AnswerShippingQueryMethod(@NotNull AnswerShippingQuery.AnswerShippingQueryBuilder method) {
+    public AnswerShippingQueryMethod(@NotNull AnswerShippingQuery.AnswerShippingQueryBuilder<?, ?> method) {
         this.method = method;
     }
 

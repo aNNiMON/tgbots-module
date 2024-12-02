@@ -20,13 +20,13 @@ public class CopyMessageMethod implements
         AllowPaidBroadcastMethod<CopyMessageMethod, MessageId>,
         CaptionAboveMediaMethod<CopyMessageMethod, MessageId> {
 
-    private final CopyMessage.CopyMessageBuilder method;
+    private final CopyMessage.CopyMessageBuilder<?, ?> method;
 
     public CopyMessageMethod() {
         this(CopyMessage.builder());
     }
 
-    public CopyMessageMethod(@NotNull CopyMessage.CopyMessageBuilder method) {
+    public CopyMessageMethod(@NotNull CopyMessage.CopyMessageBuilder<?, ?> method) {
         this.method = method;
     }
 

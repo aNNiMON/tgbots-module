@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.stickers.DeleteStickerSet;
 
 public class DeleteStickerSetMethod implements Method<Boolean> {
 
-    private final DeleteStickerSet.DeleteStickerSetBuilder method;
+    private final DeleteStickerSet.DeleteStickerSetBuilder<?, ?> method;
 
     public DeleteStickerSetMethod() {
         this(DeleteStickerSet.builder());
     }
 
-    public DeleteStickerSetMethod(@NotNull DeleteStickerSet.DeleteStickerSetBuilder method) {
+    public DeleteStickerSetMethod(@NotNull DeleteStickerSet.DeleteStickerSetBuilder<?, ?> method) {
         this.method = method;
     }
 

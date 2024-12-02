@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage
 
 public class DeleteMessagesMethod implements ChatMethod<DeleteMessagesMethod, Boolean> {
 
-    private final DeleteMessages.DeleteMessagesBuilder method;
+    private final DeleteMessages.DeleteMessagesBuilder<?, ?> method;
 
     public DeleteMessagesMethod() {
         this(DeleteMessages.builder());
     }
 
-    public DeleteMessagesMethod(@NotNull DeleteMessages.DeleteMessagesBuilder method) {
+    public DeleteMessagesMethod(@NotNull DeleteMessages.DeleteMessagesBuilder<?, ?> method) {
         this.method = method;
     }
 

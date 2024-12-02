@@ -24,13 +24,13 @@ public class EditMessageTextMethod implements
         TextMethod<EditMessageTextMethod, Serializable>,
         BusinessConnectionMethod<EditMessageTextMethod, Serializable> {
 
-    private final EditMessageText.EditMessageTextBuilder method;
+    private final EditMessageText.EditMessageTextBuilder<?, ?> method;
 
     public EditMessageTextMethod() {
         this(EditMessageText.builder());
     }
 
-    public EditMessageTextMethod(@NotNull EditMessageText.EditMessageTextBuilder method) {
+    public EditMessageTextMethod(@NotNull EditMessageText.EditMessageTextBuilder<?, ?> method) {
         this.method = method;
     }
 

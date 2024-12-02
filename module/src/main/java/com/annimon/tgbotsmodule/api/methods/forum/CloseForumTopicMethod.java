@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.forum.CloseForumTopic;
 
 public class CloseForumTopicMethod implements ChatMessageThreadMethod<CloseForumTopicMethod, Boolean> {
 
-    private final CloseForumTopic.CloseForumTopicBuilder method;
+    private final CloseForumTopic.CloseForumTopicBuilder<?, ?> method;
 
     public CloseForumTopicMethod() {
         this(CloseForumTopic.builder());
     }
 
-    public CloseForumTopicMethod(@NotNull CloseForumTopic.CloseForumTopicBuilder method) {
+    public CloseForumTopicMethod(@NotNull CloseForumTopic.CloseForumTopicBuilder<?, ?> method) {
         this.method = method;
     }
 

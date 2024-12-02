@@ -27,13 +27,13 @@ public class SendPollMethod implements
         MessageEffectMethod<SendPollMethod, Message>,
         BusinessConnectionMethod<SendPollMethod, Message> {
 
-    private final SendPoll.SendPollBuilder method;
+    private final SendPoll.SendPollBuilder<?, ?> method;
 
     public SendPollMethod() {
         this(SendPoll.builder());
     }
 
-    public SendPollMethod(@NotNull SendPoll.SendPollBuilder method) {
+    public SendPollMethod(@NotNull SendPoll.SendPollBuilder<?, ?> method) {
         this.method = method;
     }
 

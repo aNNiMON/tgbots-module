@@ -22,13 +22,13 @@ public class SendVenueMethod implements
         MessageEffectMethod<SendVenueMethod, Message>,
         BusinessConnectionMethod<SendVenueMethod, Message> {
 
-    private final SendVenue.SendVenueBuilder method;
+    private final SendVenue.SendVenueBuilder<?, ?> method;
 
     public SendVenueMethod() {
         this(SendVenue.builder());
     }
 
-    public SendVenueMethod(@NotNull SendVenue.SendVenueBuilder method) {
+    public SendVenueMethod(@NotNull SendVenue.SendVenueBuilder<?, ?> method) {
         this.method = method;
     }
 

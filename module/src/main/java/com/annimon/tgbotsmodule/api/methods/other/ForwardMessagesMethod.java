@@ -16,13 +16,13 @@ public class ForwardMessagesMethod implements
         NotificationMethod<ForwardMessagesMethod, ArrayList<MessageId>>,
         ProtectedContentMethod<ForwardMessagesMethod, ArrayList<MessageId>> {
 
-    private final ForwardMessages.ForwardMessagesBuilder method;
+    private final ForwardMessages.ForwardMessagesBuilder<?, ?> method;
 
     public ForwardMessagesMethod() {
         this(ForwardMessages.builder());
     }
 
-    public ForwardMessagesMethod(@NotNull ForwardMessages.ForwardMessagesBuilder method) {
+    public ForwardMessagesMethod(@NotNull ForwardMessages.ForwardMessagesBuilder<?, ?> method) {
         this.method = method;
     }
 

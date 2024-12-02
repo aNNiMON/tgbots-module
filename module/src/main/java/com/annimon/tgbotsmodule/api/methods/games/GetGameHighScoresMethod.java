@@ -13,13 +13,13 @@ public class GetGameHighScoresMethod implements
         InlineOrChatMessageMethod<GetGameHighScoresMethod, ArrayList<GameHighScore>>,
         ChatMemberMethod<GetGameHighScoresMethod, ArrayList<GameHighScore>> {
 
-    private final GetGameHighScores.GetGameHighScoresBuilder method;
+    private final GetGameHighScores.GetGameHighScoresBuilder<?, ?> method;
 
     public GetGameHighScoresMethod() {
         this(GetGameHighScores.builder());
     }
 
-    public GetGameHighScoresMethod(@NotNull GetGameHighScores.GetGameHighScoresBuilder method) {
+    public GetGameHighScoresMethod(@NotNull GetGameHighScores.GetGameHighScoresBuilder<?, ?> method) {
         this.method = method;
     }
 

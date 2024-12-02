@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerEmojiList;
 
 public class SetStickerEmojiListMethod implements Method<Boolean> {
 
-    private final SetStickerEmojiList.SetStickerEmojiListBuilder method;
+    private final SetStickerEmojiList.SetStickerEmojiListBuilder<?, ?> method;
 
     public SetStickerEmojiListMethod() {
         this(SetStickerEmojiList.builder());
     }
 
-    public SetStickerEmojiListMethod(@NotNull SetStickerEmojiList.SetStickerEmojiListBuilder method) {
+    public SetStickerEmojiListMethod(@NotNull SetStickerEmojiList.SetStickerEmojiListBuilder<?, ?> method) {
         this.method = method;
     }
 

@@ -11,13 +11,13 @@ public class BanChatSenderChatMethod implements
         TimePeriodMethod<BanChatSenderChatMethod, Boolean>,
         ChatMethod<BanChatSenderChatMethod, Boolean> {
 
-    private final BanChatSenderChat.BanChatSenderChatBuilder method;
+    private final BanChatSenderChat.BanChatSenderChatBuilder<?, ?> method;
 
     public BanChatSenderChatMethod() {
         this(BanChatSenderChat.builder());
     }
 
-    public BanChatSenderChatMethod(@NotNull BanChatSenderChat.BanChatSenderChatBuilder method) {
+    public BanChatSenderChatMethod(@NotNull BanChatSenderChat.BanChatSenderChatBuilder<?, ?> method) {
         this.method = method;
     }
 

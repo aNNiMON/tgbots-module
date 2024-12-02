@@ -29,13 +29,13 @@ public class SendMessageMethod implements
         MessageEffectMethod<SendMessageMethod, Message>,
         BusinessConnectionMethod<SendMessageMethod, Message> {
 
-    private final SendMessage.SendMessageBuilder method;
+    private final SendMessage.SendMessageBuilder<?, ?> method;
 
     public SendMessageMethod() {
         this(SendMessage.builder());
     }
 
-    public SendMessageMethod(@NotNull SendMessage.SendMessageBuilder method) {
+    public SendMessageMethod(@NotNull SendMessage.SendMessageBuilder<?, ?> method) {
         this.method = method;
     }
 

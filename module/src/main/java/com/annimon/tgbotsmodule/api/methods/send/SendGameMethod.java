@@ -20,13 +20,13 @@ public class SendGameMethod implements
         MessageEffectMethod<SendGameMethod, Message>,
         BusinessConnectionMethod<SendGameMethod, Message> {
 
-    private final SendGame.SendGameBuilder method;
+    private final SendGame.SendGameBuilder<?, ?> method;
 
     public SendGameMethod() {
         this(SendGame.builder());
     }
 
-    public SendGameMethod(@NotNull SendGame.SendGameBuilder method) {
+    public SendGameMethod(@NotNull SendGame.SendGameBuilder<?, ?> method) {
         this.method = method;
     }
 

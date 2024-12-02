@@ -12,13 +12,13 @@ public class StopPollMethod implements
         ChatMessageMethod<StopPollMethod, Poll>,
         BusinessConnectionMethod<StopPollMethod, Poll> {
 
-    private final StopPoll.StopPollBuilder method;
+    private final StopPoll.StopPollBuilder<?, ?> method;
 
     public StopPollMethod() {
         this(StopPoll.builder());
     }
 
-    public StopPollMethod(@NotNull StopPoll.StopPollBuilder method) {
+    public StopPollMethod(@NotNull StopPoll.StopPollBuilder<?, ?> method) {
         this.method = method;
     }
 

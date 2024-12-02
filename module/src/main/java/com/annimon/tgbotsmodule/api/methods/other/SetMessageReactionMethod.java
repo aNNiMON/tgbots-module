@@ -11,13 +11,13 @@ import org.telegram.telegrambots.meta.api.objects.reactions.ReactionType;
 
 public class SetMessageReactionMethod implements ChatMessageMethod<SetMessageReactionMethod, Boolean> {
 
-    private final SetMessageReaction.SetMessageReactionBuilder method;
+    private final SetMessageReaction.SetMessageReactionBuilder<?, ?> method;
 
     public SetMessageReactionMethod() {
         this(SetMessageReaction.builder());
     }
 
-    public SetMessageReactionMethod(@NotNull SetMessageReaction.SetMessageReactionBuilder method) {
+    public SetMessageReactionMethod(@NotNull SetMessageReaction.SetMessageReactionBuilder<?, ?> method) {
         this.method = method;
     }
 

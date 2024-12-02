@@ -10,7 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.webapp.SentWebAppMessage;
 
 public class AnswerWebAppQueryMethod implements Method<SentWebAppMessage> {
 
-    private final AnswerWebAppQuery.AnswerWebAppQueryBuilder method;
+    private final AnswerWebAppQuery.AnswerWebAppQueryBuilder<?, ?> method;
 
     public AnswerWebAppQueryMethod() {
         this(AnswerWebAppQuery.builder());
