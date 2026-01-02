@@ -78,6 +78,15 @@ public class SendGiftMethod implements
         return this;
     }
 
+    public Boolean getPayForUpgrade() {
+        return method.build().getPayForUpgrade();
+    }
+
+    public SendGiftMethod payForUpgrade(boolean payForUpgrade) {
+        method.payForUpgrade(payForUpgrade);
+        return this;
+    }
+
     @Override
     public Boolean call(@NotNull CommonAbsSender sender) {
         return sender.call(method.build());

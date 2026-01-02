@@ -17,14 +17,7 @@ import com.annimon.tgbotsmodule.api.methods.invoices.EditUserStarSubscriptionMet
 import com.annimon.tgbotsmodule.api.methods.invoices.GetStarTransactionsMethod;
 import com.annimon.tgbotsmodule.api.methods.invoices.RefundStarPaymentMethod;
 import com.annimon.tgbotsmodule.api.methods.invoices.SendInvoiceMethod;
-import com.annimon.tgbotsmodule.api.methods.other.CopyMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.other.CopyMessagesMethod;
-import com.annimon.tgbotsmodule.api.methods.other.ForwardMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.other.ForwardMessagesMethod;
-import com.annimon.tgbotsmodule.api.methods.other.LeaveChatMethod;
-import com.annimon.tgbotsmodule.api.methods.other.SendChatActionMethod;
-import com.annimon.tgbotsmodule.api.methods.other.SetMessageReactionMethod;
-import com.annimon.tgbotsmodule.api.methods.other.SetPassportDataErrorsMethod;
+import com.annimon.tgbotsmodule.api.methods.other.*;
 import com.annimon.tgbotsmodule.api.methods.polls.SendPollMethod;
 import com.annimon.tgbotsmodule.api.methods.polls.StopPollMethod;
 import com.annimon.tgbotsmodule.api.methods.send.*;
@@ -1531,5 +1524,48 @@ public final class Methods {
     public static AnswerWebAppQueryMethod answerWebAppQuery(@NotNull String webAppQueryId,
                                                             @NotNull InlineQueryResult queryResult) {
         return answerWebAppQuery().setWebAppQueryId(webAppQueryId).setQueryResult(queryResult);
+    }
+
+    public static VerifyChatMethod verifyChat() {
+        return new VerifyChatMethod();
+    }
+
+    public static VerifyChatMethod verifyChat(@NotNull String chatId) {
+        return verifyChat().setChatId(chatId);
+    }
+
+    public static VerifyChatMethod verifyChat(long chatId) {
+        return verifyChat().setChatId(chatId);
+    }
+
+
+    public static VerifyUserMethod verifyUser() {
+        return new VerifyUserMethod();
+    }
+
+    public static VerifyUserMethod verifyUser(long userId) {
+        return verifyUser().setUserId(userId);
+    }
+
+
+    public static RemoveChatVerificationMethod removeChatVerification() {
+        return new RemoveChatVerificationMethod();
+    }
+
+    public static RemoveChatVerificationMethod removeChatVerification(@NotNull String chatId) {
+        return removeChatVerification().setChatId(chatId);
+    }
+
+    public static RemoveChatVerificationMethod removeChatVerification(long chatId) {
+        return removeChatVerification().setChatId(chatId);
+    }
+
+
+    public static RemoveUserVerificationMethod removeUserVerification() {
+        return new RemoveUserVerificationMethod();
+    }
+
+    public static RemoveUserVerificationMethod removeUserVerification(long userId) {
+        return removeUserVerification().setUserId(userId);
     }
 }
