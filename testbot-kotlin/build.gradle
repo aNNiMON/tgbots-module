@@ -1,12 +1,14 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.9.22"
+    id "org.jetbrains.kotlin.jvm" version "2.3.0"
     id 'application'
 }
 
-group 'com.annimon'
-version '8.0.0-SNAPSHOT'
+group = 'com.annimon'
+version = '9.2.0-SNAPSHOT'
 
-mainClassName = 'com.annimon.testbotkt.TestBot'
+application {
+    mainClass = 'com.annimon.testbotkt.TestBot'
+}
 
 repositories {
     mavenCentral()
@@ -14,20 +16,13 @@ repositories {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
 dependencies {
     implementation project(':module')
-    implementation 'org.slf4j:slf4j-simple:2.0.16'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.14.0"
-}
-
-compileKotlin {
-    kotlinOptions.jvmTarget = "17"
-}
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "17"
+    implementation 'org.slf4j:slf4j-simple:2.0.17'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'tools.jackson.module:jackson-module-kotlin:3.0.3'
 }
