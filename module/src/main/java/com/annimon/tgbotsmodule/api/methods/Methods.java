@@ -28,14 +28,7 @@ import com.annimon.tgbotsmodule.api.methods.stickers.*;
 import com.annimon.tgbotsmodule.api.methods.updates.DeleteWebhookMethod;
 import com.annimon.tgbotsmodule.api.methods.updates.GetUpdatesMethod;
 import com.annimon.tgbotsmodule.api.methods.updates.GetWebhookInfoMethod;
-import com.annimon.tgbotsmodule.api.methods.updatingmessages.DeleteMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.updatingmessages.DeleteMessagesMethod;
-import com.annimon.tgbotsmodule.api.methods.updatingmessages.EditMessageCaptionMethod;
-import com.annimon.tgbotsmodule.api.methods.updatingmessages.EditMessageLiveLocationMethod;
-import com.annimon.tgbotsmodule.api.methods.updatingmessages.EditMessageMediaMethod;
-import com.annimon.tgbotsmodule.api.methods.updatingmessages.EditMessageReplyMarkupMethod;
-import com.annimon.tgbotsmodule.api.methods.updatingmessages.EditMessageTextMethod;
-import com.annimon.tgbotsmodule.api.methods.updatingmessages.StopMessageLiveLocationMethod;
+import com.annimon.tgbotsmodule.api.methods.updatingmessages.*;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ActionType;
@@ -1061,6 +1054,11 @@ public final class Methods {
     }
 
 
+    public static GetMyStarBalanceMethod getMyStarBalance() {
+        return new GetMyStarBalanceMethod();
+    }
+
+
     public static GetUserProfilePhotosMethod getUserProfilePhotos() {
         return new GetUserProfilePhotosMethod();
     }
@@ -1174,6 +1172,19 @@ public final class Methods {
 
     public static SendAudioMethod sendAudio(long chatId) {
         return sendAudio().setChatId(chatId);
+    }
+
+
+    public static SendChecklistMethod sendChecklist() {
+        return new SendChecklistMethod();
+    }
+
+    public static SendChecklistMethod sendChecklist(@NotNull String chatId) {
+        return sendChecklist().setChatId(chatId);
+    }
+
+    public static SendChecklistMethod sendChecklist(long chatId) {
+        return sendChecklist().setChatId(chatId);
     }
 
 
@@ -1383,6 +1394,19 @@ public final class Methods {
 
     public static EditMessageCaptionMethod editMessageCaption(long chatId, int messageId) {
         return editMessageCaption().setChatId(chatId).setMessageId(messageId);
+    }
+
+
+    public static EditMessageChecklistMethod editMessageChecklist() {
+        return new EditMessageChecklistMethod();
+    }
+
+    public static EditMessageChecklistMethod editMessageChecklist(@NotNull String chatId, int messageId) {
+        return editMessageChecklist().setChatId(chatId).setMessageId(messageId);
+    }
+
+    public static EditMessageChecklistMethod editMessageChecklist(long chatId, int messageId) {
+        return editMessageChecklist().setChatId(Long.toString(chatId)).setMessageId(messageId);
     }
 
 
