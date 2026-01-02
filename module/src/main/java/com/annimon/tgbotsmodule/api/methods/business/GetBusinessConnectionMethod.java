@@ -1,4 +1,4 @@
-package com.annimon.tgbotsmodule.api.methods.info;
+package com.annimon.tgbotsmodule.api.methods.business;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;

@@ -6,11 +6,11 @@ import com.annimon.tgbotsmodule.api.methods.answerqueries.AnswerInlineQueryMetho
 import com.annimon.tgbotsmodule.api.methods.answerqueries.AnswerPreCheckoutQueryMethod;
 import com.annimon.tgbotsmodule.api.methods.answerqueries.AnswerShippingQueryMethod;
 import com.annimon.tgbotsmodule.api.methods.answerqueries.AnswerWebAppQueryMethod;
+import com.annimon.tgbotsmodule.api.methods.business.*;
 import com.annimon.tgbotsmodule.api.methods.forum.*;
 import com.annimon.tgbotsmodule.api.methods.games.GetGameHighScoresMethod;
 import com.annimon.tgbotsmodule.api.methods.games.SetGameScoreMethod;
-import com.annimon.tgbotsmodule.api.methods.gifts.GetAvailableGiftsMethod;
-import com.annimon.tgbotsmodule.api.methods.gifts.SendGiftMethod;
+import com.annimon.tgbotsmodule.api.methods.gifts.*;
 import com.annimon.tgbotsmodule.api.methods.info.*;
 import com.annimon.tgbotsmodule.api.methods.invoices.CreateInvoiceLinkMethod;
 import com.annimon.tgbotsmodule.api.methods.invoices.EditUserStarSubscriptionMethod;
@@ -21,6 +21,9 @@ import com.annimon.tgbotsmodule.api.methods.other.*;
 import com.annimon.tgbotsmodule.api.methods.polls.SendPollMethod;
 import com.annimon.tgbotsmodule.api.methods.polls.StopPollMethod;
 import com.annimon.tgbotsmodule.api.methods.send.*;
+import com.annimon.tgbotsmodule.api.methods.stories.DeleteStoryMethod;
+import com.annimon.tgbotsmodule.api.methods.stories.EditStoryMethod;
+import com.annimon.tgbotsmodule.api.methods.stories.PostStoryMethod;
 import com.annimon.tgbotsmodule.api.methods.stickers.*;
 import com.annimon.tgbotsmodule.api.methods.updates.DeleteWebhookMethod;
 import com.annimon.tgbotsmodule.api.methods.updates.GetUpdatesMethod;
@@ -376,6 +379,63 @@ public final class Methods {
 
         public static UnpinAllChatMessagesMethod unpinAllChatMessages(long chatId) {
             return unpinAllChatMessages().setChatId(chatId);
+        }
+    }
+
+    public static class Business {
+        private Business() { }
+
+
+        public static GetBusinessConnectionMethod getBusinessConnection() {
+            return new GetBusinessConnectionMethod();
+        }
+
+        public static GetBusinessConnectionMethod getBusinessConnection(String businessConnectionId) {
+            return getBusinessConnection().setBusinessConnectionId(businessConnectionId);
+        }
+
+        public static DeleteBusinessMessagesMethod deleteBusinessMessages() {
+            return new DeleteBusinessMessagesMethod();
+        }
+
+        public static GetBusinessAccountGiftsMethod getBusinessAccountGifts() {
+            return new GetBusinessAccountGiftsMethod();
+        }
+
+        public static GetBusinessAccountStarBalanceMethod getBusinessAccountStarBalance() {
+            return new GetBusinessAccountStarBalanceMethod();
+        }
+
+        public static ReadBusinessMessageMethod readBusinessMessage() {
+            return new ReadBusinessMessageMethod();
+        }
+
+        public static RemoveBusinessAccountProfilePhotoMethod removeBusinessAccountProfilePhoto() {
+            return new RemoveBusinessAccountProfilePhotoMethod();
+        }
+
+        public static SetBusinessAccountNameMethod setBusinessAccountName() {
+            return new SetBusinessAccountNameMethod();
+        }
+
+        public static SetBusinessAccountBioMethod setBusinessAccountBio() {
+            return new SetBusinessAccountBioMethod();
+        }
+
+        public static SetBusinessAccountProfilePhotoMethod setBusinessAccountProfilePhoto() {
+            return new SetBusinessAccountProfilePhotoMethod();
+        }
+
+        public static SetBusinessAccountUsernameMethod setBusinessAccountUsername() {
+            return new SetBusinessAccountUsernameMethod();
+        }
+
+        public static SetBusinessAccountGiftSettingsMethod setBusinessAccountGiftSettings() {
+            return new SetBusinessAccountGiftSettingsMethod();
+        }
+
+        public static TransferBusinessAccountStarsMethod transferBusinessAccountStars() {
+            return new TransferBusinessAccountStarsMethod();
         }
     }
 
@@ -808,6 +868,22 @@ public final class Methods {
         }
     }
 
+    public static class Stories {
+        private Stories() {}
+
+        public static PostStoryMethod postStory() {
+            return new PostStoryMethod();
+        }
+
+        public static EditStoryMethod editStory() {
+            return new EditStoryMethod();
+        }
+
+        public static DeleteStoryMethod deleteStory() {
+            return new DeleteStoryMethod();
+        }
+    }
+
     public static class Updates {
         private Updates() { }
 
@@ -840,20 +916,22 @@ public final class Methods {
         public static SendGiftMethod sendGift(long userId) {
             return sendGift().setUserId(userId);
         }
+
+        public static ConvertGiftToStarsMethod convertGiftToStars() {
+            return new ConvertGiftToStarsMethod();
+        }
+
+        public static UpgradeGiftMethod upgradeGift() {
+            return new UpgradeGiftMethod();
+        }
+
+        public static TransferGiftMethod transferGift() {
+            return new TransferGiftMethod();
+        }
     }
 
 
     // Info
-
-    public static GetBusinessConnectionMethod getBusinessConnection() {
-        return new GetBusinessConnectionMethod();
-    }
-
-    public static GetBusinessConnectionMethod getBusinessConnection(String businessConnectionId) {
-        return getBusinessConnection().setBusinessConnectionId(businessConnectionId);
-    }
-
-
     public static GetChatAdministratorsMethod getChatAdministrators() {
         return new GetChatAdministratorsMethod();
     }
@@ -1042,7 +1120,7 @@ public final class Methods {
         return new GetMyCommandsMethod();
     }
 
-    public static GetMyCommandsMethod getMyCommands(BotCommandScope scope){
+    public static GetMyCommandsMethod getMyCommands(BotCommandScope scope) {
         return getMyCommands().setScope(scope);
     }
 
@@ -1054,11 +1132,11 @@ public final class Methods {
         return setMyCommands().setCommands(commands);
     }
 
-    public static DeleteMyCommandsMethod deleteMyCommands(){
+    public static DeleteMyCommandsMethod deleteMyCommands() {
         return new DeleteMyCommandsMethod();
     }
 
-    public static DeleteMyCommandsMethod deleteMyCommands(BotCommandScope scope){
+    public static DeleteMyCommandsMethod deleteMyCommands(BotCommandScope scope) {
         return deleteMyCommands().setScope(scope);
     }
 
@@ -1569,3 +1647,4 @@ public final class Methods {
         return removeUserVerification().setUserId(userId);
     }
 }
+

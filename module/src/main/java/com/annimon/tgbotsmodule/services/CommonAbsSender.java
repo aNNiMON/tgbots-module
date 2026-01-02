@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.botapimethods.PartialBotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.business.SetBusinessAccountProfilePhoto;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.*;
 import org.telegram.telegrambots.meta.api.methods.stickers.AddStickerToSet;
@@ -328,6 +329,25 @@ public abstract class CommonAbsSender extends OkHttpTelegramClient {
 
     public CompletableFuture<Message> callAsync(
             @NotNull SendAnimation method) {
+        return callApiMethodAsync(() -> {
+            preprocessMethod(method);
+            return executeAsync(method);
+        });
+    }
+
+    @Nullable
+    public Boolean call(@NotNull SetBusinessAccountProfilePhoto method) {
+        try {
+            preprocessMethod(method);
+            return execute(method);
+        } catch (TelegramApiException e) {
+            handleTelegramApiException(e);
+            return null;
+        }
+    }
+
+    public CompletableFuture<Boolean> callAsync(
+            @NotNull SetBusinessAccountProfilePhoto method) {
         return callApiMethodAsync(() -> {
             preprocessMethod(method);
             return executeAsync(method);
