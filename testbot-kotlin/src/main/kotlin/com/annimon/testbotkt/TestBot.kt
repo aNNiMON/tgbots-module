@@ -7,7 +7,7 @@ import com.annimon.tgbotsmodule.Runner
 import com.annimon.tgbotsmodule.beans.Config
 import com.annimon.tgbotsmodule.services.YamlConfigLoaderService
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.module.kotlin.KotlinModule
+import tools.jackson.module.kotlin.KotlinModule
 
 class TestBot : BotModule {
 
@@ -23,7 +23,7 @@ class TestBot : BotModule {
         val configLoader = YamlConfigLoaderService()
         val configFile = configLoader.configFile("testbot", config.profile)
         val botConfig = configLoader.loadFile(configFile, BotConfig::class.java) {
-            it.registerModule(KotlinModule.Builder().build())
+            it.addModule(KotlinModule.Builder().build())
         }
         val botModuleOptions = BotModuleOptions.createDefault(botConfig.token);
         return TestBotHandler(botModuleOptions, botConfig)

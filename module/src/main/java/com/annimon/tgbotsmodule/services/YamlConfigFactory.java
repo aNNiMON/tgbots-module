@@ -1,14 +1,14 @@
 package com.annimon.tgbotsmodule.services;
 
-import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.io.IOContext;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.regex.Pattern;
 import org.apache.commons.io.IOUtils;
+import tools.jackson.core.JsonEncoding;
+import tools.jackson.core.io.IOContext;
+import tools.jackson.dataformat.yaml.YAMLFactory;
 
 public class YamlConfigFactory extends YAMLFactory {
 
@@ -16,14 +16,22 @@ public class YamlConfigFactory extends YAMLFactory {
 
     @Override
     protected Reader _createReader(byte[] data, int offset, int len, JsonEncoding enc,
-                                   IOContext ctxt) throws IOException {
-        return wrap(super._createReader(data, offset, len, enc, ctxt));
+                                   IOContext ctxt) {
+        try {
+            return wrap(super._createReader(data, offset, len, enc, ctxt));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     protected Reader _createReader(InputStream in, JsonEncoding enc,
-                                   IOContext ctxt) throws IOException {
-        return wrap(super._createReader(in, enc, ctxt));
+                                   IOContext ctxt) {
+        try {
+            return wrap(super._createReader(in, enc, ctxt));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private Reader wrap(Reader reader) throws IOException {

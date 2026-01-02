@@ -1,16 +1,18 @@
 package com.annimon.tgbotsmodule.services;
 
 import com.annimon.tgbotsmodule.exceptions.ConfigLoaderException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.jetbrains.annotations.NotNull;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.cfg.MapperBuilder;
+import tools.jackson.dataformat.yaml.YAMLMapper;
 
 public class YamlConfigLoaderService implements ConfigLoaderService {
 
@@ -20,11 +22,11 @@ public class YamlConfigLoaderService implements ConfigLoaderService {
     public <T> @NotNull T loadFile(
             @NotNull File file,
             @NotNull Class<T> configType,
-            Consumer<ObjectMapper> mapperConsumer) {
+            Consumer<MapperBuilder<? extends ObjectMapper, ?>> mapperConsumer) {
         final var mapper = getConfiguredMapper(mapperConsumer);
         try {
             return mapper.readValue(file, configType);
-        } catch (IOException ex) {
+        } catch (JacksonException ex) {
             log.error("yaml loader", ex);
             throw new ConfigLoaderException(ex);
         }
@@ -34,11 +36,11 @@ public class YamlConfigLoaderService implements ConfigLoaderService {
     public <T> @NotNull T loadFile(
             @NotNull File file,
             @NotNull TypeReference<T> configType,
-            Consumer<ObjectMapper> mapperConsumer) {
+            Consumer<MapperBuilder<? extends ObjectMapper, ?>> mapperConsumer) {
         final var mapper = getConfiguredMapper(mapperConsumer);
         try {
             return mapper.readValue(file, configType);
-        } catch (IOException ex) {
+        } catch (JacksonException ex) {
             log.error("yaml loader", ex);
             throw new ConfigLoaderException(ex);
         }
@@ -48,11 +50,11 @@ public class YamlConfigLoaderService implements ConfigLoaderService {
     public <T> @NotNull T load(
             @NotNull InputStream is,
             @NotNull Class<T> configType,
-            Consumer<ObjectMapper> mapperConsumer) {
+            Consumer<MapperBuilder<? extends ObjectMapper, ?>> mapperConsumer) {
         final var mapper = getConfiguredMapper(mapperConsumer);
         try {
             return mapper.readValue(is, configType);
-        } catch (IOException ex) {
+        } catch (JacksonException ex) {
             log.error("yaml loader", ex);
             throw new ConfigLoaderException(ex);
         }
@@ -62,11 +64,11 @@ public class YamlConfigLoaderService implements ConfigLoaderService {
     public <T> @NotNull T load(
             @NotNull InputStream is,
             @NotNull TypeReference<T> configType,
-            Consumer<ObjectMapper> mapperConsumer) {
+            Consumer<MapperBuilder<? extends ObjectMapper, ?>> mapperConsumer) {
         final var mapper = getConfiguredMapper(mapperConsumer);
         try {
             return mapper.readValue(is, configType);
-        } catch (IOException ex) {
+        } catch (JacksonException ex) {
             log.error("yaml loader", ex);
             throw new ConfigLoaderException(ex);
         }
@@ -100,11 +102,11 @@ public class YamlConfigLoaderService implements ConfigLoaderService {
     }
 
     @NotNull
-    private static ObjectMapper getConfiguredMapper(Consumer<ObjectMapper> mapperConsumer) {
-        final var mapper = new ObjectMapper(new YamlConfigFactory());
+    private static ObjectMapper getConfiguredMapper(Consumer<MapperBuilder<? extends ObjectMapper, ?>> mapperConsumer) {
+        final var mapper = YAMLMapper.builder(new YamlConfigFactory());
         if (mapperConsumer != null) {
             mapperConsumer.accept(mapper);
         }
-        return mapper;
+        return mapper.build();
     }
 }
