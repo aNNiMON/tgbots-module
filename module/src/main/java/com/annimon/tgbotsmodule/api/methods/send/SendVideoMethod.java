@@ -279,6 +279,24 @@ public class SendVideoMethod implements
         return this;
     }
 
+    public InputFile getCover() {
+        return method.build().getCover();
+    }
+
+    public SendVideoMethod setCover(InputFile cover) {
+        method.cover(cover);
+        return this;
+    }
+
+    public Integer getStartTimestamp() {
+        return method.build().getStartTimestamp();
+    }
+
+    public SendVideoMethod setStartTimestamp(Integer startTimestamp) {
+        method.startTimestamp(startTimestamp);
+        return this;
+    }
+
     @Override
     public Message call(@NotNull CommonAbsSender sender) {
         return sender.call(method.build());

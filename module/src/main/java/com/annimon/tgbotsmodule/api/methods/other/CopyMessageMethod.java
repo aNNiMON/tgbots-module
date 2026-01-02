@@ -171,6 +171,16 @@ public class CopyMessageMethod implements
         return this;
     }
 
+    /* TODO: uncomment when fixed in Telegram Bots API
+    public Integer getVideoStartTimestamp() {
+        return method.build().getVideoStartTimestamp();
+    }
+
+    public CopyMessageMethod setVideoStartTimestamp(Integer videoStartTimestamp) {
+        method.videoStartTimestamp(videoStartTimestamp);
+        return this;
+    }*/
+
     @Override
     public MessageId call(@NotNull CommonAbsSender sender) {
         return sender.call(method.build());

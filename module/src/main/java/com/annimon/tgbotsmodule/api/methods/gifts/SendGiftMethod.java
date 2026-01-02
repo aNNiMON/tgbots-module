@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.gifts;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.TextMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
@@ -12,6 +13,7 @@ import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 
 public class SendGiftMethod implements
         UserMethod<SendGiftMethod, Boolean>,
+        ChatMethod<SendGiftMethod, Boolean>,
         TextMethod<SendGiftMethod, Boolean>,
         ParseModeMethod<SendGiftMethod, Boolean> {
 
@@ -33,6 +35,17 @@ public class SendGiftMethod implements
     @Override
     public SendGiftMethod setUserId(@NotNull Long userId) {
         method.userId(userId);
+        return this;
+    }
+
+    @Override
+    public String getChatId() {
+        return method.build().getChatId();
+    }
+
+    @Override
+    public SendGiftMethod setChatId(@NotNull String chatId) {
+        method.chatId(chatId);
         return this;
     }
 
