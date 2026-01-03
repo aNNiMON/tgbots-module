@@ -2,6 +2,7 @@ package com.annimon.tgbotsmodule.api.methods.send;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.DirectMessageTopicMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SendableMessageMethod;
@@ -20,6 +21,7 @@ public class SendMediaGroupMethod implements
         ProtectedContentMethod<SendMediaGroupMethod, ArrayList<Message>>,
         AllowPaidBroadcastMethod<SendMediaGroupMethod, ArrayList<Message>>,
         MessageEffectMethod<SendMediaGroupMethod, ArrayList<Message>>,
+        DirectMessageTopicMethod<SendMediaGroupMethod, ArrayList<Message>>,
         BusinessConnectionMethod<SendMediaGroupMethod, ArrayList<Message>> {
 
     private final SendMediaGroup.SendMediaGroupBuilder<?, ?> method;
@@ -154,6 +156,17 @@ public class SendMediaGroupMethod implements
     @Override
     public SendMediaGroupMethod setAllowPaidBroadcast(Boolean flag) {
         method.allowPaidBroadcast(flag);
+        return this;
+    }
+
+    @Override
+    public Integer getDirectMessagesTopicId() {
+        return method.build().getDirectMessagesTopicId();
+    }
+
+    @Override
+    public SendMediaGroupMethod setDirectMessagesTopicId(Integer topicId) {
+        method.directMessagesTopicId(topicId);
         return this;
     }
 

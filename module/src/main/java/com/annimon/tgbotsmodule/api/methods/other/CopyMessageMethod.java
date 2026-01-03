@@ -3,8 +3,10 @@ package com.annimon.tgbotsmodule.api.methods.other;
 import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionAboveMediaMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.DirectMessageTopicMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.SuggestedPostParametersMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
@@ -12,12 +14,15 @@ import org.telegram.telegrambots.meta.api.methods.CopyMessage;
 import org.telegram.telegrambots.meta.api.objects.MessageId;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
+import org.telegram.telegrambots.meta.api.objects.suggestedpost.SuggestedPostParameters;
 
 public class CopyMessageMethod implements
         ChatMessageMethod<CopyMessageMethod, MessageId>,
         ReplyMarkupSupportedMessageMethod<CopyMessageMethod, MessageId>,
         ProtectedContentMethod<CopyMessageMethod, MessageId>,
         AllowPaidBroadcastMethod<CopyMessageMethod, MessageId>,
+        DirectMessageTopicMethod<CopyMessageMethod, MessageId>,
+        SuggestedPostParametersMethod<CopyMessageMethod, MessageId>,
         CaptionAboveMediaMethod<CopyMessageMethod, MessageId> {
 
     private final CopyMessage.CopyMessageBuilder<?, ?> method;
@@ -180,6 +185,28 @@ public class CopyMessageMethod implements
         method.videoStartTimestamp(videoStartTimestamp);
         return this;
     }*/
+
+    @Override
+    public Integer getDirectMessagesTopicId() {
+        return method.build().getDirectMessagesTopicId();
+    }
+
+    @Override
+    public CopyMessageMethod setDirectMessagesTopicId(Integer topicId) {
+        method.directMessagesTopicId(topicId);
+        return this;
+    }
+
+    @Override
+    public SuggestedPostParameters getSuggestedPostParameters() {
+        return method.build().getSuggestedPostParameters();
+    }
+
+    @Override
+    public CopyMessageMethod setSuggestedPostParameters(SuggestedPostParameters parameters) {
+        method.suggestedPostParameters(parameters);
+        return this;
+    }
 
     @Override
     public MessageId call(@NotNull CommonAbsSender sender) {

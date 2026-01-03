@@ -166,6 +166,15 @@ public class PromoteChatMemberMethod implements ChatMemberMethod<PromoteChatMemb
         return this;
     }
 
+    public Boolean getCanManageDirectMessages() {
+        return method.build().getCanManageDirectMessages();
+    }
+
+    public PromoteChatMemberMethod setCanManageDirectMessages(Boolean canManageDirectMessages) {
+        method.canManageDirectMessages(canManageDirectMessages);
+        return this;
+    }
+
     public Boolean isAnonymous() {
         return method.build().getIsAnonymous();
     }

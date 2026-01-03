@@ -1,10 +1,12 @@
 package com.annimon.tgbotsmodule.api.methods.invoices;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.DirectMessageTopicMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.InlineKeyboardMarkupMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SendableMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.SuggestedPostParametersMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -14,12 +16,15 @@ import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.payments.LabeledPrice;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.suggestedpost.SuggestedPostParameters;
 
 public class SendInvoiceMethod implements
         SendableMessageMethod<SendInvoiceMethod, Message>,
         InlineKeyboardMarkupMethod<SendInvoiceMethod, Message>,
         ProtectedContentMethod<SendInvoiceMethod, Message>,
         AllowPaidBroadcastMethod<SendInvoiceMethod, Message>,
+        DirectMessageTopicMethod<SendInvoiceMethod, Message>,
+        SuggestedPostParametersMethod<SendInvoiceMethod, Message>,
         MessageEffectMethod<SendInvoiceMethod, Message> {
 
     private final SendInvoice.SendInvoiceBuilder<?, ?> method;
@@ -346,6 +351,34 @@ public class SendInvoiceMethod implements
     @Override
     public SendInvoiceMethod setMessageEffectId(String messageEffectId) {
         method.messageEffectId(messageEffectId);
+        return this;
+    }
+
+    @Override
+    public Integer getDirectMessagesTopicId() {
+        // TODO uncomment when available in Telegram Bots API
+        // return method.build().getDirectMessagesTopicId();
+        return null;
+    }
+
+    @Override
+    public SendInvoiceMethod setDirectMessagesTopicId(Integer topicId) {
+        // TODO uncomment when available in Telegram Bots API
+        // method.directMessagesTopicId(topicId);
+        return this;
+    }
+
+    @Override
+    public SuggestedPostParameters getSuggestedPostParameters() {
+        // TODO uncomment when available in Telegram Bots API
+        // return method.build().getSuggestedPostParameters();
+        return null;
+    }
+
+    @Override
+    public SendInvoiceMethod setSuggestedPostParameters(SuggestedPostParameters parameters) {
+        // TODO uncomment when available in Telegram Bots API
+        // method.suggestedPostParameters(parameters);
         return this;
     }
 

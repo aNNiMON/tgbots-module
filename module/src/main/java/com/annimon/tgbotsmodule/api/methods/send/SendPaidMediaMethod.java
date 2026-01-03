@@ -12,6 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.media.paid.InputPaidMedia;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
+import org.telegram.telegrambots.meta.api.objects.suggestedpost.SuggestedPostParameters;
 
 public class SendPaidMediaMethod implements
         ChatMethod<SendPaidMediaMethod, ArrayList<Message>>,
@@ -23,6 +24,8 @@ public class SendPaidMediaMethod implements
         ReplyMarkupSupportedMessageMethod<SendPaidMediaMethod, ArrayList<Message>>,
         CaptionMethod<SendPaidMediaMethod, ArrayList<Message>>,
         CaptionAboveMediaMethod<SendPaidMediaMethod, ArrayList<Message>>,
+        DirectMessageTopicMethod<SendPaidMediaMethod, ArrayList<Message>>,
+        SuggestedPostParametersMethod<SendPaidMediaMethod, ArrayList<Message>>,
         BusinessConnectionMethod<SendPaidMediaMethod, ArrayList<Message>> {
 
     private final SendPaidMedia.SendPaidMediaBuilder method;
@@ -210,6 +213,38 @@ public class SendPaidMediaMethod implements
     }
 
     @Override
+    public Boolean getAllowSendingWithoutReply() {
+        return false;
+    }
+
+    @Override
+    public SendPaidMediaMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
+        return this;
+    }
+
+    @Override
+    public Integer getDirectMessagesTopicId() {
+        return method.build().getDirectMessagesTopicId();
+    }
+
+    @Override
+    public SendPaidMediaMethod setDirectMessagesTopicId(Integer topicId) {
+        method.directMessagesTopicId(topicId);
+        return this;
+    }
+
+    @Override
+    public SuggestedPostParameters getSuggestedPostParameters() {
+        return method.build().getSuggestedPostParameters();
+    }
+
+    @Override
+    public SendPaidMediaMethod setSuggestedPostParameters(SuggestedPostParameters parameters) {
+        method.suggestedPostParameters(parameters);
+        return this;
+    }
+
+    @Override
     public ArrayList<Message> call(@NotNull CommonAbsSender sender) {
         return listToArrayList(sender.call(method.build()));
     }
@@ -227,15 +262,5 @@ public class SendPaidMediaMethod implements
             return (ArrayList<Message>) messages;
         }
         return new ArrayList<>(messages);
-    }
-
-    @Override
-    public Boolean getAllowSendingWithoutReply() {
-        return false;
-    }
-
-    @Override
-    public SendPaidMediaMethod setAllowSendingWithoutReply(Boolean allowSendingWithoutReply) {
-        return this;
     }
 }

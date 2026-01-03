@@ -10,6 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
+import org.telegram.telegrambots.meta.api.objects.suggestedpost.SuggestedPostParameters;
 
 public class SendStickerMethod implements
         MediaMessageMethod<SendStickerMethod, Message>,
@@ -169,6 +170,28 @@ public class SendStickerMethod implements
     @Override
     public SendStickerMethod setAllowPaidBroadcast(Boolean flag) {
         method.allowPaidBroadcast(flag);
+        return this;
+    }
+
+    @Override
+    public Integer getDirectMessagesTopicId() {
+        return method.build().getDirectMessagesTopicId();
+    }
+
+    @Override
+    public SendStickerMethod setDirectMessagesTopicId(Integer topicId) {
+        method.directMessagesTopicId(topicId);
+        return this;
+    }
+
+    @Override
+    public SuggestedPostParameters getSuggestedPostParameters() {
+        return method.build().getSuggestedPostParameters();
+    }
+
+    @Override
+    public SendStickerMethod setSuggestedPostParameters(SuggestedPostParameters parameters) {
+        method.suggestedPostParameters(parameters);
         return this;
     }
 

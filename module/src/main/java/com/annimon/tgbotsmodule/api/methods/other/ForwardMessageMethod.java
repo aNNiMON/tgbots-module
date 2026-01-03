@@ -2,18 +2,23 @@ package com.annimon.tgbotsmodule.api.methods.other;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageThreadMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.DirectMessageTopicMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.NotificationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.SuggestedPostParametersMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.ForwardMessage;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
+import org.telegram.telegrambots.meta.api.objects.suggestedpost.SuggestedPostParameters;
 
 public class ForwardMessageMethod implements
         ChatMessageMethod<ForwardMessageMethod, Message>,
         ChatMessageThreadMethod<ForwardMessageMethod, Message>,
         NotificationMethod<ForwardMessageMethod, Message>,
+        DirectMessageTopicMethod<ForwardMessageMethod, Message>,
+        SuggestedPostParametersMethod<ForwardMessageMethod, Message>,
         ProtectedContentMethod<ForwardMessageMethod, Message> {
 
     private final ForwardMessage.ForwardMessageBuilder<?, ?> method;
@@ -110,6 +115,28 @@ public class ForwardMessageMethod implements
         method.videoStartTimestamp(videoStartTimestamp);
         return this;
     }*/
+
+    @Override
+    public Integer getDirectMessagesTopicId() {
+        return method.build().getDirectMessagesTopicId();
+    }
+
+    @Override
+    public ForwardMessageMethod setDirectMessagesTopicId(Integer topicId) {
+        method.directMessagesTopicId(topicId);
+        return this;
+    }
+
+    @Override
+    public SuggestedPostParameters getSuggestedPostParameters() {
+        return method.build().getSuggestedPostParameters();
+    }
+
+    @Override
+    public ForwardMessageMethod setSuggestedPostParameters(SuggestedPostParameters parameters) {
+        method.suggestedPostParameters(parameters);
+        return this;
+    }
 
     @Override
     public Message call(@NotNull CommonAbsSender sender) {

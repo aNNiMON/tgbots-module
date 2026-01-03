@@ -2,9 +2,11 @@ package com.annimon.tgbotsmodule.api.methods.send;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.DirectMessageTopicMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.SuggestedPostParametersMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
@@ -12,12 +14,15 @@ import org.telegram.telegrambots.meta.api.methods.send.SendContact;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
+import org.telegram.telegrambots.meta.api.objects.suggestedpost.SuggestedPostParameters;
 
 public class SendContactMethod implements
         ReplyMarkupSupportedMessageMethod<SendContactMethod, Message>,
         ProtectedContentMethod<SendContactMethod, Message>,
         AllowPaidBroadcastMethod<SendContactMethod, Message>,
         MessageEffectMethod<SendContactMethod, Message>,
+        DirectMessageTopicMethod<SendContactMethod, Message>,
+        SuggestedPostParametersMethod<SendContactMethod, Message>,
         BusinessConnectionMethod<SendContactMethod, Message> {
 
     private final SendContact.SendContactBuilder<?, ?> method;
@@ -190,6 +195,28 @@ public class SendContactMethod implements
     @Override
     public SendContactMethod setAllowPaidBroadcast(Boolean flag) {
         method.allowPaidBroadcast(flag);
+        return this;
+    }
+
+    @Override
+    public Integer getDirectMessagesTopicId() {
+        return method.build().getDirectMessagesTopicId();
+    }
+
+    @Override
+    public SendContactMethod setDirectMessagesTopicId(Integer topicId) {
+        method.directMessagesTopicId(topicId);
+        return this;
+    }
+
+    @Override
+    public SuggestedPostParameters getSuggestedPostParameters() {
+        return method.build().getSuggestedPostParameters();
+    }
+
+    @Override
+    public SendContactMethod setSuggestedPostParameters(SuggestedPostParameters parameters) {
+        method.suggestedPostParameters(parameters);
         return this;
     }
 

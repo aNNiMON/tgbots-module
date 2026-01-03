@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.other;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageThreadMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.DirectMessageTopicMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.NotificationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.RemoveCaptionMethod;
@@ -16,6 +17,7 @@ public class CopyMessagesMethod implements
         ChatMessageThreadMethod<CopyMessagesMethod, ArrayList<MessageId>>,
         NotificationMethod<CopyMessagesMethod, ArrayList<MessageId>>,
         ProtectedContentMethod<CopyMessagesMethod, ArrayList<MessageId>>,
+        DirectMessageTopicMethod<CopyMessagesMethod, ArrayList<MessageId>>,
         RemoveCaptionMethod<CopyMessagesMethod, ArrayList<MessageId>> {
 
     private final CopyMessages.CopyMessagesBuilder<?, ?> method;
@@ -107,6 +109,17 @@ public class CopyMessagesMethod implements
     @Override
     public CopyMessagesMethod setRemoveCaption(Boolean removeCaption) {
         method.removeCaption(removeCaption);
+        return this;
+    }
+
+    @Override
+    public Integer getDirectMessagesTopicId() {
+        return method.build().getDirectMessagesTopicId();
+    }
+
+    @Override
+    public CopyMessagesMethod setDirectMessagesTopicId(Integer topicId) {
+        method.directMessagesTopicId(topicId);
         return this;
     }
 

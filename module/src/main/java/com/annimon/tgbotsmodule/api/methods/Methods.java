@@ -373,6 +373,16 @@ public final class Methods {
         public static UnpinAllChatMessagesMethod unpinAllChatMessages(long chatId) {
             return unpinAllChatMessages().setChatId(chatId);
         }
+
+
+        public static ApproveSuggestedPostMethod approveSuggestedPost() {
+            return new ApproveSuggestedPostMethod();
+        }
+
+
+        public static DeclineSuggestedPostMethod declineSuggestedPost() {
+            return new DeclineSuggestedPostMethod();
+        }
     }
 
     public static class Business {

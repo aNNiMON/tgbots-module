@@ -1,13 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.send;
 
-import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ParseModeMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.TextMethod;
-import com.annimon.tgbotsmodule.api.methods.interfaces.WebPagePreviewMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.*;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -18,6 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
+import org.telegram.telegrambots.meta.api.objects.suggestedpost.SuggestedPostParameters;
 
 public class SendMessageMethod implements
         ReplyMarkupSupportedMessageMethod<SendMessageMethod, Message>,
@@ -27,6 +21,8 @@ public class SendMessageMethod implements
         AllowPaidBroadcastMethod<SendMessageMethod, Message>,
         TextMethod<SendMessageMethod, Message>,
         MessageEffectMethod<SendMessageMethod, Message>,
+        DirectMessageTopicMethod<SendMessageMethod, Message>,
+        SuggestedPostParametersMethod<SendMessageMethod, Message>,
         BusinessConnectionMethod<SendMessageMethod, Message> {
 
     private final SendMessage.SendMessageBuilder<?, ?> method;
@@ -220,6 +216,28 @@ public class SendMessageMethod implements
     @Override
     public SendMessageMethod setAllowPaidBroadcast(Boolean flag) {
         method.allowPaidBroadcast(flag);
+        return this;
+    }
+
+    @Override
+    public Integer getDirectMessagesTopicId() {
+        return method.build().getDirectMessagesTopicId();
+    }
+
+    @Override
+    public SendMessageMethod setDirectMessagesTopicId(Integer topicId) {
+        method.directMessagesTopicId(topicId);
+        return this;
+    }
+
+    @Override
+    public SuggestedPostParameters getSuggestedPostParameters() {
+        return method.build().getSuggestedPostParameters();
+    }
+
+    @Override
+    public SendMessageMethod setSuggestedPostParameters(SuggestedPostParameters parameters) {
+        method.suggestedPostParameters(parameters);
         return this;
     }
 

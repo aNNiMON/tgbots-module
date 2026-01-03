@@ -1,6 +1,7 @@
 package com.annimon.tgbotsmodule.api.methods.other;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageThreadMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.DirectMessageTopicMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.NotificationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
@@ -14,6 +15,7 @@ import org.telegram.telegrambots.meta.api.objects.MessageId;
 public class ForwardMessagesMethod implements
         ChatMessageThreadMethod<ForwardMessagesMethod, ArrayList<MessageId>>,
         NotificationMethod<ForwardMessagesMethod, ArrayList<MessageId>>,
+        DirectMessageTopicMethod<ForwardMessagesMethod, ArrayList<MessageId>>,
         ProtectedContentMethod<ForwardMessagesMethod, ArrayList<MessageId>> {
 
     private final ForwardMessages.ForwardMessagesBuilder<?, ?> method;
@@ -94,6 +96,17 @@ public class ForwardMessagesMethod implements
     @Override
     public ForwardMessagesMethod setProtectContent(Boolean protectContent) {
         method.protectContent(protectContent);
+        return this;
+    }
+
+    @Override
+    public Integer getDirectMessagesTopicId() {
+        return method.build().getDirectMessagesTopicId();
+    }
+
+    @Override
+    public ForwardMessagesMethod setDirectMessagesTopicId(Integer topicId) {
+        method.directMessagesTopicId(topicId);
         return this;
     }
 

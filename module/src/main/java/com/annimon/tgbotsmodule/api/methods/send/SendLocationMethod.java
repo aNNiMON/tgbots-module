@@ -2,10 +2,12 @@ package com.annimon.tgbotsmodule.api.methods.send;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.DirectMessageTopicMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.LocationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.SuggestedPostParametersMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
@@ -13,6 +15,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendLocation;
 import org.telegram.telegrambots.meta.api.objects.ReplyParameters;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
+import org.telegram.telegrambots.meta.api.objects.suggestedpost.SuggestedPostParameters;
 
 public class SendLocationMethod implements
         ReplyMarkupSupportedMessageMethod<SendLocationMethod, Message>,
@@ -20,6 +23,8 @@ public class SendLocationMethod implements
         ProtectedContentMethod<SendLocationMethod, Message>,
         AllowPaidBroadcastMethod<SendLocationMethod, Message>,
         MessageEffectMethod<SendLocationMethod, Message>,
+        DirectMessageTopicMethod<SendLocationMethod, Message>,
+        SuggestedPostParametersMethod<SendLocationMethod, Message>,
         BusinessConnectionMethod<SendLocationMethod, Message> {
 
     private final SendLocation.SendLocationBuilder<?, ?> method;
@@ -214,6 +219,28 @@ public class SendLocationMethod implements
     @Override
     public SendLocationMethod setAllowPaidBroadcast(Boolean flag) {
         method.allowPaidBroadcast(flag);
+        return this;
+    }
+
+    @Override
+    public Integer getDirectMessagesTopicId() {
+        return method.build().getDirectMessagesTopicId();
+    }
+
+    @Override
+    public SendLocationMethod setDirectMessagesTopicId(Integer topicId) {
+        method.directMessagesTopicId(topicId);
+        return this;
+    }
+
+    @Override
+    public SuggestedPostParameters getSuggestedPostParameters() {
+        return method.build().getSuggestedPostParameters();
+    }
+
+    @Override
+    public SendLocationMethod setSuggestedPostParameters(SuggestedPostParameters parameters) {
+        method.suggestedPostParameters(parameters);
         return this;
     }
 
