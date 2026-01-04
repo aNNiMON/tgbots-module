@@ -12,23 +12,25 @@ Enhanced Java telegram bots runner built on top of the [Telegram Bots](https://g
  - I want command system with roles support.
  - I want localization support.
 
-## Example
+## Examples
 
- [@tgbotsmodulebot](https://t.me/tgbotsmodulebot) ([source code](https://github.com/annimon-tutorials/tgbotsmodule-webhook-bot))
+- [@tgbotsmodulebot source code](https://github.com/annimon-tutorials/tgbotsmodule-webhook-bot)
+- [@lastkatkatbot source code](https://github.com/Senderman/lastkatkabot)
+- [@artific_intellig_bot source code](https://github.com/Helltar/artific_intellig_bot)
+- [@effybot source code](https://github.com/aNNiMON/effybot)
 
- 
 ## Usage
  
  - Add gradle dependency:
  
     ```groovy
-    implementation 'com.annimon:tgbots-module:8.0.0'
+    implementation 'com.annimon:tgbots-module:9.2.0'
     ```
 
 - Or if you don't want to use webhooks:
 
     ```groovy
-    implementation ('com.annimon:tgbots-module:8.0.0') {
+    implementation ('com.annimon:tgbots-module:9.2.0') {
         exclude group: 'org.telegram', module: 'telegrambots-webhook'
     }
     ```
