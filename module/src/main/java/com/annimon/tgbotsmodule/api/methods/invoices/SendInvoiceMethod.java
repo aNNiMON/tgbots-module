@@ -356,29 +356,23 @@ public class SendInvoiceMethod implements
 
     @Override
     public Integer getDirectMessagesTopicId() {
-        // TODO uncomment when available in Telegram Bots API
-        // return method.build().getDirectMessagesTopicId();
-        return null;
+        return method.build().getDirectMessagesTopicId();
     }
 
     @Override
     public SendInvoiceMethod setDirectMessagesTopicId(Integer topicId) {
-        // TODO uncomment when available in Telegram Bots API
-        // method.directMessagesTopicId(topicId);
+        method.directMessagesTopicId(topicId);
         return this;
     }
 
     @Override
     public SuggestedPostParameters getSuggestedPostParameters() {
-        // TODO uncomment when available in Telegram Bots API
-        // return method.build().getSuggestedPostParameters();
-        return null;
+        return method.build().getSuggestedPostParameters();
     }
 
     @Override
     public SendInvoiceMethod setSuggestedPostParameters(SuggestedPostParameters parameters) {
-        // TODO uncomment when available in Telegram Bots API
-        // method.suggestedPostParameters(parameters);
+        method.suggestedPostParameters(parameters);
         return this;
     }
 

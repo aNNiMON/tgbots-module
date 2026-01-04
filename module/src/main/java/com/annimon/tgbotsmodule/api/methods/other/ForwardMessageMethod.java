@@ -106,7 +106,6 @@ public class ForwardMessageMethod implements
         return this;
     }
 
-    /* TODO: uncomment when fixed in Telegram Bots API
     public Integer getVideoStartTimestamp() {
         return method.build().getVideoStartTimestamp();
     }
@@ -114,7 +113,7 @@ public class ForwardMessageMethod implements
     public ForwardMessageMethod setVideoStartTimestamp(Integer videoStartTimestamp) {
         method.videoStartTimestamp(videoStartTimestamp);
         return this;
-    }*/
+    }
 
     @Override
     public Integer getDirectMessagesTopicId() {
