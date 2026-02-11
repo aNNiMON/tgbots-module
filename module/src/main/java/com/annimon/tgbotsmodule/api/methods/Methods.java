@@ -25,6 +25,7 @@ import com.annimon.tgbotsmodule.api.methods.stories.DeleteStoryMethod;
 import com.annimon.tgbotsmodule.api.methods.stories.EditStoryMethod;
 import com.annimon.tgbotsmodule.api.methods.stories.PostStoryMethod;
 import com.annimon.tgbotsmodule.api.methods.stickers.*;
+import com.annimon.tgbotsmodule.api.methods.stories.RepostStoryMethod;
 import com.annimon.tgbotsmodule.api.methods.updates.DeleteWebhookMethod;
 import com.annimon.tgbotsmodule.api.methods.updates.GetUpdatesMethod;
 import com.annimon.tgbotsmodule.api.methods.updates.GetWebhookInfoMethod;
@@ -878,6 +879,10 @@ public final class Methods {
             return new PostStoryMethod();
         }
 
+        public static RepostStoryMethod repostStory() {
+            return new RepostStoryMethod();
+        }
+
         public static EditStoryMethod editStory() {
             return new EditStoryMethod();
         }
@@ -910,6 +915,26 @@ public final class Methods {
 
         public static GetAvailableGiftsMethod getAvailableGifts() {
             return new GetAvailableGiftsMethod();
+        }
+
+        public static GetChatGiftsMethod getChatGifts() {
+            return new GetChatGiftsMethod();
+        }
+
+        public static GetChatGiftsMethod getChatGifts(@NotNull String chatId) {
+            return getChatGifts().setChatId(chatId);
+        }
+
+        public static GetChatGiftsMethod getChatGifts(long chatId) {
+            return getChatGifts().setChatId(chatId);
+        }
+
+        public static GetUserGiftsMethod getUserGifts() {
+            return new GetUserGiftsMethod();
+        }
+
+        public static GetUserGiftsMethod getUserGifts(long userId) {
+            return getUserGifts().setUserId(userId);
         }
 
         public static SendGiftMethod sendGift() {
@@ -1275,6 +1300,19 @@ public final class Methods {
 
     public static SendMessageMethod sendMessage(long chatId, @NotNull String text) {
         return sendMessage().setChatId(chatId).setText(text);
+    }
+
+
+    public static SendMessageDraftMethod sendMessageDraft() {
+        return new SendMessageDraftMethod();
+    }
+
+    public static SendMessageDraftMethod sendMessageDraft(@NotNull String chatId, @NotNull String text) {
+        return sendMessageDraft().setChatId(chatId).setText(text);
+    }
+
+    public static SendMessageDraftMethod sendMessageDraft(long chatId, @NotNull String text) {
+        return sendMessageDraft().setChatId(chatId).setText(text);
     }
 
 

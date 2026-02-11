@@ -57,12 +57,21 @@ public class GetBusinessAccountGiftsMethod implements BusinessConnectionMethod<G
         return this;
     }
 
-    public Boolean getExcludeLimited() {
-        return method.build().getExcludeLimited();
+    public Boolean getExcludeLimitedUpgradable() {
+        return method.build().getExcludeLimitedUpgradable();
     }
 
-    public GetBusinessAccountGiftsMethod setExcludeLimited(Boolean excludeLimited) {
-        method.excludeLimited(excludeLimited);
+    public GetBusinessAccountGiftsMethod setExcludeLimitedUpgradable(Boolean flag) {
+        method.excludeLimitedUpgradable(flag);
+        return this;
+    }
+
+    public Boolean getExcludeLimitedNonUpgradable() {
+        return method.build().getExcludeLimitedNonUpgradable();
+    }
+
+    public GetBusinessAccountGiftsMethod setExcludeLimitedNonUpgradable(Boolean flag) {
+        method.excludeLimitedNonUpgradable(flag);
         return this;
     }
 
@@ -72,6 +81,15 @@ public class GetBusinessAccountGiftsMethod implements BusinessConnectionMethod<G
 
     public GetBusinessAccountGiftsMethod setExcludeUnique(Boolean excludeUnique) {
         method.excludeUnique(excludeUnique);
+        return this;
+    }
+
+    public Boolean getExcludeFromBlockchain() {
+        return method.build().getExcludeFromBlockchain();
+    }
+
+    public GetBusinessAccountGiftsMethod setExcludeFromBlockchain(Boolean flag) {
+        method.excludeFromBlockchain(flag);
         return this;
     }
 

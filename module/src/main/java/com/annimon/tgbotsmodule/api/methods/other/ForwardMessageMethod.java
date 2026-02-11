@@ -3,6 +3,7 @@ package com.annimon.tgbotsmodule.api.methods.other;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageThreadMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DirectMessageTopicMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.NotificationMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SuggestedPostParametersMethod;
@@ -19,6 +20,7 @@ public class ForwardMessageMethod implements
         NotificationMethod<ForwardMessageMethod, Message>,
         DirectMessageTopicMethod<ForwardMessageMethod, Message>,
         SuggestedPostParametersMethod<ForwardMessageMethod, Message>,
+        MessageEffectMethod<ForwardMessageMethod, Message>,
         ProtectedContentMethod<ForwardMessageMethod, Message> {
 
     private final ForwardMessage.ForwardMessageBuilder<?, ?> method;
@@ -134,6 +136,17 @@ public class ForwardMessageMethod implements
     @Override
     public ForwardMessageMethod setSuggestedPostParameters(SuggestedPostParameters parameters) {
         method.suggestedPostParameters(parameters);
+        return this;
+    }
+
+    @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public ForwardMessageMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
         return this;
     }
 

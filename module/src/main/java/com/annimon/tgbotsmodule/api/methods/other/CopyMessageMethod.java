@@ -4,6 +4,7 @@ import com.annimon.tgbotsmodule.api.methods.interfaces.AllowPaidBroadcastMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.CaptionAboveMediaMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.DirectMessageTopicMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.MessageEffectMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ProtectedContentMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.ReplyMarkupSupportedMessageMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.SuggestedPostParametersMethod;
@@ -23,6 +24,7 @@ public class CopyMessageMethod implements
         AllowPaidBroadcastMethod<CopyMessageMethod, MessageId>,
         DirectMessageTopicMethod<CopyMessageMethod, MessageId>,
         SuggestedPostParametersMethod<CopyMessageMethod, MessageId>,
+        MessageEffectMethod<CopyMessageMethod, MessageId>,
         CaptionAboveMediaMethod<CopyMessageMethod, MessageId> {
 
     private final CopyMessage.CopyMessageBuilder<?, ?> method;
@@ -204,6 +206,17 @@ public class CopyMessageMethod implements
     @Override
     public CopyMessageMethod setSuggestedPostParameters(SuggestedPostParameters parameters) {
         method.suggestedPostParameters(parameters);
+        return this;
+    }
+
+    @Override
+    public String getMessageEffectId() {
+        return method.build().getMessageEffectId();
+    }
+
+    @Override
+    public CopyMessageMethod setMessageEffectId(String messageEffectId) {
+        method.messageEffectId(messageEffectId);
         return this;
     }
 
