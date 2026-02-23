@@ -1094,6 +1094,15 @@ public final class Methods {
     }
 
 
+    public static GetUserProfileAudiosMethod getUserProfileAudios() {
+        return new GetUserProfileAudiosMethod();
+    }
+
+    public static GetUserProfileAudiosMethod getUserProfileAudios(long userId) {
+        return getUserProfileAudios().setUserId(userId);
+    }
+
+
     public static GetUserProfilePhotosMethod getUserProfilePhotos() {
         return new GetUserProfilePhotosMethod();
     }
@@ -1171,6 +1180,14 @@ public final class Methods {
 
     public static DeleteMyCommandsMethod deleteMyCommands(BotCommandScope scope) {
         return deleteMyCommands().setScope(scope);
+    }
+
+    public static SetMyProfilePhotoMethod setMyProfilePhoto() {
+        return new SetMyProfilePhotoMethod();
+    }
+
+    public static RemoveMyProfilePhotoMethod removeMyProfilePhoto() {
+        return new RemoveMyProfilePhotoMethod();
     }
 
     public static SetUserEmojiStatusMethod setUserEmojiStatus() {
