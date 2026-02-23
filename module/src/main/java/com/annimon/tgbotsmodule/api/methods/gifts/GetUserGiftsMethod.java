@@ -1,5 +1,6 @@
 package com.annimon.tgbotsmodule.api.methods.gifts;
 
+import com.annimon.tgbotsmodule.api.methods.interfaces.PaginableStringMethod;
 import com.annimon.tgbotsmodule.api.methods.interfaces.UserMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.concurrent.CompletableFuture;
@@ -7,7 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.gifts.GetUserGifts;
 import org.telegram.telegrambots.meta.api.objects.gifts.owned.OwnedGifts;
 
-public class GetUserGiftsMethod implements UserMethod<GetUserGiftsMethod, OwnedGifts> {
+public class GetUserGiftsMethod implements
+        UserMethod<GetUserGiftsMethod, OwnedGifts>,
+        PaginableStringMethod<GetUserGiftsMethod, OwnedGifts> {
 
     private final GetUserGifts.GetUserGiftsBuilder method;
 
@@ -84,19 +87,23 @@ public class GetUserGiftsMethod implements UserMethod<GetUserGiftsMethod, OwnedG
         return this;
     }
 
+    @Override
     public String getOffset() {
         return method.build().getOffset();
     }
 
+    @Override
     public GetUserGiftsMethod setOffset(String offset) {
         method.offset(offset);
         return this;
     }
 
+    @Override
     public Integer getLimit() {
         return method.build().getLimit();
     }
 
+    @Override
     public GetUserGiftsMethod setLimit(Integer limit) {
         method.limit(limit);
         return this;

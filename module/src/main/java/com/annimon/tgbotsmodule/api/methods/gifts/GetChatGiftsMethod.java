@@ -1,13 +1,16 @@
 package com.annimon.tgbotsmodule.api.methods.gifts;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.ChatMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.PaginableStringMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.gifts.GetChatGifts;
 import org.telegram.telegrambots.meta.api.objects.gifts.owned.OwnedGifts;
 
-public class GetChatGiftsMethod implements ChatMethod<GetChatGiftsMethod, OwnedGifts> {
+public class GetChatGiftsMethod implements
+        ChatMethod<GetChatGiftsMethod, OwnedGifts>,
+        PaginableStringMethod<GetChatGiftsMethod, OwnedGifts> {
 
     private final GetChatGifts.GetChatGiftsBuilder method;
 
@@ -102,19 +105,23 @@ public class GetChatGiftsMethod implements ChatMethod<GetChatGiftsMethod, OwnedG
         return this;
     }
 
+    @Override
     public String getOffset() {
         return method.build().getOffset();
     }
 
+    @Override
     public GetChatGiftsMethod setOffset(String offset) {
         method.offset(offset);
         return this;
     }
 
+    @Override
     public Integer getLimit() {
         return method.build().getLimit();
     }
 
+    @Override
     public GetChatGiftsMethod setLimit(Integer limit) {
         method.limit(limit);
         return this;

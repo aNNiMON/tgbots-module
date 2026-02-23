@@ -1,13 +1,16 @@
 package com.annimon.tgbotsmodule.api.methods.business;
 
 import com.annimon.tgbotsmodule.api.methods.interfaces.BusinessConnectionMethod;
+import com.annimon.tgbotsmodule.api.methods.interfaces.PaginableStringMethod;
 import com.annimon.tgbotsmodule.services.CommonAbsSender;
 import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.meta.api.methods.business.GetBusinessAccountGifts;
 import org.telegram.telegrambots.meta.api.objects.gifts.owned.OwnedGifts;
 
-public class GetBusinessAccountGiftsMethod implements BusinessConnectionMethod<GetBusinessAccountGiftsMethod, OwnedGifts> {
+public class GetBusinessAccountGiftsMethod implements
+        BusinessConnectionMethod<GetBusinessAccountGiftsMethod, OwnedGifts>,
+        PaginableStringMethod<GetBusinessAccountGiftsMethod, OwnedGifts> {
 
     private final GetBusinessAccountGifts.GetBusinessAccountGiftsBuilder method;
 
@@ -102,19 +105,23 @@ public class GetBusinessAccountGiftsMethod implements BusinessConnectionMethod<G
         return this;
     }
 
+    @Override
     public String getOffset() {
         return method.build().getOffset();
     }
 
+    @Override
     public GetBusinessAccountGiftsMethod setOffset(String offset) {
         method.offset(offset);
         return this;
     }
 
+    @Override
     public Integer getLimit() {
         return method.build().getLimit();
     }
 
+    @Override
     public GetBusinessAccountGiftsMethod setLimit(Integer limit) {
         method.limit(limit);
         return this;
