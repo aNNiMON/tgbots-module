@@ -29,7 +29,7 @@ public class SendVoiceMethod implements
         this(SendVoice.builder());
     }
 
-    public SendVoiceMethod(@NotNull SendVoice.SendVoiceBuilder method) {
+    public SendVoiceMethod(@NotNull SendVoice.SendVoiceBuilder<?, ?> method) {
         this.method = method;
     }
 

@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.objects.ChatInviteLink;
 
 public class EditChatInviteLinkMethod implements ChatMethod<EditChatInviteLinkMethod, ChatInviteLink> {
 
-    private final EditChatInviteLink.EditChatInviteLinkBuilder method;
+    private final EditChatInviteLink.EditChatInviteLinkBuilder<?, ?> method;
 
     public EditChatInviteLinkMethod() {
         this(EditChatInviteLink.builder());
     }
 
-    public EditChatInviteLinkMethod(@NotNull EditChatInviteLink.EditChatInviteLinkBuilder method) {
+    public EditChatInviteLinkMethod(@NotNull EditChatInviteLink.EditChatInviteLinkBuilder<?, ?> method) {
         this.method = method;
     }
 

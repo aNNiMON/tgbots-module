@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.api.methods.AnswerPreCheckoutQuery;
 
 public class AnswerPreCheckoutQueryMethod implements Method<Boolean> {
 
-    private final AnswerPreCheckoutQuery.AnswerPreCheckoutQueryBuilder method;
+    private final AnswerPreCheckoutQuery.AnswerPreCheckoutQueryBuilder<?, ?> method;
 
     public AnswerPreCheckoutQueryMethod() {
         this(AnswerPreCheckoutQuery.builder());

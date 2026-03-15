@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.pinnedmessages.UnpinAllChatMes
 
 public class UnpinAllChatMessagesMethod implements ChatMethod<UnpinAllChatMessagesMethod, Boolean> {
 
-    private final UnpinAllChatMessages.UnpinAllChatMessagesBuilder method;
+    private final UnpinAllChatMessages.UnpinAllChatMessagesBuilder<?, ?> method;
 
     public UnpinAllChatMessagesMethod() {
         this(UnpinAllChatMessages.builder());
     }
 
-    public UnpinAllChatMessagesMethod(@NotNull UnpinAllChatMessages.UnpinAllChatMessagesBuilder method) {
+    public UnpinAllChatMessagesMethod(@NotNull UnpinAllChatMessages.UnpinAllChatMessagesBuilder<?, ?> method) {
         this.method = method;
     }
 

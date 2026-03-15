@@ -15,14 +15,14 @@ public class UploadStickerFileMethod implements
         InputFileMethod<UploadStickerFileMethod, File>,
         StickerFormatMethod<UploadStickerFileMethod, File> {
 
-    private final UploadStickerFile.UploadStickerFileBuilder method;
+    private final UploadStickerFile.UploadStickerFileBuilder<?, ?> method;
 
     public UploadStickerFileMethod() {
         this(UploadStickerFile.builder());
 
     }
 
-    public UploadStickerFileMethod(@NotNull UploadStickerFile.UploadStickerFileBuilder method) {
+    public UploadStickerFileMethod(@NotNull UploadStickerFile.UploadStickerFileBuilder<?, ?> method) {
         this.method = method;
     }
 

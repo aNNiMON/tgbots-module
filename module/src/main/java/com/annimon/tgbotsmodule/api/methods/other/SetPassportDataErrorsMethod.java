@@ -11,13 +11,13 @@ import org.telegram.telegrambots.meta.api.objects.passport.dataerror.PassportEle
 
 public class SetPassportDataErrorsMethod implements UserMethod<SetPassportDataErrorsMethod, Boolean> {
 
-    private final SetPassportDataErrors.SetPassportDataErrorsBuilder method;
+    private final SetPassportDataErrors.SetPassportDataErrorsBuilder<?, ?> method;
 
     public SetPassportDataErrorsMethod() {
         this(SetPassportDataErrors.builder());
     }
 
-    public SetPassportDataErrorsMethod(@NotNull SetPassportDataErrors.SetPassportDataErrorsBuilder method) {
+    public SetPassportDataErrorsMethod(@NotNull SetPassportDataErrors.SetPassportDataErrorsBuilder<?, ?> method) {
         this.method = method;
     }
 

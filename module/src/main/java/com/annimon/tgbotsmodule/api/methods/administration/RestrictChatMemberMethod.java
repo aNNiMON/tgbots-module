@@ -12,13 +12,13 @@ public class RestrictChatMemberMethod implements
         TimePeriodMethod<RestrictChatMemberMethod, Boolean>,
         ChatMemberMethod<RestrictChatMemberMethod, Boolean> {
 
-    private final RestrictChatMember.RestrictChatMemberBuilder method;
+    private final RestrictChatMember.RestrictChatMemberBuilder<?, ?> method;
 
     public RestrictChatMemberMethod() {
         this(RestrictChatMember.builder());
     }
 
-    public RestrictChatMemberMethod(@NotNull RestrictChatMember.RestrictChatMemberBuilder method) {
+    public RestrictChatMemberMethod(@NotNull RestrictChatMember.RestrictChatMemberBuilder<?, ?> method) {
         this.method = method;
     }
 

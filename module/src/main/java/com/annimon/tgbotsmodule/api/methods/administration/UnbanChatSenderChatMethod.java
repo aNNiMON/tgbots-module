@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.UnbanChatS
 
 public class UnbanChatSenderChatMethod implements ChatMethod<UnbanChatSenderChatMethod, Boolean> {
 
-    private final UnbanChatSenderChat.UnbanChatSenderChatBuilder method;
+    private final UnbanChatSenderChat.UnbanChatSenderChatBuilder<?, ?> method;
 
     public UnbanChatSenderChatMethod() {
         this(UnbanChatSenderChat.builder());
     }
 
-    public UnbanChatSenderChatMethod(@NotNull UnbanChatSenderChat.UnbanChatSenderChatBuilder method) {
+    public UnbanChatSenderChatMethod(@NotNull UnbanChatSenderChat.UnbanChatSenderChatBuilder<?, ?> method) {
         this.method = method;
     }
 

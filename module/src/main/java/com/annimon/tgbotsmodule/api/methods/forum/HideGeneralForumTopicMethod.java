@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.forum.HideGeneralForumTopic;
 
 public class HideGeneralForumTopicMethod implements ChatMethod<HideGeneralForumTopicMethod, Boolean> {
 
-    private final HideGeneralForumTopic.HideGeneralForumTopicBuilder method;
+    private final HideGeneralForumTopic.HideGeneralForumTopicBuilder<?, ?> method;
 
     public HideGeneralForumTopicMethod() {
         this(HideGeneralForumTopic.builder());
     }
 
-    public HideGeneralForumTopicMethod(@NotNull HideGeneralForumTopic.HideGeneralForumTopicBuilder method) {
+    public HideGeneralForumTopicMethod(@NotNull HideGeneralForumTopic.HideGeneralForumTopicBuilder<?, ?> method) {
         this.method = method;
     }
 

@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatSti
 
 public class SetChatStickerSetMethod implements ChatMethod<SetChatStickerSetMethod, Boolean> {
 
-    private final SetChatStickerSet.SetChatStickerSetBuilder method;
+    private final SetChatStickerSet.SetChatStickerSetBuilder<?, ?> method;
 
     public SetChatStickerSetMethod() {
         this(SetChatStickerSet.builder());
     }
 
-    public SetChatStickerSetMethod(@NotNull SetChatStickerSet.SetChatStickerSetBuilder method) {
+    public SetChatStickerSetMethod(@NotNull SetChatStickerSet.SetChatStickerSetBuilder<?, ?> method) {
         this.method = method;
     }
 

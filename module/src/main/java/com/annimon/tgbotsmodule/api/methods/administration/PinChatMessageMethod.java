@@ -19,7 +19,7 @@ public class PinChatMessageMethod implements
         this(PinChatMessage.builder());
     }
 
-    public PinChatMessageMethod(@NotNull PinChatMessage.PinChatMessageBuilder method) {
+    public PinChatMessageMethod(@NotNull PinChatMessage.PinChatMessageBuilder<?, ?> method) {
         this.method = method;
     }
 

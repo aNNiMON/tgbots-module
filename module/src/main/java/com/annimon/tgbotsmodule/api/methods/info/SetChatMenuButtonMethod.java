@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.objects.menubutton.MenuButton;
 
 public class SetChatMenuButtonMethod implements ChatMethod<SetChatMenuButtonMethod, Boolean> {
 
-    private final SetChatMenuButton.SetChatMenuButtonBuilder method;
+    private final SetChatMenuButton.SetChatMenuButtonBuilder<?, ?> method;
 
     public SetChatMenuButtonMethod() {
         this(SetChatMenuButton.builder());
     }
 
-    public SetChatMenuButtonMethod(@NotNull SetChatMenuButton.SetChatMenuButtonBuilder method) {
+    public SetChatMenuButtonMethod(@NotNull SetChatMenuButton.SetChatMenuButtonBuilder<?, ?> method) {
         this.method = method;
     }
 

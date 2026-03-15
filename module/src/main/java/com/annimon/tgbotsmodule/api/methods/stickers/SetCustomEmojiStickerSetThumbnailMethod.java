@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.stickers.SetCustomEmojiSticker
 
 public class SetCustomEmojiStickerSetThumbnailMethod implements Method<Boolean> {
 
-    private final SetCustomEmojiStickerSetThumbnail.SetCustomEmojiStickerSetThumbnailBuilder method;
+    private final SetCustomEmojiStickerSetThumbnail.SetCustomEmojiStickerSetThumbnailBuilder<?, ?> method;
 
     public SetCustomEmojiStickerSetThumbnailMethod() {
         this(SetCustomEmojiStickerSetThumbnail.builder());
     }
 
-    public SetCustomEmojiStickerSetThumbnailMethod(@NotNull SetCustomEmojiStickerSetThumbnail.SetCustomEmojiStickerSetThumbnailBuilder method) {
+    public SetCustomEmojiStickerSetThumbnailMethod(@NotNull SetCustomEmojiStickerSetThumbnail.SetCustomEmojiStickerSetThumbnailBuilder<?, ?> method) {
         this.method = method;
     }
 

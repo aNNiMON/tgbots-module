@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.forum.DeleteForumTopic;
 
 public class DeleteForumTopicMethod implements ChatMessageThreadMethod<DeleteForumTopicMethod, Boolean> {
 
-    private final DeleteForumTopic.DeleteForumTopicBuilder method;
+    private final DeleteForumTopic.DeleteForumTopicBuilder<?, ?> method;
 
     public DeleteForumTopicMethod() {
         this(DeleteForumTopic.builder());
     }
 
-    public DeleteForumTopicMethod(@NotNull DeleteForumTopic.DeleteForumTopicBuilder method) {
+    public DeleteForumTopicMethod(@NotNull DeleteForumTopic.DeleteForumTopicBuilder<?, ?> method) {
         this.method = method;
     }
 

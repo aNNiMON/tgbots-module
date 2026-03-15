@@ -18,7 +18,7 @@ public class SetChatPhotoMethod implements
         this(SetChatPhoto.builder());
     }
 
-    public SetChatPhotoMethod(@NotNull SetChatPhoto.SetChatPhotoBuilder method) {
+    public SetChatPhotoMethod(@NotNull SetChatPhoto.SetChatPhotoBuilder<?, ?> method) {
         this.method = method;
     }
 

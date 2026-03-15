@@ -11,13 +11,13 @@ import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope
 
 public class SetMyCommandsMethod implements Method<Boolean> {
 
-    private final SetMyCommands.SetMyCommandsBuilder method;
+    private final SetMyCommands.SetMyCommandsBuilder<?, ?> method;
 
     public SetMyCommandsMethod() {
         this(SetMyCommands.builder());
     }
 
-    public SetMyCommandsMethod(@NotNull SetMyCommands.SetMyCommandsBuilder method) {
+    public SetMyCommandsMethod(@NotNull SetMyCommands.SetMyCommandsBuilder<?, ?> method) {
         this.method = method;
     }
 

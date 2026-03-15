@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.forum.ReopenGeneralForumTopic;
 
 public class ReopenGeneralForumTopicMethod implements ChatMethod<ReopenGeneralForumTopicMethod, Boolean> {
 
-    private final ReopenGeneralForumTopic.ReopenGeneralForumTopicBuilder method;
+    private final ReopenGeneralForumTopic.ReopenGeneralForumTopicBuilder<?, ?> method;
 
     public ReopenGeneralForumTopicMethod() {
         this(ReopenGeneralForumTopic.builder());
     }
 
-    public ReopenGeneralForumTopicMethod(@NotNull ReopenGeneralForumTopic.ReopenGeneralForumTopicBuilder method) {
+    public ReopenGeneralForumTopicMethod(@NotNull ReopenGeneralForumTopic.ReopenGeneralForumTopicBuilder<?, ?> method) {
         this.method = method;
     }
 

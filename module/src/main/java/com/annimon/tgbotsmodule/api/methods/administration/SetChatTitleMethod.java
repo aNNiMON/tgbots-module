@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatTit
 
 public class SetChatTitleMethod implements ChatMethod<SetChatTitleMethod, Boolean> {
 
-    private final SetChatTitle.SetChatTitleBuilder method;
+    private final SetChatTitle.SetChatTitleBuilder<?, ?> method;
 
     public SetChatTitleMethod() {
         this(SetChatTitle.builder());
     }
 
-    public SetChatTitleMethod(@NotNull SetChatTitle.SetChatTitleBuilder method) {
+    public SetChatTitleMethod(@NotNull SetChatTitle.SetChatTitleBuilder<?, ?> method) {
         this.method = method;
     }
 

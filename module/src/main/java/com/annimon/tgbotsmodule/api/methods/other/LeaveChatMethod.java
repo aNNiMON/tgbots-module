@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.LeaveChat;
 
 public class LeaveChatMethod implements ChatMethod<LeaveChatMethod, Boolean> {
 
-    private final LeaveChat.LeaveChatBuilder method;
+    private final LeaveChat.LeaveChatBuilder<?, ?> method;
 
     public LeaveChatMethod() {
         this(LeaveChat.builder());
     }
 
-    public LeaveChatMethod(@NotNull LeaveChat.LeaveChatBuilder method) {
+    public LeaveChatMethod(@NotNull LeaveChat.LeaveChatBuilder<?, ?> method) {
         this.method = method;
     }
 

@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.objects.ChatPermissions;
 
 public class SetChatPermissionsMethod implements ChatMethod<SetChatPermissionsMethod, Boolean> {
 
-    private final SetChatPermissions.SetChatPermissionsBuilder method;
+    private final SetChatPermissions.SetChatPermissionsBuilder<?, ?> method;
 
     public SetChatPermissionsMethod() {
         this(SetChatPermissions.builder());
     }
 
-    public SetChatPermissionsMethod(@NotNull SetChatPermissions.SetChatPermissionsBuilder method) {
+    public SetChatPermissionsMethod(@NotNull SetChatPermissions.SetChatPermissionsBuilder<?, ?> method) {
         this.method = method;
     }
 

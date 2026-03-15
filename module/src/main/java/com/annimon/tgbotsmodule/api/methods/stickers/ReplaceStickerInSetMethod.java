@@ -10,13 +10,13 @@ import org.telegram.telegrambots.meta.api.objects.stickers.InputSticker;
 public class ReplaceStickerInSetMethod implements
         UserMethod<ReplaceStickerInSetMethod, Boolean> {
 
-    private final ReplaceStickerInSet.ReplaceStickerInSetBuilder method;
+    private final ReplaceStickerInSet.ReplaceStickerInSetBuilder<?, ?> method;
 
     public ReplaceStickerInSetMethod() {
         this(ReplaceStickerInSet.builder());
     }
 
-    public ReplaceStickerInSetMethod(@NotNull ReplaceStickerInSet.ReplaceStickerInSetBuilder method) {
+    public ReplaceStickerInSetMethod(@NotNull ReplaceStickerInSet.ReplaceStickerInSetBuilder<?, ?> method) {
         this.method = method;
     }
 

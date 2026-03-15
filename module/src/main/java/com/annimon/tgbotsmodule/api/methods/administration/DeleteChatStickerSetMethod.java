@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.DeleteChat
 
 public class DeleteChatStickerSetMethod implements ChatMethod<DeleteChatStickerSetMethod, Boolean> {
 
-    private final DeleteChatStickerSet.DeleteChatStickerSetBuilder method;
+    private final DeleteChatStickerSet.DeleteChatStickerSetBuilder<?, ?> method;
 
     public DeleteChatStickerSetMethod() {
         this(DeleteChatStickerSet.builder());
     }
 
-    public DeleteChatStickerSetMethod(@NotNull DeleteChatStickerSet.DeleteChatStickerSetBuilder method) {
+    public DeleteChatStickerSetMethod(@NotNull DeleteChatStickerSet.DeleteChatStickerSetBuilder<?, ?> method) {
         this.method = method;
     }
 

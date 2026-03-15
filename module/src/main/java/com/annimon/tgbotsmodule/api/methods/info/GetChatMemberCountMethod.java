@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.GetChatMem
 
 public class GetChatMemberCountMethod implements ChatMethod<GetChatMemberCountMethod, Integer> {
 
-    private final GetChatMemberCount.GetChatMemberCountBuilder method;
+    private final GetChatMemberCount.GetChatMemberCountBuilder<?, ?> method;
 
     public GetChatMemberCountMethod() {
         this(GetChatMemberCount.builder());
     }
 
-    public GetChatMemberCountMethod(@NotNull GetChatMemberCount.GetChatMemberCountBuilder method) {
+    public GetChatMemberCountMethod(@NotNull GetChatMemberCount.GetChatMemberCountBuilder<?, ?> method) {
         this.method = method;
     }
 

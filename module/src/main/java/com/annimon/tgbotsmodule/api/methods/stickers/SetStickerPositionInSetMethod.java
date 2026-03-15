@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.stickers.SetStickerPositionInS
 
 public class SetStickerPositionInSetMethod implements Method<Boolean> {
 
-    private final SetStickerPositionInSet.SetStickerPositionInSetBuilder method;
+    private final SetStickerPositionInSet.SetStickerPositionInSetBuilder<?, ?> method;
 
     public SetStickerPositionInSetMethod() {
         this(SetStickerPositionInSet.builder());
     }
 
-    public SetStickerPositionInSetMethod(@NotNull SetStickerPositionInSet.SetStickerPositionInSetBuilder method) {
+    public SetStickerPositionInSetMethod(@NotNull SetStickerPositionInSet.SetStickerPositionInSetBuilder<?, ?> method) {
         this.method = method;
     }
 

@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatDes
 
 public class SetChatDescriptionMethod implements ChatMethod<SetChatDescriptionMethod, Boolean> {
 
-    private final SetChatDescription.SetChatDescriptionBuilder method;
+    private final SetChatDescription.SetChatDescriptionBuilder<?, ?> method;
 
     public SetChatDescriptionMethod() {
         this(SetChatDescription.builder());
     }
 
-    public SetChatDescriptionMethod(@NotNull SetChatDescription.SetChatDescriptionBuilder method) {
+    public SetChatDescriptionMethod(@NotNull SetChatDescription.SetChatDescriptionBuilder<?, ?> method) {
         this.method = method;
     }
 

@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.forum.UnhideGeneralForumTopic;
 
 public class UnhideGeneralForumTopicMethod implements ChatMethod<UnhideGeneralForumTopicMethod, Boolean> {
 
-    private final UnhideGeneralForumTopic.UnhideGeneralForumTopicBuilder method;
+    private final UnhideGeneralForumTopic.UnhideGeneralForumTopicBuilder<?, ?> method;
 
     public UnhideGeneralForumTopicMethod() {
         this(UnhideGeneralForumTopic.builder());
     }
 
-    public UnhideGeneralForumTopicMethod(@NotNull UnhideGeneralForumTopic.UnhideGeneralForumTopicBuilder method) {
+    public UnhideGeneralForumTopicMethod(@NotNull UnhideGeneralForumTopic.UnhideGeneralForumTopicBuilder<?, ?> method) {
         this.method = method;
     }
 

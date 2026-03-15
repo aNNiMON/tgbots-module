@@ -11,13 +11,13 @@ public class UnpinChatMessageMethod implements
         ChatMessageMethod<UnpinChatMessageMethod, Boolean>,
         BusinessConnectionMethod<UnpinChatMessageMethod, Boolean> {
 
-    private final UnpinChatMessage.UnpinChatMessageBuilder method;
+    private final UnpinChatMessage.UnpinChatMessageBuilder<?, ?> method;
 
     public UnpinChatMessageMethod() {
         this(UnpinChatMessage.builder());
     }
 
-    public UnpinChatMessageMethod(@NotNull UnpinChatMessage.UnpinChatMessageBuilder method) {
+    public UnpinChatMessageMethod(@NotNull UnpinChatMessage.UnpinChatMessageBuilder<?, ?> method) {
         this.method = method;
     }
 

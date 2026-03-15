@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.ExportChat
 
 public class ExportChatInviteLinkMethod implements ChatMethod<ExportChatInviteLinkMethod, String> {
 
-    private final ExportChatInviteLink.ExportChatInviteLinkBuilder method;
+    private final ExportChatInviteLink.ExportChatInviteLinkBuilder<?, ?> method;
 
     public ExportChatInviteLinkMethod() {
         this(ExportChatInviteLink.builder());
     }
 
-    public ExportChatInviteLinkMethod(@NotNull ExportChatInviteLink.ExportChatInviteLinkBuilder method) {
+    public ExportChatInviteLinkMethod(@NotNull ExportChatInviteLink.ExportChatInviteLinkBuilder<?, ?> method) {
         this.method = method;
     }
 

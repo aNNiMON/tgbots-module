@@ -14,13 +14,13 @@ public class CreateNewStickerSetMethod implements
     private static final String REGULAR_TYPE = "regular";
     private static final String MASK_TYPE = "mask";
     private static final String CUSTOM_EMOJI_TYPE = "custom_emoji";
-    private final CreateNewStickerSet.CreateNewStickerSetBuilder method;
+    private final CreateNewStickerSet.CreateNewStickerSetBuilder<?, ?> method;
 
     public CreateNewStickerSetMethod() {
         this(CreateNewStickerSet.builder());
     }
 
-    public CreateNewStickerSetMethod(@NotNull CreateNewStickerSet.CreateNewStickerSetBuilder method) {
+    public CreateNewStickerSetMethod(@NotNull CreateNewStickerSet.CreateNewStickerSetBuilder<?, ?> method) {
         this.method = method;
     }
 

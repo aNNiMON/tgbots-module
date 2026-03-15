@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.DeleteChat
 
 public class DeleteChatPhotoMethod implements ChatMethod<DeleteChatPhotoMethod, Boolean> {
 
-    private final DeleteChatPhoto.DeleteChatPhotoBuilder method;
+    private final DeleteChatPhoto.DeleteChatPhotoBuilder<?, ?> method;
 
     public DeleteChatPhotoMethod() {
         this(DeleteChatPhoto.builder());
     }
 
-    public DeleteChatPhotoMethod(@NotNull DeleteChatPhoto.DeleteChatPhotoBuilder method) {
+    public DeleteChatPhotoMethod(@NotNull DeleteChatPhoto.DeleteChatPhotoBuilder<?, ?> method) {
         this.method = method;
     }
 

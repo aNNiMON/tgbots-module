@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.forum.ReopenForumTopic;
 
 public class ReopenForumTopicMethod implements ChatMessageThreadMethod<ReopenForumTopicMethod, Boolean> {
 
-    private final ReopenForumTopic.ReopenForumTopicBuilder method;
+    private final ReopenForumTopic.ReopenForumTopicBuilder<?, ?> method;
 
     public ReopenForumTopicMethod() {
         this(ReopenForumTopic.builder());
     }
 
-    public ReopenForumTopicMethod(@NotNull ReopenForumTopic.ReopenForumTopicBuilder method) {
+    public ReopenForumTopicMethod(@NotNull ReopenForumTopic.ReopenForumTopicBuilder<?, ?> method) {
         this.method = method;
     }
 

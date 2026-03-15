@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.objects.chat.ChatFullInfo;
 
 public class GetChatMethod implements ChatMethod<GetChatMethod, ChatFullInfo> {
 
-    private final GetChat.GetChatBuilder method;
+    private final GetChat.GetChatBuilder<?, ?> method;
 
     public GetChatMethod() {
         this(GetChat.builder());
     }
 
-    public GetChatMethod(@NotNull GetChat.GetChatBuilder method) {
+    public GetChatMethod(@NotNull GetChat.GetChatBuilder<?, ?> method) {
         this.method = method;
     }
 

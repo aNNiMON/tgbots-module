@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.objects.File;
 
 public class GetFileMethod implements Method<File> {
 
-    private final GetFile.GetFileBuilder method;
+    private final GetFile.GetFileBuilder<?, ?> method;
 
     public GetFileMethod() {
         this(GetFile.builder());
     }
 
-    public GetFileMethod(@NotNull GetFile.GetFileBuilder method) {
+    public GetFileMethod(@NotNull GetFile.GetFileBuilder<?, ?> method) {
         this.method = method;
     }
 

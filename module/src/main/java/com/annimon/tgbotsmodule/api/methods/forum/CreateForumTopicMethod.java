@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.objects.forum.ForumTopic;
 
 public class CreateForumTopicMethod implements ChatMethod<CreateForumTopicMethod, ForumTopic> {
 
-    private final CreateForumTopic.CreateForumTopicBuilder method;
+    private final CreateForumTopic.CreateForumTopicBuilder<?, ?> method;
 
     public CreateForumTopicMethod() {
         this(CreateForumTopic.builder());
     }
 
-    public CreateForumTopicMethod(@NotNull CreateForumTopic.CreateForumTopicBuilder method) {
+    public CreateForumTopicMethod(@NotNull CreateForumTopic.CreateForumTopicBuilder<?, ?> method) {
         this.method = method;
     }
 

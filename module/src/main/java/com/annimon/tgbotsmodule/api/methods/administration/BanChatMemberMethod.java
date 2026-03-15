@@ -11,13 +11,13 @@ public class BanChatMemberMethod implements
         TimePeriodMethod<BanChatMemberMethod, Boolean>,
         ChatMemberMethod<BanChatMemberMethod, Boolean> {
 
-    private final BanChatMember.BanChatMemberBuilder method;
+    private final BanChatMember.BanChatMemberBuilder<?, ?> method;
 
     public BanChatMemberMethod() {
         this(BanChatMember.builder());
     }
 
-    public BanChatMemberMethod(@NotNull BanChatMember.BanChatMemberBuilder method) {
+    public BanChatMemberMethod(@NotNull BanChatMember.BanChatMemberBuilder<?, ?> method) {
         this.method = method;
     }
 

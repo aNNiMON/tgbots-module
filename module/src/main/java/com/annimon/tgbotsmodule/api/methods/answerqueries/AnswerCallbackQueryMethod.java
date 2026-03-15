@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 
 public class AnswerCallbackQueryMethod implements TextMethod<AnswerCallbackQueryMethod, Boolean> {
 
-    private final AnswerCallbackQuery.AnswerCallbackQueryBuilder method;
+    private final AnswerCallbackQuery.AnswerCallbackQueryBuilder<?, ?> method;
 
     public AnswerCallbackQueryMethod() {
         this(AnswerCallbackQuery.builder());

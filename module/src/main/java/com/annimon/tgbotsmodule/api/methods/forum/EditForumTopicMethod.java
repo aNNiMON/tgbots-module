@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.forum.EditForumTopic;
 
 public class EditForumTopicMethod implements ChatMessageThreadMethod<EditForumTopicMethod, Boolean> {
 
-    private final EditForumTopic.EditForumTopicBuilder method;
+    private final EditForumTopic.EditForumTopicBuilder<?, ?> method;
 
     public EditForumTopicMethod() {
         this(EditForumTopic.builder());
     }
 
-    public EditForumTopicMethod(@NotNull EditForumTopic.EditForumTopicBuilder method) {
+    public EditForumTopicMethod(@NotNull EditForumTopic.EditForumTopicBuilder<?, ?> method) {
         this.method = method;
     }
 

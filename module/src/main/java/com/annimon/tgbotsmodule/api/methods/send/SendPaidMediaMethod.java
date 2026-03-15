@@ -28,13 +28,13 @@ public class SendPaidMediaMethod implements
         SuggestedPostParametersMethod<SendPaidMediaMethod, ArrayList<Message>>,
         BusinessConnectionMethod<SendPaidMediaMethod, ArrayList<Message>> {
 
-    private final SendPaidMedia.SendPaidMediaBuilder method;
+    private final SendPaidMedia.SendPaidMediaBuilder<?, ?> method;
 
     public SendPaidMediaMethod() {
         this(SendPaidMedia.builder());
     }
 
-    public SendPaidMediaMethod(@NotNull SendPaidMedia.SendPaidMediaBuilder method) {
+    public SendPaidMediaMethod(@NotNull SendPaidMedia.SendPaidMediaBuilder<?, ?> method) {
         this.method = method;
     }
 

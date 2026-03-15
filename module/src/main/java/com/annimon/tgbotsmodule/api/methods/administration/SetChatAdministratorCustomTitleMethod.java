@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatAdm
 
 public class SetChatAdministratorCustomTitleMethod implements ChatMemberMethod<SetChatAdministratorCustomTitleMethod, Boolean> {
 
-    private final SetChatAdministratorCustomTitle.SetChatAdministratorCustomTitleBuilder method;
+    private final SetChatAdministratorCustomTitle.SetChatAdministratorCustomTitleBuilder<?, ?> method;
 
     public SetChatAdministratorCustomTitleMethod() {
         this(SetChatAdministratorCustomTitle.builder());
     }
 
-    public SetChatAdministratorCustomTitleMethod(@NotNull SetChatAdministratorCustomTitle.SetChatAdministratorCustomTitleBuilder method) {
+    public SetChatAdministratorCustomTitleMethod(@NotNull SetChatAdministratorCustomTitle.SetChatAdministratorCustomTitleBuilder<?, ?> method) {
         this.method = method;
     }
 

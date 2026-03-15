@@ -17,7 +17,7 @@ public class GetChatAdministratorsMethod implements
         this(GetChatAdministrators.builder());
     }
 
-    public GetChatAdministratorsMethod(@NotNull GetChatAdministrators.GetChatAdministratorsBuilder method) {
+    public GetChatAdministratorsMethod(@NotNull GetChatAdministrators.GetChatAdministratorsBuilder<?, ?> method) {
         this.method = method;
     }
 

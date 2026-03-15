@@ -9,13 +9,13 @@ import org.telegram.telegrambots.meta.api.objects.ChatInviteLink;
 
 public class RevokeChatInviteLinkMethod implements ChatMethod<RevokeChatInviteLinkMethod, ChatInviteLink> {
 
-    private final RevokeChatInviteLink.RevokeChatInviteLinkBuilder method;
+    private final RevokeChatInviteLink.RevokeChatInviteLinkBuilder<?, ?> method;
 
     public RevokeChatInviteLinkMethod() {
         this(RevokeChatInviteLink.builder());
     }
 
-    public RevokeChatInviteLinkMethod(@NotNull RevokeChatInviteLink.RevokeChatInviteLinkBuilder method) {
+    public RevokeChatInviteLinkMethod(@NotNull RevokeChatInviteLink.RevokeChatInviteLinkBuilder<?, ?> method) {
         this.method = method;
     }
 

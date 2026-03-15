@@ -12,13 +12,13 @@ public class SendChatActionMethod implements
         ChatMessageThreadMethod<SendChatActionMethod, Boolean>,
         BusinessConnectionMethod<SendChatActionMethod, Boolean> {
 
-    private final SendChatAction.SendChatActionBuilder method;
+    private final SendChatAction.SendChatActionBuilder<?, ?> method;
 
     public SendChatActionMethod() {
         this(SendChatAction.builder());
     }
 
-    public SendChatActionMethod(@NotNull SendChatAction.SendChatActionBuilder method) {
+    public SendChatActionMethod(@NotNull SendChatAction.SendChatActionBuilder<?, ?> method) {
         this.method = method;
     }
 

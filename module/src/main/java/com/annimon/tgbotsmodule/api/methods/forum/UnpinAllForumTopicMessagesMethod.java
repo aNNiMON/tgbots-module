@@ -8,13 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.forum.UnpinAllForumTopicMessag
 
 public class UnpinAllForumTopicMessagesMethod implements ChatMessageThreadMethod<UnpinAllForumTopicMessagesMethod, Boolean> {
 
-    private final UnpinAllForumTopicMessages.UnpinAllForumTopicMessagesBuilder method;
+    private final UnpinAllForumTopicMessages.UnpinAllForumTopicMessagesBuilder<?, ?> method;
 
     public UnpinAllForumTopicMessagesMethod() {
         this(UnpinAllForumTopicMessages.builder());
     }
 
-    public UnpinAllForumTopicMessagesMethod(@NotNull UnpinAllForumTopicMessages.UnpinAllForumTopicMessagesBuilder method) {
+    public UnpinAllForumTopicMessagesMethod(@NotNull UnpinAllForumTopicMessages.UnpinAllForumTopicMessagesBuilder<?, ?> method) {
         this.method = method;
     }
 

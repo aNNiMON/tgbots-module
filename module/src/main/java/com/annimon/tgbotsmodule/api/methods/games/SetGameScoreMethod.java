@@ -12,13 +12,13 @@ public class SetGameScoreMethod implements
         InlineOrChatMessageMethod<SetGameScoreMethod, Serializable>,
         ChatMemberMethod<SetGameScoreMethod, Serializable> {
 
-    private final SetGameScore.SetGameScoreBuilder method;
+    private final SetGameScore.SetGameScoreBuilder<?, ?> method;
 
     public SetGameScoreMethod() {
         this(SetGameScore.builder());
     }
 
-    public SetGameScoreMethod(@NotNull SetGameScore.SetGameScoreBuilder method) {
+    public SetGameScoreMethod(@NotNull SetGameScore.SetGameScoreBuilder<?, ?> method) {
         this.method = method;
     }
 
