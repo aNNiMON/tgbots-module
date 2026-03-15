@@ -30,7 +30,7 @@ public class ResourceBundleLocalizationService implements LocalizationService {
             return bundles.get(language);
         }
         try {
-            final var bundle = ResourceBundle.getBundle(resourceName, new Locale(language));
+            final var bundle = ResourceBundle.getBundle(resourceName, Locale.of(language));
             bundles.put(language, bundle);
             return bundle;
         } catch (MissingResourceException mre) {

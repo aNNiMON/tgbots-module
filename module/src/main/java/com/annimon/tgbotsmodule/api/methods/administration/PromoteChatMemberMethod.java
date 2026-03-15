@@ -166,12 +166,21 @@ public class PromoteChatMemberMethod implements ChatMemberMethod<PromoteChatMemb
         return this;
     }
 
-    public Boolean getCanManageDirectMessages() {
+    public Boolean canManageDirectMessages() {
         return method.build().getCanManageDirectMessages();
     }
 
     public PromoteChatMemberMethod setCanManageDirectMessages(Boolean canManageDirectMessages) {
         method.canManageDirectMessages(canManageDirectMessages);
+        return this;
+    }
+
+    public Boolean canManageTags() {
+        return method.build().getCanManageTags();
+    }
+
+    public PromoteChatMemberMethod setCanManageTags(Boolean canManageTags) {
+        method.canManageTags(canManageTags);
         return this;
     }
 

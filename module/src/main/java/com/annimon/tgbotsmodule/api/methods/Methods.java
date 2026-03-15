@@ -324,6 +324,19 @@ public final class Methods {
         }
 
 
+        public static SetChatMemberTagMethod setChatMemberTag() {
+            return new SetChatMemberTagMethod();
+        }
+
+        public static SetChatMemberTagMethod setChatMemberTag(@NotNull String chatId, long userId) {
+            return setChatMemberTag().setChatId(chatId).setUserId(userId);
+        }
+
+        public static SetChatMemberTagMethod setChatMemberTag(long chatId, long userId) {
+            return setChatMemberTag().setChatId(chatId).setUserId(userId);
+        }
+
+
         public static UnbanChatMemberMethod unbanChatMember() {
             return new UnbanChatMemberMethod();
         }
